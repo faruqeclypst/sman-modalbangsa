@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand palette inspired by SMAN Modal Bangsa identity */
+  /* Brand palette — GREEN theme matching jabarprov style */
   --background: #ffffff;
   --foreground: #0f172a;
   --muted: #f1f5f9;
   --muted-foreground: #475569;
   --border: #e2e8f0;
-  --primary: #1e3a8a; /* deep school blue */
+  --primary: #166534; /* deep green */
   --primary-foreground: #ffffff;
   --secondary: #f59e0b; /* warm accent gold */
   --secondary-foreground: #1f2937;
-  --accent: #0ea5e9; /* sky accent */
+  --accent: #16a34a; /* bright green */
   --accent-foreground: #ffffff;
-  --ring: #1e3a8a;
+  --ring: #166534;
   --radius: 0.75rem;
 }
 

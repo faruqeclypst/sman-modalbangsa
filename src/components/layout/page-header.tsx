@@ -24,7 +24,7 @@ export function PageHeader({
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b border-[color:var(--border)] bg-gradient-to-br from-[color:var(--primary)] via-[#1c3387] to-[#0b1d52] text-white",
+        "relative overflow-hidden border-b border-[color:var(--border)] bg-gradient-to-br from-[#14532d] via-[#166534] to-[#15803d] text-white",
         className,
       )}
     >

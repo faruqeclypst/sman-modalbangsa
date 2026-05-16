@@ -43,13 +43,13 @@ export function LanguageSwitcher({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 p-0.5 text-xs",
+        "inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 p-0.5 text-xs",
         className,
       )}
       role="group"
       aria-label="Language selection"
     >
-      <Globe className="ml-1.5 size-3.5 text-white/70" aria-hidden />
+      <Globe className="ml-1.5 size-3.5 text-gray-400" aria-hidden />
       {locales.map((locale) => {
         const isActive = locale === currentLocale;
         return (
@@ -62,8 +62,8 @@ export function LanguageSwitcher({
             className={cn(
               "rounded-full px-2.5 py-1 font-semibold uppercase transition-colors",
               isActive
-                ? "bg-white text-[#1b3a6b]"
-                : "text-white/70 hover:text-white",
+                ? "bg-[#14532d] text-white"
+                : "text-gray-500 hover:text-gray-800",
               variant === "compact" && "px-2 py-0.5",
             )}
           >

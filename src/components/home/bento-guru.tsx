@@ -1,0 +1,180 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { LayoutGroup, motion } from "framer-motion";
+import { ArrowRight, Users } from "lucide-react";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
+import type { WPPost } from "@/lib/wp-types";
+import { getFeaturedImageUrl, getTermsByTaxonomy } from "@/lib/wp";
+import { decodeHtmlEntities } from "@/lib/utils";
+import { Container } from "@/components/ui/container";
+
+interface BentoGuruProps {
+  locale: Locale;
+  dict: Dictionary;
+  gtk: WPPost[];
+}
+
+function GuruCard({ person, size }: { person: WPPost; size: "large" | "small" }) {
+  const name = decodeHtmlEntities(person.title.rendered);
+  const imageUrl = getFeaturedImageUrl(person);
+  const jab = getTermsByTaxonomy(person, "jab")[0];
+  const stts = getTermsByTaxonomy(person, "stts")[0];
+  const initials = name.split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase();
+
+  return (
+    <div className="relative h-full w-full overflow-hidden rounded-[inherit]">
+      {imageUrl ? (
+        <Image
+          src={imageUrl}
+          alt={name}
+          fill
+          sizes={size === "large" ? "(min-width: 1024px) 33vw, 100vw" : "(min-width: 1024px) 16vw, 25vw"}
+          className="object-cover object-top"
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200">
+          <span className={`font-bold text-emerald-400 ${size === "large" ? "text-5xl" : "text-2xl"}`}>
+            {initials}
+          </span>
+        </div>
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      <div className={`absolute inset-x-0 bottom-0 p-3 text-white ${size === "large" ? "p-5" : ""}`}>
+        <p className={`font-bold leading-tight ${size === "large" ? "text-base sm:text-lg" : "text-[11px] sm:text-xs"}`}>
+          {name}
+        </p>
+        <div className="mt-1 flex flex-wrap items-center gap-1">
+          {jab ? (
+            <span className={`inline-flex items-center rounded-full bg-emerald-500/80 font-semibold text-white ${size === "large" ? "px-2.5 py-0.5 text-[10px]" : "px-1.5 py-0.5 text-[8px]"}`}>
+              {decodeHtmlEntities(jab.name)}
+            </span>
+          ) : null}
+          {stts ? (
+            <span className={`inline-flex items-center rounded-full bg-white/20 font-medium text-white backdrop-blur-sm ${size === "large" ? "px-2.5 py-0.5 text-[10px]" : "px-1.5 py-0.5 text-[8px]"}`}>
+              {decodeHtmlEntities(stts.name)}
+            </span>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/*
+  Grid: 4 columns × 2 rows
+  ┌──────────────┬───────┬───────┬───────┐
+  │              │ pos-1 │ pos-2 │ pos-3 │  (row 1, 3 small portrait)
+  │    pos-7     │       │       │       │
+  │   (UTAMA)   ├───────┼───────┼───────┤
+  │              │ pos-4 │ pos-5 │ pos-6 │  (row 2, 3 small portrait)
+  └──────────────┴───────┴───────┴───────┘
+
+  Total visible: 7 (1 large + 6 small)
+  Flow: new enters pos-1 → 2 → 3 → 4 → 5 → 6 → 7 (utama) → exit
+*/
+
+export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
+  const [step, setStep] = React.useState(0);
+
+  React.useEffect(() => {
+    if (gtk.length <= 7) return;
+    const timer = setInterval(() => {
+      setStep((prev) => prev + 1);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [gtk.length]);
+
+  if (!gtk.length) return null;
+
+  const len = gtk.length;
+  const VISIBLE = Math.min(7, len);
+
+  // visible[0] = pos-1 (newest), visible[6] = pos-7 (utama, oldest visible)
+  const visible = Array.from({ length: VISIBLE }, (_, slot) => {
+    const idx = ((step - slot) % len + len) % len;
+    return gtk[idx];
+  });
+
+  return (
+    <section aria-label={dict.cpt.gtk.title} className="bg-white py-14 sm:py-16">
+      <Container>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
+              <Users className="size-5" />
+            </span>
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+                {dict.cpt.gtk.title}
+              </h2>
+              <p className="text-sm text-gray-500">{dict.cpt.gtk.subtitle}</p>
+            </div>
+          </div>
+          <Link
+            href={`/${locale}/gtk`}
+            className="hidden items-center gap-1.5 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-emerald-600 shadow-sm transition-colors hover:bg-emerald-50 sm:inline-flex"
+          >
+            Lihat Semua
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+
+        <LayoutGroup>
+          <div className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3 lg:gap-4">
+            {visible.map((person, slot) => {
+              // slot 0-2 = row 1 small (cols 2-4)
+              // slot 3-5 = row 2 small (cols 2-4)
+              // slot 6 = utama/large (col 1, row 1-2)
+              const isUtama = slot === VISIBLE - 1;
+
+              return (
+                <motion.div
+                  key={person.id}
+                  layoutId={`guru-${person.id}`}
+                  transition={{ layout: { duration: 0.65, ease: [0.25, 0.1, 0.25, 1] } }}
+                  className={`relative overflow-hidden ${
+                    isUtama
+                      ? "col-span-2 row-span-2 h-[320px] sm:col-span-1 sm:h-[420px] lg:h-[500px] rounded-2xl shadow-lg"
+                      : "h-[155px] sm:h-[200px] lg:h-[242px] rounded-xl shadow-md"
+                  }`}
+                  style={{
+                    gridColumnStart: isUtama ? 1 : slot < 3 ? slot + 2 : slot - 3 + 2,
+                    gridRowStart: isUtama ? 1 : slot < 3 ? 1 : 2,
+                    gridRowEnd: isUtama ? 3 : undefined,
+                  }}
+                >
+                  <GuruCard person={person} size={isUtama ? "large" : "small"} />
+                </motion.div>
+              );
+            })}
+          </div>
+        </LayoutGroup>
+
+        <div className="mt-5 flex justify-center gap-1.5">
+          {gtk.slice(0, Math.min(len, 15)).map((_, i) => (
+            <span
+              key={i}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === step % len ? "w-5 bg-emerald-500" : "w-1.5 bg-gray-300"
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="mt-6 text-center sm:hidden">
+          <Link
+            href={`/${locale}/gtk`}
+            className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-emerald-600"
+          >
+            Lihat Semua Guru
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+      </Container>
+    </section>
+  );
+}

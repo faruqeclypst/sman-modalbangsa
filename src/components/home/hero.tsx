@@ -40,7 +40,7 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
       ) : (
         <div
           aria-hidden
-          className="absolute inset-0 bg-[#1b3a6b]"
+          className="absolute inset-0 bg-[#14532d]"
         />
       )}
 
@@ -60,18 +60,18 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
             {dict.hero.subtitle}
           </p>
 
-          {/* Search bar — jabarprov style: white bg, green "Cari" button */}
+          {/* Search bar — glassmorphism transparent */}
           <form
             action={`/${locale}/berita`}
             method="get"
             role="search"
-            className="mt-8 flex w-full max-w-md items-center rounded-lg bg-white shadow-lg"
+            className="mt-8 flex w-full max-w-md items-center rounded-lg border border-white/25 bg-white/15 shadow-lg backdrop-blur-md focus-within:border-white/40 focus-within:bg-white/20"
           >
             <label htmlFor="hero-search" className="sr-only">
               {dict.common.search}
             </label>
             <Search
-              className="ml-4 size-4 shrink-0 text-gray-400"
+              className="ml-4 size-4 shrink-0 text-white/70"
               aria-hidden
             />
             <input
@@ -79,7 +79,7 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
               type="search"
               name="q"
               placeholder={dict.hero.searchPlaceholder}
-              className="w-full bg-transparent px-3 py-3 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none"
+              className="w-full bg-transparent px-3 py-3 text-sm text-white placeholder:text-white/50 focus:outline-none"
             />
             <button
               type="submit"
@@ -100,7 +100,7 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/30 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-white/15 sm:text-sm"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/15 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md transition-colors hover:bg-white/25 sm:text-sm"
                   >
                     {link.label}
                     <ExternalLink className="size-3" aria-hidden />
