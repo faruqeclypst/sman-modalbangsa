@@ -1,0 +1,220 @@
+{
+  "site": {
+    "name": "SMAN Modal Bangsa",
+    "tagline": "Aceh's Leading High School Shaping Character and Excellence",
+    "shortName": "Modal Bangsa HS"
+  },
+  "nav": {
+    "home": "Home",
+    "profile": "Profile",
+    "history": "History",
+    "visionMission": "Vision & Mission",
+    "principal": "Principal",
+    "facilities": "Facilities",
+    "academic": "Academic",
+    "achievements": "Achievements",
+    "news": "News",
+    "contact": "Contact",
+    "services": "Services",
+    "menu": "Menu"
+  },
+  "cpt": {
+    "agenda": {
+      "label": "Agenda",
+      "title": "School Agenda",
+      "subtitle": "Schedule of important events and activities at SMAN Modal Bangsa.",
+      "empty": "No upcoming agenda yet.",
+      "upcoming": "Upcoming Agenda",
+      "viewAll": "View All Agenda"
+    },
+    "pengumuman": {
+      "label": "Announcements",
+      "title": "Official Announcements",
+      "subtitle": "Official communications for students, parents, and the public.",
+      "empty": "No announcements.",
+      "latest": "Latest Announcements",
+      "viewAll": "All Announcements"
+    },
+    "editorial": {
+      "label": "Editorial",
+      "title": "Editorials",
+      "subtitle": "Articles and opinions from the SMAN Modal Bangsa community.",
+      "empty": "No editorials yet."
+    },
+    "prestasi": {
+      "label": "Achievements",
+      "title": "Student & School Achievements",
+      "subtitle": "Recognitions earned at regional, national, and international levels.",
+      "empty": "No achievements published yet."
+    },
+    "gtk": {
+      "label": "Teachers & Staff",
+      "title": "Teachers & Staff",
+      "subtitle": "Educators and administrative team at SMAN Modal Bangsa.",
+      "empty": "No teacher or staff data yet.",
+      "filterAll": "All",
+      "filterByJabatan": "Filter by role",
+      "filterByStatus": "Status"
+    },
+    "ekskul": {
+      "label": "Extracurricular",
+      "title": "Extracurricular Activities",
+      "subtitle": "Programs to develop students' interests, talents, and character.",
+      "empty": "No extracurricular registered."
+    },
+    "galeri": {
+      "label": "Gallery",
+      "title": "Activity Gallery",
+      "subtitle": "Visual documentation of SMAN Modal Bangsa activities.",
+      "empty": "No photos yet."
+    }
+  },
+  "hero": {
+    "kicker": "Official School Portal",
+    "title": "Answering the\nInformation Needs of\nSMAN Modal Bangsa",
+    "subtitle": "Find the latest public information from SMAN Modal Bangsa, Aceh's leading boarding school.",
+    "searchPlaceholder": "Search...",
+    "searchButton": "Search",
+    "popularTitle": "Popular searches at SMAN Modal Bangsa",
+    "popularLinks": [
+      { "label": "Admissions", "href": "/en/spmb" },
+      { "label": "Announcements", "href": "/en/pengumuman" },
+      { "label": "Achievements", "href": "/en/prestasi" },
+      { "label": "Agenda", "href": "/en/agenda" }
+    ]
+  },
+  "quickLinks": {
+    "title": "Quick Access",
+    "subtitle": "Essential services and links for students, parents, and teachers.",
+    "items": {
+      "spmb": "Admissions",
+      "spmbDesc": "New student admissions",
+      "cbt": "CBT",
+      "cbtDesc": "Computer Based Test",
+      "schedule": "Schedule",
+      "scheduleDesc": "Academic calendar",
+      "announcements": "Announcements",
+      "announcementsDesc": "Latest school updates",
+      "achievements": "Achievements",
+      "achievementsDesc": "Student & school awards",
+      "evoting": "Student E-Voting",
+      "evotingDesc": "Student council elections"
+    }
+  },
+  "news": {
+    "latestTitle": "Latest News",
+    "latestSubtitle": "Follow the latest school activities and achievements.",
+    "viewAll": "View All News",
+    "allNews": "All News",
+    "allNewsSubtitle": "Complete archive of news and announcements.",
+    "readMore": "Read more",
+    "by": "By",
+    "publishedOn": "Published",
+    "category": "Category",
+    "tags": "Tags",
+    "noResults": "No news found.",
+    "searchPlaceholder": "Search news...",
+    "loadMore": "Load more",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of",
+    "backToList": "Back to news list",
+    "relatedNews": "Related News",
+    "shareTitle": "Share",
+    "minRead": "min read"
+  },
+  "profile": {
+    "title": "School Profile",
+    "subtitle": "Get to know SMAN Modal Bangsa.",
+    "history": {
+      "title": "School History",
+      "intro": "SMAN Modal Bangsa is a flagship high school of Aceh Province, designed to produce graduates with Islamic character, strong academics, and social awareness.",
+      "body": "Founded with the spirit of nation-building through education, the school combines the national curriculum with leading programs in science, technology, and character formation. For more than a decade, SMAN Modal Bangsa has consistently achieved at regional, national, and international levels."
+    },
+    "vision": {
+      "title": "Vision",
+      "body": "To be a school of national and international standard, producing graduates excellent in faith, science, and global perspective."
+    },
+    "mission": {
+      "title": "Mission",
+      "items": [
+        "Provide quality education grounded in faith and devotion.",
+        "Develop academic competence and 21st-century skills.",
+        "Cultivate strong character, independence, and environmental care.",
+        "Build a culture of literacy, research, and innovation.",
+        "Expand collaboration with educational institutions at home and abroad."
+      ]
+    },
+    "principal": {
+      "title": "Principal's Welcome",
+      "greeting": "Assalamu'alaikum Warahmatullahi Wabarakatuh",
+      "body": "Welcome to the official portal of SMAN Modal Bangsa. We are committed to delivering excellent education grounded in faith, knowledge, and good deeds. May this website serve as an effective bridge between school, students, parents, and the community."
+    },
+    "facilities": {
+      "title": "School Facilities",
+      "subtitle": "Infrastructure that supports the learning process.",
+      "items": [
+        { "name": "Student Dormitories", "desc": "Comfortable male and female dormitories with 24-hour supervision." },
+        { "name": "Science Labs", "desc": "Physics, Chemistry, Biology, and Computer labs at national standards." },
+        { "name": "Digital Library", "desc": "Print and e-book collections with modern reading spaces." },
+        { "name": "School Mosque", "desc": "Center for worship and Islamic learning activities." },
+        { "name": "Sports Fields", "desc": "Futsal, basketball, volleyball, and athletics areas." },
+        { "name": "Multipurpose Hall", "desc": "Venue for meetings, seminars, and arts performances." }
+      ]
+    },
+    "achievements": {
+      "title": "Achievements",
+      "subtitle": "Recognitions earned by students and the school.",
+      "samples": [
+        { "title": "National Science Olympiad", "level": "National", "year": "2024" },
+        { "title": "Robotics Competition", "level": "International", "year": "2024" },
+        { "title": "Scientific Writing Contest", "level": "Provincial", "year": "2023" },
+        { "title": "Student Arts Festival", "level": "National", "year": "2023" }
+      ]
+    }
+  },
+  "homeAchievements": {
+    "kicker": "Student Achievements",
+    "title": "Excellence That Speaks for Itself",
+    "subtitle": "Selected achievements of our students and school across academic, scientific, sports, and arts competitions.",
+    "viewAll": "See All Achievements",
+    "stats": [
+      { "value": "120+", "label": "National & International Awards" },
+      { "value": "85%", "label": "Graduates Accepted to Top Universities" },
+      { "value": "30+", "label": "Active Extracurricular Activities" },
+      { "value": "10+", "label": "Years of Consistent Excellence" }
+    ],
+    "items": [
+      { "title": "Gold — National Science Olympiad", "level": "National", "year": "2024", "category": "Academic" },
+      { "title": "International Robotics Champion", "level": "International", "year": "2024", "category": "Technology" },
+      { "title": "Best Scientific Paper Award", "level": "Provincial", "year": "2023", "category": "Research" },
+      { "title": "Student Arts Festival — 1st Place", "level": "National", "year": "2023", "category": "Arts" },
+      { "title": "English Debate Championship", "level": "National", "year": "2024", "category": "Language" },
+      { "title": "Athletics Regional Cup", "level": "Regional", "year": "2024", "category": "Sports" }
+    ]
+  },
+  "footer": {
+    "address": "Jl. Bandara Sultan Iskandar Muda, Blang Bintang, Aceh Besar, Aceh, Indonesia",
+    "contact": "Contact",
+    "links": "Links",
+    "follow": "Follow Us",
+    "rights": "All rights reserved.",
+    "developed": "Developed by SMAN Modal Bangsa IT Team"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "search": "Search",
+    "all": "All",
+    "close": "Close",
+    "open": "Open",
+    "language": "Language",
+    "switchTo": "Switch to",
+    "skipToContent": "Skip to main content",
+    "notFoundTitle": "Page not found",
+    "notFoundDesc": "The page you are looking for is unavailable or has been moved.",
+    "backHome": "Back to home"
+  }
+}

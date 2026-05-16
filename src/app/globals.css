@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand palette inspired by SMAN Modal Bangsa identity */
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
+  --border: #e2e8f0;
+  --primary: #1e3a8a; /* deep school blue */
+  --primary-foreground: #ffffff;
+  --secondary: #f59e0b; /* warm accent gold */
+  --secondary-foreground: #1f2937;
+  --accent: #0ea5e9; /* sky accent */
+  --accent-foreground: #ffffff;
+  --ring: #1e3a8a;
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --radius: var(--radius);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Article content styling for WordPress-rendered HTML */
+.prose-article {
+  color: var(--foreground);
+  line-height: 1.75;
+}
+.prose-article h1,
+.prose-article h2,
+.prose-article h3,
+.prose-article h4 {
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.5em;
+  margin-bottom: 0.6em;
+  color: var(--foreground);
+}
+.prose-article h1 {
+  font-size: 1.75rem;
+}
+.prose-article h2 {
+  font-size: 1.5rem;
+}
+.prose-article h3 {
+  font-size: 1.25rem;
+}
+.prose-article p {
+  margin: 0.85em 0;
+}
+.prose-article a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-article a:hover {
+  color: var(--accent);
+}
+.prose-article ul,
+.prose-article ol {
+  margin: 0.85em 0;
+  padding-left: 1.5rem;
+}
+.prose-article ul {
+  list-style: disc;
+}
+.prose-article ol {
+  list-style: decimal;
+}
+.prose-article blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--muted);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  color: var(--muted-foreground);
+  font-style: italic;
+}
+.prose-article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+.prose-article figure {
+  margin: 1rem 0;
+}
+.prose-article figcaption {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+.prose-article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+.prose-article th,
+.prose-article td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.prose-article th {
+  background: var(--muted);
+  font-weight: 600;
+}
+.prose-article code {
+  background: var(--muted);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.glass-dark {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Subtle fade-in for content sections */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.45s ease-out both;
+}

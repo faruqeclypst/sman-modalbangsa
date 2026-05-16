@@ -1,0 +1,220 @@
+{
+  "site": {
+    "name": "SMAN Modal Bangsa",
+    "tagline": "Sekolah Unggulan Aceh, Membentuk Generasi Berkarakter dan Berprestasi",
+    "shortName": "SMA Modal Bangsa"
+  },
+  "nav": {
+    "home": "Beranda",
+    "profile": "Profil",
+    "history": "Sejarah",
+    "visionMission": "Visi & Misi",
+    "principal": "Kepala Sekolah",
+    "facilities": "Fasilitas",
+    "academic": "Akademik",
+    "achievements": "Prestasi",
+    "news": "Berita",
+    "contact": "Kontak",
+    "services": "Layanan",
+    "menu": "Menu"
+  },
+  "cpt": {
+    "agenda": {
+      "label": "Agenda",
+      "title": "Agenda Sekolah",
+      "subtitle": "Jadwal kegiatan dan acara penting SMAN Modal Bangsa.",
+      "empty": "Belum ada agenda terjadwal.",
+      "upcoming": "Agenda Mendatang",
+      "viewAll": "Lihat Semua Agenda"
+    },
+    "pengumuman": {
+      "label": "Pengumuman",
+      "title": "Pengumuman Resmi",
+      "subtitle": "Informasi resmi dari sekolah untuk siswa, orang tua, dan publik.",
+      "empty": "Tidak ada pengumuman.",
+      "latest": "Pengumuman Terbaru",
+      "viewAll": "Semua Pengumuman"
+    },
+    "editorial": {
+      "label": "Editorial",
+      "title": "Editorial",
+      "subtitle": "Tulisan dan opini dari sivitas SMAN Modal Bangsa.",
+      "empty": "Belum ada editorial."
+    },
+    "prestasi": {
+      "label": "Prestasi",
+      "title": "Prestasi Siswa & Sekolah",
+      "subtitle": "Pencapaian membanggakan di tingkat regional, nasional, dan internasional.",
+      "empty": "Belum ada prestasi yang dipublikasikan."
+    },
+    "gtk": {
+      "label": "Guru & Tenaga Kependidikan",
+      "title": "Guru & Tenaga Kependidikan",
+      "subtitle": "Tim pendidik dan staf SMAN Modal Bangsa.",
+      "empty": "Belum ada data GTK.",
+      "filterAll": "Semua",
+      "filterByJabatan": "Saring berdasarkan jabatan",
+      "filterByStatus": "Status"
+    },
+    "ekskul": {
+      "label": "Ekstrakurikuler",
+      "title": "Ekstrakurikuler",
+      "subtitle": "Wadah pengembangan minat, bakat, dan karakter siswa.",
+      "empty": "Belum ada ekstrakurikuler terdaftar."
+    },
+    "galeri": {
+      "label": "Galeri",
+      "title": "Galeri Kegiatan",
+      "subtitle": "Dokumentasi visual kegiatan SMAN Modal Bangsa.",
+      "empty": "Belum ada foto."
+    }
+  },
+  "hero": {
+    "kicker": "Portal Resmi Sekolah",
+    "title": "SMA Negeri Modal Bangsa Provinsi Aceh",
+    "subtitle": "Temukan informasi terkini seputar pendidikan, prestasi, dan kegiatan SMAN Modal Bangsa Aceh.",
+    "searchPlaceholder": "Cari Prestasi, Berita, Pengumuman, Agenda",
+    "searchButton": "Cari",
+    "popularTitle": "Pencarian populer di SMAN Modal Bangsa",
+    "popularLinks": [
+      { "label": "SPMB", "href": "/id/spmb" },
+      { "label": "Pengumuman", "href": "/id/pengumuman" },
+      { "label": "Prestasi", "href": "/id/prestasi" },
+      { "label": "Agenda", "href": "/id/agenda" }
+    ]
+  },
+  "quickLinks": {
+    "title": "Akses Cepat",
+    "subtitle": "Layanan dan tautan penting untuk siswa, orang tua, dan guru.",
+    "items": {
+      "spmb": "SPMB",
+      "spmbDesc": "Sistem Penerimaan Murid Baru",
+      "cbt": "CBT",
+      "cbtDesc": "Computer Based Test",
+      "schedule": "Jadwal",
+      "scheduleDesc": "Kalender akademik",
+      "announcements": "Pengumuman",
+      "announcementsDesc": "Informasi terkini sekolah",
+      "achievements": "Prestasi",
+      "achievementsDesc": "Capaian siswa & sekolah",
+      "evoting": "E-Voting OSIS",
+      "evotingDesc": "Pemilihan ketua OSIS"
+    }
+  },
+  "news": {
+    "latestTitle": "Berita Terbaru",
+    "latestSubtitle": "Ikuti perkembangan terbaru kegiatan dan prestasi sekolah.",
+    "viewAll": "Lihat Semua Berita",
+    "allNews": "Semua Berita",
+    "allNewsSubtitle": "Arsip lengkap berita dan informasi SMAN Modal Bangsa.",
+    "readMore": "Baca selengkapnya",
+    "by": "Oleh",
+    "publishedOn": "Diterbitkan",
+    "category": "Kategori",
+    "tags": "Tag",
+    "noResults": "Tidak ada berita ditemukan.",
+    "searchPlaceholder": "Cari berita...",
+    "loadMore": "Muat lebih banyak",
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "page": "Halaman",
+    "of": "dari",
+    "backToList": "Kembali ke daftar berita",
+    "relatedNews": "Berita Terkait",
+    "shareTitle": "Bagikan",
+    "minRead": "menit baca"
+  },
+  "profile": {
+    "title": "Profil Sekolah",
+    "subtitle": "Mengenal lebih dekat SMAN Modal Bangsa.",
+    "history": {
+      "title": "Sejarah Sekolah",
+      "intro": "SMAN Modal Bangsa adalah sekolah unggul Provinsi Aceh yang dirancang untuk melahirkan lulusan berkualitas dengan karakter Islami, kemampuan akademik tinggi, dan kepedulian sosial.",
+      "body": "Didirikan dengan semangat membangun bangsa melalui pendidikan, sekolah ini memadukan kurikulum nasional dengan program unggulan berbasis sains, teknologi, dan pembentukan karakter. Selama lebih dari satu dekade, SMAN Modal Bangsa konsisten meraih prestasi di tingkat regional, nasional, dan internasional."
+    },
+    "vision": {
+      "title": "Visi",
+      "body": "Mewujudkan sekolah berstandar nasional dan internasional yang menghasilkan lulusan unggul dalam imtaq, iptek, dan berwawasan global."
+    },
+    "mission": {
+      "title": "Misi",
+      "items": [
+        "Menyelenggarakan pendidikan berkualitas berbasis nilai keimanan dan ketakwaan.",
+        "Mengembangkan kompetensi akademik dan keterampilan abad 21.",
+        "Menumbuhkan karakter unggul, mandiri, dan peduli lingkungan.",
+        "Membangun budaya literasi, riset, dan inovasi.",
+        "Memperluas kerjasama dengan institusi pendidikan dalam dan luar negeri."
+      ]
+    },
+    "principal": {
+      "title": "Sambutan Kepala Sekolah",
+      "greeting": "Assalamu'alaikum Warahmatullahi Wabarakatuh",
+      "body": "Selamat datang di portal resmi SMAN Modal Bangsa. Kami berkomitmen menyediakan layanan pendidikan terbaik yang berlandaskan iman, ilmu, dan amal. Semoga website ini menjadi sarana komunikasi yang efektif antara sekolah, siswa, orang tua, dan masyarakat."
+    },
+    "facilities": {
+      "title": "Fasilitas Sekolah",
+      "subtitle": "Sarana dan prasarana yang menunjang proses belajar mengajar.",
+      "items": [
+        { "name": "Asrama Siswa", "desc": "Asrama putra dan putri yang nyaman dengan pembina 24 jam." },
+        { "name": "Laboratorium Sains", "desc": "Lab Fisika, Kimia, Biologi, dan Komputer berstandar nasional." },
+        { "name": "Perpustakaan Digital", "desc": "Koleksi buku cetak dan e-book lengkap dengan ruang baca." },
+        { "name": "Masjid Sekolah", "desc": "Pusat kegiatan ibadah dan kajian keislaman siswa." },
+        { "name": "Lapangan Olahraga", "desc": "Lapangan futsal, basket, voli, dan area atletik." },
+        { "name": "Aula Serbaguna", "desc": "Ruang pertemuan, seminar, dan pertunjukan seni." }
+      ]
+    },
+    "achievements": {
+      "title": "Prestasi",
+      "subtitle": "Capaian siswa dan sekolah di berbagai kompetisi.",
+      "samples": [
+        { "title": "Olimpiade Sains Nasional", "level": "Nasional", "year": "2024" },
+        { "title": "Kompetisi Robotika", "level": "Internasional", "year": "2024" },
+        { "title": "Lomba Karya Tulis Ilmiah", "level": "Provinsi", "year": "2023" },
+        { "title": "Festival Seni Pelajar", "level": "Nasional", "year": "2023" }
+      ]
+    }
+  },
+  "homeAchievements": {
+    "kicker": "Prestasi Siswa",
+    "title": "Capaian yang Berbicara Sendiri",
+    "subtitle": "Prestasi terpilih siswa dan sekolah di kompetisi akademik, sains, olahraga, dan seni tingkat regional hingga internasional.",
+    "viewAll": "Lihat Semua Prestasi",
+    "stats": [
+      { "value": "120+", "label": "Penghargaan Nasional & Internasional" },
+      { "value": "85%", "label": "Lulusan Diterima di PTN/PTS Terbaik" },
+      { "value": "30+", "label": "Ekstrakurikuler Aktif" },
+      { "value": "10+", "label": "Tahun Konsistensi Prestasi" }
+    ],
+    "items": [
+      { "title": "Medali Emas Olimpiade Sains Nasional", "level": "Nasional", "year": "2024", "category": "Akademik" },
+      { "title": "Juara Kompetisi Robotika Internasional", "level": "Internasional", "year": "2024", "category": "Teknologi" },
+      { "title": "Karya Tulis Ilmiah Terbaik", "level": "Provinsi", "year": "2023", "category": "Riset" },
+      { "title": "Juara 1 Festival Seni Pelajar", "level": "Nasional", "year": "2023", "category": "Seni" },
+      { "title": "Juara Debat Bahasa Inggris", "level": "Nasional", "year": "2024", "category": "Bahasa" },
+      { "title": "Juara Atletik Tingkat Regional", "level": "Regional", "year": "2024", "category": "Olahraga" }
+    ]
+  },
+  "footer": {
+    "address": "Jl. Bandara Sultan Iskandar Muda, Blang Bintang, Aceh Besar, Aceh, Indonesia",
+    "contact": "Kontak",
+    "links": "Tautan",
+    "follow": "Ikuti Kami",
+    "rights": "Hak cipta dilindungi.",
+    "developed": "Dikembangkan oleh Tim IT SMAN Modal Bangsa"
+  },
+  "common": {
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "retry": "Coba lagi",
+    "search": "Cari",
+    "all": "Semua",
+    "close": "Tutup",
+    "open": "Buka",
+    "language": "Bahasa",
+    "switchTo": "Beralih ke",
+    "skipToContent": "Lewati ke konten utama",
+    "notFoundTitle": "Halaman tidak ditemukan",
+    "notFoundDesc": "Halaman yang Anda cari tidak tersedia atau telah dipindahkan.",
+    "backHome": "Kembali ke beranda"
+  }
+}

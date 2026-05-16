@@ -1,0 +1,97 @@
+import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { notFound } from "next/navigation";
+
+import "../globals.css";
+import { defaultLocale, isLocale, locales, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { QuickAccessSidebar } from "@/components/layout/quick-access-sidebar";
+import { SocialSidebar } from "@/components/layout/social-sidebar";
+
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+export async function generateStaticParams() {
+  return locales.map((lang) => ({ lang }));
+}
+
+export const viewport: Viewport = {
+  themeColor: "#1e3a8a",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[lang]">): Promise<Metadata> {
+  const { lang } = await params;
+  const locale: Locale = isLocale(lang) ? lang : defaultLocale;
+  const dict = await getDictionary(locale);
+
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id";
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: `${dict.site.name} — ${dict.site.tagline}`,
+      template: `%s | ${dict.site.name}`,
+    },
+    description: dict.site.tagline,
+    applicationName: dict.site.name,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: Object.fromEntries(
+        locales.map((l) => [l === "id" ? "id-ID" : "en-US", `/${l}`]),
+      ),
+    },
+    openGraph: {
+      title: dict.site.name,
+      description: dict.site.tagline,
+      type: "website",
+      locale: locale === "id" ? "id_ID" : "en_US",
+      siteName: dict.site.name,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.site.name,
+      description: dict.site.tagline,
+    },
+    robots: { index: true, follow: true },
+  };
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: LayoutProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+
+  const dict = await getDictionary(lang);
+
+  return (
+    <html lang={lang === "id" ? "id-ID" : "en-US"} className={plusJakarta.variable}>
+      <body className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-[color:var(--primary)] focus:px-3 focus:py-2 focus:text-sm focus:text-white"
+        >
+          {dict.common.skipToContent}
+        </a>
+        <Header locale={lang} dict={dict} />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <QuickAccessSidebar locale={lang} dict={dict} />
+        <SocialSidebar />
+        <Footer locale={lang} dict={dict} />
+      </body>
+    </html>
+  );
+}
