@@ -20,7 +20,7 @@ export function TeamPreview({ locale, dict, members }: TeamPreviewProps) {
   return (
     <section
       aria-labelledby="team-preview-title"
-      className="bg-[color:var(--muted)]/40 py-14 sm:py-16"
+      className="bg-[color:var(--background)] py-14 sm:py-16"
     >
       <Container>
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">

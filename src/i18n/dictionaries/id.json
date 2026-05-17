@@ -25,7 +25,7 @@
       "subtitle": "Jadwal kegiatan dan acara penting SMAN Modal Bangsa.",
       "empty": "Belum ada agenda terjadwal.",
       "upcoming": "Agenda Mendatang",
-      "viewAll": "Lihat Semua Agenda"
+      "viewAll": "Lihat Semua"
     },
     "pengumuman": {
       "label": "Pengumuman",
@@ -104,7 +104,7 @@
   "news": {
     "latestTitle": "Berita Terbaru",
     "latestSubtitle": "Ikuti perkembangan terbaru kegiatan dan prestasi sekolah.",
-    "viewAll": "Lihat Semua Berita",
+    "viewAll": "Lihat Semua",
     "allNews": "Semua Berita",
     "allNewsSubtitle": "Arsip lengkap berita dan informasi SMAN Modal Bangsa.",
     "readMore": "Baca selengkapnya",
@@ -122,7 +122,10 @@
     "backToList": "Kembali ke daftar berita",
     "relatedNews": "Berita Terkait",
     "shareTitle": "Bagikan",
-    "minRead": "menit baca"
+    "minRead": "menit baca",
+    "schoolNews": "Berita Sekolah",
+    "disdikNews": "Berita Disdik Aceh",
+    "noNews": "Belum ada berita"
   },
   "profile": {
     "title": "Profil Sekolah",

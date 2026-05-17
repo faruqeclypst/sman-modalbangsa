@@ -71,9 +71,9 @@
   },
   "hero": {
     "kicker": "Official School Portal",
-    "title": "Answering the\nInformation Needs of\nSMAN Modal Bangsa",
-    "subtitle": "Find the latest public information from SMAN Modal Bangsa, Aceh's leading boarding school.",
-    "searchPlaceholder": "Search...",
+    "title": "SMA Negeri Modal Bangsa Aceh Province",
+    "subtitle": "Find the latest information about education, achievements, and activities at SMAN Modal Bangsa Aceh.",
+    "searchPlaceholder": "Search Achievements, News, Announcements, Agenda",
     "searchButton": "Search",
     "popularTitle": "Popular searches at SMAN Modal Bangsa",
     "popularLinks": [
@@ -104,7 +104,7 @@
   "news": {
     "latestTitle": "Latest News",
     "latestSubtitle": "Follow the latest school activities and achievements.",
-    "viewAll": "View All News",
+    "viewAll": "View All",
     "allNews": "All News",
     "allNewsSubtitle": "Complete archive of news and announcements.",
     "readMore": "Read more",
@@ -122,7 +122,10 @@
     "backToList": "Back to news list",
     "relatedNews": "Related News",
     "shareTitle": "Share",
-    "minRead": "min read"
+    "minRead": "min read",
+    "schoolNews": "School News",
+    "disdikNews": "Disdik Aceh News",
+    "noNews": "No news yet"
   },
   "profile": {
     "title": "School Profile",
@@ -200,7 +203,7 @@
     "links": "Links",
     "follow": "Follow Us",
     "rights": "All rights reserved.",
-    "developed": "Developed by SMAN Modal Bangsa IT Team"
+    "developed": "Developed by Alfaruq Asri, S.Pd., Gr"
   },
   "common": {
     "loading": "Loading...",

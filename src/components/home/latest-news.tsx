@@ -1,14 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Calendar } from "lucide-react";
+import { Calendar, ExternalLink } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
+import type { DisdikBerita } from "@/lib/disdik-aceh";
 import { Container } from "@/components/ui/container";
 import {
   getCategoryTerms,
   getFeaturedImageUrl,
 } from "@/lib/wp";
+import {
+  getDisdikImageUrl,
+  getDisdikArticleUrl,
+} from "@/lib/disdik-aceh";
 import {
   decodeHtmlEntities,
   formatDate,
@@ -18,11 +23,14 @@ import {
 
 interface LatestNewsProps {
   posts: WPPost[];
+  disdikBerita: DisdikBerita[];
   locale: Locale;
   dict: Dictionary;
 }
 
-function BentoCard({
+// ============ School News Card ============
+
+function SchoolNewsCard({
   post,
   locale,
   size,
@@ -36,14 +44,13 @@ function BentoCard({
   const category = getCategoryTerms(post)[0];
   const imageUrl = getFeaturedImageUrl(post);
   const excerpt = truncate(stripHtml(post.excerpt?.rendered ?? ""), 100);
-
   const href = `/${locale}/berita/${post.id}`;
 
   if (size === "large") {
     return (
       <Link
         href={href}
-        className="group relative col-span-2 row-span-2 overflow-hidden rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm"
+        className="group relative col-span-2 overflow-hidden rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm"
       >
         {imageUrl ? (
           <Image
@@ -139,13 +146,72 @@ function BentoCard({
   );
 }
 
-export function LatestNews({ posts, locale, dict }: LatestNewsProps) {
-  if (!posts.length) return null;
+// ============ Disdik News Card ============
 
-  // Bento layout: 1 large (2×2), 2 medium (1×1 tall), 2 small (1×1)
+function DisdikNewsCard({ berita }: { berita: DisdikBerita }) {
+  const title = decodeHtmlEntities(berita.judul);
+  const imageUrl = getDisdikImageUrl(berita.gambar);
+  const articleUrl = getDisdikArticleUrl(berita.slug);
+  const excerpt = truncate(stripHtml(berita.deskripsi ?? ""), 80);
+
+  return (
+    <a
+      href={articleUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex gap-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-3 transition-all hover:border-[color:var(--primary)] hover:shadow-md"
+    >
+      {/* Image */}
+      <div className="relative h-20 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            unoptimized
+            sizes="96px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : null}
+      </div>
+
+      {/* Content */}
+      <div className="flex min-w-0 flex-1 flex-col">
+        {/* Category */}
+        {berita.kategori?.nama ? (
+          <span className="mb-1 inline-flex w-fit items-center rounded-full bg-[color:var(--primary)]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--primary)]">
+            {berita.kategori.nama}
+          </span>
+        ) : null}
+
+        {/* Title */}
+        <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
+          {title}
+        </h3>
+
+        {/* Meta */}
+        <div className="mt-auto flex items-center gap-2 text-[11px] text-muted-foreground">
+          <span className="inline-flex items-center gap-1">
+            <Calendar className="size-3" aria-hidden />
+            {berita.tanggal}
+          </span>
+          <ExternalLink className="size-3 opacity-50" aria-hidden />
+        </div>
+      </div>
+    </a>
+  );
+}
+
+// ============ Main Component ============
+
+export function LatestNews({
+  posts,
+  disdikBerita,
+  locale,
+  dict,
+}: LatestNewsProps) {
   const [hero, ...rest] = posts;
-  const mediums = rest.slice(0, 2);
-  const smalls = rest.slice(2, 4);
+  const others = rest.slice(0, 2);
 
   return (
     <section
@@ -161,29 +227,73 @@ export function LatestNews({ posts, locale, dict }: LatestNewsProps) {
           >
             {dict.news.latestTitle}
           </h2>
-          <Link
-            href={`/${locale}/berita`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--primary)] px-4 py-2 text-sm font-medium text-[color:var(--primary)] transition-colors hover:bg-[color:var(--primary)] hover:text-white"
-          >
-            {dict.news.viewAll}
-            <ArrowRight className="size-3.5" aria-hidden />
-          </Link>
         </div>
 
-        {/* Bento Grid */}
-        <div className="mt-8 grid auto-rows-[180px] grid-cols-2 gap-3 sm:auto-rows-[200px] lg:auto-rows-[220px] lg:grid-cols-4 lg:gap-4">
-          {/* Large card — spans 2 cols × 2 rows */}
-          <BentoCard post={hero} locale={locale} size="large" />
+        {/* Two Column Layout - equal height */}
+        <div className="mt-8 grid items-stretch gap-8 lg:grid-cols-2">
+          {/* Left Column - School News */}
+          <div className="flex flex-col">
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold text-[color:var(--foreground)]">
+                <Link
+                  href={`/${locale}/berita`}
+                  className="hover:text-[color:var(--primary)] transition-colors"
+                >
+                  {dict.news.schoolNews ?? "Berita Sekolah"}
+                </Link>
+              </h3>
+            </div>
 
-          {/* Medium cards — each spans 1 col × 1 row but taller feel */}
-          {mediums.map((post) => (
-            <BentoCard key={post.id} post={post} locale={locale} size="medium" />
-          ))}
+            {posts.length > 0 ? (
+              <div className="grid flex-1 auto-rows-[1fr] grid-cols-2 gap-3">
+                {/* Hero - spans 2 cols, full height top */}
+                {hero && (
+                  <SchoolNewsCard post={hero} locale={locale} size="large" />
+                )}
+                {/* Side cards */}
+                {others.map((post) => (
+                  <SchoolNewsCard
+                    key={post.id}
+                    post={post}
+                    locale={locale}
+                    size="small"
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground">
+                {dict.news.noNews ?? "Belum ada berita"}
+              </p>
+            )}
+          </div>
 
-          {/* Small cards */}
-          {smalls.map((post) => (
-            <BentoCard key={post.id} post={post} locale={locale} size="small" />
-          ))}
+          {/* Right Column - Disdik Aceh News */}
+          <div className="flex flex-col">
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold text-[color:var(--foreground)]">
+                <a
+                  href="https://disdik.acehprov.go.id/berita/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[color:var(--primary)] transition-colors"
+                >
+                  {dict.news.disdikNews ?? "Berita Disdik Aceh"}
+                </a>
+              </h3>
+            </div>
+
+            {disdikBerita.length > 0 ? (
+              <div className="flex flex-1 flex-col justify-between gap-3">
+                {disdikBerita.slice(0, 5).map((berita, idx) => (
+                  <DisdikNewsCard key={berita.slug || idx} berita={berita} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground">
+                {dict.news.noNews ?? "Belum ada berita"}
+              </p>
+            )}
+          </div>
         </div>
       </Container>
     </section>

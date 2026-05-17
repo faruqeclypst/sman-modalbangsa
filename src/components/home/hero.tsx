@@ -47,9 +47,9 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
       {/* Flat overlay — no gradient */}
       <div aria-hidden className="absolute inset-0 bg-black/40" />
 
-      {/* Content — left aligned */}
+      {/* Content — centered on mobile, left on desktop */}
       <Container className="relative z-10 py-24 sm:py-32">
-        <div className="max-w-xl">
+        <div className="max-w-xl text-center sm:text-left">
           <h1
             id="hero-title"
             className="whitespace-pre-line text-[2rem] font-bold leading-[1.2] sm:text-[2.5rem] md:text-[3rem]"
@@ -65,7 +65,7 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
             action={`/${locale}/berita`}
             method="get"
             role="search"
-            className="mt-8 flex w-full max-w-md items-center rounded-lg border border-white/25 bg-white/15 shadow-lg backdrop-blur-md focus-within:border-white/40 focus-within:bg-white/20"
+            className="mx-auto mt-8 flex w-full max-w-md items-center rounded-lg border border-white/25 bg-white/15 shadow-lg backdrop-blur-md focus-within:border-white/40 focus-within:bg-white/20 sm:mx-0"
           >
             <label htmlFor="hero-search" className="sr-only">
               {dict.common.search}
@@ -94,7 +94,7 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
             <p className="text-xs text-white/60 sm:text-sm">
               {dict.hero.popularTitle}
             </p>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap justify-center gap-2 sm:justify-start">
               {dict.hero.popularLinks.map(
                 (link: { label: string; href: string }) => (
                   <Link

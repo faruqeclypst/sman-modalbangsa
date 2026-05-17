@@ -80,31 +80,30 @@ export function ArticleContent({ html, className }: ArticleContentProps) {
       if (tag === "img") {
         const src = attribs.src ?? "";
         if (!src) return <></>;
-        const width = Number(attribs.width) || 1200;
-        const height = Number(attribs.height) || 675;
+        const width = Number(attribs.width) || 800;
+        const height = Number(attribs.height) || 600;
+
+        // Use image URL as-is from WordPress (already sized appropriately in content)
         if (isHttpUrl(src)) {
-          const isSchoolHost = /(^|\/\/)(www\.)?sman-modalbangsa\.sch\.id\//i.test(
-            src,
-          );
+          const isSchoolHost = /(^|\/\/)(www\.)?sman-modalbangsa\.sch\.id\//i.test(src);
           return (
             <Image
               src={src}
               alt={attribs.alt ?? ""}
-              width={width}
-              height={height}
-              className="my-4 h-auto w-full rounded-lg"
+              width={width > 100 ? width : 800}
+              height={height > 100 ? height : 600}
+              className="article-img mx-auto h-auto max-w-full rounded-lg"
               unoptimized={!isSchoolHost}
             />
           );
         }
-        // Fallback to a plain <img> for relative paths
         // eslint-disable-next-line @next/next/no-img-element
         return (
           <img
             src={src}
             alt={attribs.alt ?? ""}
             loading="lazy"
-            className="my-4 h-auto w-full rounded-lg"
+            className="article-img mx-auto h-auto max-w-full rounded-lg"
           />
         );
       }

@@ -3,7 +3,6 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Award, ArrowRight } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
@@ -34,22 +33,17 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
   const featuredTitle = decodeHtmlEntities(featured.title.rendered);
 
   return (
-    <section aria-label={dict.cpt.prestasi.title} className="bg-white py-14 sm:py-16">
+    <section aria-label={dict.cpt.prestasi.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Award className="size-5 text-yellow-500" />
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+            <Link
+              href={`/${locale}/prestasi`}
+              className="hover:text-[color:var(--primary)] transition-colors"
+            >
               {dict.cpt.prestasi.title}
-            </h2>
-          </div>
-          <Link
-            href={`/${locale}/prestasi`}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 hover:underline"
-          >
-            {dict.cpt.prestasi.title}
-            <ArrowRight className="size-4" />
-          </Link>
+            </Link>
+          </h2>
         </div>
 
         {/*

@@ -4,7 +4,6 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LayoutGroup, motion } from "framer-motion";
-import { ArrowRight, Users } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
@@ -36,10 +35,12 @@ function GuruCard({ person, size }: { person: WPPost; size: "large" | "small" })
           className="object-cover object-top"
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200">
-          <span className={`font-bold text-emerald-400 ${size === "large" ? "text-5xl" : "text-2xl"}`}>
-            {initials}
-          </span>
+        <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200">
+          <div className={`flex items-center justify-center rounded-full bg-white/80 ${size === "large" ? "size-20" : "size-12"}`}>
+            <span className={`font-bold text-emerald-500 ${size === "large" ? "text-3xl" : "text-lg"}`}>
+              {initials}
+            </span>
+          </div>
         </div>
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -77,6 +78,44 @@ function GuruCard({ person, size }: { person: WPPost; size: "large" | "small" })
   Flow: new enters pos-1 → 2 → 3 → 4 → 5 → 6 → 7 (utama) → exit
 */
 
+function MobileGuruScroll({ gtk }: { gtk: WPPost[] }) {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el || gtk.length <= 2) return;
+
+    let pos = 0;
+    const cardWidth = 162; // 150px + 12px gap
+
+    const timer = setInterval(() => {
+      pos += 1;
+      if (pos >= gtk.slice(0, 10).length - 1) pos = 0;
+      el.scrollTo({ left: pos * cardWidth, behavior: "smooth" });
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [gtk]);
+
+  return (
+    <div
+      ref={scrollRef}
+      className="mt-6 flex gap-3 overflow-x-auto pb-4 sm:hidden"
+      style={{ scrollSnapType: "x mandatory", scrollbarWidth: "none" }}
+    >
+      {gtk.slice(0, 10).map((person) => (
+        <div
+          key={person.id}
+          className="relative h-[200px] w-[150px] flex-shrink-0 overflow-hidden rounded-xl shadow-md"
+          style={{ scrollSnapAlign: "start" }}
+        >
+          <GuruCard person={person} size="small" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
   const [step, setStep] = React.useState(0);
 
@@ -93,43 +132,52 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
   const len = gtk.length;
   const VISIBLE = Math.min(7, len);
 
-  // visible[0] = pos-1 (newest), visible[6] = pos-7 (utama, oldest visible)
+  // Flow based on screenshot arrows:
+  // Row 1: 1 (col4) ← 2 (col3) ← 3 (col2) — enter from right, move left
+  // ↓ down to UTAMA
+  // UTAMA = slot-3 (col1, row-span-2) — position 4
+  // ↓ from UTAMA to row 2
+  // Row 2: 5 (col2) → 6 (col3) → 7 (col4) — exit to right
   const visible = Array.from({ length: VISIBLE }, (_, slot) => {
     const idx = ((step - slot) % len + len) % len;
     return gtk[idx];
   });
 
   return (
-    <section aria-label={dict.cpt.gtk.title} className="bg-white py-14 sm:py-16">
+    <section aria-label={dict.cpt.gtk.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
-              <Users className="size-5" />
-            </span>
-            <div>
-              <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-                {dict.cpt.gtk.title}
-              </h2>
-              <p className="text-sm text-gray-500">{dict.cpt.gtk.subtitle}</p>
-            </div>
-          </div>
-          <Link
-            href={`/${locale}/gtk`}
-            className="hidden items-center gap-1.5 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-emerald-600 shadow-sm transition-colors hover:bg-emerald-50 sm:inline-flex"
-          >
-            Lihat Semua
-            <ArrowRight className="size-4" />
-          </Link>
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+            <Link
+              href={`/${locale}/gtk`}
+              className="hover:text-[color:var(--primary)] transition-colors"
+            >
+              {dict.cpt.gtk.title}
+            </Link>
+          </h2>
+          <p className="text-sm text-gray-500">{dict.cpt.gtk.subtitle}</p>
         </div>
 
         <LayoutGroup>
-          <div className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-4 sm:gap-3 lg:gap-4">
+          {/* Desktop: bento grid with animation */}
+          <div className="mt-8 hidden sm:grid sm:grid-cols-4 sm:gap-3 lg:gap-4">
             {visible.map((person, slot) => {
-              // slot 0-2 = row 1 small (cols 2-4)
-              // slot 3-5 = row 2 small (cols 2-4)
-              // slot 6 = utama/large (col 1, row 1-2)
-              const isUtama = slot === VISIBLE - 1;
+              const isUtama = slot === 3;
+
+              let col: number;
+              let row: number;
+              if (isUtama) {
+                col = 1;
+                row = 1;
+              } else if (slot < 3) {
+                // Row 1: right to left (col 4, 3, 2) — slots 0, 1, 2
+                col = 4 - slot;
+                row = 1;
+              } else {
+                // Row 2: left to right (col 2, 3, 4) — slots 4, 5, 6
+                col = slot - 2;
+                row = 2;
+              }
 
               return (
                 <motion.div
@@ -138,12 +186,12 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
                   transition={{ layout: { duration: 0.65, ease: [0.25, 0.1, 0.25, 1] } }}
                   className={`relative overflow-hidden ${
                     isUtama
-                      ? "col-span-2 row-span-2 h-[320px] sm:col-span-1 sm:h-[420px] lg:h-[500px] rounded-2xl shadow-lg"
-                      : "h-[155px] sm:h-[200px] lg:h-[242px] rounded-xl shadow-md"
+                      ? "col-span-1 row-span-2 h-[420px] lg:h-[500px] rounded-2xl shadow-lg"
+                      : "h-[200px] lg:h-[242px] rounded-xl shadow-md"
                   }`}
                   style={{
-                    gridColumnStart: isUtama ? 1 : slot < 3 ? slot + 2 : slot - 3 + 2,
-                    gridRowStart: isUtama ? 1 : slot < 3 ? 1 : 2,
+                    gridColumnStart: col,
+                    gridRowStart: row,
                     gridRowEnd: isUtama ? 3 : undefined,
                   }}
                 >
@@ -152,6 +200,9 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
               );
             })}
           </div>
+
+          {/* Mobile: horizontal auto-scroll */}
+          <MobileGuruScroll gtk={gtk} />
         </LayoutGroup>
 
         <div className="mt-5 flex justify-center gap-1.5">
@@ -165,15 +216,7 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
           ))}
         </div>
 
-        <div className="mt-6 text-center sm:hidden">
-          <Link
-            href={`/${locale}/gtk`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-emerald-600"
-          >
-            Lihat Semua Guru
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
+
       </Container>
     </section>
   );

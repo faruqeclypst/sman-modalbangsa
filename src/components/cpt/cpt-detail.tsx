@@ -61,15 +61,14 @@ export function CPTDetail({
             {backLabel}
           </Link>
 
-          <Badge variant="primary" className="mt-5">
-            {typeLabel}
-          </Badge>
-
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-[color:var(--foreground)] sm:text-4xl md:text-5xl">
+          <h1 className="mt-5 text-3xl font-bold tracking-tight text-[color:var(--foreground)] sm:text-4xl md:text-5xl">
             {title}
           </h1>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[color:var(--muted-foreground)]">
+          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[color:var(--muted-foreground)]">
+            <Badge variant="primary">
+              {typeLabel}
+            </Badge>
             {author ? (
               <span className="inline-flex items-center gap-1.5">
                 <User className="size-4" aria-hidden /> {author}

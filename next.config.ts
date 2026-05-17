@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
         hostname: "i2.wp.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "disdik.acehprov.go.id",
+        pathname: "/**",
+      },
     ],
   },
 };

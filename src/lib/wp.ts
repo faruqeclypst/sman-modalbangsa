@@ -221,12 +221,19 @@ export function getFeaturedImage(post: WPPost): WPMedia | null {
 export function getFeaturedImageUrl(post: WPPost): string | null {
   const media = getFeaturedImage(post);
   if (!media) return null;
-  // Prefer "medium_large" or "large" if available, else fall back to source_url.
+  // Use source_url (original/full) for best quality. WordPress source_url is the full-size image.
+  return media.source_url ?? null;
+}
+
+/** Get a smaller thumbnail URL for cards/lists (medium ~300px). */
+export function getThumbnailUrl(post: WPPost): string | null {
+  const media = getFeaturedImage(post);
+  if (!media) return null;
   const sizes = media.media_details?.sizes;
   return (
     sizes?.medium_large?.source_url ??
-    sizes?.large?.source_url ??
     sizes?.medium?.source_url ??
+    sizes?.large?.source_url ??
     media.source_url ??
     null
   );
@@ -251,4 +258,53 @@ export function getTagTerms(post: WPPost): WPTerm[] {
 export function getTermsByTaxonomy(post: WPPost, taxonomy: string): WPTerm[] {
   const groups = post._embedded?.["wp:term"] ?? [];
   return groups.flat().filter((t) => t.taxonomy === taxonomy);
+}
+
+// ---------- Comments ----------
+
+export interface WPComment {
+  id: number;
+  post: number;
+  parent: number;
+  author_name: string;
+  date: string;
+  content: { rendered: string };
+  status: string;
+}
+
+/** Fetch approved comments for a post. */
+export async function getComments(postId: number | string): Promise<WPComment[]> {
+  try {
+    const { data } = await wpFetch<WPComment[]>(
+      `/comments?post=${postId}&per_page=50&order=desc&status=approve`,
+    );
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    console.error("[wp.getComments]", err);
+    return [];
+  }
+}
+
+/** Submit a new comment to WordPress. */
+export async function postComment(
+  postId: number | string,
+  body: { author_name: string; author_email: string; content: string },
+): Promise<WPComment | null> {
+  try {
+    const { data } = await wpFetch<WPComment>(`/comments`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        post: Number(postId),
+        author_name: body.author_name,
+        author_email: body.author_email,
+        content: body.content,
+      }),
+      revalidate: 0,
+    });
+    return data;
+  } catch (err) {
+    console.error("[wp.postComment]", err);
+    return null;
+  }
 }

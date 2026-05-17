@@ -2,7 +2,7 @@
 
 :root {
   /* Brand palette — GREEN theme matching jabarprov style */
-  --background: #ffffff;
+  --background: #f9fafb;
   --foreground: #0f172a;
   --muted: #f1f5f9;
   --muted-foreground: #475569;
@@ -173,4 +173,112 @@
 }
 .fade-up {
   animation: fade-up 0.45s ease-out both;
+}
+
+/* Section ornament — batik/floral grow animation on scroll */
+.section-ornament .ornament-center,
+.section-ornament .ornament-left,
+.section-ornament .ornament-right {
+  transform-origin: center;
+  transition: none;
+}
+
+.section-ornament .ornament-center {
+  transform: scale(0);
+}
+.section-ornament .ornament-left {
+  clip-path: inset(0 100% 0 0);
+}
+.section-ornament .ornament-right {
+  clip-path: inset(0 0 0 100%);
+}
+
+/* When in view — grow animation */
+.section-ornament.in-view .ornament-center {
+  animation: ornament-bloom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+}
+.section-ornament.in-view .ornament-left {
+  animation: ornament-grow-left 0.8s ease-out 0.4s forwards;
+}
+.section-ornament.in-view .ornament-right {
+  animation: ornament-grow-right 0.8s ease-out 0.4s forwards;
+}
+
+@keyframes ornament-bloom {
+  from {
+    transform: scale(0) rotate(-45deg);
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes ornament-grow-left {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+@keyframes ornament-grow-right {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0%);
+  }
+}
+
+/* Article images - centered, preserve aspect ratio */
+.prose-article img,
+.prose-article .article-img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* WordPress gallery blocks - responsive grid, max 3 columns */
+.prose-article .wp-block-gallery,
+.prose-article .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .prose-article .wp-block-gallery,
+  .prose-article .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.prose-article .wp-block-gallery img,
+.prose-article .gallery img {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* When multiple images are siblings (not in gallery wrapper), auto-grid them */
+.prose-article figure:has(+ figure),
+.prose-article figure + figure {
+  margin-top: 0;
+}
+
+/* Group consecutive figures into a visual grid via CSS */
+.prose-article figure {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.prose-article figure img {
+  margin: 0 auto;
 }

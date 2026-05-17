@@ -2,11 +2,19 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Calendar, Megaphone, NotebookPen } from "lucide-react";
+import Image from "next/image";
+import {
+  Calendar,
+  NotebookPen,
+  Clock,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
-import { decodeHtmlEntities, formatDate } from "@/lib/utils";
+import { decodeHtmlEntities, formatDate, stripHtml, truncate } from "@/lib/utils";
+import { getFeaturedImageUrl } from "@/lib/wp";
 import { Container } from "@/components/ui/container";
 
 interface BentoInfoProps {
@@ -17,40 +25,220 @@ interface BentoInfoProps {
   editorial: WPPost[];
 }
 
-function RotatingItem({
-  items,
-  locale,
-  basePath,
-  interval = 4500,
-}: {
-  items: WPPost[];
-  locale: Locale;
-  basePath: string;
-  interval?: number;
-}) {
-  const [idx, setIdx] = React.useState(0);
+// ============ Mini Calendar ============
 
-  React.useEffect(() => {
-    if (items.length <= 1) return;
-    const t = setInterval(() => setIdx((p) => (p + 1) % items.length), interval);
-    return () => clearInterval(t);
-  }, [items.length, interval]);
+function MiniCalendar({ locale }: { locale: Locale }) {
+  const [baseDate, setBaseDate] = React.useState(() => new Date());
 
-  const post = items[idx];
-  if (!post) return null;
+  const today = new Date();
+  const todayDate = today.getDate();
+  const todayMonth = today.getMonth();
+  const todayYear = today.getFullYear();
+
+  const month = baseDate.getMonth();
+  const year = baseDate.getFullYear();
+
+  const monthName = baseDate.toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
+  // Get 5 days centered around today
+  const centerDate = month === todayMonth && year === todayYear ? todayDate : 1;
+  const days: Date[] = [];
+  for (let i = -2; i <= 2; i++) {
+    const d = new Date(year, month, centerDate + i);
+    days.push(d);
+  }
+
+  const dayNames = locale === "id"
+    ? ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"]
+    : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return (
+    <div className="rounded-2xl border border-[color:var(--border)] bg-white p-5 shadow-sm">
+      <div className="flex items-center justify-between">
+        <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-[color:var(--primary)]">
+          {monthName}
+        </span>
+        <div className="flex gap-0.5">
+          <button
+            type="button"
+            onClick={() => setBaseDate(new Date(year, month - 1, 1))}
+            className="rounded-full p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+            aria-label="Previous month"
+          >
+            <ChevronLeft className="size-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => setBaseDate(new Date(year, month + 1, 1))}
+            className="rounded-full p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+            aria-label="Next month"
+          >
+            <ChevronRight className="size-3.5" />
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-4 grid grid-cols-5 gap-2 text-center">
+        {days.map((d) => {
+          const isToday =
+            d.getDate() === todayDate &&
+            d.getMonth() === todayMonth &&
+            d.getFullYear() === todayYear;
+          return (
+            <div
+              key={d.toISOString()}
+              className={`flex flex-col items-center rounded-xl py-2.5 transition-colors ${
+                isToday
+                  ? "bg-[color:var(--primary)] text-white shadow-md shadow-emerald-200"
+                  : "text-gray-500 hover:bg-gray-50"
+              }`}
+            >
+              <span className="text-[10px] font-semibold uppercase tracking-wide">
+                {dayNames[d.getDay()]}
+              </span>
+              <span className="mt-1 text-xl font-bold leading-none">
+                {d.getDate()}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ============ Featured Agenda Card ============
+
+function FeaturedAgenda({ post, locale }: { post: WPPost; locale: Locale }) {
+  const title = decodeHtmlEntities(post.title.rendered);
+  const imageUrl = getFeaturedImageUrl(post);
+  const excerpt = truncate(stripHtml(post.excerpt?.rendered ?? ""), 120);
+  const postDate = new Date(post.date);
+  const time = postDate.toLocaleTimeString(locale === "id" ? "id-ID" : "en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const dateStr = formatDate(post.date, locale);
 
   return (
     <Link
-      href={`/${locale}/${basePath}/${post.id}`}
-      className="group block"
+      href={`/${locale}/agenda/${post.id}`}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl"
     >
-      <p className="line-clamp-2 text-sm font-semibold leading-snug transition-colors group-hover:text-emerald-300">
-        {decodeHtmlEntities(post.title.rendered)}
-      </p>
-      <p className="mt-1.5 text-xs opacity-60">{formatDate(post.date, locale)}</p>
+      {/* Background */}
+      <div className="relative min-h-[320px] flex-1 sm:min-h-[360px]">
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={title}
+            fill
+            sizes="(min-width: 1024px) 60vw, 100vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-[#14532d] to-[#052e16]">
+            <div className="absolute inset-0 opacity-10" style={{
+              backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+              backgroundSize: "32px 32px",
+            }} />
+            <Calendar className="absolute left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2 text-white/10" />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+
+        {/* Content */}
+        <div className="absolute inset-x-0 bottom-0 p-6">
+          <div className="mb-3 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+              <Clock className="size-3" aria-hidden />
+              {time}
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+              <Calendar className="size-3" aria-hidden />
+              {dateStr}
+            </span>
+          </div>
+
+          <h3 className="line-clamp-2 text-xl font-bold leading-tight text-white sm:text-2xl">
+            {title}
+          </h3>
+
+          {excerpt ? (
+            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">
+              {excerpt}
+            </p>
+          ) : null}
+
+          <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-300 opacity-0 transition-opacity group-hover:opacity-100">
+            {locale === "id" ? "Selengkapnya" : "Read more"} →
+          </div>
+        </div>
+      </div>
     </Link>
   );
 }
+
+// ============ Agenda List Item ============
+
+function AgendaListItem({ post, locale }: { post: WPPost; locale: Locale }) {
+  const title = decodeHtmlEntities(post.title.rendered);
+  const postDate = new Date(post.date);
+  const day = postDate.getDate();
+  const monthShort = postDate.toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
+    month: "short",
+  });
+  const time = postDate.toLocaleTimeString(locale === "id" ? "id-ID" : "en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const isPast = postDate < new Date();
+
+  return (
+    <Link
+      href={`/${locale}/agenda/${post.id}`}
+      className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm ring-1 ring-gray-100 transition-all hover:ring-[color:var(--primary)] hover:shadow-md"
+    >
+      {/* Date badge */}
+      <div
+        className={`flex size-14 flex-shrink-0 flex-col items-center justify-center rounded-xl ${
+          isPast
+            ? "bg-gray-50 text-gray-400"
+            : "bg-gradient-to-br from-emerald-50 to-emerald-100 text-[color:var(--primary)]"
+        }`}
+      >
+        <span className="text-xl font-bold leading-none">{day}</span>
+        <span className="mt-0.5 text-[10px] font-bold uppercase">{monthShort}</span>
+      </div>
+
+      {/* Content */}
+      <div className="min-w-0 flex-1">
+        <p className="line-clamp-1 text-sm font-semibold text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
+          {title}
+        </p>
+        <p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
+          <Clock className="size-3" aria-hidden />
+          {time} • {formatDate(post.date, locale)}
+        </p>
+      </div>
+
+      {/* Status */}
+      {isPast ? (
+        <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-[10px] font-bold text-gray-500">
+          {locale === "id" ? "Selesai" : "Done"}
+        </span>
+      ) : (
+        <span className="shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">
+          {locale === "id" ? "Mendatang" : "Upcoming"}
+        </span>
+      )}
+    </Link>
+  );
+}
+
+// ============ Main Component ============
 
 export function BentoInfo({
   locale,
@@ -60,124 +248,76 @@ export function BentoInfo({
   editorial,
 }: BentoInfoProps) {
   return (
-    <section aria-label="Informasi" className="bg-gray-50 py-14 sm:py-16">
+    <section aria-label="Informasi" className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
-        {/*
-          Bento grid — asymmetric:
-          Desktop: [Pengumuman 2col×2row] [Agenda 1col×1row] [Editorial 1col×1row]
-                                          [Agenda list 2col×1row]
-        */}
-        <div className="grid auto-rows-[170px] grid-cols-1 gap-3 sm:grid-cols-2 lg:auto-rows-[180px] lg:grid-cols-4 lg:gap-4">
-
-          {/* Pengumuman — tall dark green, 2 rows */}
-          <div className="row-span-2 flex flex-col overflow-hidden rounded-2xl bg-[#14532d] p-6 text-white">
-            <div className="flex items-center gap-2">
-              <Megaphone className="size-5 text-emerald-300" />
-              <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-300">
-                {dict.cpt.pengumuman.label}
-              </h3>
-            </div>
-            <ul className="mt-4 flex flex-1 flex-col gap-3 overflow-hidden">
-              {pengumuman.slice(0, 4).map((post) => (
-                <li key={post.id}>
-                  <Link
-                    href={`/${locale}/pengumuman/${post.id}`}
-                    className="group block rounded-lg p-2 transition-colors hover:bg-white/10"
-                  >
-                    <p className="line-clamp-2 text-sm font-medium leading-snug group-hover:text-emerald-300">
-                      {decodeHtmlEntities(post.title.rendered)}
-                    </p>
-                    <p className="mt-1 text-[11px] text-emerald-200/60">
-                      {formatDate(post.date, locale)}
-                    </p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href={`/${locale}/pengumuman`}
-              className="mt-3 text-xs font-semibold text-emerald-300 hover:underline"
-            >
-              {dict.cpt.pengumuman.viewAll} →
-            </Link>
-          </div>
-
-          {/* Agenda — green accent, single rotating item */}
-          <div className="flex flex-col justify-between overflow-hidden rounded-2xl bg-emerald-600 p-5 text-white lg:col-span-2">
-            <div className="flex items-center gap-2">
-              <Calendar className="size-4 text-emerald-200" />
-              <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-200">
-                {dict.cpt.agenda.upcoming}
-              </h3>
-            </div>
-            <div className="mt-3">
-              <RotatingItem
-                items={agenda}
-                locale={locale}
-                basePath="agenda"
-                interval={5000}
-              />
-            </div>
+        {/* Section Header */}
+        <div className="mb-8">
+          <h2 className="text-xl font-bold text-[color:var(--foreground)] sm:text-2xl">
             <Link
               href={`/${locale}/agenda`}
-              className="mt-3 text-xs font-semibold text-emerald-100 hover:underline"
+              className="hover:text-[color:var(--primary)] transition-colors"
             >
-              {dict.cpt.agenda.viewAll} →
+              {dict.cpt.agenda.title}
             </Link>
+          </h2>
+          <p className="text-sm text-muted-foreground">{dict.cpt.agenda.subtitle}</p>
+        </div>
+
+        {/* Main Grid */}
+        <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+          {/* Left - Featured Agenda + List */}
+          <div className="flex flex-col gap-4">
+            {agenda[0] ? (
+              <FeaturedAgenda post={agenda[0]} locale={locale} />
+            ) : (
+              <div className="flex min-h-[320px] items-center justify-center rounded-2xl bg-gray-50">
+                <div className="text-center">
+                  <Calendar className="mx-auto size-12 text-gray-300" />
+                  <p className="mt-3 text-sm text-muted-foreground">{dict.cpt.agenda.empty}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Agenda List */}
+            {agenda.length > 1 ? (
+              <div className="grid gap-3 sm:grid-cols-2">
+                {agenda.slice(1, 5).map((post) => (
+                  <AgendaListItem key={post.id} post={post} locale={locale} />
+                ))}
+              </div>
+            ) : null}
           </div>
 
-          {/* Editorial — white card */}
-          <div className="flex flex-col justify-between overflow-hidden rounded-2xl bg-white p-5 shadow-sm ring-1 ring-gray-200">
-            <div className="flex items-center gap-2">
-              <NotebookPen className="size-4 text-gray-400" />
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                {dict.cpt.editorial.label}
-              </h3>
-            </div>
-            <div className="mt-3">
-              <RotatingItem
-                items={editorial}
-                locale={locale}
-                basePath="editorial"
-                interval={6000}
-              />
-            </div>
-            <Link
-              href={`/${locale}/editorial`}
-              className="mt-3 text-xs font-semibold text-emerald-600 hover:underline"
-            >
-              {dict.cpt.editorial.title} →
-            </Link>
-          </div>
+          {/* Right Sidebar */}
+          <div className="flex flex-col gap-4">
+            {/* Mini Calendar */}
+            <MiniCalendar locale={locale} />
 
-          {/* Agenda list — wide, shows 2-3 upcoming items */}
-          <div className="flex flex-col overflow-hidden rounded-2xl bg-gray-900 p-5 text-white sm:col-span-1 lg:col-span-3">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                {dict.cpt.agenda.title}
-              </h3>
-              <Link
-                href={`/${locale}/agenda`}
-                className="text-xs font-semibold text-emerald-400 hover:underline"
-              >
-                {dict.cpt.agenda.viewAll} →
-              </Link>
-            </div>
-            <div className="mt-3 grid flex-1 gap-3 sm:grid-cols-3">
-              {agenda.slice(0, 3).map((post) => (
-                <Link
-                  key={post.id}
-                  href={`/${locale}/agenda/${post.id}`}
-                  className="group rounded-xl bg-white/5 p-3 transition-colors hover:bg-white/10"
-                >
-                  <p className="text-xs text-emerald-400">
-                    {formatDate(post.date, locale)}
-                  </p>
-                  <p className="mt-1 line-clamp-2 text-sm font-medium leading-snug group-hover:text-emerald-300">
-                    {decodeHtmlEntities(post.title.rendered)}
-                  </p>
-                </Link>
-              ))}
+            {/* Editorial */}
+            <div className="rounded-2xl border border-[color:var(--border)] bg-white p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <NotebookPen className="size-4 text-gray-400" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                  {dict.cpt.editorial.label}
+                </h3>
+              </div>
+              <ul className="mt-3 space-y-3">
+                {editorial.slice(0, 2).map((post) => (
+                  <li key={post.id}>
+                    <Link
+                      href={`/${locale}/editorial/${post.id}`}
+                      className="group block"
+                    >
+                      <p className="line-clamp-2 text-sm font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
+                        {decodeHtmlEntities(post.title.rendered)}
+                      </p>
+                      <p className="mt-1 text-[11px] text-muted-foreground">
+                        {formatDate(post.date, locale)}
+                      </p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

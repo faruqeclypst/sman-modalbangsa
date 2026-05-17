@@ -2,13 +2,17 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getCPT, getPosts } from "@/lib/wp";
+import { getDisdikBerita } from "@/lib/disdik-aceh";
 import { Hero } from "@/components/home/hero";
+import { AnnouncementStrip } from "@/components/home/announcement-strip";
 import { HeadmasterSection } from "@/components/home/headmaster-section";
 import { LatestNews } from "@/components/home/latest-news";
 import { BentoInfo } from "@/components/home/bento-info";
 import { BentoPrestasi } from "@/components/home/bento-prestasi";
 import { BentoGuru } from "@/components/home/bento-guru";
 import { BentoCommunity } from "@/components/home/bento-community";
+import { InstagramFeed } from "@/components/home/instagram-feed";
+import { SectionOrnament } from "@/components/ui/section-ornament";
 
 export const revalidate = 300; // 5 min ISR — renders on first request, cached after
 
@@ -28,6 +32,7 @@ export default async function HomePage({
     { posts: prestasi },
     { posts: gtk },
     { posts: galeri },
+    { berita: disdikBerita },
   ] = await Promise.all([
     getPosts({ perPage: 8 }),
     getCPT("pengumuman", { perPage: 5 }),
@@ -35,14 +40,19 @@ export default async function HomePage({
     getCPT("editorial", { perPage: 4 }),
     getCPT("prestasi", { perPage: 5 }),
     getCPT("gtk", { perPage: 20, orderBy: "title", order: "asc" }),
-    getCPT("galeri", { perPage: 6 }),
+    getCPT("galeri", { perPage: 20 }),
+    getDisdikBerita({ limit: 5 }),
   ]);
 
   return (
     <>
       <Hero locale={lang} dict={dict} gallery={galeri} />
+      <AnnouncementStrip locale={lang} dict={dict} pengumuman={pengumuman} />
       <HeadmasterSection dict={dict} />
-      <LatestNews posts={news} locale={lang} dict={dict} />
+      <SectionOrnament />
+      <LatestNews posts={news} disdikBerita={disdikBerita} locale={lang} dict={dict} />
+      <InstagramFeed />
+      <SectionOrnament flip />
       <BentoInfo
         locale={lang}
         dict={dict}
@@ -50,9 +60,12 @@ export default async function HomePage({
         agenda={agenda}
         editorial={editorial}
       />
+      <SectionOrnament />
       <BentoPrestasi locale={lang} dict={dict} prestasi={prestasi} />
+      <SectionOrnament flip />
       <BentoGuru locale={lang} dict={dict} gtk={gtk} />
-      <BentoCommunity locale={lang} dict={dict} gtk={[]} galeri={galeri} />
+      <SectionOrnament />
+      <BentoCommunity locale={lang} dict={dict} gtk={[]} galeri={[...galeri, ...news, ...prestasi]} />
     </>
   );
 }

@@ -8,6 +8,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import {
   getAuthorName,
   getCategoryTerms,
+  getComments,
   getFeaturedImage,
   getFeaturedImageUrl,
   getPostById,
@@ -25,6 +26,7 @@ import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { ArticleContent } from "@/components/news/article-content";
 import { NewsCard } from "@/components/news/news-card";
+import { CommentSection } from "@/components/news/comment-section";
 
 export const revalidate = 600; // 10 minutes ISR for individual posts
 export const dynamicParams = true;
@@ -93,12 +95,22 @@ export default async function NewsDetailPage({
 
   // Related posts (same primary category if available)
   const primaryCat = categories[0];
-  const { posts: relatedRaw } = await getPosts({
-    perPage: 4,
-    categories: primaryCat ? [primaryCat.id] : undefined,
-    exclude: [post.id],
-  });
+  const [{ posts: relatedRaw }, comments] = await Promise.all([
+    getPosts({
+      perPage: 4,
+      categories: primaryCat ? [primaryCat.id] : undefined,
+      exclude: [post.id],
+    }),
+    getComments(post.id),
+  ]);
   const related = relatedRaw.slice(0, 3);
+
+  // Split content in half to inject "Baca Juga" in the middle
+  const contentHtml = post.content.rendered;
+  const paragraphs = contentHtml.split(/<\/p>/i);
+  const midPoint = Math.max(2, Math.floor(paragraphs.length / 2));
+  const contentTop = paragraphs.slice(0, midPoint).join("</p>") + "</p>";
+  const contentBottom = paragraphs.slice(midPoint).join("</p>");
 
   return (
     <article className="bg-[color:var(--background)]">
@@ -161,10 +173,55 @@ export default async function NewsDetailPage({
 
       {/* Body */}
       <Container size="md" className="py-10">
+        {/* First half of content */}
         <ArticleContent
-          html={post.content.rendered}
+          html={contentTop}
           className="prose-article max-w-none"
         />
+
+        {/* Baca Juga - injected in the middle of content */}
+        {related.length ? (
+          <div className="my-8 rounded-2xl border border-[color:var(--border)] bg-[color:var(--muted)]/30 p-5">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[color:var(--primary)]">
+              {lang === "id" ? "Baca Juga" : "Read Also"}
+            </h3>
+            <div className="mt-3 grid gap-3 sm:grid-cols-3">
+              {related.slice(0, 3).map((r) => {
+                const rImg = getFeaturedImageUrl(r);
+                return (
+                  <Link
+                    key={r.id}
+                    href={`/${lang}/berita/${r.id}`}
+                    className="group flex gap-3 sm:flex-col sm:gap-2"
+                  >
+                    <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-[color:var(--muted)] sm:aspect-video sm:h-auto sm:w-full">
+                      {rImg ? (
+                        <Image
+                          src={rImg}
+                          alt={decodeHtmlEntities(r.title.rendered)}
+                          fill
+                          sizes="(min-width: 640px) 200px, 56px"
+                          className="object-cover transition-transform group-hover:scale-105"
+                        />
+                      ) : null}
+                    </div>
+                    <p className="line-clamp-2 text-sm font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
+                      {decodeHtmlEntities(r.title.rendered)}
+                    </p>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+
+        {/* Second half of content */}
+        {contentBottom.trim() ? (
+          <ArticleContent
+            html={contentBottom}
+            className="prose-article max-w-none"
+          />
+        ) : null}
 
         {tags.length ? (
           <div className="mt-10 border-t border-[color:var(--border)] pt-6">
@@ -181,6 +238,13 @@ export default async function NewsDetailPage({
           </div>
         ) : null}
       </Container>
+
+      {/* Comments - connected to WordPress */}
+      <section className="border-t border-[color:var(--border)] py-12">
+        <Container size="md">
+          <CommentSection postId={post.id} initialComments={comments} locale={lang} />
+        </Container>
+      </section>
 
       {/* Related */}
       {related.length ? (

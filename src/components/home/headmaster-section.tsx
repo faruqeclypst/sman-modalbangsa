@@ -15,23 +15,33 @@ const HEADMASTER = {
 
 export function HeadmasterSection({ dict }: HeadmasterSectionProps) {
   return (
-    <section aria-label={dict.profile.principal.title} className="bg-white py-14 sm:py-16">
+    <section aria-label={dict.profile.principal.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
         <div className="grid items-center gap-8 lg:grid-cols-[300px_1fr_240px] lg:gap-10">
-          {/* Left — Portrait photo (HD, no box/shadow) */}
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-[280px] overflow-hidden lg:mx-0 lg:max-w-none">
-            <Image
-              src={HEADMASTER.photo}
-              alt={HEADMASTER.name}
-              fill
-              sizes="(min-width: 1024px) 300px, 280px"
-              className="object-cover object-top"
-              unoptimized
-              priority
-            />
-            <div className="absolute rounded-3xl inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-5 pt-12">
-              <p className="text-lg font-bold text-white">{HEADMASTER.name}</p>
-              <span className="mt-1 inline-flex items-center rounded-full bg-emerald-500/80 px-3 py-0.5 text-xs font-semibold text-white">
+          {/* Left — Portrait photo with geometric background */}
+          <div className="mx-auto w-full max-w-[220px] lg:mx-0 lg:max-w-none">
+            <div className="relative">
+              {/* Geometric background shapes */}
+              <div className="absolute inset-x-2 bottom-0 top-8 rounded-2xl bg-emerald-50" aria-hidden />
+              <div className="absolute right-0 top-4 size-12 rounded-lg border-2 border-emerald-200 opacity-60" aria-hidden />
+              <div className="absolute -left-2 bottom-12 size-8 rounded-full bg-emerald-100" aria-hidden />
+
+              {/* Photo - transparent PNG, no overflow hidden so bottom isn't cut */}
+              <div className="relative">
+                <Image
+                  src={HEADMASTER.photo}
+                  alt={HEADMASTER.name}
+                  width={220}
+                  height={300}
+                  className="relative z-10 mx-auto h-auto w-full object-contain"
+                  unoptimized
+                  priority
+                />
+              </div>
+            </div>
+            <div className="mt-3 text-center">
+              <p className="text-sm font-bold text-[color:var(--foreground)]">{HEADMASTER.name}</p>
+              <span className="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700">
                 {HEADMASTER.role}
               </span>
             </div>

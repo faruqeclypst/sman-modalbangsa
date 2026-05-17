@@ -4,7 +4,6 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Camera } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
@@ -21,42 +20,54 @@ interface BentoCommunityProps {
 
 export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
   const items = galeri.filter((p) => getFeaturedImageUrl(p));
-  const [offset, setOffset] = React.useState(0);
+  const numSlots = Math.min(6, items.length);
+  
+  // Initialize slots with first N indices
+  const [slots, setSlots] = React.useState<number[]>(() =>
+    Array.from({ length: numSlots }, (_, i) => i)
+  );
 
-  // Auto-rotate: shift visible window every 5 seconds
+  // Rotate one slot at a time every 3 seconds
   React.useEffect(() => {
-    if (items.length <= 5) return;
+    if (items.length <= numSlots) return;
+    let currentSlot = 0;
+
     const timer = setInterval(() => {
-      setOffset((prev) => (prev + 1) % items.length);
-    }, 5000);
+      setSlots((prev) => {
+        const next = [...prev];
+        let newIdx: number;
+        let attempts = 0;
+        do {
+          newIdx = Math.floor(Math.random() * items.length);
+          attempts++;
+        } while (prev.includes(newIdx) && attempts < 20);
+        
+        next[currentSlot] = newIdx;
+        currentSlot = (currentSlot + 1) % numSlots;
+        return next;
+      });
+    }, 3000);
+
     return () => clearInterval(timer);
-  }, [items.length]);
+  }, [items.length, numSlots]);
 
-  if (!items.length) return null;
+  if (items.length < 3) return null;
 
-  // Get 5 visible items from circular buffer
-  const getItem = (i: number) => items[(offset + i) % items.length];
-  const visible = Array.from({ length: Math.min(5, items.length) }, (_, i) => getItem(i));
+  const visible = slots.map((idx) => items[idx % items.length]).filter(Boolean);
+  if (visible.length < 3) return null;
 
   return (
-    <section aria-label={dict.cpt.galeri.title} className="bg-gray-50 py-14 sm:py-16">
+    <section aria-label={dict.cpt.galeri.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
-              <Camera className="size-5" />
-            </span>
-            <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+            <Link
+              href={`/${locale}/galeri`}
+              className="hover:text-[color:var(--primary)] transition-colors"
+            >
               {dict.cpt.galeri.title}
-            </h2>
-          </div>
-          <Link
-            href={`/${locale}/galeri`}
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 hover:underline"
-          >
-            Lihat Semua
-            <ArrowRight className="size-4" />
-          </Link>
+            </Link>
+          </h2>
         </div>
 
         {/* Bento grid — all slots auto-rotate through all gallery items */}
@@ -122,9 +133,9 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
             </div>
           ) : null}
 
-          {/* Small cards (3 slots) */}
-          {visible.slice(2, 5).map((post, idx) => (
-            <div key={`slot-${idx}`} className="relative overflow-hidden rounded-2xl">
+          {/* Small cards (fill remaining slots) */}
+          {visible.slice(2).map((post, idx) => (
+            <div key={`slot-${idx}`} className="relative overflow-hidden rounded-2xl bg-emerald-50">
               <AnimatePresence mode="popLayout">
                 <motion.div
                   key={post.id}
@@ -138,13 +149,21 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
                     href={`/${locale}/galeri/${post.id}`}
                     className="group relative block h-full w-full"
                   >
-                    <Image
-                      src={getFeaturedImageUrl(post)!}
-                      alt={decodeHtmlEntities(post.title.rendered)}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, 50vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                    {getFeaturedImageUrl(post) ? (
+                      <Image
+                        src={getFeaturedImageUrl(post)!}
+                        alt={decodeHtmlEntities(post.title.rendered)}
+                        fill
+                        sizes="(min-width: 1024px) 25vw, 50vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100 p-4">
+                        <p className="text-center text-xs font-semibold text-emerald-600">
+                          {decodeHtmlEntities(post.title.rendered)}
+                        </p>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/5" />
                   </Link>
                 </motion.div>
@@ -153,19 +172,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
           ))}
         </div>
 
-        {/* Dots */}
-        {items.length > 5 ? (
-          <div className="mt-4 flex justify-center gap-1.5">
-            {items.map((_, i) => (
-              <span
-                key={i}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  i === offset % items.length ? "w-5 bg-emerald-500" : "w-1.5 bg-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-        ) : null}
+        {/* No dots needed - continuous random rotation */}
       </Container>
     </section>
   );

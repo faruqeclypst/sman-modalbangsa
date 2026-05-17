@@ -108,7 +108,7 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
             );
 
             const className =
-              "group flex flex-col items-center rounded-xl border border-white/30 bg-white/60 p-4 text-center shadow-sm backdrop-blur-md transition-all hover:-translate-y-1 hover:border-white/50 hover:bg-white/80 hover:shadow-lg";
+              "group flex flex-col items-center rounded-xl border border-[color:var(--border)] bg-white p-4 text-center shadow-sm transition-all hover:-translate-y-0.5 hover:border-[color:var(--primary)]/40 hover:shadow-md";
 
             return (
               <li key={key}>
