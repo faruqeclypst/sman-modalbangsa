@@ -3,6 +3,7 @@ import { locales } from "@/i18n/config";
 import { getCPT, getPosts } from "@/lib/wp";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic"; // generate on first request, not at build
 
 const STATIC_PATHS = [
   "",

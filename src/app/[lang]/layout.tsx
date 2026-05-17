@@ -16,9 +16,9 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-export async function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
+// Don't pre-render at build time — let ISR handle it on first request
+// This avoids WP API timeouts during Vercel builds from US data centers
+export const dynamicParams = true;
 
 export const viewport: Viewport = {
   themeColor: "#166534",

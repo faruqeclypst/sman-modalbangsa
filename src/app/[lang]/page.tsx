@@ -10,7 +10,7 @@ import { BentoPrestasi } from "@/components/home/bento-prestasi";
 import { BentoGuru } from "@/components/home/bento-guru";
 import { BentoCommunity } from "@/components/home/bento-community";
 
-export const revalidate = 3600;
+export const revalidate = 300; // 5 min ISR — renders on first request, cached after
 
 export default async function HomePage({
   params,

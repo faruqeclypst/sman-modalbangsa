@@ -27,18 +27,11 @@ import { ArticleContent } from "@/components/news/article-content";
 import { NewsCard } from "@/components/news/news-card";
 
 export const revalidate = 600; // 10 minutes ISR for individual posts
-export const dynamicParams = true; // allow new post IDs to render on-demand
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  // Pre-render the most recent posts at build time. Others render on-demand.
-  try {
-    const { posts } = await getPosts({ perPage: 12 });
-    return posts.flatMap((post) =>
-      ["id", "en"].map((lang) => ({ lang, id: String(post.id) })),
-    );
-  } catch {
-    return [];
-  }
+  // Skip pre-rendering at build time — render on-demand with ISR
+  return [];
 }
 
 export async function generateMetadata({
