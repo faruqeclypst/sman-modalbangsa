@@ -3,6 +3,7 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getCPT, getPosts } from "@/lib/wp";
 import { Hero } from "@/components/home/hero";
+import { HeadmasterSection } from "@/components/home/headmaster-section";
 import { LatestNews } from "@/components/home/latest-news";
 import { BentoInfo } from "@/components/home/bento-info";
 import { BentoPrestasi } from "@/components/home/bento-prestasi";
@@ -40,6 +41,7 @@ export default async function HomePage({
   return (
     <>
       <Hero locale={lang} dict={dict} gallery={galeri} />
+      <HeadmasterSection dict={dict} />
       <LatestNews posts={news} locale={lang} dict={dict} />
       <BentoInfo
         locale={lang}

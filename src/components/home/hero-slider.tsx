@@ -30,7 +30,7 @@ export function HeroSlider({ images, interval = 6000 }: HeroSliderProps) {
           fill
           priority={idx === 0}
           sizes="100vw"
-          className={`object-cover transition-opacity duration-[1200ms] ease-in-out ${
+          className={`object-cover blur-[5px] transition-opacity duration-[1200ms] ease-in-out ${
             idx === current ? "opacity-100" : "opacity-0"
           }`}
         />

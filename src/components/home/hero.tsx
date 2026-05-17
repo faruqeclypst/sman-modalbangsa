@@ -34,7 +34,7 @@ export function Hero({ locale, dict, gallery = [] }: HeroProps) {
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover blur-[2px]"
           aria-hidden
         />
       ) : (
