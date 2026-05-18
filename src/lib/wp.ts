@@ -84,9 +84,12 @@ export async function getPosts({
   exclude,
   orderBy = "date",
   order = "desc",
-}: FetchPostsParams = {}): Promise<PostsResult> {
+  embed = true,
+  fields,
+}: FetchPostsParams & { embed?: boolean; fields?: string[] } = {}): Promise<PostsResult> {
   const query = buildQuery({
-    _embed: 1,
+    ...(embed ? { _embed: 1 } : {}),
+    ...(fields?.length ? { _fields: fields.join(",") } : {}),
     page,
     per_page: perPage,
     search,
@@ -138,6 +141,10 @@ export async function getCategories(): Promise<WPCategory[]> {
 /**
  * Generic fetcher for any custom post type exposed by the WP REST API.
  * Returns posts shaped like /wp/v2/posts (title/content/excerpt rendered).
+ *
+ * @param fields - Optional array of WP fields to request (reduces payload).
+ *                 When provided, only those fields are returned.
+ *                 Pass `embed: false` to skip _embed (no media/terms join).
  */
 export async function getCPT(
   type: WPCustomPostType,
@@ -149,10 +156,11 @@ export async function getCPT(
     orderBy = "date",
     order = "desc",
     taxonomies,
-  }: FetchCustomParams = {},
+    embed = true,
+    fields,
+  }: FetchCustomParams & { embed?: boolean; fields?: string[] } = {},
 ): Promise<PostsResult> {
   const baseQuery: Record<string, unknown> = {
-    _embed: 1,
     page,
     per_page: perPage,
     search,
@@ -160,6 +168,10 @@ export async function getCPT(
     orderby: orderBy,
     order,
   };
+
+  if (embed) baseQuery._embed = 1;
+  if (fields?.length) baseQuery._fields = fields.join(",");
+
   if (taxonomies) {
     for (const [tax, ids] of Object.entries(taxonomies)) {
       if (ids && ids.length) baseQuery[tax] = ids;

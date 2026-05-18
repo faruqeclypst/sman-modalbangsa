@@ -24,29 +24,41 @@ export default async function HomePage({
 
   const dict = await getDictionary(lang);
 
-  // Split into critical (above-fold) and non-critical (below-fold) fetches
-  // to reduce waterfall impact on perceived load time
+  // All fetches run in parallel — single Promise.all for maximum concurrency.
+  // Use lightweight options (no _embed, limited _fields) where possible
+  // to drastically reduce WP response time and payload size.
   const [
     { posts: news },
     { posts: pengumuman },
     { berita: disdikBerita },
-  ] = await Promise.all([
-    getPosts({ perPage: 4 }),
-    getCPT("pengumuman", { perPage: 5 }),
-    getDisdikBerita({ limit: 5 }),
-  ]);
-
-  const [
     { posts: agenda },
     { posts: editorial },
     { posts: prestasi },
     { posts: gtk },
     { posts: galeri },
   ] = await Promise.all([
+    // News needs full embed for categories + media + excerpt
+    getPosts({ perPage: 4 }),
+    // Pengumuman strip only shows title — no embed needed
+    getCPT("pengumuman", {
+      perPage: 5,
+      embed: false,
+      fields: ["id", "title", "date"],
+    }),
+    getDisdikBerita({ limit: 5 }),
+    // Agenda needs image + excerpt for featured card
     getCPT("agenda", { perPage: 4 }),
-    getCPT("editorial", { perPage: 4 }),
+    // Editorial sidebar only shows title + date
+    getCPT("editorial", {
+      perPage: 4,
+      embed: false,
+      fields: ["id", "title", "date"],
+    }),
+    // Prestasi needs image for bento cards
     getCPT("prestasi", { perPage: 5 }),
+    // GTK needs image + taxonomy terms (jab, stts)
     getCPT("gtk", { perPage: 12, orderBy: "title", order: "asc" }),
+    // Galeri only needs image URL for hero slider + community grid
     getCPT("galeri", { perPage: 12 }),
   ]);
 
