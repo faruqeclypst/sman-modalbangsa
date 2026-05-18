@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CheckCircle2, Target, Eye } from "lucide-react";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/container";
@@ -39,40 +38,40 @@ export default async function VisionMissionPage({
           { label: dict.nav.visionMission },
         ]}
       />
-      <Container size="md" className="py-12">
-        <div className="grid gap-6 md:grid-cols-2">
-          <article className="rounded-xl border border-[color:var(--border)] bg-white p-6 shadow-sm">
-            <span className="inline-flex size-11 items-center justify-center rounded-lg bg-[color:var(--primary)]/10 text-[color:var(--primary)]">
-              <Eye className="size-5" aria-hidden />
-            </span>
-            <h2 className="mt-4 text-xl font-bold text-[color:var(--foreground)]">
-              {dict.profile.vision.title}
-            </h2>
-            <p className="mt-2 text-[color:var(--muted-foreground)]">
-              {dict.profile.vision.body}
-            </p>
-          </article>
-          <article className="rounded-xl border border-[color:var(--border)] bg-white p-6 shadow-sm">
-            <span className="inline-flex size-11 items-center justify-center rounded-lg bg-[color:var(--secondary)]/10 text-[color:var(--secondary)]">
-              <Target className="size-5" aria-hidden />
-            </span>
-            <h2 className="mt-4 text-xl font-bold text-[color:var(--foreground)]">
-              {dict.profile.mission.title}
-            </h2>
-            <ul className="mt-3 space-y-2.5">
-              {dict.profile.mission.items.map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-[color:var(--foreground)]">
-                  <CheckCircle2
-                    className="mt-0.5 size-5 shrink-0 text-[color:var(--accent)]"
-                    aria-hidden
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        </div>
-      </Container>
+
+      {/* Visi — full-width statement */}
+      <section className="bg-[#14532d] py-16 text-white sm:py-20">
+        <Container size="md">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">
+            {dict.profile.vision.title}
+          </p>
+          <blockquote className="mt-6 text-2xl font-medium leading-snug sm:text-3xl sm:leading-snug lg:text-4xl lg:leading-snug">
+            &ldquo;{dict.profile.vision.body}&rdquo;
+          </blockquote>
+        </Container>
+      </section>
+
+      {/* Misi — numbered list, clean */}
+      <section className="py-16 sm:py-20">
+        <Container size="md">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--muted-foreground)]">
+            {dict.profile.mission.title}
+          </p>
+
+          <ol className="mt-8 space-y-6">
+            {dict.profile.mission.items.map((item, i) => (
+              <li key={i} className="flex gap-5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[color:var(--primary)] text-sm font-bold text-white">
+                  {i + 1}
+                </span>
+                <p className="pt-1 text-base leading-relaxed text-[color:var(--foreground)] sm:text-lg">
+                  {item}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
     </>
   );
 }

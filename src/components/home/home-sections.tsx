@@ -2,6 +2,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getCPT, getPosts } from "@/lib/wp";
 import { getDisdikBerita } from "@/lib/disdik-aceh";
+import { getMediaNews } from "@/lib/media-news";
 import { AnnouncementStrip } from "@/components/home/announcement-strip";
 import { HeadmasterSection } from "@/components/home/headmaster-section";
 import { LatestNews } from "@/components/home/latest-news";
@@ -26,19 +27,21 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
     { posts: news },
     { posts: pengumuman },
     { berita: disdikBerita },
+    mediaNews,
     { posts: agenda },
     { posts: editorial },
     { posts: prestasi },
     { posts: gtk },
     { posts: galeri },
   ] = await Promise.all([
-    getPosts({ perPage: 4 }),
+    getPosts({ perPage: 6 }),
     getCPT("pengumuman", {
       perPage: 5,
       embed: false,
       fields: ["id", "title", "date"],
     }),
     getDisdikBerita({ limit: 5 }),
+    getMediaNews(9),
     getCPT("agenda", { perPage: 4 }),
     getCPT("editorial", {
       perPage: 4,
@@ -55,7 +58,7 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
       <AnnouncementStrip locale={locale} dict={dict} pengumuman={pengumuman} />
       <HeadmasterSection dict={dict} />
       <SectionOrnament />
-      <LatestNews posts={news} disdikBerita={disdikBerita} locale={locale} dict={dict} />
+      <LatestNews posts={news} disdikBerita={disdikBerita} mediaNews={mediaNews} locale={locale} dict={dict} />
       <SectionOrnament flip />
       <BentoInfo
         locale={locale}

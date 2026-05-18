@@ -1,158 +1,275 @@
+"use client";
+
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, ExternalLink } from "lucide-react";
+import { Calendar, ExternalLink, Newspaper } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
 import type { DisdikBerita } from "@/lib/disdik-aceh";
+import type { MediaNewsItem } from "@/lib/media-news";
 import { Container } from "@/components/ui/container";
-import {
-  getCategoryTerms,
-  getFeaturedImageUrl,
-} from "@/lib/wp";
-import {
-  getDisdikImageUrl,
-  getDisdikArticleUrl,
-} from "@/lib/disdik-aceh";
-import {
-  decodeHtmlEntities,
-  formatDate,
-  stripHtml,
-  truncate,
-} from "@/lib/utils";
+
+// Helpers inlined to avoid server-only imports in client component
+function decodeHtml(str: string) {
+  return str
+    .replace(/&#8217;/g, "'")
+    .replace(/&#8216;/g, "'")
+    .replace(/&#8220;/g, "\u201C")
+    .replace(/&#8221;/g, "\u201D")
+    .replace(/&#038;/g, "&")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#8230;/g, "\u2026")
+    .replace(/<[^>]*>/g, "");
+}
+
+function fmtDate(dateStr: string, locale: Locale) {
+  try {
+    return new Date(dateStr).toLocaleDateString(
+      locale === "id" ? "id-ID" : "en-US",
+      { day: "numeric", month: "long", year: "numeric" },
+    );
+  } catch {
+    return dateStr;
+  }
+}
+
+function extractDomain(url: string): string {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return "";
+  }
+}
+
+/** Map known media source names to their actual domains for favicon */
+const SOURCE_DOMAINS: Record<string, string> = {
+  "serambinews.com": "serambinews.com",
+  "ajnn.net": "ajnn.net",
+  "meugahnews.com": "meugahnews.com",
+  "nukilan.id": "nukilan.id",
+  "kompas.com": "kompas.com",
+  "detik.com": "detik.com",
+  "tribunnews.com": "tribunnews.com",
+  "antaranews.com": "antaranews.com",
+  "cnnindonesia.com": "cnnindonesia.com",
+  "liputan6.com": "liputan6.com",
+  "republika.co.id": "republika.co.id",
+  "tempo.co": "tempo.co",
+  "kumparan.com": "kumparan.com",
+  "okezone.com": "okezone.com",
+  "suara.com": "suara.com",
+  "merdeka.com": "merdeka.com",
+  "dialeksis.com": "dialeksis.com",
+  "lintasnasional.com": "lintasnasional.com",
+  "acehtrend.com": "acehtrend.com",
+};
+
+function getSourceDomain(source: string, link: string): string {
+  // Try matching source name against known domains
+  const lower = source.toLowerCase();
+  for (const [key, domain] of Object.entries(SOURCE_DOMAINS)) {
+    if (lower.includes(key.split(".")[0])) return domain;
+  }
+  // Fallback: try to extract from source URL attribute in RSS (stored in link for Google News)
+  // Google News links redirect, so just use source text as domain guess
+  if (source.includes(".")) return source.toLowerCase();
+  return extractDomain(link) || "google.com";
+}
 
 interface LatestNewsProps {
   posts: WPPost[];
   disdikBerita: DisdikBerita[];
+  mediaNews: MediaNewsItem[];
   locale: Locale;
   dict: Dictionary;
 }
 
-// ============ School News Card ============
+// ============ Hero Slider (main card, auto-rotates) ============
 
-function SchoolNewsCard({
-  post,
-  locale,
-  size,
-}: {
-  post: WPPost;
-  locale: Locale;
-  size: "large" | "medium" | "small";
-}) {
-  const title = decodeHtmlEntities(post.title.rendered);
-  const date = formatDate(post.date, locale);
-  const category = getCategoryTerms(post)[0];
-  const imageUrl = getFeaturedImageUrl(post);
-  const excerpt = truncate(stripHtml(post.excerpt?.rendered ?? ""), 100);
+function HeroSlider({ posts, locale }: { posts: WPPost[]; locale: Locale }) {
+  const [idx, setIdx] = React.useState(0);
+
+  React.useEffect(() => {
+    if (posts.length <= 1) return;
+    const t = setInterval(() => setIdx((p) => (p + 1) % posts.length), 5000);
+    return () => clearInterval(t);
+  }, [posts.length]);
+
+  const post = posts[idx];
+  if (!post) return null;
+
+  const title = decodeHtml(post.title.rendered);
+  const date = fmtDate(post.date, locale);
+  const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
+  const category = post._embedded?.["wp:term"]?.flat().find((t) => t.taxonomy === "category");
   const href = `/${locale}/berita/${post.id}`;
 
-  if (size === "large") {
-    return (
-      <Link
-        href={href}
-        className="group relative col-span-2 overflow-hidden rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm"
-      >
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : null}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative flex h-full flex-col justify-end p-6 text-white sm:p-8">
-          {category ? (
-            <span className="mb-2 inline-flex w-fit items-center rounded-full border border-white/25 bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur-sm">
-              {decodeHtmlEntities(category.name)}
-            </span>
-          ) : null}
-          <h3 className="line-clamp-3 text-lg font-bold leading-tight sm:text-xl lg:text-2xl">
-            {title}
-          </h3>
-          {excerpt ? (
-            <p className="mt-2 line-clamp-2 text-sm text-white/80">
-              {excerpt}
-            </p>
-          ) : null}
-          <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-white/70">
-            <Calendar className="size-3.5" aria-hidden />
-            {date}
-          </p>
-        </div>
-      </Link>
-    );
-  }
-
-  if (size === "medium") {
-    return (
-      <Link
-        href={href}
-        className="group relative overflow-hidden rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm"
-      >
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            sizes="(min-width: 1024px) 25vw, 50vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : null}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative flex h-full flex-col justify-end p-5 text-white">
-          {category ? (
-            <span className="mb-2 inline-flex w-fit items-center rounded-full border border-white/25 bg-white/15 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider backdrop-blur-sm">
-              {decodeHtmlEntities(category.name)}
-            </span>
-          ) : null}
-          <h3 className="line-clamp-2 text-base font-bold leading-snug sm:text-lg">
-            {title}
-          </h3>
-          <p className="mt-2 inline-flex items-center gap-1.5 text-xs text-white/70">
-            <Calendar className="size-3" aria-hidden />
-            {date}
-          </p>
-        </div>
-      </Link>
-    );
-  }
-
-  // small
   return (
-    <Link
-      href={href}
-      className="group relative overflow-hidden rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm"
-    >
+    <Link href={href} className="group relative col-span-2 overflow-hidden rounded-2xl bg-black">
+      {imageUrl ? (
+        <Image
+          src={imageUrl}
+          alt={title}
+          fill
+          priority
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          className="object-cover transition-all duration-700 group-hover:scale-105"
+        />
+      ) : null}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      <div className="relative flex h-full flex-col justify-end p-6 text-white sm:p-8">
+        {category ? (
+          <span className="mb-2 inline-flex w-fit items-center rounded-full border border-white/25 bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur-sm">
+            {decodeHtml(category.name)}
+          </span>
+        ) : null}
+        <h3 className="line-clamp-3 text-lg font-bold leading-tight sm:text-xl lg:text-2xl">
+          {title}
+        </h3>
+        <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-white/70">
+          <Calendar className="size-3.5" aria-hidden />
+          {date}
+        </p>
+        {/* Dots */}
+        {posts.length > 1 && (
+          <div className="mt-3 flex gap-1.5">
+            {posts.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={(e) => { e.preventDefault(); setIdx(i); }}
+                aria-label={`Berita ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all ${i === idx ? "w-6 bg-white" : "w-2 bg-white/40"}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </Link>
+  );
+}
+
+// ============ Rotating Small Card ============
+
+function RotatingCard({ posts, locale }: { posts: WPPost[]; locale: Locale }) {
+  const [idx, setIdx] = React.useState(0);
+
+  React.useEffect(() => {
+    if (posts.length <= 1) return;
+    const t = setInterval(() => setIdx((p) => (p + 1) % posts.length), 4000);
+    return () => clearInterval(t);
+  }, [posts.length]);
+
+  const post = posts[idx];
+  if (!post) return null;
+
+  const title = decodeHtml(post.title.rendered);
+  const date = fmtDate(post.date, locale);
+  const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
+  const href = `/${locale}/berita/${post.id}`;
+
+  return (
+    <Link href={href} className="group relative overflow-hidden rounded-2xl bg-black">
       {imageUrl ? (
         <Image
           src={imageUrl}
           alt={title}
           fill
           sizes="(min-width: 1024px) 25vw, 50vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-all duration-700 group-hover:scale-105"
         />
       ) : null}
-      <div className="absolute inset-0 bg-black/55" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       <div className="relative flex h-full flex-col justify-end p-4 text-white">
-        <h3 className="line-clamp-2 text-sm font-bold leading-snug">
-          {title}
-        </h3>
+        <h3 className="line-clamp-2 text-sm font-bold leading-snug">{title}</h3>
         <p className="mt-1.5 text-[11px] text-white/70">{date}</p>
       </div>
     </Link>
   );
 }
 
+// ============ Media News Box (3 items with thumbnails) ============
+
+function MediaNewsBox({ items, locale }: { items: MediaNewsItem[]; locale: Locale }) {
+  const [page, setPage] = React.useState(0);
+
+  const pageCount = Math.max(1, Math.ceil(items.length / 3));
+
+  React.useEffect(() => {
+    if (pageCount <= 1) return;
+    const t = setInterval(() => setPage((p) => (p + 1) % pageCount), 6000);
+    return () => clearInterval(t);
+  }, [pageCount]);
+
+  if (!items.length) return null;
+
+  const visible = items.slice(page * 3, page * 3 + 3);
+
+  return (
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-[color:var(--border)] bg-white">
+      <div className="flex items-center gap-2 border-b border-[color:var(--border)] bg-gray-50 px-4 py-2.5">
+        <Newspaper className="size-3.5 text-[color:var(--primary)]" />
+        <h4 className="text-[10px] font-bold uppercase tracking-wider text-[color:var(--muted-foreground)]">
+          {locale === "id" ? "Liputan Media" : "Media Coverage"}
+        </h4>
+      </div>
+      <div className="flex flex-1 flex-col divide-y divide-[color:var(--border)]">
+        {visible.map((item, idx) => (
+          <a
+            key={`${page}-${idx}`}
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-1 items-center gap-3 px-3 py-3 transition-colors hover:bg-gray-50"
+          >
+            {/* Thumbnail — use favicon/logo of the source website */}
+            <div className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-gray-100">
+              <Image
+                src={`https://www.google.com/s2/favicons?domain=${getSourceDomain(item.source, item.link)}&sz=64`}
+                alt={item.source}
+                fill
+                unoptimized
+                sizes="40px"
+                className="object-contain p-1"
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="line-clamp-2 text-xs font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
+                {item.title}
+              </p>
+              {item.source ? (
+                <p className="mt-0.5 text-[10px] text-[color:var(--muted-foreground)]">
+                  {item.source}
+                </p>
+              ) : null}
+            </div>
+            <ExternalLink className="size-3 shrink-0 text-[color:var(--muted-foreground)] opacity-0 group-hover:opacity-100" />
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ============ Disdik News Card ============
 
 function DisdikNewsCard({ berita }: { berita: DisdikBerita }) {
-  const title = decodeHtmlEntities(berita.judul);
-  const imageUrl = getDisdikImageUrl(berita.gambar);
-  const articleUrl = getDisdikArticleUrl(berita.slug);
-  const excerpt = truncate(stripHtml(berita.deskripsi ?? ""), 80);
+  const title = decodeHtml(berita.judul);
+  const imageUrl = berita.gambar
+    ? berita.gambar.startsWith("http")
+      ? berita.gambar
+      : `https://disdik.acehprov.go.id/thumbnail/300x200${berita.gambar}`
+    : "";
+  const articleUrl = berita.slug
+    ? berita.slug.startsWith("http")
+      ? berita.slug
+      : `https://disdik.acehprov.go.id${berita.slug}`
+    : "";
 
   return (
     <a
@@ -161,40 +278,23 @@ function DisdikNewsCard({ berita }: { berita: DisdikBerita }) {
       rel="noopener noreferrer"
       className="group flex gap-4 rounded-xl border border-[color:var(--border)] bg-[color:var(--card)] p-3 transition-all hover:border-[color:var(--primary)] hover:shadow-md"
     >
-      {/* Image */}
-      <div className="relative h-20 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
+      <div className="relative h-20 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-[color:var(--muted)]">
         {imageUrl ? (
-          <Image
-            src={imageUrl}
-            alt={title}
-            fill
-            unoptimized
-            sizes="96px"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          <Image src={imageUrl} alt={title} fill unoptimized sizes="96px" className="object-cover" />
         ) : null}
       </div>
-
-      {/* Content */}
       <div className="flex min-w-0 flex-1 flex-col">
-        {/* Category */}
         {berita.kategori?.nama ? (
           <span className="mb-1 inline-flex w-fit items-center rounded-full bg-[color:var(--primary)]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--primary)]">
             {berita.kategori.nama}
           </span>
         ) : null}
-
-        {/* Title */}
         <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
           {title}
         </h3>
-
-        {/* Meta */}
         <div className="mt-auto flex items-center gap-2 text-[11px] text-muted-foreground">
-          <span className="inline-flex items-center gap-1">
-            <Calendar className="size-3" aria-hidden />
-            {berita.tanggal}
-          </span>
+          <Calendar className="size-3" aria-hidden />
+          {berita.tanggal}
           <ExternalLink className="size-3 opacity-50" aria-hidden />
         </div>
       </div>
@@ -207,11 +307,13 @@ function DisdikNewsCard({ berita }: { berita: DisdikBerita }) {
 export function LatestNews({
   posts,
   disdikBerita,
+  mediaNews,
   locale,
   dict,
 }: LatestNewsProps) {
-  const [hero, ...rest] = posts;
-  const others = rest.slice(0, 2);
+  // Split posts: first 3 for hero slider, rest for rotating small card
+  const heroPosts = posts.slice(0, 3);
+  const rotatingPosts = posts.slice(3);
 
   return (
     <section
@@ -219,7 +321,6 @@ export function LatestNews({
       className="bg-[color:var(--background)] py-14 sm:py-16"
     >
       <Container>
-        {/* Header */}
         <div className="flex items-center justify-between">
           <h2
             id="latest-news-title"
@@ -229,9 +330,8 @@ export function LatestNews({
           </h2>
         </div>
 
-        {/* Two Column Layout - equal height */}
         <div className="mt-8 grid items-stretch gap-8 lg:grid-cols-2">
-          {/* Left Column - School News */}
+          {/* Left Column */}
           <div className="flex flex-col">
             <div className="mb-4">
               <h3 className="text-lg font-semibold text-[color:var(--foreground)]">
@@ -246,19 +346,14 @@ export function LatestNews({
 
             {posts.length > 0 ? (
               <div className="grid flex-1 auto-rows-[1fr] grid-cols-2 gap-3">
-                {/* Hero - spans 2 cols, full height top */}
-                {hero && (
-                  <SchoolNewsCard post={hero} locale={locale} size="large" />
-                )}
-                {/* Side cards */}
-                {others.map((post) => (
-                  <SchoolNewsCard
-                    key={post.id}
-                    post={post}
-                    locale={locale}
-                    size="small"
-                  />
-                ))}
+                {/* Hero slider — spans 2 cols */}
+                <HeroSlider posts={heroPosts} locale={locale} />
+                {/* Bottom left: rotating card */}
+                {rotatingPosts.length > 0 ? (
+                  <RotatingCard posts={rotatingPosts} locale={locale} />
+                ) : null}
+                {/* Bottom right: media coverage */}
+                <MediaNewsBox items={mediaNews} locale={locale} />
               </div>
             ) : (
               <p className="text-muted-foreground">
@@ -267,7 +362,7 @@ export function LatestNews({
             )}
           </div>
 
-          {/* Right Column - Disdik Aceh News */}
+          {/* Right Column - Disdik (unchanged) */}
           <div className="flex flex-col">
             <div className="mb-4">
               <h3 className="text-lg font-semibold text-[color:var(--foreground)]">

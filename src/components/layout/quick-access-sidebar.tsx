@@ -19,8 +19,13 @@ export function QuickAccessSidebar({ dict }: QuickAccessSidebarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Change at the pengumuman strip area (between hero bottom and headmaster)
-      // From screenshot: this is about 1 viewport height + a small offset
+      // Check if a hero section exists on the page
+      const hero = document.getElementById("hero-title");
+      if (!hero) {
+        // No hero on this page — always use solid style
+        setIsOnHero(false);
+        return;
+      }
       const triggerPoint = window.innerHeight + 50;
       setIsOnHero(window.scrollY < triggerPoint);
     };
