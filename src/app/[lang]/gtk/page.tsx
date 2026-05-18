@@ -232,7 +232,7 @@ function PersonCard({
  * Bento layout for GTK page.
  * All cards same size in a uniform grid — clean and consistent.
  */
-function BentoGTKGrid({ posts }: { posts: WPPost[]; page: number }) {
+function BentoGTKGrid({ posts }: { posts: WPPost[] }) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 lg:gap-4">
       {posts.map((post) => (
