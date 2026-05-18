@@ -26,6 +26,9 @@ export const dynamic = "force-dynamic";
 
 const VALID_TAGS = ["wp", "disdik-berita"] as const;
 
+// Expire immediately so next request fetches fresh data
+const EXPIRE_NOW = { expire: 0 };
+
 export async function POST(request: NextRequest) {
   // Authenticate
   const secret = request.headers.get("x-revalidate-secret");
@@ -53,7 +56,7 @@ export async function POST(request: NextRequest) {
   try {
     if (tag === "all") {
       for (const t of VALID_TAGS) {
-        revalidateTag(t);
+        revalidateTag(t, EXPIRE_NOW);
       }
       return NextResponse.json({
         ok: true,
@@ -63,7 +66,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (VALID_TAGS.includes(tag as (typeof VALID_TAGS)[number])) {
-      revalidateTag(tag);
+      revalidateTag(tag, EXPIRE_NOW);
       return NextResponse.json({
         ok: true,
         revalidated: [tag],
@@ -100,13 +103,13 @@ export async function GET(request: NextRequest) {
   try {
     if (tag === "all") {
       for (const t of VALID_TAGS) {
-        revalidateTag(t);
+        revalidateTag(t, EXPIRE_NOW);
       }
       return NextResponse.json({ ok: true, revalidated: [...VALID_TAGS], now: Date.now() });
     }
 
     if (VALID_TAGS.includes(tag as (typeof VALID_TAGS)[number])) {
-      revalidateTag(tag);
+      revalidateTag(tag, EXPIRE_NOW);
       return NextResponse.json({ ok: true, revalidated: [tag], now: Date.now() });
     }
 
