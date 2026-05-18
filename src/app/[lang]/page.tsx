@@ -7,6 +7,7 @@ import { HeroGallery } from "@/components/home/hero-gallery";
 import { InstagramFeed } from "@/components/home/instagram-feed";
 import { HomeSections } from "@/components/home/home-sections";
 import { HomeSectionsSkeleton } from "@/components/home/home-sections-skeleton";
+import { SectionOrnament } from "@/components/ui/section-ornament";
 
 export const revalidate = 86400; // 24h ISR — on-demand revalidation via /api/revalidate handles freshness
 
@@ -33,6 +34,7 @@ export default async function HomePage({
         <HomeSections locale={lang} dict={dict} />
       </Suspense>
 
+      <SectionOrnament flip />
       <InstagramFeed />
     </>
   );

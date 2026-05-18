@@ -1,27 +1,6 @@
 import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
-/**
- * On-demand revalidation endpoint.
- *
- * WordPress calls this via webhook (e.g. WP Webhooks plugin) whenever
- * a post is published/updated/deleted. This purges the ISR cache so
- * the next visitor gets fresh content without waiting for the timed revalidation.
- *
- * Usage:
- *   POST /api/revalidate
- *   Headers: { "x-revalidate-secret": "<REVALIDATE_SECRET>" }
- *   Body (optional): { "tag": "wp" }
- *
- * Supported tags:
- *   - "wp"           → all WordPress content
- *   - "disdik-berita" → Disdik Aceh news
- *   - "all"          → purge everything
- *
- * Environment variable required:
- *   REVALIDATE_SECRET — shared secret between WP and this endpoint
- */
-
 export const dynamic = "force-dynamic";
 
 const VALID_TAGS = ["wp", "disdik-berita"] as const;

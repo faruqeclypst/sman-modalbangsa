@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { Calendar, ExternalLink, Newspaper } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -193,22 +194,27 @@ function RotatingCard({ posts, locale }: { posts: WPPost[]; locale: Locale }) {
   );
 }
 
-// ============ Media News Box (3 items with thumbnails) ============
+// ============ Media News Box (vertical ticker — items slide down one by one) ============
 
 function MediaNewsBox({ items, locale }: { items: MediaNewsItem[]; locale: Locale }) {
-  const [page, setPage] = React.useState(0);
-
-  const pageCount = Math.max(1, Math.ceil(items.length / 3));
+  const VISIBLE_COUNT = 3;
+  const [topIndex, setTopIndex] = React.useState(0);
 
   React.useEffect(() => {
-    if (pageCount <= 1) return;
-    const t = setInterval(() => setPage((p) => (p + 1) % pageCount), 6000);
+    if (items.length <= VISIBLE_COUNT) return;
+    const t = setInterval(() => {
+      setTopIndex((prev) => (prev + 1) % items.length);
+    }, 3500);
     return () => clearInterval(t);
-  }, [pageCount]);
+  }, [items.length]);
 
   if (!items.length) return null;
 
-  const visible = items.slice(page * 3, page * 3 + 3);
+  // Build visible list by wrapping around
+  const visible: MediaNewsItem[] = [];
+  for (let i = 0; i < Math.min(VISIBLE_COUNT, items.length); i++) {
+    visible.push(items[(topIndex + i) % items.length]);
+  }
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-[color:var(--border)] bg-white">
@@ -218,39 +224,50 @@ function MediaNewsBox({ items, locale }: { items: MediaNewsItem[]; locale: Local
           {locale === "id" ? "Liputan Media" : "Media Coverage"}
         </h4>
       </div>
-      <div className="flex flex-1 flex-col divide-y divide-[color:var(--border)]">
-        {visible.map((item, idx) => (
-          <a
-            key={`${page}-${idx}`}
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-1 items-center gap-3 px-3 py-3 transition-colors hover:bg-gray-50"
+      <div className="relative flex-1 overflow-hidden">
+        <AnimatePresence initial={false} mode="popLayout">
+          <motion.div
+            key={topIndex}
+            initial={{ y: "-33.33%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "33.33%", opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="absolute inset-0 flex flex-col divide-y divide-[color:var(--border)]"
           >
-            {/* Thumbnail — use favicon/logo of the source website */}
-            <div className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-gray-100">
-              <Image
-                src={`https://www.google.com/s2/favicons?domain=${getSourceDomain(item.source, item.link)}&sz=64`}
-                alt={item.source}
-                fill
-                unoptimized
-                sizes="40px"
-                className="object-contain p-1"
-              />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="line-clamp-2 text-xs font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
-                {item.title}
-              </p>
-              {item.source ? (
-                <p className="mt-0.5 text-[10px] text-[color:var(--muted-foreground)]">
-                  {item.source}
-                </p>
-              ) : null}
-            </div>
-            <ExternalLink className="size-3 shrink-0 text-[color:var(--muted-foreground)] opacity-0 group-hover:opacity-100" />
-          </a>
-        ))}
+            {visible.map((item, idx) => (
+              <a
+                key={`${item.title}-${idx}`}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-1 items-center gap-3 px-3 py-3 transition-colors hover:bg-gray-50"
+              >
+                {/* Thumbnail — use favicon/logo of the source website */}
+                <div className="relative size-10 shrink-0 overflow-hidden rounded-lg bg-gray-100">
+                  <Image
+                    src={`https://www.google.com/s2/favicons?domain=${getSourceDomain(item.source, item.link)}&sz=64`}
+                    alt={item.source}
+                    fill
+                    unoptimized
+                    sizes="40px"
+                    className="object-contain p-1"
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="line-clamp-2 text-xs font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
+                    {item.title}
+                  </p>
+                  {item.source ? (
+                    <p className="mt-0.5 text-[10px] text-[color:var(--muted-foreground)]">
+                      {item.source}
+                    </p>
+                  ) : null}
+                </div>
+                <ExternalLink className="size-3 shrink-0 text-[color:var(--muted-foreground)] opacity-0 group-hover:opacity-100" />
+              </a>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

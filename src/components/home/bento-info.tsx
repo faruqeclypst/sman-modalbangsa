@@ -90,11 +90,10 @@ function MiniCalendar({ locale }: { locale: Locale }) {
           return (
             <div
               key={d.toISOString()}
-              className={`flex flex-col items-center rounded-xl py-2.5 transition-colors ${
-                isToday
-                  ? "bg-[color:var(--primary)] text-white shadow-md shadow-emerald-200"
-                  : "text-gray-500 hover:bg-gray-50"
-              }`}
+              className={`flex flex-col items-center rounded-xl py-2.5 transition-colors ${isToday
+                ? "bg-[color:var(--primary)] text-white shadow-md shadow-emerald-200"
+                : "text-gray-500 hover:bg-gray-50"
+                }`}
             >
               <span className="text-[10px] font-semibold uppercase tracking-wide">
                 {dayNames[d.getDay()]}
@@ -173,7 +172,7 @@ function FeaturedAgenda({ post, locale }: { post: WPPost; locale: Locale }) {
           ) : null}
 
           <div className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-300 opacity-0 transition-opacity group-hover:opacity-100">
-            {locale === "id" ? "Selengkapnya" : "Read more"} →
+            {locale === "id" ? "Selengkapnya" : "Read more"}
           </div>
         </div>
       </div>
@@ -203,11 +202,10 @@ function AgendaListItem({ post, locale }: { post: WPPost; locale: Locale }) {
     >
       {/* Date badge */}
       <div
-        className={`flex size-14 flex-shrink-0 flex-col items-center justify-center rounded-xl ${
-          isPast
-            ? "bg-gray-50 text-gray-400"
-            : "bg-gradient-to-br from-emerald-50 to-emerald-100 text-[color:var(--primary)]"
-        }`}
+        className={`flex size-14 flex-shrink-0 flex-col items-center justify-center rounded-xl ${isPast
+          ? "bg-gray-50 text-gray-400"
+          : "bg-gradient-to-br from-emerald-50 to-emerald-100 text-[color:var(--primary)]"
+          }`}
       >
         <span className="text-xl font-bold leading-none">{day}</span>
         <span className="mt-0.5 text-[10px] font-bold uppercase">{monthShort}</span>

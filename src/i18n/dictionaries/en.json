@@ -67,6 +67,14 @@
       "title": "Activity Gallery",
       "subtitle": "Visual documentation of SMAN Modal Bangsa activities.",
       "empty": "No photos yet."
+    },
+    "download": {
+      "label": "Downloads",
+      "title": "Download Center",
+      "subtitle": "Download official documents, announcements, and other important files.",
+      "empty": "No files available yet.",
+      "viewAll": "View All",
+      "downloadBtn": "Download"
     }
   },
   "hero": {

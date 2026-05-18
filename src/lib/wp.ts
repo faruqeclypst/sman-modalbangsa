@@ -320,3 +320,63 @@ export async function postComment(
     return null;
   }
 }
+
+// ---------- Downloads ----------
+
+export interface DownloadItem {
+  id: number;
+  title: string;
+  date: string;
+  fileUrl: string | null;
+  fileType: string | null;
+  category: string | null;
+}
+
+/**
+ * Fetch download posts with their attached file URLs.
+ * The WP "download" CPT stores files as media attachments (parent = post id).
+ */
+export async function getDownloads(perPage = 6, page = 1): Promise<{ items: DownloadItem[]; totalPages: number }> {
+  try {
+    const { posts, totalPages } = await getCPT("download", { page, perPage, embed: true });
+
+    // Fetch attachments for all download posts in parallel
+    const items = await Promise.all(
+      posts.map(async (post) => {
+        let fileUrl: string | null = null;
+        let fileType: string | null = null;
+
+        // Try to get attachment media for this post
+        try {
+          const { data: attachments } = await wpFetch<Array<{ source_url: string; mime_type: string }>>(
+            `/media?parent=${post.id}&per_page=1`,
+          );
+          if (Array.isArray(attachments) && attachments.length > 0) {
+            fileUrl = attachments[0].source_url ?? null;
+            fileType = attachments[0].mime_type ?? null;
+          }
+        } catch {
+          // Fallback: no attachment found
+        }
+
+        // Get category from embedded terms
+        const terms = post._embedded?.["wp:term"]?.flat() ?? [];
+        const cat = terms.find((t) => t.taxonomy === "cat-download");
+
+        return {
+          id: post.id,
+          title: post.title.rendered.replace(/<[^>]*>/g, "").replace(/&amp;/g, "&").replace(/&#8217;/g, "'"),
+          date: post.date,
+          fileUrl,
+          fileType,
+          category: cat?.name ?? null,
+        };
+      }),
+    );
+
+    return { items, totalPages };
+  } catch (err) {
+    console.error("[wp.getDownloads]", err);
+    return { items: [], totalPages: 1 };
+  }
+}

@@ -65,19 +65,6 @@ function GuruCard({ person, size }: { person: WPPost; size: "large" | "small" })
   );
 }
 
-/*
-  Grid: 4 columns × 2 rows
-  ┌──────────────┬───────┬───────┬───────┐
-  │              │ pos-1 │ pos-2 │ pos-3 │  (row 1, 3 small portrait)
-  │    pos-7     │       │       │       │
-  │   (UTAMA)   ├───────┼───────┼───────┤
-  │              │ pos-4 │ pos-5 │ pos-6 │  (row 2, 3 small portrait)
-  └──────────────┴───────┴───────┴───────┘
-
-  Total visible: 7 (1 large + 6 small)
-  Flow: new enters pos-1 → 2 → 3 → 4 → 5 → 6 → 7 (utama) → exit
-*/
-
 function MobileGuruScroll({ gtk }: { gtk: WPPost[] }) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
@@ -184,11 +171,10 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
                   key={person.id}
                   layoutId={`guru-${person.id}`}
                   transition={{ layout: { duration: 0.65, ease: [0.25, 0.1, 0.25, 1] } }}
-                  className={`relative overflow-hidden ${
-                    isUtama
+                  className={`relative overflow-hidden ${isUtama
                       ? "col-span-1 row-span-2 h-[420px] lg:h-[500px] rounded-2xl shadow-lg"
                       : "h-[200px] lg:h-[242px] rounded-xl shadow-md"
-                  }`}
+                    }`}
                   style={{
                     gridColumnStart: col,
                     gridRowStart: row,
@@ -209,9 +195,8 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
           {gtk.slice(0, Math.min(len, 15)).map((_, i) => (
             <span
               key={i}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === step % len ? "w-5 bg-emerald-500" : "w-1.5 bg-gray-300"
-              }`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === step % len ? "w-5 bg-emerald-500" : "w-1.5 bg-gray-300"
+                }`}
             />
           ))}
         </div>

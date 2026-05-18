@@ -167,7 +167,7 @@ export function NewsCard({
             </p>
           ) : null}
           <span className="mt-auto pt-4 text-sm font-semibold text-[color:var(--primary)]">
-            {dict.news.readMore} →
+            {dict.news.readMore}
           </span>
         </div>
       </Link>

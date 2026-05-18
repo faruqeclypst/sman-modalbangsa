@@ -67,6 +67,14 @@
       "title": "Galeri Kegiatan",
       "subtitle": "Dokumentasi visual kegiatan SMAN Modal Bangsa.",
       "empty": "Belum ada foto."
+    },
+    "download": {
+      "label": "Download",
+      "title": "Pusat Unduhan",
+      "subtitle": "Unduh dokumen resmi, pengumuman, dan berkas penting lainnya.",
+      "empty": "Belum ada berkas tersedia.",
+      "viewAll": "Lihat Semua",
+      "downloadBtn": "Unduh"
     }
   },
   "hero": {
@@ -77,10 +85,22 @@
     "searchButton": "Cari",
     "popularTitle": "Pencarian populer di SMAN Modal Bangsa",
     "popularLinks": [
-      { "label": "SPMB", "href": "/id/spmb" },
-      { "label": "Pengumuman", "href": "/id/pengumuman" },
-      { "label": "Prestasi", "href": "/id/prestasi" },
-      { "label": "Agenda", "href": "/id/agenda" }
+      {
+        "label": "SPMB",
+        "href": "/id/spmb"
+      },
+      {
+        "label": "Pengumuman",
+        "href": "/id/pengumuman"
+      },
+      {
+        "label": "Prestasi",
+        "href": "/id/prestasi"
+      },
+      {
+        "label": "Agenda",
+        "href": "/id/agenda"
+      }
     ]
   },
   "quickLinks": {
@@ -158,22 +178,56 @@
       "title": "Fasilitas Sekolah",
       "subtitle": "Sarana dan prasarana yang menunjang proses belajar mengajar.",
       "items": [
-        { "name": "Asrama Siswa", "desc": "Asrama putra dan putri yang nyaman dengan pembina 24 jam." },
-        { "name": "Laboratorium Sains", "desc": "Lab Fisika, Kimia, Biologi, dan Komputer berstandar nasional." },
-        { "name": "Perpustakaan Digital", "desc": "Koleksi buku cetak dan e-book lengkap dengan ruang baca." },
-        { "name": "Masjid Sekolah", "desc": "Pusat kegiatan ibadah dan kajian keislaman siswa." },
-        { "name": "Lapangan Olahraga", "desc": "Lapangan futsal, basket, voli, dan area atletik." },
-        { "name": "Aula Serbaguna", "desc": "Ruang pertemuan, seminar, dan pertunjukan seni." }
+        {
+          "name": "Asrama Siswa",
+          "desc": "Asrama putra dan putri yang nyaman dengan pembina 24 jam."
+        },
+        {
+          "name": "Laboratorium Sains",
+          "desc": "Lab Fisika, Kimia, Biologi, dan Komputer berstandar nasional."
+        },
+        {
+          "name": "Perpustakaan Digital",
+          "desc": "Koleksi buku cetak dan e-book lengkap dengan ruang baca."
+        },
+        {
+          "name": "Masjid Sekolah",
+          "desc": "Pusat kegiatan ibadah dan kajian keislaman siswa."
+        },
+        {
+          "name": "Lapangan Olahraga",
+          "desc": "Lapangan futsal, basket, voli, dan area atletik."
+        },
+        {
+          "name": "Aula Serbaguna",
+          "desc": "Ruang pertemuan, seminar, dan pertunjukan seni."
+        }
       ]
     },
     "achievements": {
       "title": "Prestasi",
       "subtitle": "Capaian siswa dan sekolah di berbagai kompetisi.",
       "samples": [
-        { "title": "Olimpiade Sains Nasional", "level": "Nasional", "year": "2024" },
-        { "title": "Kompetisi Robotika", "level": "Internasional", "year": "2024" },
-        { "title": "Lomba Karya Tulis Ilmiah", "level": "Provinsi", "year": "2023" },
-        { "title": "Festival Seni Pelajar", "level": "Nasional", "year": "2023" }
+        {
+          "title": "Olimpiade Sains Nasional",
+          "level": "Nasional",
+          "year": "2024"
+        },
+        {
+          "title": "Kompetisi Robotika",
+          "level": "Internasional",
+          "year": "2024"
+        },
+        {
+          "title": "Lomba Karya Tulis Ilmiah",
+          "level": "Provinsi",
+          "year": "2023"
+        },
+        {
+          "title": "Festival Seni Pelajar",
+          "level": "Nasional",
+          "year": "2023"
+        }
       ]
     }
   },
@@ -183,18 +237,60 @@
     "subtitle": "Prestasi terpilih siswa dan sekolah di kompetisi akademik, sains, olahraga, dan seni tingkat regional hingga internasional.",
     "viewAll": "Lihat Semua Prestasi",
     "stats": [
-      { "value": "120+", "label": "Penghargaan Nasional & Internasional" },
-      { "value": "85%", "label": "Lulusan Diterima di PTN/PTS Terbaik" },
-      { "value": "30+", "label": "Ekstrakurikuler Aktif" },
-      { "value": "10+", "label": "Tahun Konsistensi Prestasi" }
+      {
+        "value": "120+",
+        "label": "Penghargaan Nasional & Internasional"
+      },
+      {
+        "value": "85%",
+        "label": "Lulusan Diterima di PTN/PTS Terbaik"
+      },
+      {
+        "value": "30+",
+        "label": "Ekstrakurikuler Aktif"
+      },
+      {
+        "value": "10+",
+        "label": "Tahun Konsistensi Prestasi"
+      }
     ],
     "items": [
-      { "title": "Medali Emas Olimpiade Sains Nasional", "level": "Nasional", "year": "2024", "category": "Akademik" },
-      { "title": "Juara Kompetisi Robotika Internasional", "level": "Internasional", "year": "2024", "category": "Teknologi" },
-      { "title": "Karya Tulis Ilmiah Terbaik", "level": "Provinsi", "year": "2023", "category": "Riset" },
-      { "title": "Juara 1 Festival Seni Pelajar", "level": "Nasional", "year": "2023", "category": "Seni" },
-      { "title": "Juara Debat Bahasa Inggris", "level": "Nasional", "year": "2024", "category": "Bahasa" },
-      { "title": "Juara Atletik Tingkat Regional", "level": "Regional", "year": "2024", "category": "Olahraga" }
+      {
+        "title": "Medali Emas Olimpiade Sains Nasional",
+        "level": "Nasional",
+        "year": "2024",
+        "category": "Akademik"
+      },
+      {
+        "title": "Juara Kompetisi Robotika Internasional",
+        "level": "Internasional",
+        "year": "2024",
+        "category": "Teknologi"
+      },
+      {
+        "title": "Karya Tulis Ilmiah Terbaik",
+        "level": "Provinsi",
+        "year": "2023",
+        "category": "Riset"
+      },
+      {
+        "title": "Juara 1 Festival Seni Pelajar",
+        "level": "Nasional",
+        "year": "2023",
+        "category": "Seni"
+      },
+      {
+        "title": "Juara Debat Bahasa Inggris",
+        "level": "Nasional",
+        "year": "2024",
+        "category": "Bahasa"
+      },
+      {
+        "title": "Juara Atletik Tingkat Regional",
+        "level": "Regional",
+        "year": "2024",
+        "category": "Olahraga"
+      }
     ]
   },
   "footer": {

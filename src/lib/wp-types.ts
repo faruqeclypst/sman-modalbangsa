@@ -60,6 +60,12 @@ export interface WPPost {
   categories: number[];
   tags: number[];
   _embedded?: WPEmbedded;
+  /** Custom meta fields exposed via REST API (e.g. download URL). */
+  meta?: Record<string, unknown>;
+  /** ACF fields if Advanced Custom Fields is active. */
+  acf?: Record<string, unknown>;
+  /** Some themes/plugins expose download URL directly. */
+  download_url?: string;
 }
 
 export interface WPCategory {
