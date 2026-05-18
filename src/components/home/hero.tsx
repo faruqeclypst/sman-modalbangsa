@@ -3,48 +3,36 @@ import Link from "next/link";
 import { ExternalLink, Search } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImageUrl } from "@/lib/wp";
 import { Container } from "@/components/ui/container";
-import { HeroSlider } from "@/components/home/hero-slider";
 
 interface HeroProps {
   locale: Locale;
   dict: Dictionary;
-  gallery?: WPPost[];
+  /** Optional slot for streaming gallery slider (rendered via Suspense) */
+  children?: React.ReactNode;
 }
 
-export function Hero({ locale, dict, gallery = [] }: HeroProps) {
-  const images = gallery
-    .map((post) => getFeaturedImageUrl(post))
-    .filter((url): url is string => Boolean(url));
-
+export function Hero({ locale, dict, children }: HeroProps) {
   return (
     <section
       className="relative flex min-h-[100dvh] items-center overflow-hidden text-white"
       aria-labelledby="hero-title"
     >
-      {/* Background images */}
-      {images.length > 1 ? (
-        <HeroSlider images={images} />
-      ) : images.length === 1 ? (
-        <Image
-          src={images[0]}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover blur-[2px]"
-          aria-hidden
-        />
-      ) : (
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[#14532d]"
-        />
-      )}
+      {/* Default static background — always loads instantly */}
+      <Image
+        src="/bg.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover blur-[2px]"
+        aria-hidden
+      />
 
-      {/* Flat overlay — no gradient */}
+      {/* Gallery slider streams in on top when ready */}
+      {children}
+
+      {/* Flat overlay */}
       <div aria-hidden className="absolute inset-0 bg-black/40" />
 
       {/* Content — centered on mobile, left on desktop */}
