@@ -71,9 +71,9 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
         </div>
 
         {/* Bento grid — all slots auto-rotate through all gallery items */}
-        <div className="mt-8 grid auto-rows-[160px] grid-cols-2 gap-3 lg:auto-rows-[180px] lg:grid-cols-4 lg:gap-4">
-          {/* Hero — tall */}
-          <div className="relative row-span-2 overflow-hidden rounded-2xl">
+        <div className="mt-8 grid auto-rows-[140px] grid-cols-2 gap-3 sm:auto-rows-[160px] lg:auto-rows-[180px] lg:grid-cols-4 lg:gap-4">
+          {/* Hero — tall on desktop, normal on mobile */}
+          <div className="relative row-span-1 overflow-hidden rounded-2xl sm:row-span-2">
             <AnimatePresence mode="popLayout">
               <motion.div
                 key={visible[0].id}
@@ -134,42 +134,44 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
           ) : null}
 
           {/* Small cards (fill remaining slots) */}
-          {visible.slice(2).map((post, idx) => (
-            <div key={`slot-${idx}`} className="relative overflow-hidden rounded-2xl bg-emerald-50">
-              <AnimatePresence mode="popLayout">
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.8, delay: (idx + 2) * 0.1 }}
-                  className="absolute inset-0"
-                >
-                  <Link
-                    href={`/${locale}/galeri/${post.id}`}
-                    className="group relative block h-full w-full"
+          {visible.slice(2).map((post, idx) => {
+            const imgUrl = getFeaturedImageUrl(post);
+            return (
+              <div key={`slot-${idx}`} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100">
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.8, delay: (idx + 2) * 0.1 }}
+                    className="absolute inset-0"
                   >
-                    {getFeaturedImageUrl(post) ? (
-                      <Image
-                        src={getFeaturedImageUrl(post)!}
-                        alt={decodeHtmlEntities(post.title.rendered)}
-                        fill
-                        sizes="(min-width: 1024px) 25vw, 50vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center bg-gradient-to-br from-emerald-50 to-emerald-100 p-4">
-                        <p className="text-center text-xs font-semibold text-emerald-600">
+                    <Link
+                      href={`/${locale}/galeri/${post.id}`}
+                      className="group relative block h-full w-full"
+                    >
+                      {imgUrl ? (
+                        <Image
+                          src={imgUrl}
+                          alt={decodeHtmlEntities(post.title.rendered)}
+                          fill
+                          sizes="(min-width: 1024px) 25vw, 50vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      ) : null}
+                      {/* Placeholder overlay - always visible as fallback */}
+                      <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/60 to-transparent p-3 transition-colors group-hover:from-black/40">
+                        <p className="line-clamp-2 text-[10px] font-semibold text-white">
                           {decodeHtmlEntities(post.title.rendered)}
                         </p>
                       </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/5" />
-                  </Link>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          ))}
+                    </Link>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
 
         {/* No dots needed - continuous random rotation */}

@@ -69,7 +69,7 @@ function SchoolNewsCard({
               {decodeHtmlEntities(category.name)}
             </span>
           ) : null}
-          <h3 className="line-clamp-3 text-xl font-bold leading-tight sm:text-2xl lg:text-3xl">
+          <h3 className="line-clamp-3 text-lg font-bold leading-tight sm:text-xl lg:text-2xl">
             {title}
           </h3>
           {excerpt ? (

@@ -14,7 +14,7 @@ import { BentoCommunity } from "@/components/home/bento-community";
 import { InstagramFeed } from "@/components/home/instagram-feed";
 import { SectionOrnament } from "@/components/ui/section-ornament";
 
-export const revalidate = 300; // 5 min ISR — renders on first request, cached after
+export const revalidate = 86400; // 24h ISR — on-demand revalidation via /api/revalidate handles freshness
 
 export default async function HomePage({
   params,
@@ -24,24 +24,30 @@ export default async function HomePage({
 
   const dict = await getDictionary(lang);
 
+  // Split into critical (above-fold) and non-critical (below-fold) fetches
+  // to reduce waterfall impact on perceived load time
   const [
     { posts: news },
     { posts: pengumuman },
+    { berita: disdikBerita },
+  ] = await Promise.all([
+    getPosts({ perPage: 4 }),
+    getCPT("pengumuman", { perPage: 5 }),
+    getDisdikBerita({ limit: 5 }),
+  ]);
+
+  const [
     { posts: agenda },
     { posts: editorial },
     { posts: prestasi },
     { posts: gtk },
     { posts: galeri },
-    { berita: disdikBerita },
   ] = await Promise.all([
-    getPosts({ perPage: 8 }),
-    getCPT("pengumuman", { perPage: 5 }),
     getCPT("agenda", { perPage: 4 }),
     getCPT("editorial", { perPage: 4 }),
     getCPT("prestasi", { perPage: 5 }),
-    getCPT("gtk", { perPage: 20, orderBy: "title", order: "asc" }),
-    getCPT("galeri", { perPage: 20 }),
-    getDisdikBerita({ limit: 5 }),
+    getCPT("gtk", { perPage: 12, orderBy: "title", order: "asc" }),
+    getCPT("galeri", { perPage: 12 }),
   ]);
 
   return (

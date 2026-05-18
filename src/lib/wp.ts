@@ -20,7 +20,7 @@ export const WP_API_URL =
 /** Default ISR revalidation in seconds (1 hour). */
 export const WP_REVALIDATE = 60 * 60;
 
-const DEFAULT_TIMEOUT_MS = 60_000;
+const DEFAULT_TIMEOUT_MS = 15_000;
 
 async function wpFetch<T>(
   path: string,
