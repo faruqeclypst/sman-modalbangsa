@@ -32,7 +32,7 @@ export function CPTCard({
   priority = false,
   showExcerpt = true,
 }: CPTCardProps) {
-  const href = `/${locale}/${basePath}/${post.id}`;
+  const href = `/${locale}/${basePath}/${post.slug}`;
   const title = decodeHtmlEntities(post.title.rendered);
   const excerpt = truncate(stripHtml(post.excerpt?.rendered ?? ""), 140);
   const date = formatDate(post.date, locale);

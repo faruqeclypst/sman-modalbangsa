@@ -11,7 +11,7 @@ import {
   getComments,
   getFeaturedImage,
   getFeaturedImageUrl,
-  getPostById,
+  getPostBySlug,
   getPosts,
   getTagTerms,
 } from "@/lib/wp";
@@ -42,7 +42,7 @@ export async function generateMetadata({
   const { lang, id } = await params;
   if (!isLocale(lang)) return {};
 
-  const post = await getPostById(id);
+  const post = await getPostBySlug(id);
   if (!post) return { title: "Not found" };
 
   const title = decodeHtmlEntities(post.title.rendered);
@@ -52,7 +52,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: `/${lang}/berita/${id}` },
+    alternates: { canonical: `/${lang}/berita/${post.slug}` },
     openGraph: {
       title,
       description,
@@ -77,7 +77,7 @@ export default async function NewsDetailPage({
   if (!isLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
-  const post = await getPostById(id);
+  const post = await getPostBySlug(id);
   if (!post) notFound();
 
   const title = decodeHtmlEntities(post.title.rendered);
@@ -191,7 +191,7 @@ export default async function NewsDetailPage({
                 return (
                   <Link
                     key={r.id}
-                    href={`/${lang}/berita/${r.id}`}
+                    href={`/${lang}/berita/${r.slug}`}
                     className="group flex gap-3 sm:flex-col sm:gap-2"
                   >
                     <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-[color:var(--muted)] sm:aspect-video sm:h-auto sm:w-full">

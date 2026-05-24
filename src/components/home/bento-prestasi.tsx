@@ -92,7 +92,7 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
             return (
               <Link
                 key={post.id}
-                href={`/${locale}/prestasi/${post.id}`}
+                href={`/${locale}/prestasi/${post.slug}`}
                 className="group relative overflow-hidden rounded-2xl bg-gray-100"
               >
                 {img ? (

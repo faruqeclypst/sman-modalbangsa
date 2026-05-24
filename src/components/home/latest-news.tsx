@@ -108,7 +108,7 @@ function HeroSlider({ posts, locale }: { posts: WPPost[]; locale: Locale }) {
   const date = fmtDate(post.date, locale);
   const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
   const category = post._embedded?.["wp:term"]?.flat().find((t) => t.taxonomy === "category");
-  const href = `/${locale}/berita/${post.id}`;
+  const href = `/${locale}/berita/${post.slug}`;
 
   return (
     <Link href={href} className="group relative col-span-2 overflow-hidden rounded-2xl bg-black">
@@ -129,7 +129,7 @@ function HeroSlider({ posts, locale }: { posts: WPPost[]; locale: Locale }) {
             {decodeHtml(category.name)}
           </span>
         ) : null}
-        <h3 className="line-clamp-3 text-lg font-bold leading-tight sm:text-xl lg:text-2xl">
+        <h3 className="line-clamp-2 text-base font-bold leading-tight sm:text-lg lg:text-xl">
           {title}
         </h3>
         <p className="mt-3 inline-flex items-center gap-1.5 text-xs text-white/70">
@@ -172,7 +172,7 @@ function RotatingCard({ posts, locale }: { posts: WPPost[]; locale: Locale }) {
   const title = decodeHtml(post.title.rendered);
   const date = fmtDate(post.date, locale);
   const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
-  const href = `/${locale}/berita/${post.id}`;
+  const href = `/${locale}/berita/${post.slug}`;
 
   return (
     <Link href={href} className="group relative overflow-hidden rounded-2xl bg-black">
@@ -328,9 +328,9 @@ export function LatestNews({
   locale,
   dict,
 }: LatestNewsProps) {
-  // Split posts: first 3 for hero slider, rest for rotating small card
-  const heroPosts = posts.slice(0, 3);
-  const rotatingPosts = posts.slice(3);
+  // Split posts: first 5 for hero slider, rest for rotating small card
+  const heroPosts = posts.slice(0, 5);
+  const rotatingPosts = posts.slice(5);
 
   return (
     <section

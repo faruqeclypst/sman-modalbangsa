@@ -125,6 +125,17 @@ export async function getPostById(id: number | string): Promise<WPPost | null> {
   }
 }
 
+/** Fetch a single post by slug with embedded data. */
+export async function getPostBySlug(slug: string): Promise<WPPost | null> {
+  try {
+    const { data } = await wpFetch<WPPost[]>(`/posts?slug=${encodeURIComponent(slug)}&_embed=1`);
+    return Array.isArray(data) && data.length > 0 ? data[0] : null;
+  } catch (err) {
+    console.error("[wp.getPostBySlug]", err);
+    return null;
+  }
+}
+
 /** Fetch all post categories. */
 export async function getCategories(): Promise<WPCategory[]> {
   try {
@@ -204,6 +215,20 @@ export async function getCPTById(
     return data ?? null;
   } catch (err) {
     console.error(`[wp.getCPTById:${type}]`, err);
+    return null;
+  }
+}
+
+/** Fetch a single CPT entry by slug. */
+export async function getCPTBySlug(
+  type: WPCustomPostType,
+  slug: string,
+): Promise<WPPost | null> {
+  try {
+    const { data } = await wpFetch<WPPost[]>(`/${type}?slug=${encodeURIComponent(slug)}&_embed=1`);
+    return Array.isArray(data) && data.length > 0 ? data[0] : null;
+  } catch (err) {
+    console.error(`[wp.getCPTBySlug:${type}]`, err);
     return null;
   }
 }

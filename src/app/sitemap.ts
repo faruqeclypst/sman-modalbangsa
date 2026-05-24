@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       for (const post of posts) {
         for (const locale of locales) {
           contentUrls.push({
-            url: `${base}/${locale}/${basePath}/${post.id}`,
+            url: `${base}/${locale}/${basePath}/${post.slug}`,
             lastModified: new Date(post.modified),
             changeFrequency: "monthly" as const,
             priority: 0.6,

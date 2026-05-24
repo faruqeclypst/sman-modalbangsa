@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { getCPTById, getFeaturedImageUrl } from "@/lib/wp";
+import { getCPTBySlug, getFeaturedImageUrl } from "@/lib/wp";
 import { decodeHtmlEntities, stripHtml, truncate } from "@/lib/utils";
 import { CPTDetail } from "@/components/cpt/cpt-detail";
 
@@ -14,7 +14,7 @@ export async function generateMetadata({
 }: PageProps<"/[lang]/editorial/[id]">): Promise<Metadata> {
   const { lang, id } = await params;
   if (!isLocale(lang)) return {};
-  const post = await getCPTById("editorial", id);
+  const post = await getCPTBySlug("editorial", id);
   if (!post) return { title: "Not found" };
   const title = decodeHtmlEntities(post.title.rendered);
   const description = truncate(stripHtml(post.excerpt?.rendered ?? ""), 160);
@@ -22,7 +22,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: `/${lang}/editorial/${id}` },
+    alternates: { canonical: `/${lang}/editorial/${post.slug}` },
     openGraph: {
       title,
       description,
@@ -38,7 +38,7 @@ export default async function EditorialDetailPage({
   const { lang, id } = await params;
   if (!isLocale(lang)) notFound();
   const dict = await getDictionary(lang);
-  const post = await getCPTById("editorial", id);
+  const post = await getCPTBySlug("editorial", id);
   if (!post) notFound();
 
   return (

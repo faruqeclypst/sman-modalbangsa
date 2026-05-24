@@ -148,7 +148,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
                     className="absolute inset-0"
                   >
                     <Link
-                      href={`/${locale}/galeri/${post.id}`}
+                      href={`/${locale}/galeri/${post.slug}`}
                       className="group relative block h-full w-full"
                     >
                       {imgUrl ? (

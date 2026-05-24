@@ -58,7 +58,7 @@ export function GalleryPreview({ locale, dict, items }: GalleryPreviewProps) {
             return (
               <Link
                 key={post.id}
-                href={`/${locale}/galeri/${post.id}`}
+                href={`/${locale}/galeri/${post.slug}`}
                 className={`group relative aspect-square overflow-hidden rounded-xl bg-[color:var(--muted)] shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-md ${
                   idx === 0 ? "col-span-2 row-span-2 lg:col-span-2 lg:row-span-2 lg:aspect-auto" : ""
                 }`}
