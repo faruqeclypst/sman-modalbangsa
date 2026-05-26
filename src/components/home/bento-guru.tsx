@@ -168,7 +168,7 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
   });
 
   return (
-    <section ref={sectionRef} aria-label={dict.cpt.gtk.title} className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} id="guru" aria-label={dict.cpt.gtk.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
         <div data-animate-guru>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">

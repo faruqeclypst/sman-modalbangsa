@@ -16,7 +16,7 @@ export function Header({ locale, dict }: HeaderProps) {
   const nav = buildNav(locale, dict);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm">
+    <header className="sticky top-0 z-40 border-b border-[color:var(--border)] bg-[color:var(--background)] shadow-sm">
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link
           href={`/${locale}`}

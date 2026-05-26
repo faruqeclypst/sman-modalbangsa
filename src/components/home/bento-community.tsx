@@ -94,7 +94,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
   if (visible.length < 3) return null;
 
   return (
-    <section ref={sectionRef} aria-label={dict.cpt.galeri.title} className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} id="galeri" aria-label={dict.cpt.galeri.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
         <div data-animate-galeri>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">

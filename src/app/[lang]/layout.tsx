@@ -9,6 +9,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { QuickAccessSidebar } from "@/components/layout/quick-access-sidebar";
 import { SocialSidebar } from "@/components/layout/social-sidebar";
+import { BackToTop } from "@/components/ui/back-to-top";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -94,6 +95,7 @@ export default async function LocaleLayout({
         </main>
         <QuickAccessSidebar locale={lang} dict={dict} />
         <SocialSidebar />
+        <BackToTop />
         <Footer locale={lang} dict={dict} />
       </body>
     </html>

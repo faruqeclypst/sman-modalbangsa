@@ -87,6 +87,8 @@ export interface FetchPostsParams {
   exclude?: number[];
   orderBy?: "date" | "title" | "id";
   order?: "asc" | "desc";
+  /** ISO 8601 date — only return posts published after this date. */
+  after?: string;
 }
 
 export interface PostsResult {

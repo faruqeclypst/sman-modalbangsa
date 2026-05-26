@@ -18,6 +18,8 @@ import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { ArticleContent } from "@/components/news/article-content";
 import { DisqusComments } from "@/components/comments/disqus-comments";
+import { ShareButtons } from "@/components/ui/share-buttons";
+import { ArticleLightboxWrapper } from "@/components/ui/article-lightbox-wrapper";
 
 interface CPTDetailProps {
   post: WPPost;
@@ -104,10 +106,20 @@ export function CPTDetail({
       ) : null}
 
       <Container size="md" className="py-10">
-        <ArticleContent
-          html={post.content?.rendered ?? ""}
-          className="prose-article max-w-none"
-        />
+        <ArticleLightboxWrapper>
+          <ArticleContent
+            html={post.content?.rendered ?? ""}
+            className="prose-article max-w-none"
+          />
+        </ArticleLightboxWrapper>
+
+        {/* Share buttons */}
+        <div className="mt-8 border-t border-[color:var(--border)] pt-6">
+          <ShareButtons
+            url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${locale}/${backHref.split("/").slice(2).join("/")}/${post.slug}`}
+            title={title}
+          />
+        </div>
 
         <DisqusComments
           identifier={`${post.slug}`}

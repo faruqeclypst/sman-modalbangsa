@@ -71,7 +71,7 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
   const featuredTitle = decodeHtmlEntities(featured.title.rendered);
 
   return (
-    <section ref={sectionRef} aria-label={dict.cpt.prestasi.title} className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} id="prestasi" aria-label={dict.cpt.prestasi.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
         <div data-animate>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">

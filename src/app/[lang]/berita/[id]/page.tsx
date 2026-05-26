@@ -14,6 +14,7 @@ import {
   getPosts,
   getTagTerms,
 } from "@/lib/wp";
+import type { WPPost } from "@/lib/wp-types";
 import {
   decodeHtmlEntities,
   formatDate,
@@ -26,6 +27,8 @@ import { Badge } from "@/components/ui/badge";
 import { ArticleContent } from "@/components/news/article-content";
 import { NewsCard } from "@/components/news/news-card";
 import { DisqusComments } from "@/components/comments/disqus-comments";
+import { ReadingProgress } from "@/components/ui/reading-progress";
+import { ShareButtons } from "@/components/ui/share-buttons";
 
 export const revalidate = 600; // 10 minutes ISR for individual posts
 export const dynamicParams = true;
@@ -92,16 +95,45 @@ export default async function NewsDetailPage({
   const media = getFeaturedImage(post);
   const imageUrl = getFeaturedImageUrl(post);
 
-  // Related posts (same primary category if available)
+  // Related posts — prefer same category from last 3 months, fallback to latest
   const primaryCat = categories[0];
-  const [{ posts: relatedRaw }] = await Promise.all([
-    getPosts({
+  const threeMonthsAgo = new Date();
+  threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+  const afterDate = threeMonthsAgo.toISOString();
+
+  let related: WPPost[] = [];
+
+  // Try: same category, last 3 months
+  if (primaryCat) {
+    const { posts: catRecent } = await getPosts({
       perPage: 4,
-      categories: primaryCat ? [primaryCat.id] : undefined,
+      categories: [primaryCat.id],
       exclude: [post.id],
-    }),
-  ]);
-  const related = relatedRaw.slice(0, 3);
+      after: afterDate,
+    });
+    related = catRecent.slice(0, 3);
+  }
+
+  // Fallback: if not enough, fill with latest posts (any category, last 3 months)
+  if (related.length < 3) {
+    const existingIds = [post.id, ...related.map((r) => r.id)];
+    const { posts: latest } = await getPosts({
+      perPage: 4,
+      exclude: existingIds,
+      after: afterDate,
+    });
+    related = [...related, ...latest].slice(0, 3);
+  }
+
+  // Final fallback: if still not enough (very few posts), get latest without date filter
+  if (related.length < 3) {
+    const existingIds = [post.id, ...related.map((r) => r.id)];
+    const { posts: anyLatest } = await getPosts({
+      perPage: 4,
+      exclude: existingIds,
+    });
+    related = [...related, ...anyLatest].slice(0, 3);
+  }
 
   // Split content in half to inject "Baca Juga" in the middle
   const contentHtml = post.content.rendered;
@@ -112,6 +144,7 @@ export default async function NewsDetailPage({
 
   return (
     <article className="bg-[color:var(--background)]">
+      <ReadingProgress />
       {/* Header */}
       <header className="border-b border-[color:var(--border)] bg-[color:var(--muted)]/40">
         <Container size="lg" className="py-10 sm:py-14">
@@ -235,6 +268,14 @@ export default async function NewsDetailPage({
             </div>
           </div>
         ) : null}
+
+        {/* Share buttons */}
+        <div className="mt-8 border-t border-[color:var(--border)] pt-6">
+          <ShareButtons
+            url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${lang}/berita/${post.slug}`}
+            title={title}
+          />
+        </div>
       </Container>
 
       {/* Comments - Disqus */}

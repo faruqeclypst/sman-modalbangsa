@@ -289,7 +289,7 @@ export function BentoInfo({
   useScrollAnimate(sectionRef, "[data-animate]");
 
   return (
-    <section ref={sectionRef} aria-label="Informasi" className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} id="info" aria-label="Informasi" className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
         {/* Section Header */}
         <div className="mb-8" data-animate>

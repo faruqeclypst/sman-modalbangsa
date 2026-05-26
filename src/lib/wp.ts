@@ -84,6 +84,7 @@ export async function getPosts({
   exclude,
   orderBy = "date",
   order = "desc",
+  after,
   embed = true,
   fields,
 }: FetchPostsParams & { embed?: boolean; fields?: string[] } = {}): Promise<PostsResult> {
@@ -97,6 +98,7 @@ export async function getPosts({
     exclude,
     orderby: orderBy,
     order,
+    after,
   });
 
   try {

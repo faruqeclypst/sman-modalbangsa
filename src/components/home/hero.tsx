@@ -16,6 +16,7 @@ export function Hero({ locale, dict, children }: HeroProps) {
     <section
       className="relative flex min-h-[100dvh] items-center overflow-hidden text-white"
       aria-labelledby="hero-title"
+      id="hero"
     >
       {/* Default static background — always loads instantly */}
       <Image

@@ -372,6 +372,7 @@ export function LatestNews({
   return (
     <section
       ref={sectionRef}
+      id="news"
       aria-labelledby="latest-news-title"
       className="bg-[color:var(--background)] py-14 sm:py-16"
     >

@@ -4,6 +4,7 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/layout/page-header";
+import { AnimatedTimeline } from "@/components/profil/animated-timeline";
 
 export const revalidate = false;
 
@@ -20,13 +21,106 @@ export async function generateMetadata({
   };
 }
 
-const MILESTONES = [
-  { year: "2006", id: "Pendirian", en: "Founded" },
-  { year: "2007", id: "Angkatan Pertama", en: "First Cohort" },
-  { year: "2010", id: "Prestasi Nasional", en: "National Awards" },
-  { year: "2015", id: "Akreditasi A", en: "A Accreditation" },
-  { year: "2020", id: "Fasilitas Baru", en: "New Facilities" },
-  { year: "2024", id: "Go International", en: "Going Global" },
+const MILESTONES_ID = [
+  {
+    year: "2004",
+    title: "Tsunami Aceh",
+    description:
+      "Bencana tsunami melanda Aceh. Lahir tekad untuk membangun kembali sumber daya manusia Aceh melalui pendidikan berkualitas.",
+  },
+  {
+    year: "2006",
+    title: "Pendirian Sekolah",
+    description:
+      "SMAN Modal Bangsa resmi didirikan oleh Pemerintah Provinsi Aceh sebagai sekolah unggulan berasrama di Blang Bintang, Aceh Besar.",
+  },
+  {
+    year: "2007",
+    title: "Angkatan Pertama",
+    description:
+      "Menerima siswa-siswi terbaik angkatan pertama dari seluruh kabupaten/kota di Aceh. Awal perjalanan panjang mencetak generasi unggul.",
+  },
+  {
+    year: "2010",
+    title: "Prestasi Nasional Pertama",
+    description:
+      "Meraih medali pertama di Olimpiade Sains Nasional (OSN). Membuktikan kualitas pendidikan yang setara dengan sekolah terbaik Indonesia.",
+  },
+  {
+    year: "2015",
+    title: "Akreditasi A",
+    description:
+      "Mendapatkan akreditasi A dari BAN-S/M. Pengakuan resmi atas standar mutu pendidikan yang tinggi dan konsisten.",
+  },
+  {
+    year: "2018",
+    title: "Ekspansi Fasilitas",
+    description:
+      "Pembangunan laboratorium sains modern, perpustakaan digital, dan asrama baru untuk mendukung kapasitas dan kualitas pembelajaran.",
+  },
+  {
+    year: "2020",
+    title: "Adaptasi Digital",
+    description:
+      "Transformasi digital pembelajaran selama pandemi. Implementasi e-learning dan CBT (Computer Based Test) secara penuh.",
+  },
+  {
+    year: "2024",
+    title: "Go International",
+    description:
+      "Siswa meraih prestasi di kompetisi internasional. Kerjasama dengan institusi pendidikan luar negeri semakin diperluas.",
+  },
+];
+
+const MILESTONES_EN = [
+  {
+    year: "2004",
+    title: "Aceh Tsunami",
+    description:
+      "The tsunami devastated Aceh. A determination was born to rebuild Aceh's human resources through quality education.",
+  },
+  {
+    year: "2006",
+    title: "School Founded",
+    description:
+      "SMAN Modal Bangsa was officially established by the Aceh Provincial Government as a premier boarding school in Blang Bintang, Aceh Besar.",
+  },
+  {
+    year: "2007",
+    title: "First Cohort",
+    description:
+      "Accepted the best students from all districts across Aceh. The beginning of a long journey to produce excellent generations.",
+  },
+  {
+    year: "2010",
+    title: "First National Achievement",
+    description:
+      "Won the first medal at the National Science Olympiad (OSN). Proving educational quality on par with Indonesia's best schools.",
+  },
+  {
+    year: "2015",
+    title: "A Accreditation",
+    description:
+      "Received A accreditation from BAN-S/M. Official recognition of consistently high educational quality standards.",
+  },
+  {
+    year: "2018",
+    title: "Facility Expansion",
+    description:
+      "Construction of modern science laboratories, digital library, and new dormitories to support capacity and learning quality.",
+  },
+  {
+    year: "2020",
+    title: "Digital Adaptation",
+    description:
+      "Digital learning transformation during the pandemic. Full implementation of e-learning and Computer Based Testing (CBT).",
+  },
+  {
+    year: "2024",
+    title: "Going Global",
+    description:
+      "Students achieved in international competitions. Partnerships with overseas educational institutions expanded further.",
+  },
 ];
 
 export default async function HistoryPage({
@@ -49,9 +143,9 @@ export default async function HistoryPage({
         ]}
       />
 
+      {/* Intro section */}
       <section className="py-16 sm:py-20">
         <Container size="md">
-          {/* Lead paragraph — editorial style */}
           <p className="text-xl leading-relaxed text-[color:var(--foreground)] sm:text-2xl sm:leading-relaxed">
             {dict.profile.history.intro}
           </p>
@@ -78,25 +172,13 @@ export default async function HistoryPage({
         </Container>
       </section>
 
-      {/* Milestones — horizontal scroll on mobile, grid on desktop */}
-      <section className="border-y border-[color:var(--border)] bg-[color:var(--muted)]/30 py-12 sm:py-16">
-        <Container>
-          <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--muted-foreground)]">
-            {isId ? "Tonggak Sejarah" : "Milestones"}
-          </h2>
-          <div className="mt-6 flex gap-4 overflow-x-auto pb-4 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:pb-0 lg:grid-cols-6">
-            {MILESTONES.map((m) => (
-              <div
-                key={m.year}
-                className="flex min-w-[140px] flex-shrink-0 flex-col rounded-xl border border-[color:var(--border)] bg-white p-5 shadow-sm sm:min-w-0"
-              >
-                <span className="text-2xl font-bold text-[color:var(--primary)]">{m.year}</span>
-                <span className="mt-2 text-sm text-[color:var(--foreground)]">
-                  {isId ? m.id : m.en}
-                </span>
-              </div>
-            ))}
-          </div>
+      {/* Animated Timeline */}
+      <section className="border-y border-[color:var(--border)] bg-[color:var(--muted)]/20 py-16 sm:py-20">
+        <Container size="lg">
+          <AnimatedTimeline
+            items={isId ? MILESTONES_ID : MILESTONES_EN}
+            heading={isId ? "Tonggak Sejarah" : "Milestones"}
+          />
         </Container>
       </section>
     </>
