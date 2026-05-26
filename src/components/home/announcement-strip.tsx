@@ -45,7 +45,7 @@ export function AnnouncementStrip({ locale, dict, pengumuman }: AnnouncementStri
 
           {/* Content */}
           <Link
-            href={`/${locale}/pengumuman/${pengumuman[active].id}`}
+            href={`/${locale}/pengumuman/${pengumuman[active].slug}`}
             className="group flex min-w-0 flex-1 items-center px-4"
           >
             <span className="truncate text-sm font-medium text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">

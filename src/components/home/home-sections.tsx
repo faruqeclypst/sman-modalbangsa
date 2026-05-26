@@ -38,7 +38,7 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
     getCPT("pengumuman", {
       perPage: 5,
       embed: false,
-      fields: ["id", "title", "date"],
+      fields: ["id", "title", "date", "slug"],
     }),
     getDisdikBerita({ limit: 5 }),
     getMediaNews(9),

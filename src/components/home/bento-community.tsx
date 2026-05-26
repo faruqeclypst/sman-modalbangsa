@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { animate, stagger } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
@@ -21,6 +22,7 @@ interface BentoCommunityProps {
 export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
   const items = galeri.filter((p) => getFeaturedImageUrl(p));
   const numSlots = Math.min(6, items.length);
+  const sectionRef = React.useRef<HTMLElement>(null);
   
   // Initialize slots with first N indices
   const [slots, setSlots] = React.useState<number[]>(() =>
@@ -51,15 +53,50 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
     return () => clearInterval(timer);
   }, [items.length, numSlots]);
 
+  // Scroll-triggered entrance
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const targets = el.querySelectorAll("[data-animate-galeri]");
+    if (!targets.length) return;
+
+    targets.forEach((t) => {
+      (t as HTMLElement).style.opacity = "0";
+      (t as HTMLElement).style.transform = "scale(0.9)";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(targets, {
+              opacity: [0, 1],
+              scale: [0.9, 1],
+              delay: stagger(100, { start: 0 }),
+              duration: 650,
+              ease: "outQuint",
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   if (items.length < 3) return null;
 
   const visible = slots.map((idx) => items[idx % items.length]).filter(Boolean);
   if (visible.length < 3) return null;
 
   return (
-    <section aria-label={dict.cpt.galeri.title} className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} aria-label={dict.cpt.galeri.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
-        <div>
+        <div data-animate-galeri>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             <Link
               href={`/${locale}/galeri`}
@@ -71,7 +108,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
         </div>
 
         {/* Bento grid — all slots auto-rotate through all gallery items */}
-        <div className="mt-8 grid auto-rows-[140px] grid-cols-2 gap-3 sm:auto-rows-[160px] lg:auto-rows-[180px] lg:grid-cols-4 lg:gap-4">
+        <div data-animate-galeri className="mt-8 grid auto-rows-[140px] grid-cols-2 gap-3 sm:auto-rows-[160px] lg:auto-rows-[180px] lg:grid-cols-4 lg:gap-4">
           {/* Hero — tall on desktop, normal on mobile */}
           <div className="relative row-span-1 overflow-hidden rounded-2xl sm:row-span-2">
             <AnimatePresence mode="popLayout">

@@ -10,6 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { animate, stagger } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
@@ -236,20 +237,62 @@ function AgendaListItem({ post, locale }: { post: WPPost; locale: Locale }) {
   );
 }
 
+// ============ Scroll Animation Hook ============
+
+function useScrollAnimate(ref: React.RefObject<HTMLElement | null>, selector: string) {
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const targets = el.querySelectorAll(selector);
+    if (!targets.length) return;
+
+    // Set initial state
+    targets.forEach((t) => {
+      (t as HTMLElement).style.opacity = "0";
+      (t as HTMLElement).style.transform = "translateY(32px)";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(targets, {
+              opacity: [0, 1],
+              translateY: [32, 0],
+              delay: stagger(100, { start: 0 }),
+              duration: 700,
+              ease: "outQuint",
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref, selector]);
+}
+
 // ============ Main Component ============
 
 export function BentoInfo({
   locale,
   dict,
-  pengumuman,
+  pengumuman: _pengumuman,
   agenda,
   editorial,
 }: BentoInfoProps) {
+  const sectionRef = React.useRef<HTMLElement>(null);
+  useScrollAnimate(sectionRef, "[data-animate]");
+
   return (
-    <section aria-label="Informasi" className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} aria-label="Informasi" className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
         {/* Section Header */}
-        <div className="mb-8">
+        <div className="mb-8" data-animate>
           <h2 className="text-xl font-bold text-[color:var(--foreground)] sm:text-2xl">
             <Link
               href={`/${locale}/agenda`}
@@ -266,9 +309,11 @@ export function BentoInfo({
           {/* Left - Featured Agenda + List */}
           <div className="flex flex-col gap-4">
             {agenda[0] ? (
-              <FeaturedAgenda post={agenda[0]} locale={locale} />
+              <div data-animate>
+                <FeaturedAgenda post={agenda[0]} locale={locale} />
+              </div>
             ) : (
-              <div className="flex min-h-[320px] items-center justify-center rounded-2xl bg-gray-50">
+              <div data-animate className="flex min-h-[320px] items-center justify-center rounded-2xl bg-gray-50">
                 <div className="text-center">
                   <Calendar className="mx-auto size-12 text-gray-300" />
                   <p className="mt-3 text-sm text-muted-foreground">{dict.cpt.agenda.empty}</p>
@@ -280,7 +325,9 @@ export function BentoInfo({
             {agenda.length > 1 ? (
               <div className="grid gap-3 sm:grid-cols-2">
                 {agenda.slice(1, 5).map((post) => (
-                  <AgendaListItem key={post.id} post={post} locale={locale} />
+                  <div key={post.id} data-animate>
+                    <AgendaListItem post={post} locale={locale} />
+                  </div>
                 ))}
               </div>
             ) : null}
@@ -289,10 +336,12 @@ export function BentoInfo({
           {/* Right Sidebar */}
           <div className="flex flex-col gap-4">
             {/* Mini Calendar */}
-            <MiniCalendar locale={locale} />
+            <div data-animate>
+              <MiniCalendar locale={locale} />
+            </div>
 
             {/* Editorial */}
-            <div className="rounded-2xl border border-[color:var(--border)] bg-white p-5 shadow-sm">
+            <div data-animate className="rounded-2xl border border-[color:var(--border)] bg-white p-5 shadow-sm">
               <div className="flex items-center gap-2">
                 <NotebookPen className="size-4 text-gray-400" />
                 <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">

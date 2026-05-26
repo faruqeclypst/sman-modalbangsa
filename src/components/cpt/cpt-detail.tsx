@@ -17,6 +17,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { ArticleContent } from "@/components/news/article-content";
+import { DisqusComments } from "@/components/comments/disqus-comments";
 
 interface CPTDetailProps {
   post: WPPost;
@@ -106,6 +107,12 @@ export function CPTDetail({
         <ArticleContent
           html={post.content?.rendered ?? ""}
           className="prose-article max-w-none"
+        />
+
+        <DisqusComments
+          identifier={`${post.slug}`}
+          url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${locale}/${backHref.split("/").slice(2).join("/")}/${post.slug}`}
+          title={title}
         />
       </Container>
     </article>

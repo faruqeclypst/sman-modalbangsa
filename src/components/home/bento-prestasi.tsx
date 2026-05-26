@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { animate, stagger } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
@@ -18,12 +19,49 @@ interface BentoPrestasiProps {
 
 export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
   const [active, setActive] = React.useState(0);
+  const sectionRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
     if (prestasi.length <= 1) return;
     const t = setInterval(() => setActive((p) => (p + 1) % prestasi.length), 5000);
     return () => clearInterval(t);
   }, [prestasi.length]);
+
+  // Scroll-triggered entrance animation
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const targets = el.querySelectorAll("[data-animate]");
+    if (!targets.length) return;
+
+    targets.forEach((t) => {
+      (t as HTMLElement).style.opacity = "0";
+      (t as HTMLElement).style.transform = "scale(0.92) translateY(24px)";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(targets, {
+              opacity: [0, 1],
+              scale: [0.92, 1],
+              translateY: [24, 0],
+              delay: stagger(80, { start: 100 }),
+              duration: 600,
+              ease: "outQuint",
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   if (!prestasi.length) return null;
 
@@ -33,9 +71,9 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
   const featuredTitle = decodeHtmlEntities(featured.title.rendered);
 
   return (
-    <section aria-label={dict.cpt.prestasi.title} className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} aria-label={dict.cpt.prestasi.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
-        <div>
+        <div data-animate>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             <Link
               href={`/${locale}/prestasi`}
@@ -52,7 +90,7 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
         */}
         <div className="mt-8 grid auto-rows-[160px] grid-cols-2 gap-3 lg:auto-rows-[180px] lg:grid-cols-4 lg:gap-4">
           {/* Featured — large rotating card */}
-          <div className="relative col-span-2 row-span-2 overflow-hidden rounded-2xl bg-gray-900">
+          <div data-animate className="relative col-span-2 row-span-2 overflow-hidden rounded-2xl bg-gray-900">
             {featuredImage ? (
               <Image
                 src={featuredImage}
@@ -86,13 +124,14 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
           </div>
 
           {/* Side items — 4 smaller cards */}
-          {prestasi.slice(0, 4).map((post, idx) => {
+          {prestasi.slice(0, 4).map((post) => {
             const img = getFeaturedImageUrl(post);
             const title = decodeHtmlEntities(post.title.rendered);
             return (
               <Link
                 key={post.id}
                 href={`/${locale}/prestasi/${post.slug}`}
+                data-animate
                 className="group relative overflow-hidden rounded-2xl bg-gray-100"
               >
                 {img ? (

@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
+import { animate, stagger } from "animejs";
 import { Calendar, ExternalLink, Newspaper } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -331,14 +332,51 @@ export function LatestNews({
   // Split posts: first 5 for hero slider, rest for rotating small card
   const heroPosts = posts.slice(0, 5);
   const rotatingPosts = posts.slice(5);
+  const sectionRef = React.useRef<HTMLElement>(null);
+
+  // Scroll-triggered entrance
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const targets = el.querySelectorAll("[data-animate-news]");
+    if (!targets.length) return;
+
+    targets.forEach((t) => {
+      (t as HTMLElement).style.opacity = "0";
+      (t as HTMLElement).style.transform = "translateY(30px)";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(targets, {
+              opacity: [0, 1],
+              translateY: [30, 0],
+              delay: stagger(120, { start: 0 }),
+              duration: 700,
+              ease: "outQuint",
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       aria-labelledby="latest-news-title"
       className="bg-[color:var(--background)] py-14 sm:py-16"
     >
       <Container>
-        <div className="flex items-center justify-between">
+        <div data-animate-news className="flex items-center justify-between">
           <h2
             id="latest-news-title"
             className="text-2xl font-bold tracking-tight text-[color:var(--foreground)] sm:text-3xl"
@@ -349,7 +387,7 @@ export function LatestNews({
 
         <div className="mt-8 grid items-stretch gap-8 lg:grid-cols-2">
           {/* Left Column */}
-          <div className="flex flex-col">
+          <div data-animate-news className="flex flex-col">
             <div className="mb-4">
               <h3 className="text-lg font-semibold text-[color:var(--foreground)]">
                 <Link
@@ -380,7 +418,7 @@ export function LatestNews({
           </div>
 
           {/* Right Column - Disdik (unchanged) */}
-          <div className="flex flex-col">
+          <div data-animate-news className="flex flex-col">
             <div className="mb-4">
               <h3 className="text-lg font-semibold text-[color:var(--foreground)]">
                 <a

@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LayoutGroup, motion } from "framer-motion";
+import { animate, stagger } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
@@ -105,6 +106,7 @@ function MobileGuruScroll({ gtk }: { gtk: WPPost[] }) {
 
 export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
   const [step, setStep] = React.useState(0);
+  const sectionRef = React.useRef<HTMLElement>(null);
 
   React.useEffect(() => {
     if (gtk.length <= 7) return;
@@ -113,6 +115,41 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
     }, 3500);
     return () => clearInterval(timer);
   }, [gtk.length]);
+
+  // Scroll-triggered entrance
+  React.useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const targets = el.querySelectorAll("[data-animate-guru]");
+    if (!targets.length) return;
+
+    targets.forEach((t) => {
+      (t as HTMLElement).style.opacity = "0";
+      (t as HTMLElement).style.transform = "translateY(40px)";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(targets, {
+              opacity: [0, 1],
+              translateY: [40, 0],
+              delay: stagger(120, { start: 0 }),
+              duration: 800,
+              ease: "outQuint",
+            });
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   if (!gtk.length) return null;
 
@@ -131,9 +168,9 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
   });
 
   return (
-    <section aria-label={dict.cpt.gtk.title} className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section ref={sectionRef} aria-label={dict.cpt.gtk.title} className="bg-[color:var(--background)] py-14 sm:py-16">
       <Container>
-        <div>
+        <div data-animate-guru>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             <Link
               href={`/${locale}/gtk`}
@@ -147,7 +184,7 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
 
         <LayoutGroup>
           {/* Desktop: bento grid with animation */}
-          <div className="mt-8 hidden sm:grid sm:grid-cols-4 sm:gap-3 lg:gap-4">
+          <div data-animate-guru className="mt-8 hidden sm:grid sm:grid-cols-4 sm:gap-3 lg:gap-4">
             {visible.map((person, slot) => {
               const isUtama = slot === 3;
 

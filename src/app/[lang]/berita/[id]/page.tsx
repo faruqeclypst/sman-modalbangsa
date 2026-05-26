@@ -8,7 +8,6 @@ import { getDictionary } from "@/i18n/dictionaries";
 import {
   getAuthorName,
   getCategoryTerms,
-  getComments,
   getFeaturedImage,
   getFeaturedImageUrl,
   getPostBySlug,
@@ -26,7 +25,7 @@ import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { ArticleContent } from "@/components/news/article-content";
 import { NewsCard } from "@/components/news/news-card";
-import { CommentSection } from "@/components/news/comment-section";
+import { DisqusComments } from "@/components/comments/disqus-comments";
 
 export const revalidate = 600; // 10 minutes ISR for individual posts
 export const dynamicParams = true;
@@ -95,13 +94,12 @@ export default async function NewsDetailPage({
 
   // Related posts (same primary category if available)
   const primaryCat = categories[0];
-  const [{ posts: relatedRaw }, comments] = await Promise.all([
+  const [{ posts: relatedRaw }] = await Promise.all([
     getPosts({
       perPage: 4,
       categories: primaryCat ? [primaryCat.id] : undefined,
       exclude: [post.id],
     }),
-    getComments(post.id),
   ]);
   const related = relatedRaw.slice(0, 3);
 
@@ -239,10 +237,14 @@ export default async function NewsDetailPage({
         ) : null}
       </Container>
 
-      {/* Comments - connected to WordPress */}
+      {/* Comments - Disqus */}
       <section className="border-t border-[color:var(--border)] py-12">
         <Container size="md">
-          <CommentSection postId={post.id} initialComments={comments} locale={lang} />
+          <DisqusComments
+            identifier={`berita-${post.slug}`}
+            url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${lang}/berita/${post.slug}`}
+            title={title}
+          />
         </Container>
       </section>
 
