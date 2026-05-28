@@ -48,6 +48,7 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
       },
       { label: dict.nav.news, href: `${base}/berita` },
       { label: dict.nav.contact, href: `${base}/kontak` },
+      { label: "Info Ujian CBT", href: `${base}/cbt` },
     ],
   };
 }

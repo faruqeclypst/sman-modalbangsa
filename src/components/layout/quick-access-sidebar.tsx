@@ -48,7 +48,7 @@ export function QuickAccessSidebar({ dict, locale }: QuickAccessSidebarProps) {
       key: "cbt",
       Icon: Monitor,
       label: dict.quickLinks.items.cbt,
-      href: "https://modalbangsa.alfaruqasri.my.id/",
+      href: "https://modalbangsa.alfaruqasri.my.id/exam",
     },
     {
       key: "evoting",
