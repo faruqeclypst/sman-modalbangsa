@@ -152,21 +152,67 @@
     "subtitle": "Mengenal lebih dekat SMAN Modal Bangsa.",
     "history": {
       "title": "Sejarah Sekolah",
-      "intro": "SMAN Modal Bangsa adalah sekolah unggul Provinsi Aceh yang dirancang untuk melahirkan lulusan berkualitas dengan karakter Islami, kemampuan akademik tinggi, dan kepedulian sosial.",
-      "body": "Didirikan dengan semangat membangun bangsa melalui pendidikan, sekolah ini memadukan kurikulum nasional dengan program unggulan berbasis sains, teknologi, dan pembentukan karakter. Selama lebih dari satu dekade, SMAN Modal Bangsa konsisten meraih prestasi di tingkat regional, nasional, dan internasional."
+      "intro": "SMA Negeri (SMAN) Modal Bangsa merupakan salah satu sekolah unggulan berasrama di Aceh yang didirikan pada tahun 1994 di bawah naungan Pemerintah Daerah melalui Kantor Wilayah Departemen Pendidikan dan Kebudayaan (Kanwil Depdikbud) Provinsi Daerah Istimewa Aceh (kini Aceh). Kehadiran sekolah ini menjadi bagian dari upaya peningkatan kualitas sumber daya manusia Aceh melalui pendidikan yang berorientasi pada prestasi akademik, karakter, dan kepemimpinan.",
+      "paragraphs": [
+        "Pada masa awal berdirinya, kegiatan belajar mengajar dilaksanakan di Lampeuneurut hingga Juli 1997. Memasuki tahun ajaran 1997–1998, yang merupakan angkatan keempat, seluruh aktivitas pendidikan dipindahkan ke kampus baru di Meulayo, Kecamatan Kuta Baro, Kabupaten Aceh Besar. Kampus tersebut berdiri di atas perbukitan yang asri dan strategis, sekitar 12,5 kilometer dari pusat Kota Banda Aceh, dengan luas lahan mencapai tujuh hektare.",
+        "Saat ini, SMAN Modal Bangsa berlokasi di Jalan Bandara Sultan Iskandar Muda, Cot Geundreut, Kecamatan Blang Bintang, Kabupaten Aceh Besar. Sekolah ini dikelola oleh Pemerintah Aceh dan dikenal sebagai lembaga pendidikan yang memadukan sistem pendidikan unggul dengan kehidupan berasrama. Lingkungan belajar yang kondusif memungkinkan peserta didik memperoleh pembinaan yang komprehensif, baik dalam aspek akademik maupun pengembangan karakter.",
+        "Sebagai sekolah unggulan, SMAN Modal Bangsa tidak hanya menyelenggarakan program pendidikan reguler, tetapi juga berbagai program khusus yang dirancang untuk membentuk peserta didik menjadi generasi yang beriman, berilmu, berkarakter, dan siap menghadapi tantangan masa depan."
+      ],
+      "specialProgramsTitle": "Program Khusus SMAN Modal Bangsa",
+      "specialPrograms": [
+        {
+          "name": "1. Program Pengembangan Akhlak dan Nilai-Nilai Islami (P1)",
+          "desc": "Program ini bertujuan membentuk peserta didik yang memiliki keimanan, ketakwaan, dan akhlak mulia. Melalui berbagai kegiatan keagamaan dan pembiasaan positif, siswa dibimbing untuk mengamalkan nilai-nilai Islam dalam kehidupan sehari-hari."
+        },
+        {
+          "name": "2. Program Pemberdayaan Nilai Hidup Bermasyarakat, Berbangsa, dan Bernegara (P2)",
+          "desc": "Program ini menanamkan kesadaran sosial, semangat kebangsaan, serta tanggung jawab sebagai warga negara. Peserta didik didorong untuk memahami dan menghargai keberagaman serta berkontribusi positif dalam kehidupan bermasyarakat."
+        },
+        {
+          "name": "3. Program Pengembangan Disiplin dan Budaya Berprestasi (P3)",
+          "desc": "Melalui program ini, siswa dibiasakan untuk hidup disiplin, bertanggung jawab, dan memiliki etos kerja yang tinggi. Budaya berprestasi ditanamkan agar peserta didik senantiasa berusaha mencapai hasil terbaik dalam bidang akademik maupun nonakademik."
+        },
+        {
+          "name": "4. Program Pengembangan Kepemimpinan, Bakat, Kreativitas, dan Keterampilan (P4)",
+          "desc": "Program ini memberikan ruang bagi peserta didik untuk mengembangkan potensi diri melalui berbagai kegiatan organisasi, pelatihan kepemimpinan, pengembangan bakat, serta keterampilan yang relevan dengan kebutuhan masa depan."
+        },
+        {
+          "name": "5. Program Pengembangan Kemampuan Berbahasa dan Komunikasi (P5)",
+          "desc": "Kemampuan berkomunikasi menjadi salah satu kompetensi penting di era global. Oleh karena itu, siswa dibekali keterampilan berbahasa, baik bahasa Indonesia maupun bahasa asing, serta kemampuan berbicara, berdiskusi, dan menyampaikan gagasan secara efektif."
+        },
+        {
+          "name": "6. Program Pengembangan Wawasan dan Sikap Ilmu Pengetahuan dan Teknologi (P6)",
+          "desc": "Program ini bertujuan meningkatkan literasi sains dan teknologi serta menumbuhkan pola pikir ilmiah. Peserta didik didorong untuk berpikir kritis, kreatif, inovatif, dan adaptif terhadap perkembangan ilmu pengetahuan dan teknologi."
+        }
+      ]
     },
     "vision": {
       "title": "Visi",
-      "body": "Mewujudkan sekolah berstandar nasional dan internasional yang menghasilkan lulusan unggul dalam imtaq, iptek, dan berwawasan global."
+      "body": "Mewujudkan Calon Pemimpin Bangsa Yang Unggul Dalam Imtaq, Iptek, dan Berwawasan Lingkungan serta Berdaya Saing Global."
     },
     "mission": {
       "title": "Misi",
       "items": [
-        "Menyelenggarakan pendidikan berkualitas berbasis nilai keimanan dan ketakwaan.",
-        "Mengembangkan kompetensi akademik dan keterampilan abad 21.",
-        "Menumbuhkan karakter unggul, mandiri, dan peduli lingkungan.",
-        "Membangun budaya literasi, riset, dan inovasi.",
-        "Memperluas kerjasama dengan institusi pendidikan dalam dan luar negeri."
+        "Mempersiapkan Pemimpin Yang Memiliki Landasan Imtaq dan Iptek serta Kecintaan Terhadap Bangsa dan Negara.",
+        "Memberi Penguatan Terhadap Penguasaan Ajaran Agama Islam dan Implementasinya Dalam Kehidupan Sehari-Hari.",
+        "Mempersiapkan Peserta Didik Yang Berprestasi Akademik dan Non Akademik Pada Tingkat Provinsi, Nasional maupun Internasional.",
+        "Mempersiapkan Peserta Didik Yang Mampu Menghadapi Daya Saing Global Dengan Melanjutkan Studi ke Perguruan Tinggi Terbaik Dalam Negeri maupun Luar Negeri.",
+        "Mengembangkan Potensi Serta Sumber Daya Manusia Yang Cerdas, Memiliki Prakarsa dan membangun diri serta lingkungan;"
+      ]
+    },
+    "objectives": {
+      "title": "Tujuan",
+      "items": [
+        "Menyiapkan Warga Sekolah Agar Menjadi Insan Yang Beriman Dan Bertakwa Kepada Tuhan Yang Maha Esa.",
+        "Memiliki Pendidik dan Tenaga Kependidikan Yang Kompeten Serta Berdaya Saing Tinggi.",
+        "Membekali Peserta Didik Agar Memiliki Motivasi dan Komitmen Yang Tinggi Untuk Mengukir Prestasi Tingkat Regional, Nasional, maupun Internasional Serta Memiliki Pengetahuan Yang Memadai Untuk Melanjutkan Ke Jenjang Pendidikan Yang Lebih Tinggi Khususnya di Perguruan Tinggi Negeri Ternama.",
+        "Menyiapkan Peserta Didik Agar Memiliki Kemampuan Daya Nalar Yang Tinggi dan Berpotensi Untuk Mengembangkan Dirinya.",
+        "Membekali Peserta Didik Agar Memiliki Wawasan Kebangsaan dan Patriotisme.",
+        "Menyiapkan Peserta Didik Agar Memiliki Disiplin Yang Tinggi dan Fisik Yang Prima.",
+        "Menyiapkan Peserta Didik Agar Memiliki Akhlak Yang Mulia.",
+        "Meningkatkan Kondisi Sekolah Yang Sehat, Indah, Nyaman, Menyenangkan, dan Peduli Terhadap Lingkungan.",
+        "Mewujudkan Sekolah Ramah Anak.",
+        "Bekerjasama Dengan Unsur Komite, Masyarakat, Instansi Terkait, dan Narasumber Yang Berkompeten di Bidangnya Dalam Upaya Peningkatan Kualitas Sumber Daya Manusia."
       ]
     },
     "principal": {

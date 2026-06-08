@@ -140,21 +140,67 @@
     "subtitle": "Get to know SMAN Modal Bangsa.",
     "history": {
       "title": "School History",
-      "intro": "SMAN Modal Bangsa is a flagship high school of Aceh Province, designed to produce graduates with Islamic character, strong academics, and social awareness.",
-      "body": "Founded with the spirit of nation-building through education, the school combines the national curriculum with leading programs in science, technology, and character formation. For more than a decade, SMAN Modal Bangsa has consistently achieved at regional, national, and international levels."
+      "intro": "SMA Negeri (SMAN) Modal Bangsa is a premier boarding school in Aceh established in 1994 under the regional government through the Regional Office of the Ministry of Education and Culture (Kanwil Depdikbud) of the Special Region of Aceh (now Aceh). The presence of this school is part of the effort to improve the quality of human resources in Aceh through education oriented towards academic achievement, character, and leadership.",
+      "paragraphs": [
+        "In the early years of its establishment, teaching and learning activities were conducted in Lampeuneurut until July 1997. Entering the 1997-1998 academic year, which was the fourth cohort, all educational activities were moved to the new campus in Meulayo, Kuta Baro District, Aceh Besar Regency. The campus stands on a beautiful and strategic hill, about 12.5 kilometers from the center of Banda Aceh City, with a land area of seven hectares.",
+        "Currently, SMAN Modal Bangsa is located on Jalan Bandara Sultan Iskandar Muda, Cot Geundreut, Blang Bintang District, Aceh Besar Regency. The school is managed by the Government of Aceh and is known as an educational institution that combines an excellent education system with boarding life. A conducive learning environment allows students to receive comprehensive guidance, both in academic aspects and character development.",
+        "As a flagship school, SMAN Modal Bangsa not only organizes regular education programs, but also various special programs designed to shape students into a generation that is faithful, knowledgeable, characterized, and ready to face future challenges."
+      ],
+      "specialProgramsTitle": "Special Programs of SMAN Modal Bangsa",
+      "specialPrograms": [
+        {
+          "name": "1. Islamic Character and Values Development Program (P1)",
+          "desc": "This program aims to shape students with faith, piety, and noble character. Through various religious activities and positive habits, students are guided to implement Islamic values in daily life."
+        },
+        {
+          "name": "2. Community, Nation, and State Living Values Empowerment Program (P2)",
+          "desc": "This program instills social awareness, national spirit, and responsibility as citizens. Students are encouraged to understand and appreciate diversity and contribute positively to community life."
+        },
+        {
+          "name": "3. Discipline and Achievement Culture Development Program (P3)",
+          "desc": "Through this program, students are accustomed to disciplined, responsible living and a high work ethic. An achievement culture is cultivated so that students always strive for the best results in both academic and non-academic fields."
+        },
+        {
+          "name": "4. Leadership, Talent, Creativity, and Skills Development Program (P4)",
+          "desc": "This program provides space for students to develop their potential through various organizational activities, leadership training, talent development, and skills relevant to future needs."
+        },
+        {
+          "name": "5. Language and Communication Skills Development Program (P5)",
+          "desc": "Communication skills are crucial competencies in the global era. Therefore, students are equipped with language skills, both Indonesian and foreign, as well as the ability to speak, discuss, and convey ideas effectively."
+        },
+        {
+          "name": "6. Science and Technology Insight and Attitude Development Program (P6)",
+          "desc": "This program aims to increase scientific and technological literacy and foster a scientific mindset. Students are encouraged to think critically, creatively, innovatively, and adaptively to developments in science and technology."
+        }
+      ]
     },
     "vision": {
       "title": "Vision",
-      "body": "To be a school of national and international standard, producing graduates excellent in faith, science, and global perspective."
+      "body": "To realize future national leaders who are excellent in faith and devotion (Imtaq), science and technology (Iptek), and environmental awareness, as well as globally competitive."
     },
     "mission": {
       "title": "Mission",
       "items": [
-        "Provide quality education grounded in faith and devotion.",
-        "Develop academic competence and 21st-century skills.",
-        "Cultivate strong character, independence, and environmental care.",
-        "Build a culture of literacy, research, and innovation.",
-        "Expand collaboration with educational institutions at home and abroad."
+        "Prepare leaders who have a foundation of faith & devotion (Imtaq) and science & technology (Iptek), as well as love for the nation and state.",
+        "Provide reinforcement for the mastery of Islamic teachings and their implementation in daily life.",
+        "Prepare students who achieve academically and non-academically at provincial, national, and international levels.",
+        "Prepare students who are capable of facing global competition by continuing their studies to the best domestic and foreign higher education institutions.",
+        "Develop the potential and human resources that are intelligent, possess initiative, and build themselves as well as the environment."
+      ]
+    },
+    "objectives": {
+      "title": "Objectives",
+      "items": [
+        "Prepare school members to become individuals who have faith and devotion to God Almighty.",
+        "Have competent and highly competitive educators and education staff.",
+        "Equip students to have high motivation and commitment to achieve at regional, national, and international levels, and possess adequate knowledge to continue to higher education levels, especially at prominent state universities.",
+        "Prepare students to have high reasoning abilities and the potential to develop themselves.",
+        "Equip students to have national insight and patriotism.",
+        "Prepare students to have high discipline and excellent physical fitness.",
+        "Prepare students to have noble character.",
+        "Improve school conditions to be healthy, beautiful, comfortable, pleasant, and caring for the environment.",
+        "Realize a child-friendly school.",
+        "Cooperate with committee members, community, relevant institutions, and competent resource persons in their fields to improve the quality of human resources."
       ]
     },
     "principal": {
