@@ -12,6 +12,7 @@ interface SearchOverlayProps {
   placeholder?: string;
 }
 
+
 export function SearchOverlay({ locale, placeholder = "Cari berita, pengumuman, agenda..." }: SearchOverlayProps) {
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
