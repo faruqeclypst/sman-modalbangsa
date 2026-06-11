@@ -4,7 +4,7 @@ import { ArrowRight, Camera } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImage, getFeaturedImageUrl } from "@/lib/wp";
+import { getFeaturedImage, getThumbnailUrl } from "@/lib/wp";
 import { decodeHtmlEntities } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
 
@@ -16,7 +16,7 @@ interface GalleryPreviewProps {
 
 export function GalleryPreview({ locale, dict, items }: GalleryPreviewProps) {
   // Only render galleries that have a featured image; otherwise the strip is mostly empty.
-  const withImages = items.filter((p) => getFeaturedImageUrl(p));
+  const withImages = items.filter((p) => getThumbnailUrl(p));
   if (!withImages.length) return null;
 
   return (
@@ -54,7 +54,7 @@ export function GalleryPreview({ locale, dict, items }: GalleryPreviewProps) {
           {withImages.slice(0, 6).map((post, idx) => {
             const title = decodeHtmlEntities(post.title.rendered);
             const media = getFeaturedImage(post);
-            const imageUrl = getFeaturedImageUrl(post);
+            const imageUrl = getThumbnailUrl(post);
             return (
               <Link
                 key={post.id}

@@ -31,7 +31,7 @@ import { DisqusComments } from "@/components/comments/disqus-comments";
 import { ReadingProgress } from "@/components/ui/reading-progress";
 import { ShareButtons } from "@/components/ui/share-buttons";
 
-export const revalidate = 300; // 5 minutes ISR for individual posts
+export const revalidate = 3600; // 1 hour ISR for individual posts
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

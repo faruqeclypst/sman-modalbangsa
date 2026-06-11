@@ -8,7 +8,7 @@ import { animate, stagger } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImageUrl } from "@/lib/wp";
+import { getThumbnailUrl } from "@/lib/wp";
 import { decodeHtmlEntities } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
 
@@ -20,7 +20,7 @@ interface BentoCommunityProps {
 }
 
 export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
-  const items = galeri.filter((p) => getFeaturedImageUrl(p));
+  const items = galeri.filter((p) => getThumbnailUrl(p));
   const numSlots = Math.min(6, items.length);
   const sectionRef = React.useRef<HTMLElement>(null);
   
@@ -125,7 +125,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
                   className="group relative block h-full w-full"
                 >
                   <Image
-                    src={getFeaturedImageUrl(visible[0])!}
+                    src={getThumbnailUrl(visible[0])!}
                     alt={decodeHtmlEntities(visible[0].title.rendered)}
                     fill
                     sizes="(min-width: 1024px) 25vw, 50vw"
@@ -157,7 +157,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
                     className="group relative block h-full w-full"
                   >
                     <Image
-                      src={getFeaturedImageUrl(visible[1])!}
+                      src={getThumbnailUrl(visible[1])!}
                       alt={decodeHtmlEntities(visible[1].title.rendered)}
                       fill
                       sizes="(min-width: 1024px) 50vw, 50vw"
@@ -172,7 +172,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
 
           {/* Small cards (fill remaining slots) */}
           {visible.slice(2).map((post, idx) => {
-            const imgUrl = getFeaturedImageUrl(post);
+            const imgUrl = getThumbnailUrl(post);
             return (
               <div key={`slot-${idx}`} className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100">
                 <AnimatePresence mode="popLayout">

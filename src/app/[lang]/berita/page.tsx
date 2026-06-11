@@ -11,7 +11,7 @@ import { Pagination } from "@/components/news/pagination";
 
 import { EmptyState } from "@/components/ui/empty-state";
 
-export const revalidate = 300; // 5 minutes for the news index
+export const revalidate = 3600; // 1 hour ISR for the news index
 
 export async function generateMetadata({
   params,

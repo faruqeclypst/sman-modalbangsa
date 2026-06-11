@@ -15,7 +15,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
 import { decodeHtmlEntities, formatDate, stripHtml, truncate } from "@/lib/utils";
-import { getFeaturedImageUrl } from "@/lib/wp";
+import { getThumbnailUrl } from "@/lib/wp";
 import { Container } from "@/components/ui/container";
 
 interface BentoInfoProps {
@@ -114,7 +114,7 @@ function MiniCalendar({ locale }: { locale: Locale }) {
 
 function FeaturedAgenda({ post, locale }: { post: WPPost; locale: Locale }) {
   const title = decodeHtmlEntities(post.title.rendered);
-  const imageUrl = getFeaturedImageUrl(post);
+  const imageUrl = getThumbnailUrl(post);
   const excerpt = truncate(stripHtml(post.excerpt?.rendered ?? ""), 120);
   const postDate = new Date(post.date);
   const time = postDate.toLocaleTimeString(locale === "id" ? "id-ID" : "en-US", {

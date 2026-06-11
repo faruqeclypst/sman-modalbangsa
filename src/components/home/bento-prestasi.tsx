@@ -7,7 +7,7 @@ import { animate, stagger } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImageUrl } from "@/lib/wp";
+import { getThumbnailUrl } from "@/lib/wp";
 import { decodeHtmlEntities, formatDate } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
 
@@ -67,7 +67,7 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
 
   // Split: featured (rotating) + side list
   const featured = prestasi[active];
-  const featuredImage = getFeaturedImageUrl(featured);
+  const featuredImage = getThumbnailUrl(featured);
   const featuredTitle = decodeHtmlEntities(featured.title.rendered);
 
   return (
@@ -125,7 +125,7 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
 
           {/* Side items — 4 smaller cards */}
           {prestasi.slice(0, 4).map((post) => {
-            const img = getFeaturedImageUrl(post);
+            const img = getThumbnailUrl(post);
             const title = decodeHtmlEntities(post.title.rendered);
             return (
               <Link

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImage, getFeaturedImageUrl } from "@/lib/wp";
+import { getFeaturedImage, getThumbnailUrl } from "@/lib/wp";
 import { decodeHtmlEntities, stripHtml, truncate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
@@ -16,7 +16,7 @@ export function GTKCard({ post, jabatanLabel, statusLabel }: GTKCardProps) {
   const name = decodeHtmlEntities(post.title.rendered);
   const description = truncate(stripHtml(post.excerpt?.rendered ?? ""), 110);
   const media = getFeaturedImage(post);
-  const imageUrl = getFeaturedImageUrl(post);
+  const imageUrl = getThumbnailUrl(post);
 
   return (
     <article className="group flex h-full flex-col items-center overflow-hidden rounded-xl border border-white/30 bg-white/60 p-5 text-center shadow-sm backdrop-blur-md transition-all hover:-translate-y-1 hover:border-white/50 hover:bg-white/80 hover:shadow-lg">

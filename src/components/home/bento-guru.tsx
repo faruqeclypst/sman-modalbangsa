@@ -8,7 +8,7 @@ import { animate, stagger } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImageUrl, getTermsByTaxonomy } from "@/lib/wp";
+import { getThumbnailUrl, getTermsByTaxonomy } from "@/lib/wp";
 import { decodeHtmlEntities } from "@/lib/utils";
 import { Container } from "@/components/ui/container";
 
@@ -20,7 +20,7 @@ interface BentoGuruProps {
 
 function GuruCard({ person, size }: { person: WPPost; size: "large" | "small" }) {
   const name = decodeHtmlEntities(person.title.rendered);
-  const imageUrl = getFeaturedImageUrl(person);
+  const imageUrl = getThumbnailUrl(person);
   const jab = getTermsByTaxonomy(person, "jab")[0];
   const stts = getTermsByTaxonomy(person, "stts")[0];
   const initials = name.split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase();

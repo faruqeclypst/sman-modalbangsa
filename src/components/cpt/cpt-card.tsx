@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Calendar, Eye } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImage, getFeaturedImageUrl } from "@/lib/wp";
+import { getFeaturedImage, getThumbnailUrl } from "@/lib/wp";
 import {
   decodeHtmlEntities,
   formatDate,
@@ -37,7 +37,7 @@ export function CPTCard({
   const excerpt = truncate(stripHtml(post.excerpt?.rendered ?? ""), 140);
   const date = formatDate(post.date, locale);
   const media = getFeaturedImage(post);
-  const imageUrl = getFeaturedImageUrl(post);
+  const imageUrl = getThumbnailUrl(post);
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-white/30 bg-white/60 shadow-sm backdrop-blur-md transition-all hover:-translate-y-1 hover:border-white/50 hover:bg-white/80 hover:shadow-lg">

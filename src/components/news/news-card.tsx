@@ -8,7 +8,7 @@ import {
   getAuthorName,
   getCategoryTerms,
   getFeaturedImage,
-  getFeaturedImageUrl,
+  getThumbnailUrl,
 } from "@/lib/wp";
 import {
   decodeHtmlEntities,
@@ -44,7 +44,7 @@ export function NewsCard({
   const date = formatDate(post.date, locale);
   const categories = getCategoryTerms(post).slice(0, 1);
   const media = getFeaturedImage(post);
-  const imageUrl = getFeaturedImageUrl(post);
+  const imageUrl = getThumbnailUrl(post);
   const altText = media?.alt_text || title;
 
   if (variant === "featured") {

@@ -9,7 +9,7 @@ import { HomeSections } from "@/components/home/home-sections";
 import { HomeSectionsSkeleton } from "@/components/home/home-sections-skeleton";
 import { SectionOrnament } from "@/components/ui/section-ornament";
 
-export const revalidate = 300; // 5m ISR
+export const revalidate = 3600; // 1h ISR
 
 export default async function HomePage({
   params,
