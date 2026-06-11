@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +37,7 @@ export async function POST(request: NextRequest) {
       for (const t of VALID_TAGS) {
         revalidateTag(t, EXPIRE_NOW);
       }
+      revalidatePath("/", "layout");
       return NextResponse.json({
         ok: true,
         revalidated: [...VALID_TAGS],
@@ -46,6 +47,7 @@ export async function POST(request: NextRequest) {
 
     if (VALID_TAGS.includes(tag as (typeof VALID_TAGS)[number])) {
       revalidateTag(tag, EXPIRE_NOW);
+      revalidatePath("/", "layout");
       return NextResponse.json({
         ok: true,
         revalidated: [tag],
@@ -84,11 +86,13 @@ export async function GET(request: NextRequest) {
       for (const t of VALID_TAGS) {
         revalidateTag(t, EXPIRE_NOW);
       }
+      revalidatePath("/", "layout");
       return NextResponse.json({ ok: true, revalidated: [...VALID_TAGS], now: Date.now() });
     }
 
     if (VALID_TAGS.includes(tag as (typeof VALID_TAGS)[number])) {
       revalidateTag(tag, EXPIRE_NOW);
+      revalidatePath("/", "layout");
       return NextResponse.json({ ok: true, revalidated: [tag], now: Date.now() });
     }
 
