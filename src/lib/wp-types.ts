@@ -66,6 +66,7 @@ export interface WPPost {
   acf?: Record<string, unknown>;
   /** Some themes/plugins expose download URL directly. */
   download_url?: string;
+  views?: number;
 }
 
 export interface WPCategory {

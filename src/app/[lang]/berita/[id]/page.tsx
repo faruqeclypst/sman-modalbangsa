@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Eye, User } from "lucide-react";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import {
@@ -26,11 +26,12 @@ import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { ArticleContent } from "@/components/news/article-content";
 import { NewsCard } from "@/components/news/news-card";
+import { ViewCounter } from "@/components/news/view-counter";
 import { DisqusComments } from "@/components/comments/disqus-comments";
 import { ReadingProgress } from "@/components/ui/reading-progress";
 import { ShareButtons } from "@/components/ui/share-buttons";
 
-export const revalidate = 600; // 10 minutes ISR for individual posts
+export const revalidate = 300; // 5 minutes ISR for individual posts
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
@@ -182,6 +183,7 @@ export default async function NewsDetailPage({
             <span className="inline-flex items-center gap-1.5">
               <Clock className="size-4" aria-hidden /> {minutes} {dict.news.minRead}
             </span>
+            <ViewCounter id={post.id} initialViews={post.views} locale={lang} />
           </div>
         </Container>
       </header>
@@ -304,6 +306,25 @@ export default async function NewsDetailPage({
           </Container>
         </section>
       ) : null}
+
+      {/* Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            "headline": title,
+            "image": imageUrl ? [imageUrl] : [],
+            "datePublished": post.date,
+            "dateModified": post.modified,
+            "author": [{
+              "@type": "Person",
+              "name": author || "Admin"
+            }]
+          }),
+        }}
+      />
     </article>
   );
 }

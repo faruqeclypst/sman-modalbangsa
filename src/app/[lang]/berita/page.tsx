@@ -9,7 +9,9 @@ import { NewsCard } from "@/components/news/news-card";
 import { NewsSearchForm } from "@/components/news/news-search-form";
 import { Pagination } from "@/components/news/pagination";
 
-export const revalidate = 600; // 10 minutes for the news index
+import { EmptyState } from "@/components/ui/empty-state";
+
+export const revalidate = 300; // 5 minutes for the news index
 
 export async function generateMetadata({
   params,
@@ -80,11 +82,10 @@ export default async function NewsListPage({
         </div>
 
         {posts.length === 0 ? (
-          <div className="mt-12 rounded-xl border border-dashed border-[color:var(--border)] bg-white p-10 text-center">
-            <p className="text-[color:var(--muted-foreground)]">
-              {dict.news.noResults}
-            </p>
-          </div>
+          <EmptyState 
+            message={dict.news.noResults} 
+            className="mt-12 rounded-xl border border-dashed border-[color:var(--border)] bg-white" 
+          />
         ) : (
           <>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar } from "lucide-react";
+import { Calendar, Eye } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { WPPost } from "@/lib/wp-types";
 import { getFeaturedImage, getFeaturedImageUrl } from "@/lib/wp";
@@ -80,9 +80,16 @@ export function CPTCard({
           ) : null}
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <p className="inline-flex items-center gap-1.5 text-xs text-[color:var(--muted-foreground)]">
-            <Calendar className="size-3.5" aria-hidden /> {date}
-          </p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[color:var(--muted-foreground)]">
+            <span className="inline-flex items-center gap-1.5">
+              <Calendar className="size-3.5" aria-hidden /> {date}
+            </span>
+            {post.views !== undefined && post.views !== null ? (
+              <span className="inline-flex items-center gap-1.5">
+                <Eye className="size-3.5" aria-hidden /> {post.views}
+              </span>
+            ) : null}
+          </div>
           <h3 className="mt-2 line-clamp-2 text-base font-semibold leading-snug text-[color:var(--foreground)] transition-colors group-hover:text-[color:var(--primary)] sm:text-lg">
             {title}
           </h3>

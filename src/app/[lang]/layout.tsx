@@ -10,6 +10,7 @@ import { Footer } from "@/components/layout/footer";
 import { QuickAccessSidebar } from "@/components/layout/quick-access-sidebar";
 import { SocialSidebar } from "@/components/layout/social-sidebar";
 import { BackToTop } from "@/components/ui/back-to-top";
+import { LenisProvider } from "@/components/ui/lenis-provider";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -57,11 +58,20 @@ export async function generateMetadata({
       type: "website",
       locale: locale === "id" ? "id_ID" : "en_US",
       siteName: dict.site.name,
+      images: [
+        {
+          url: "/logo.png",
+          width: 1200,
+          height: 630,
+          alt: dict.site.name,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: dict.site.name,
       description: dict.site.tagline,
+      images: ["/logo.png"],
     },
     robots: { index: true, follow: true },
     icons: {
@@ -79,24 +89,42 @@ export default async function LocaleLayout({
   if (!isLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id";
 
   return (
     <html lang={lang === "id" ? "id-ID" : "en-US"} className={plusJakarta.variable}>
       <body className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-[color:var(--primary)] focus:px-3 focus:py-2 focus:text-sm focus:text-white"
-        >
-          {dict.common.skipToContent}
-        </a>
-        <Header locale={lang} dict={dict} />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <QuickAccessSidebar locale={lang} dict={dict} />
-        <SocialSidebar />
-        <BackToTop />
-        <Footer locale={lang} dict={dict} />
+        <LenisProvider>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-[color:var(--primary)] focus:px-3 focus:py-2 focus:text-sm focus:text-white"
+          >
+            {dict.common.skipToContent}
+          </a>
+          <Header locale={lang} dict={dict} />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <QuickAccessSidebar locale={lang} dict={dict} />
+          <SocialSidebar />
+          <BackToTop />
+          <Footer locale={lang} dict={dict} />
+          {/* Schema.org JSON-LD */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "EducationalOrganization",
+                "name": dict.site.name,
+                "description": dict.site.tagline,
+                "url": baseUrl,
+                "logo": `${baseUrl}/logo.png`,
+                "image": `${baseUrl}/logo.png`,
+              }),
+            }}
+          />
+        </LenisProvider>
       </body>
     </html>
   );
