@@ -253,6 +253,19 @@ export async function getTaxonomyTerms(
 
 // ---------- Helpers to safely read embedded data from a post ----------
 
+export function toProxyUrl(url: string | null): string | null {
+  if (!url) return null;
+  const wpContentIdx = url.indexOf("/wp-content/");
+  if (wpContentIdx !== -1) {
+    return url.substring(wpContentIdx);
+  }
+  const wpIncludesIdx = url.indexOf("/wp-includes/");
+  if (wpIncludesIdx !== -1) {
+    return url.substring(wpIncludesIdx);
+  }
+  return url;
+}
+
 export function getFeaturedImage(post: WPPost): WPMedia | null {
   return post._embedded?.["wp:featuredmedia"]?.[0] ?? null;
 }
@@ -261,7 +274,7 @@ export function getFeaturedImageUrl(post: WPPost): string | null {
   const media = getFeaturedImage(post);
   if (!media) return null;
   // Use source_url (original/full) for best quality. WordPress source_url is the full-size image.
-  return media.source_url ?? null;
+  return toProxyUrl(media.source_url ?? null);
 }
 
 /** Get a smaller thumbnail URL for cards/lists (medium ~300px). */
@@ -269,7 +282,7 @@ export function getThumbnailUrl(post: WPPost): string | null {
   const media = getFeaturedImage(post);
   if (!media) return null;
   const sizes = media.media_details?.sizes;
-  return (
+  return toProxyUrl(
     sizes?.medium_large?.source_url ??
     sizes?.medium?.source_url ??
     sizes?.large?.source_url ??
