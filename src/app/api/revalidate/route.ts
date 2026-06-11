@@ -9,8 +9,10 @@ const VALID_TAGS = ["wp", "disdik-berita"] as const;
 const EXPIRE_NOW = { expire: 0 };
 
 export async function POST(request: NextRequest) {
-  // Authenticate
-  const secret = request.headers.get("x-revalidate-secret");
+  // Authenticate (check header first, fallback to query param)
+  const secret =
+    request.headers.get("x-revalidate-secret") ??
+    request.nextUrl.searchParams.get("secret");
   const expectedSecret = process.env.REVALIDATE_SECRET;
 
   if (!expectedSecret || secret !== expectedSecret) {
@@ -20,15 +22,15 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Parse body
-  let tag = "wp";
+  // Parse body or fallback to query param
+  let tag = request.nextUrl.searchParams.get("tag") ?? "wp";
   try {
     const body = await request.json();
     if (body?.tag && typeof body.tag === "string") {
       tag = body.tag;
     }
   } catch {
-    // No body or invalid JSON — default to "wp"
+    // No body or invalid JSON — fallback to query param or "wp"
   }
 
   // Revalidate
