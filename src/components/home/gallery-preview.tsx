@@ -131,25 +131,7 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
       if (gridRef.current) {
         const isMobile = window.innerWidth < 768;
 
-        if (isMobile) {
-          const cards = gridRef.current;
-          const totalWidth = cards.scrollWidth;
-          const viewportWidth = window.innerWidth;
-          const scrollDist = totalWidth - viewportWidth + 32;
-
-          gsap.to(cards, {
-            x: -scrollDist,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              pin: true,
-              scrub: 1.5,
-              start: "center center",
-              end: () => `+=${scrollDist * 1.5}`,
-              invalidateOnRefresh: true,
-            },
-          });
-        } else {
+        if (!isMobile) {
           gsap.fromTo(
             gridRef.current.children,
             { opacity: 0, y: 50 },
@@ -267,7 +249,7 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
         {displayPhotos.length >= 5 ? (
           <div
             ref={gridRef}
-            className="flex md:grid md:grid-cols-4 gap-6 md:gap-6 grid-flow-dense md:grid-rows-2 md:h-[650px] items-stretch will-change-transform select-none pb-4 md:pb-0"
+            className="flex overflow-x-auto scrollbar-none snap-x snap-mandatory md:grid md:grid-cols-4 gap-6 md:gap-6 grid-flow-dense md:grid-rows-2 md:h-[650px] items-stretch select-none pb-4 md:pb-0"
           >
             <div
               className="md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto w-[290px] sm:w-[320px] md:w-auto shrink-0 snap-start"
@@ -311,7 +293,7 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
         ) : (
           <div
             ref={gridRef}
-            className="flex md:grid md:grid-cols-3 gap-6 will-change-transform select-none pb-4 md:pb-0"
+            className="flex overflow-x-auto scrollbar-none snap-x snap-mandatory md:grid md:grid-cols-3 gap-6 select-none pb-4 md:pb-0"
           >
             {displayPhotos.map((photo, index) => (
               <div

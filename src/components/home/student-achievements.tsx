@@ -161,31 +161,40 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
   const useIsomorphicLayoutEffect =
     typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
-  // GSAP Vertical translation ScrollTrigger
+  // GSAP Vertical Yoyo Auto-Scroll
   useIsomorphicLayoutEffect(() => {
     if (!wrapperRef.current || !listRef.current) return;
 
-    // Reset list position first in case layout changes
+    // Reset list position first
     gsap.set(listRef.current, { y: 0 });
 
     const containerHeight = isDesktop ? 4 * ITEM_HEIGHT : 360;
     const scrollableDistance = listRef.current.scrollHeight - containerHeight;
-    // We only pin & scroll if the content is taller than the container
+    
+    // We only animate if the content is taller than the container
     if (scrollableDistance <= 0) return;
 
     const ctx = gsap.context(() => {
-      gsap.to(listRef.current, {
+      const anim = gsap.to(listRef.current, {
         y: -scrollableDistance,
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top top",
-          end: () => `+=${scrollableDistance * 1.5}`,
-          pin: true,
-          scrub: 1.5,
-          invalidateOnRefresh: true,
-        },
+        duration: Math.max(8, scrollableDistance * 0.035), // Smooth speed proportional to height
+        ease: "power1.inOut",
+        repeat: -1,
+        yoyo: true,
       });
+
+      // Pause on hover
+      const listEl = listRef.current;
+      const onMouseEnter = () => anim.pause();
+      const onMouseLeave = () => anim.play();
+
+      listEl.addEventListener("mouseenter", onMouseEnter);
+      listEl.addEventListener("mouseleave", onMouseLeave);
+
+      return () => {
+        listEl.removeEventListener("mouseenter", onMouseEnter);
+        listEl.removeEventListener("mouseleave", onMouseLeave);
+      };
     }, wrapperRef);
 
     return () => ctx.revert();
@@ -195,7 +204,7 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
     <section
       ref={wrapperRef}
       aria-labelledby="home-achievements-title"
-      className="relative overflow-hidden bg-white h-screen flex items-center w-full"
+      className="relative overflow-hidden bg-white py-16 sm:py-24 w-full"
     >
       <Container className="w-full">
         {/* Editorial Split Layout */}

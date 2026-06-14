@@ -44,71 +44,14 @@ interface SchoolCommitmentProps {
 }
 
 export function SchoolCommitment({ locale }: SchoolCommitmentProps) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-
-  useIsomorphicLayoutEffect(() => {
-    // Only initialize GSAP on mobile viewports (< 768px)
-    const isMobile = window.innerWidth < 768;
-    if (!isMobile) return;
-
-    const ctx = gsap.context(() => {
-      if (!sectionRef.current) return;
-
-      // Header entrance animation
-      if (headerRef.current) {
-        gsap.fromTo(
-          headerRef.current.children,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.15,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      if (cardsRef.current) {
-        const cards = cardsRef.current;
-        const totalWidth = cards.scrollWidth;
-        const viewportWidth = window.innerWidth;
-        const scrollDist = totalWidth - viewportWidth + 32;
-
-        gsap.to(cards, {
-          x: -scrollDist,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            pin: true,
-            scrub: 1.5,
-            start: "center center",
-            end: () => `+=${scrollDist * 1.5}`,
-            invalidateOnRefresh: true,
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       id="komitmen-sekolah"
-      className="relative overflow-hidden bg-transparent py-12 sm:py-32"
+      className="relative overflow-hidden bg-transparent py-16 sm:py-32"
     >
       <Container>
         {/* Header Block */}
-        <div ref={headerRef} className="mx-auto max-w-4xl text-center mb-16 sm:mb-20">
+        <div className="mx-auto max-w-4xl text-center mb-16 sm:mb-20">
           <h2 className="font-sfpro font-bold tracking-tight text-[2.5rem] leading-[1.15] sm:text-[3.5rem] md:text-[4rem] text-zinc-900 mb-6">
             {locale === "en" ? (
               <>
@@ -134,10 +77,9 @@ export function SchoolCommitment({ locale }: SchoolCommitmentProps) {
             )}
           </p>
         </div>
-        {/* 3-Column Image Cards Grid - Sliding on mobile with GSAP, Grid on desktop */}
+        {/* 3-Column Image Cards Grid - Sliding on mobile natively, Grid on desktop */}
         <div 
-          ref={cardsRef} 
-          className="flex md:grid md:grid-cols-3 gap-6 pb-4 md:pb-0 md:gap-6 will-change-transform select-none"
+          className="flex overflow-x-auto scrollbar-none snap-x snap-mandatory md:grid md:grid-cols-3 gap-6 pb-4 md:pb-0 md:gap-6 select-none"
         >
           {valueCards.map((card, idx) => (
             <div
