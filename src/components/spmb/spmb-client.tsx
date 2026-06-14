@@ -302,27 +302,15 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                     : "Welcome to the admissions page of SMAN Modal Bangsa! We are dedicated to providing an enriching environment that supports students' academic and personal growth."}
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 rounded-3xl overflow-hidden aspect-[21/9] w-full shadow-sm bg-zinc-150">
-                  <div className="relative h-64 md:h-auto min-h-[320px]">
-                    <Image 
-                      src={spmbPhotos.img1} 
-                      alt="SMAN Modal Bangsa Campus" 
-                      fill 
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover" 
-                      priority
-                    />
-                  </div>
-                  <div className="relative h-64 md:h-auto min-h-[320px]">
-                    <Image 
-                      src={spmbPhotos.img2} 
-                      alt="SMAN Modal Bangsa Academic" 
-                      fill 
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover" 
-                      priority
-                    />
-                  </div>
+                <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-sm bg-zinc-150">
+                  <Image 
+                    src={spmbPhotos.img1} 
+                    alt="SMAN Modal Bangsa Campus" 
+                    fill 
+                    sizes="100vw"
+                    className="object-cover" 
+                    priority
+                  />
                 </div>
               </div>
 

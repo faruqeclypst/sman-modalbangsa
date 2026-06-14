@@ -31,6 +31,14 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
         ],
       },
       { label: dict.nav.news, href: `${base}/berita` },
+      {
+        label: dict.nav.achievements,
+        links: [
+          { label: dict.cpt.prestasi.hallOfFameTitle, href: `${base}/prestasi/hall-of-fame` },
+          { label: dict.cpt.galeri.label, href: `${base}/galeri` },
+          { label: dict.nav.achievements, href: `${base}/prestasi` },
+        ],
+      },
       { label: dict.quickLinks.items.spmb, href: `${base}/spmb` },
       { label: dict.nav.contact, href: `${base}/kontak` },
     ],
