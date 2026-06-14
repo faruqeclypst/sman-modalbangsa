@@ -90,39 +90,14 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
         id: "Matematika adalah bahasa alam semesta. Di balik setiap angka dan rumus, ada keindahan logika yang menanti untuk dipecahkan.", 
         en: "Mathematics is the language of the universe. Behind every number and formula, there is a beauty of logic waiting to be solved." 
       },
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+      image: "/images/hof/fayruz-4.png",
       imageBadge: { id: "14th World Rank WYMO", en: "14th World Rank WYMO" },
       year: "2025",
       country: { id: "Thailand", en: "Thailand" },
       themeColor: "from-amber-500/10 to-amber-600/5",
       icon: Globe,
     },
-    {
-      id: "dzawata",
-      name: "Dzawata Maghfura Z.",
-      category: "Nasional",
-      honorTier: { id: "National Honor Roll (Paskibraka IKN)", en: "National Honor Roll (Paskibraka IKN)" },
-      field: { id: "SAINS & KEPEMIMPINAN", en: "SCIENCE & LEADERSHIP" },
-      subjectTag: "Sains",
-      title: { 
-        id: "Paskibraka Pengibar Bendera Pusaka Pertama di IKN 2024", 
-        en: "First National Flag Hoisting Troop (Paskibraka) at IKN 2024" 
-      },
-      achievement: { 
-        id: "Terpilih sebagai perwakilan resmi Provinsi Aceh dan bertugas dalam tim pengibar bendera merah putih bersejarah pertama kali di Ibu Kota Nusantara (IKN).", 
-        en: "Selected as the official representative of Aceh Province and served in the historic first red and white flag-raising team in the Nusantara Capital City (IKN)." 
-      },
-      quote: { 
-        id: "Langkah tegap di tanah IKN Nusantara adalah wujud bakti dan kehormatan tertinggi kami untuk masyarakat Aceh dan Indonesia.", 
-        en: "A firm step on the ground of IKN Nusantara is a form of our highest devotion and honor for the people of Aceh and Indonesia." 
-      },
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
-      imageBadge: { id: "Paskibraka Utama IKN", en: "Main IKN Flag Raiser" },
-      year: "2024",
-      country: { id: "IKN Nusantara", en: "IKN Nusantara" },
-      themeColor: "from-emerald-500/10 to-emerald-600/5",
-      icon: Medal,
-    },
+
     {
       id: "dzakwan",
       name: "Dzakwan Dhiya R.",
@@ -142,12 +117,38 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
         id: "Alam semesta bergerak dalam harmoni keteraturan. Mempelajari fisika melatih logika kita melihat keagungan penciptaan.", 
         en: "The universe moves in a harmony of order. Studying physics trains our logic to see the majesty of creation." 
       },
-      image: "/images/hof/dzakwan.jpeg",
+      image: "/images/hof/dzakwan.png",
       imageBadge: { id: "Perak OSN Fisika 2025", en: "Physics OSN Silver 2025" },
       year: "2025",
       country: { id: "Malang", en: "Malang" },
       themeColor: "from-amber-500/10 to-amber-600/5",
       icon: Trophy,
+    },
+    {
+      id: "ridho",
+      name: "Muhammad Ridho",
+      category: "Nasional",
+      honorTier: { id: "National Commander Honor", en: "National Commander Honor" },
+      field: { id: "KEPEMIMPINAN / LEADERSHIP", en: "LEADERSHIP" },
+      subjectTag: "Olimpiade",
+      title: { 
+        id: "Komandan Upacara Hari Lahir Pancasila Tingkat Nasional 2026", 
+        en: "Ceremony Commander of National Pancasila Day 2026" 
+      },
+      achievement: { 
+        id: "Terpilih dan bertugas sebagai Komandan Upacara Hari Lahir Pancasila Tingkat Nasional 2026 di hadapan Presiden Republik Indonesia.", 
+        en: "Selected and served as the Ceremony Commander of National Pancasila Day 2026 in front of the President of the Republic of Indonesia." 
+      },
+      quote: { 
+        id: "Disiplin, dedikasi, dan kehormatan adalah pilar utama dalam mengabdi pada bangsa dan negara.", 
+        en: "Discipline, dedication, and honor are the main pillars in serving the nation and state." 
+      },
+      image: "/images/hof/ridho.png",
+      imageBadge: { id: "Komandan Nasional 2026", en: "National Commander 2026" },
+      year: "2026",
+      country: { id: "Jakarta", en: "Jakarta" },
+      themeColor: "from-rose-500/10 to-rose-600/5",
+      icon: Medal,
     },
     {
       id: "fatih",
@@ -168,7 +169,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
         id: "Melodi adalah getaran jiwa, dan menciptakan lagu adalah cara paling jujur untuk mengekspresikan cerita kehidupan yang tidak terucap.", 
         en: "Melody is the vibration of the soul, and songwriting is the most honest way to express unspoken life stories." 
       },
-      image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+      image: "/images/hof/teuku fatih.png",
       imageBadge: { id: "Perunggu FLS2N Nasional", en: "FLS2N National Bronze" },
       year: "2025",
       country: { id: "Aceh / Nasional", en: "Aceh / National" },
@@ -178,8 +179,8 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
     {
       id: "balqis",
       name: "Balqis Daratunnasywa",
-      category: "Provinsi",
-      honorTier: { id: "Provincial Journalism Laureate", en: "Provincial Journalism Laureate" },
+      category: "Nasional",
+      honorTier: { id: "National Journalism Laureate", en: "National Journalism Laureate" },
       field: { id: "LITERASI / JOURNALISM", en: "LITERACY / JOURNALISM" },
       subjectTag: "Literasi",
       title: { 
@@ -194,7 +195,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
         id: "Menulis berita bukan sekadar merangkai kata, melainkan menyingkap fakta secara jernih untuk menyuarakan kebenaran kepada publik.", 
         en: "Writing news is not just about stringing words together, but about revealing facts clearly to voice the truth to the public." 
       },
-      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=80",
+      image: "/images/hof/balqis.png",
       imageBadge: { id: "Juara 2 Nasional FLS2N", en: "2nd Place National FLS2N" },
       year: "2025",
       country: { id: "Aceh / Nasional", en: "Aceh / National" },

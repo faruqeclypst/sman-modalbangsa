@@ -276,7 +276,7 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
 
             <div className="pt-4 hidden lg:block">
               <Link
-                href={`/${locale}/prestasi`}
+                href={`/${locale}/prestasi/hall-of-fame`}
                 className="group inline-flex items-center justify-between gap-6 bg-[#16a34a] hover:bg-[#118037] text-white text-xs font-bold tracking-widest pl-6 pr-2 py-2 rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] font-sfpro uppercase shadow-sm hover:shadow-md active:scale-[0.98]"
               >
                 <span>Hall of Fame</span>
@@ -354,7 +354,7 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
 
             <div className="pt-8 text-center lg:hidden">
               <Link
-                href={`/${locale}/prestasi`}
+                href={`/${locale}/prestasi/hall-of-fame`}
                 className="group inline-flex items-center justify-between gap-6 bg-[#16a34a] text-white text-xs font-bold tracking-widest pl-6 pr-2 py-2 rounded-full font-sfpro uppercase shadow-sm"
               >
                 <span>Hall of Fame</span>
