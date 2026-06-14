@@ -47,7 +47,8 @@
       "subtitle": "Recognitions earned at regional, national, and international levels.",
       "empty": "No achievements published yet.",
       "hallOfFameTitle": "Mosa Hall of Fame",
-      "hallOfFameSubtitle": "The gallery of honor celebrating outstanding achievements of SMAN Modal Bangsa students across International, National, and Provincial levels."
+      "hallOfFameSubtitle": "The gallery of honor celebrating outstanding achievements of SMAN Modal Bangsa students across International, National, and Provincial levels.",
+      "viewAll": "All Achievements"
     },
     "gtk": {
       "label": "Teachers & Staff",

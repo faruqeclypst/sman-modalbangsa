@@ -45,6 +45,9 @@ export function HeaderNav({ nav, locale, dict, isTransparent }: HeaderNavProps) 
 
   const isActive = (href: string) => {
     if (href === `/${locale}`) return pathname === href;
+    if (href === `/${locale}/prestasi` && pathname.startsWith(`/${locale}/prestasi/hall-of-fame`)) {
+      return false;
+    }
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 

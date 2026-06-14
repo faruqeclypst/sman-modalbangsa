@@ -321,7 +321,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
                     SMAN Modal Bangsa
                   </span>{" "}
-                  {isId ? "Admission" : "Admission"}
+                  {isId ? "" : "Admission"}
                 </h2>
                 <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans text-justify sm:text-left">
                   {isId 
