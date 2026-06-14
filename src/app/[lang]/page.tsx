@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Hero } from "@/components/home/hero";
-import { OnboardingSplash } from "@/components/home/onboarding-splash";
 import { IntroTransition } from "@/components/home/intro-transition";
 import { HomeSections } from "@/components/home/home-sections";
 import { HomeSectionsSkeleton } from "@/components/home/home-sections-skeleton";
@@ -21,9 +20,6 @@ export default async function HomePage({
 
   return (
     <>
-      {/* 2.5s Onboarding preloader overlay with logo breathing scale */}
-      <OnboardingSplash locale={lang} />
-
       {/* Hero renders instantly with video bg.mp4 */}
       <Hero locale={lang} dict={dict} />
 

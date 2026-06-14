@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import type { Locale } from "@/i18n/config";
 
@@ -10,10 +11,16 @@ interface OnboardingSplashProps {
 }
 
 export function OnboardingSplash({ locale }: OnboardingSplashProps) {
+  const pathname = usePathname();
+  const isHome = pathname === "/" || pathname === `/${locale}` || pathname === `/${locale}/`;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLHeadingElement>(null);
+
   useEffect(() => {
+    if (!isHome) return;
+
     // Prevent scrolling while onboarding is active
     document.body.style.overflow = "hidden";
 
@@ -22,7 +29,6 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
 
       const tl = gsap.timeline({
         onComplete: () => {
-          document.documentElement.classList.remove("onboarding-active");
           document.body.style.overflow = "";
           if (containerRef.current) {
             containerRef.current.style.display = "none";
@@ -77,23 +83,23 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
     }, containerRef);
 
     return () => {
-      document.documentElement.classList.remove("onboarding-active");
       document.body.style.overflow = "";
       ctx.revert();
     };
-  }, []);
+  }, [isHome]);
+
+  if (!isHome) return null;
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white text-zinc-900 select-none overflow-hidden"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white text-zinc-900 select-none overflow-hidden"
     >
       <div className="flex flex-col items-center justify-center text-center px-6 max-w-4xl">
         {/* Brand Logo & Name */}
         <div
           ref={logoRef}
           className="flex items-center gap-4 mb-6"
-          style={{ opacity: 0, transform: "scale(0.5)" }}
         >
           <span className="relative inline-flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-xl">
             <Image
@@ -119,7 +125,6 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
         <h1
           ref={taglineRef}
           className="text-2xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-sfpro mt-2 leading-normal"
-          style={{ opacity: 0, transform: "translateY(20px)" }}
         >
           {locale === "en" ? (
             <>
