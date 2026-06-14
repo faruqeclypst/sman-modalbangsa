@@ -88,7 +88,7 @@ export function SchoolCommitment({ locale }: SchoolCommitmentProps) {
           scrollTrigger: {
             trigger: sectionRef.current,
             pin: true,
-            scrub: 0.5,
+            scrub: 1.5,
             start: "center center",
             end: () => `+=${scrollDist * 1.5}`,
             invalidateOnRefresh: true,

@@ -9,6 +9,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Register GSAP ScrollTrigger
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+  });
 }
 
 export function LenisProvider({ children }: { children: React.ReactNode }) {

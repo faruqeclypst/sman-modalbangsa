@@ -182,7 +182,7 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
           start: "top top",
           end: () => `+=${scrollableDistance * 1.5}`,
           pin: true,
-          scrub: 0.5,
+          scrub: 1.5,
           invalidateOnRefresh: true,
         },
       });
@@ -199,8 +199,8 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
     >
       <Container className="w-full">
         {/* Editorial Split Layout */}
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 lg:items-center w-full">
-          <div className="lg:w-1/3 space-y-8">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 lg:items-center w-full">
+          <div className="lg:w-1/3 space-y-6 lg:space-y-8">
             <div className="space-y-4">
               <h2
                 id="home-achievements-title"
