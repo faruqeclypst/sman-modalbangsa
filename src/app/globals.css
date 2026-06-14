@@ -391,11 +391,45 @@
   background: rgba(16, 185, 129, 0.4);
 }
 
-/* Hide header and sidebars during onboarding splash to prevent flash-in */
-.onboarding-active header,
-.onboarding-active aside,
-.onboarding-active button[aria-label="Back to top"] {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  visibility: hidden !important;
+/* Onboarding Splash CSS Animations (GPU-accelerated, prevents hydration lag/blink) */
+@keyframes logo-entrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  45% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-logo-entrance {
+  opacity: 0;
+  animation: logo-entrance 1.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes tagline-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-tagline-entrance {
+  opacity: 0;
+  animation: tagline-entrance 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.4s both;
 }

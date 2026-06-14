@@ -25,7 +25,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
     document.body.style.overflow = "hidden";
 
     const ctx = gsap.context(() => {
-      if (!containerRef.current || !logoRef.current || !taglineRef.current) return;
+      if (!containerRef.current) return;
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -36,44 +36,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
         }
       });
 
-      // Initial state
-      gsap.set(logoRef.current, { scale: 0.5, opacity: 0 });
-      gsap.set(taglineRef.current, { y: 20, opacity: 0 });
-
-      // 1. Logo entrance: small -> large -> normal (0.0s - 0.7s)
-      tl.to(logoRef.current, {
-        scale: 1.1,
-        opacity: 1,
-        duration: 0.5,
-        ease: "back.out(1.7)"
-      })
-      .to(logoRef.current, {
-        scale: 1.0,
-        duration: 0.2,
-        ease: "power2.out"
-      });
-
-      // 2. Tagline slide up and fade in (0.4s - 0.9s)
-      tl.to(taglineRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        ease: "power3.out"
-      }, 0.4);
-
-      // 3. Logo second breathing pulse (1.2s - 1.6s)
-      tl.to(logoRef.current, {
-        scale: 1.06,
-        duration: 0.2,
-        ease: "power1.inOut"
-      }, 1.2)
-      .to(logoRef.current, {
-        scale: 1.0,
-        duration: 0.2,
-        ease: "power1.inOut"
-      });
-
-      // 4. Slide overlay up out of view (2.0s - 2.5s)
+      // Slide overlay up out of view (2.0s - 2.5s)
       tl.to(containerRef.current, {
         yPercent: -100,
         duration: 0.5,
@@ -99,7 +62,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
         {/* Brand Logo & Name */}
         <div
           ref={logoRef}
-          className="flex items-center gap-4 mb-6"
+          className="flex items-center gap-4 mb-6 animate-logo-entrance"
         >
           <span className="relative inline-flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-xl">
             <Image
@@ -124,7 +87,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
         {/* Dynamic Tagline (fades in) */}
         <h1
           ref={taglineRef}
-          className="text-2xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-sfpro mt-2 leading-normal"
+          className="text-2xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-sfpro mt-2 leading-normal animate-tagline-entrance"
         >
           {locale === "en" ? (
             <>
