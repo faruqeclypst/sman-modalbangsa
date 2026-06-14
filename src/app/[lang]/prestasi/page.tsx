@@ -41,6 +41,7 @@ export default async function PrestasiListPage({
       <PageHeader
         title={dict.cpt.prestasi.title}
         subtitle={dict.cpt.prestasi.subtitle}
+        variant="green"
         breadcrumbs={[
           { label: dict.nav.home, href: `/${lang}` },
           { label: dict.cpt.prestasi.label },

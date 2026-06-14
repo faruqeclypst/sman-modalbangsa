@@ -92,8 +92,8 @@ export function HeadmasterSection({ dict }: HeadmasterSectionProps) {
           </div>
 
           {/* Center — Greeting text */}
-          <div>
-            <div className="flex items-center gap-3">
+          <div className="text-center lg:text-left">
+            <div className="flex flex-col items-center justify-center gap-3 lg:flex-row lg:items-center lg:justify-start">
               <span className="flex size-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600">
                 <Quote className="size-5" />
               </span>
@@ -106,7 +106,7 @@ export function HeadmasterSection({ dict }: HeadmasterSectionProps) {
               {dict.profile.principal.greeting}
             </p>
 
-            <p className="mt-4 text-base leading-relaxed text-gray-600 sm:text-lg">
+            <p className="mt-4 text-base leading-relaxed text-gray-650 sm:text-lg">
               {dict.profile.principal.body}
             </p>
 

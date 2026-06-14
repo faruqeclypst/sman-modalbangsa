@@ -142,7 +142,7 @@ export function JourneyHighlightsClient({
             {/* Scroll Container */}
             <div
               ref={scrollRef}
-              className="flex gap-6 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory"
+              className="flex gap-6 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory items-stretch"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {activeTab === "news" ? (

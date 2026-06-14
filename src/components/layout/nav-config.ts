@@ -27,6 +27,7 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
           { label: dict.nav.visionMission, href: `${base}/profil/visi-misi` },
           { label: dict.nav.principal, href: `${base}/profil/kepala-sekolah` },
           { label: dict.nav.facilities, href: `${base}/profil/fasilitas` },
+          { label: dict.nav.structure, href: `${base}/profil/struktur` },
           { label: dict.cpt.gtk.label, href: `${base}/gtk` },
         ],
       },
@@ -40,6 +41,7 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
         ],
       },
       { label: dict.quickLinks.items.spmb, href: `${base}/spmb` },
+      { label: dict.nav.alumni, href: `${base}/alumni` },
       { label: dict.nav.contact, href: `${base}/kontak` },
     ],
   };

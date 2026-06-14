@@ -11,12 +11,14 @@
     "visionMission": "Vision & Mission",
     "principal": "Principal",
     "facilities": "Facilities",
+    "structure": "Organizational Structure",
     "academic": "Academic",
     "achievements": "Achievements",
     "news": "News",
     "contact": "Contact",
     "services": "Services",
-    "menu": "Menu"
+    "menu": "Menu",
+    "alumni": "Alumni"
   },
   "cpt": {
     "agenda": {
@@ -113,7 +115,9 @@
       "achievements": "Achievements",
       "achievementsDesc": "Student & school awards",
       "evoting": "Student E-Voting",
-      "evotingDesc": "Student council elections"
+      "evotingDesc": "Student council elections",
+      "alumni": "Alumni",
+      "alumniDesc": "Alumni tracking data"
     }
   },
   "news": {
@@ -294,5 +298,13 @@
     "notFoundTitle": "Page not found",
     "notFoundDesc": "The page you are looking for is unavailable or has been moved.",
     "backHome": "Back to home"
+  },
+  "alumni": {
+    "title": "Alumni Tracking",
+    "subtitle": "Alumni tracking database and tracer study center of SMAN Modal Bangsa.",
+    "introTitle": "Hello Mosa Alumni!",
+    "introDesc": "Let's stay connected and contribute to the development of our alma mater. Filling out this tracking data (Tracer Study) is crucial for the school's progress and accreditation. Please fill out the form below with your latest details.",
+    "formInstruction": "If the form below doesn't load properly, you can also access it directly via the following link:",
+    "openFormButton": "Open Form in New Tab"
   }
 }

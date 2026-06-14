@@ -6,6 +6,7 @@ import {
   Monitor,
   Trophy,
   Vote,
+  ClipboardList,
 } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -68,6 +69,14 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
       external: true,
       tone: "bg-indigo-50 text-indigo-700",
     },
+    {
+      key: "alumni",
+      Icon: ClipboardList,
+      label: dict.quickLinks.items.alumni,
+      desc: dict.quickLinks.items.alumniDesc,
+      href: `/${locale}/alumni`,
+      tone: "bg-teal-50 text-teal-700",
+    },
   ] as const;
 
   return (
@@ -88,7 +97,7 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
           </p>
         </div>
 
-        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-4">
+        <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-7 lg:gap-4">
           {items.map(({ key, Icon, label, desc, href, tone, ...rest }) => {
             const isExternal = "external" in rest && rest.external;
             const content = (

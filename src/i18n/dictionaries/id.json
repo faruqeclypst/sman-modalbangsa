@@ -11,12 +11,14 @@
     "visionMission": "Visi & Misi",
     "principal": "Kepala Sekolah",
     "facilities": "Fasilitas",
+    "structure": "Struktur Organisasi",
     "academic": "Akademik",
     "achievements": "Prestasi",
     "news": "Berita",
     "contact": "Kontak",
     "services": "Layanan",
-    "menu": "Menu"
+    "menu": "Menu",
+    "alumni": "Alumni"
   },
   "cpt": {
     "agenda": {
@@ -125,7 +127,9 @@
       "achievements": "Prestasi",
       "achievementsDesc": "Capaian siswa & sekolah",
       "evoting": "E-Voting OSIS",
-      "evotingDesc": "Pemilihan ketua OSIS"
+      "evotingDesc": "Pemilihan ketua OSIS",
+      "alumni": "Alumni",
+      "alumniDesc": "Penelusuran data alumni"
     }
   },
   "news": {
@@ -382,5 +386,13 @@
     "notFoundTitle": "Halaman tidak ditemukan",
     "notFoundDesc": "Halaman yang Anda cari tidak tersedia atau telah dipindahkan.",
     "backHome": "Kembali ke beranda"
+  },
+  "alumni": {
+    "title": "Penelusuran Alumni",
+    "subtitle": "Pusat Pelacakan dan Tracer Study Alumni SMAN Modal Bangsa.",
+    "introTitle": "Halo Alumni Mosa!",
+    "introDesc": "Mari terus terhubung dan membantu pengembangan almamater kita. Pengisian data penelusuran (Tracer Study) ini sangat penting bagi kemajuan sekolah serta akreditasi SMAN Modal Bangsa. Silakan isi formulir di bawah ini dengan data Anda yang terbaru.",
+    "formInstruction": "Jika formulir di bawah tidak termuat dengan sempurna, Anda juga dapat membukanya secara langsung melalui tautan berikut:",
+    "openFormButton": "Buka Formulir di Tab Baru"
   }
 }
