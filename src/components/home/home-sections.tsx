@@ -1,8 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { getPosts, getCPT } from "@/lib/wp";
-import { getDisdikBerita } from "@/lib/disdik-aceh";
-import { getMediaNews } from "@/lib/media-news";
 import { SchoolCommitment } from "@/components/home/school-commitment";
 import { HeadmasterSection } from "@/components/home/headmaster-section";
 import { StudentStories } from "@/components/home/student-stories";
@@ -40,14 +38,10 @@ async function getBeholdFeed() {
 export async function HomeSections({ locale, dict }: HomeSectionsProps) {
   const [
     { posts: news },
-    { berita: disdikBerita },
-    mediaNews,
     feed,
     { posts: galleryItems },
   ] = await Promise.all([
     getPosts({ perPage: 6 }),
-    getDisdikBerita({ limit: 5 }),
-    getMediaNews(9),
     getBeholdFeed(),
     getCPT("galeri", { perPage: 6 }),
   ]);
@@ -84,8 +78,6 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
         {/* <SectionOrnament /> */}
         <LatestNews
           posts={news}
-          disdikBerita={disdikBerita}
-          mediaNews={mediaNews}
           instagramPosts={instagramPosts}
           locale={locale}
           dict={dict}
