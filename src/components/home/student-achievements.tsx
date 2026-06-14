@@ -164,12 +164,11 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
   // GSAP Vertical translation ScrollTrigger
   useIsomorphicLayoutEffect(() => {
     if (!wrapperRef.current || !listRef.current) return;
-    if (!isDesktop) return; // Disable pinning on mobile/tablet completely
 
     // Reset list position first in case layout changes
     gsap.set(listRef.current, { y: 0 });
 
-    const containerHeight = 4 * ITEM_HEIGHT;
+    const containerHeight = isDesktop ? 4 * ITEM_HEIGHT : 360;
     const scrollableDistance = listRef.current.scrollHeight - containerHeight;
     // We only pin & scroll if the content is taller than the container
     if (scrollableDistance <= 0) return;
@@ -196,7 +195,7 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
     <section
       ref={wrapperRef}
       aria-labelledby="home-achievements-title"
-      className="relative overflow-hidden bg-white py-16 sm:py-24 lg:py-0 lg:h-screen lg:flex lg:items-center w-full"
+      className="relative overflow-hidden bg-white h-screen flex items-center w-full"
     >
       <Container className="w-full">
         {/* Editorial Split Layout */}
@@ -283,8 +282,8 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
           <div className="lg:w-2/3 space-y-4">
             {filteredItems.length > 0 ? (
               <div 
-                className="relative lg:overflow-hidden px-6 -mx-6" 
-                style={{ height: isDesktop ? `${4 * ITEM_HEIGHT}px` : "auto" }}
+                className="relative overflow-hidden lg:h-[520px] px-6 -mx-6" 
+                style={{ height: isDesktop ? `${4 * ITEM_HEIGHT}px` : "360px" }}
               >
                 <div ref={listRef} className="divide-y divide-zinc-100 will-change-transform flex flex-col">
                   {filteredItems.map((item, idx) => {

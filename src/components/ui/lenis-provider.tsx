@@ -19,19 +19,13 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // Disable Lenis on mobile/tablet devices
-    const isMobile = window.innerWidth < 1024 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (isMobile) {
-      return;
-    }
-
     // Initialize Lenis
     const lenis = new Lenis({
-      lerp: 0.1,
-      duration: 1.2,
+      lerp: 0.06, // Lower lerp for stronger damping (makes scroll feel smooth and controlled)
+      duration: 1.8, // Longer transition duration
       smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 0.8,
+      wheelMultiplier: 0.75, // Reduce speed/distance of wheel scroll
+      touchMultiplier: 0.75, // Reduce speed/distance of touch scroll on mobile
     });
 
     lenisRef.current = lenis;
