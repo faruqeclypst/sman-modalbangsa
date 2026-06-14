@@ -163,19 +163,20 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
 
   // GSAP Vertical Yoyo Auto-Scroll
   useIsomorphicLayoutEffect(() => {
-    if (!wrapperRef.current || !listRef.current) return;
+    const listEl = listRef.current;
+    if (!wrapperRef.current || !listEl) return;
 
     // Reset list position first
-    gsap.set(listRef.current, { y: 0 });
+    gsap.set(listEl, { y: 0 });
 
     const containerHeight = isDesktop ? 4 * ITEM_HEIGHT : 360;
-    const scrollableDistance = listRef.current.scrollHeight - containerHeight;
+    const scrollableDistance = listEl.scrollHeight - containerHeight;
     
     // We only animate if the content is taller than the container
     if (scrollableDistance <= 0) return;
 
     const ctx = gsap.context(() => {
-      const anim = gsap.to(listRef.current, {
+      const anim = gsap.to(listEl, {
         y: -scrollableDistance,
         duration: Math.max(8, scrollableDistance * 0.035), // Smooth speed proportional to height
         ease: "power1.inOut",
@@ -184,7 +185,6 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
       });
 
       // Pause on hover
-      const listEl = listRef.current;
       const onMouseEnter = () => anim.pause();
       const onMouseLeave = () => anim.play();
 
@@ -209,7 +209,7 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
       <Container className="w-full">
         {/* Editorial Split Layout */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 lg:items-center w-full">
-          <div className="lg:w-1/3 space-y-6 lg:space-y-8">
+          <div className="lg:w-1/3 space-y-6 lg:space-y-8 text-center lg:text-left">
             <div className="space-y-4">
               <h2
                 id="home-achievements-title"
@@ -232,13 +232,13 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
                 )}
               </h2>
 
-              <p className="text-zinc-550 font-medium text-sm sm:text-base leading-relaxed max-w-[32ch]">
+              <p className="text-zinc-550 font-medium text-sm sm:text-base leading-relaxed max-w-[32ch] mx-auto lg:mx-0">
                 {ach.subtitle}
               </p>
             </div>
 
             {/* Elegant Muted Filters */}
-            <div className="flex flex-row lg:flex-col items-start flex-wrap gap-2 lg:gap-3.5 pt-2">
+            <div className="flex flex-row lg:flex-col justify-center lg:justify-start items-center lg:items-start flex-wrap gap-2 lg:gap-3.5 pt-2">
               {[
                 { id: "semua", label: isId ? "Semua Tingkat" : "All Levels" },
                 { id: "internasional", label: "Tingkat Internasional" },
