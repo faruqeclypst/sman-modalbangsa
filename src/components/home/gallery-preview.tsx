@@ -145,7 +145,7 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
               pin: true,
               scrub: 1.5,
               start: "center center",
-              end: () => `+=${scrollDist * 1.5}`,
+              end: () => `+=${scrollDist * 0.8}`,
               invalidateOnRefresh: true,
             },
           });

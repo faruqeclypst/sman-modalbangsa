@@ -19,11 +19,19 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Disable Lenis on mobile/tablet devices
+    const isMobile = window.innerWidth < 1024 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      return;
+    }
+
     // Initialize Lenis
     const lenis = new Lenis({
       lerp: 0.1,
-      duration: 1.5,
+      duration: 1.2,
       smoothWheel: true,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 0.8,
     });
 
     lenisRef.current = lenis;
