@@ -304,7 +304,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
 
                 <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-sm bg-zinc-150">
                   <Image 
-                    src={spmbPhotos.img1} 
+                    src="/images/spmb/spmb.jpeg" 
                     alt="SMAN Modal Bangsa Campus" 
                     fill 
                     sizes="100vw"
