@@ -15,9 +15,7 @@ const WP_ORIGIN =
 
 const nextConfig: NextConfig = {
   images: {
-    // In development, www.sman-modalbangsa.sch.id may resolve to a private IP
-    // which Next.js Image blocks. Use unoptimized in dev to bypass this.
-    unoptimized: process.env.NODE_ENV === "development",
+    unoptimized: true,
     minimumCacheTTL: 31536000, // 1 year cache TTL for optimized images
     remotePatterns: [
       {
