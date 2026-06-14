@@ -30,25 +30,9 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
           { label: dict.cpt.gtk.label, href: `${base}/gtk` },
         ],
       },
-      {
-        label: dict.cpt.pengumuman.label,
-        links: [
-          { label: dict.cpt.pengumuman.label, href: `${base}/pengumuman` },
-          { label: dict.cpt.agenda.label, href: `${base}/agenda` },
-          { label: dict.cpt.editorial.label, href: `${base}/editorial` },
-        ],
-      },
-      {
-        label: dict.cpt.prestasi.label,
-        links: [
-          { label: dict.cpt.prestasi.label, href: `${base}/prestasi` },
-          { label: dict.cpt.ekskul.label, href: `${base}/ekskul` },
-          { label: dict.cpt.galeri.label, href: `${base}/galeri` },
-        ],
-      },
       { label: dict.nav.news, href: `${base}/berita` },
+      { label: dict.quickLinks.items.spmb, href: `${base}/spmb` },
       { label: dict.nav.contact, href: `${base}/kontak` },
-      { label: "Info Ujian CBT", href: `${base}/cbt` },
     ],
   };
 }

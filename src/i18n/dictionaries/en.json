@@ -45,7 +45,9 @@
       "label": "Achievements",
       "title": "Student & School Achievements",
       "subtitle": "Recognitions earned at regional, national, and international levels.",
-      "empty": "No achievements published yet."
+      "empty": "No achievements published yet.",
+      "hallOfFameTitle": "Mosa Hall of Fame",
+      "hallOfFameSubtitle": "The gallery of honor celebrating outstanding achievements of SMAN Modal Bangsa students across International, National, and Provincial levels."
     },
     "gtk": {
       "label": "Teachers & Staff",
@@ -65,7 +67,7 @@
     "galeri": {
       "label": "Gallery",
       "title": "Activity Gallery",
-      "subtitle": "Visual documentation of SMAN Modal Bangsa activities.",
+      "subtitle": "A collection of live documentation photos from SMAN Modal Bangsa activities and events.",
       "empty": "No photos yet."
     },
     "download": {
@@ -78,6 +80,10 @@
     }
   },
   "hero": {
+    "welcome": "Welcome to SMAN Modal Bangsa",
+    "titleLine1": "Nurturing Well-rounded",
+    "titleAccent": "Leaders",
+    "titleLine2": "Today",
     "kicker": "Official School Portal",
     "title": "SMA Negeri Modal Bangsa Aceh Province",
     "subtitle": "Find the latest information about education, achievements, and activities at SMAN Modal Bangsa Aceh.",
@@ -250,6 +256,20 @@
       { "title": "English Debate Championship", "level": "National", "year": "2024", "category": "Language" },
       { "title": "Athletics Regional Cup", "level": "Regional", "year": "2024", "category": "Sports" }
     ]
+  },
+  "cta": {
+    "title": "Mosa",
+    "titleAccent": "Inspire",
+    "description": "It's your chance to get to know the heart of SMAN Modal Bangsa better! Stay connected through Mosa Inspire, discover our stories, achievements, and insights about our vibrant community.",
+    "buttonText": "School Info"
+  },
+  "highlights": {
+    "title": "Highlights",
+    "titleAccent": "from Our Journey",
+    "subtitle": "Stay updated with the latest news and stories from SMAN Modal Bangsa.",
+    "news": "News",
+    "socialMedia": "Social Media",
+    "followUs": "Follow our Social Media"
   },
   "footer": {
     "address": "Jl. Bandara Sultan Iskandar Muda, Blang Bintang, Aceh Besar, Aceh, Indonesia",

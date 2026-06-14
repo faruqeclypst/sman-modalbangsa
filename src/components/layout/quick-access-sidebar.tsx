@@ -67,7 +67,7 @@ export function QuickAccessSidebar({ dict, locale }: QuickAccessSidebarProps) {
   return (
     <>
       <aside
-        className="fixed right-4 top-1/2 z-50 hidden -translate-y-1/2 sm:block"
+        className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 sm:block"
         aria-label={dict.quickLinks.title}
       >
         <nav

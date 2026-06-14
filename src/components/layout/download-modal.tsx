@@ -79,10 +79,8 @@ export function DownloadModal({
     }
   }, [isOpen, downloads.length]);
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+    <div className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm ${!isOpen ? "pointer-events-none hidden" : ""}`}>
       <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl bg-white/10 backdrop-blur-md shadow-2xl border border-white/20">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/20 px-6 py-4">

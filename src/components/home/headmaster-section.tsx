@@ -15,34 +15,78 @@ const HEADMASTER = {
 
 export function HeadmasterSection({ dict }: HeadmasterSectionProps) {
   return (
-    <section aria-label={dict.profile.principal.title} className="bg-[color:var(--background)] py-14 sm:py-16">
+    <section aria-label={dict.profile.principal.title} className="relative overflow-hidden bg-transparent py-14 sm:py-16">
+      {/* Background Watermark Mandala */}
+      <div className="absolute right-0 top-0 -z-10 h-96 w-96 translate-x-1/4 -translate-y-1/4 opacity-[0.03] text-emerald-800 pointer-events-none">
+        <svg viewBox="0 0 500 500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="250" cy="250" r="240" stroke="currentColor" strokeWidth="2" fill="none" />
+          <circle cx="250" cy="250" r="200" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(0 250 250)" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(15 250 250)" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(30 250 250)" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(45 250 250)" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(60 250 250)" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(75 250 250)" />
+          <circle cx="250" cy="250" r="100" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          <circle cx="250" cy="250" r="50" stroke="currentColor" strokeWidth="1.5" fill="none" />
+        </svg>
+      </div>
+
+      <div className="absolute left-0 bottom-0 -z-10 h-72 w-72 -translate-x-1/4 translate-y-1/4 opacity-[0.02] text-emerald-800 pointer-events-none">
+        <svg viewBox="0 0 500 500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="250" cy="250" r="240" stroke="currentColor" strokeWidth="2" fill="none" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(45 250 250)" />
+          <rect x="100" y="100" width="300" height="300" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(0 250 250)" />
+        </svg>
+      </div>
+
       <Container>
         <div className="grid items-center gap-8 lg:grid-cols-[300px_1fr_240px] lg:gap-10">
           {/* Left — Portrait photo with geometric background */}
           <div className="mx-auto w-full max-w-[220px] lg:mx-0 lg:max-w-none">
             <div className="relative">
-              {/* Geometric background shapes */}
-              <div className="absolute inset-x-2 bottom-0 top-8 rounded-2xl bg-emerald-50" aria-hidden />
-              <div className="absolute right-0 top-4 size-12 rounded-lg border-2 border-emerald-200 opacity-60" aria-hidden />
-              <div className="absolute -left-2 bottom-12 size-8 rounded-full bg-emerald-100" aria-hidden />
+              {/* Custom SVG arched background frame matching Aceh gate shape */}
+              <div className="absolute inset-0 -z-10 scale-105 opacity-80">
+                <svg viewBox="0 0 240 320" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
+                  <defs>
+                    <linearGradient id="hm-bg-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.25" />
+                      <stop offset="100%" stopColor="#d97706" stopOpacity="0.05" />
+                    </linearGradient>
+                    <linearGradient id="hm-bg-green" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#34d399" stopOpacity="0.15" />
+                      <stop offset="100%" stopColor="#059669" stopOpacity="0.02" />
+                    </linearGradient>
+                  </defs>
+                  {/* Decorative arched backplate */}
+                  <path
+                    d="M 12 300 L 12 110 C 12 50, 60 20, 120 20 C 180 20, 228 50, 228 110 L 228 300 Z"
+                    fill="url(#hm-bg-green)"
+                    stroke="url(#hm-bg-gold)"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                  />
+                  <circle cx="120" cy="110" r="80" stroke="url(#hm-bg-gold)" strokeWidth="1" strokeOpacity="0.3" />
+                  <circle cx="120" cy="110" r="60" stroke="url(#hm-bg-green)" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.3" />
+                </svg>
+              </div>
 
               {/* Photo - transparent PNG, no overflow hidden so bottom isn't cut */}
-              <div className="relative">
                 <Image
                   src={HEADMASTER.photo}
                   alt={HEADMASTER.name}
                   width={220}
                   height={300}
-                  className="relative z-10 mx-auto h-auto w-full object-contain"
+                  className="relative z-10 mx-auto h-auto w-full object-contain drop-shadow-[0_8px_16px_rgba(5,150,105,0.15)]"
+                  style={{ height: "auto" }}
                   unoptimized
                   priority
                 />
-              </div>
             </div>
             <div className="mt-3 text-center">
               <p className="text-sm font-bold text-[color:var(--foreground)]">{HEADMASTER.name}</p>
               <span className="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700">
-                {HEADMASTER.role}
+                {dict.nav.principal}
               </span>
             </div>
           </div>
@@ -72,7 +116,7 @@ export function HeadmasterSection({ dict }: HeadmasterSectionProps) {
                 {HEADMASTER.name}
               </p>
               <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-semibold text-emerald-700">
-                {HEADMASTER.role}
+                {dict.nav.principal}
               </span>
               <div className="h-px flex-1 bg-gray-200" />
             </div>

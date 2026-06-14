@@ -28,6 +28,7 @@ interface NewsCardProps {
   dict: Dictionary;
   variant?: "default" | "featured" | "compact";
   priority?: boolean;
+  badge?: string;
 }
 
 export function NewsCard({
@@ -36,6 +37,7 @@ export function NewsCard({
   dict,
   variant = "default",
   priority = false,
+  badge,
 }: NewsCardProps) {
   const href = `/${locale}/berita/${post.slug}`;
   const title = decodeHtmlEntities(post.title.rendered);
@@ -46,6 +48,10 @@ export function NewsCard({
   const media = getFeaturedImage(post);
   const imageUrl = getThumbnailUrl(post);
   const altText = media?.alt_text || title;
+
+  const categoryName = categories[0] ? decodeHtmlEntities(categories[0].name) : "";
+  const isUncategorized = categoryName.toLowerCase() === "uncategorized";
+  const badgeText = badge || (categoryName && !isUncategorized ? categoryName : dict.nav.news);
 
   if (variant === "featured") {
     return (
@@ -67,9 +73,9 @@ export function NewsCard({
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5 text-white sm:p-7">
-                {categories[0] ? (
+                {badgeText ? (
                   <Badge variant="primary" className="mb-3">
-                    {decodeHtmlEntities(categories[0].name)}
+                    {badgeText}
                   </Badge>
                 ) : null}
                 <h3 className="line-clamp-2 text-lg font-bold leading-tight sm:text-2xl">
@@ -132,60 +138,76 @@ export function NewsCard({
 
   return (
     <FadeIn direction="up" className="h-full">
-      <MagicCard className="group flex h-full flex-col backdrop-blur-md">
+      <article className="group flex h-full flex-col bg-transparent transition-all duration-300">
         <Link href={href} className="flex h-full flex-col">
-          <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--muted)]">
+          {/* Image Container with rounded corners and scale on hover */}
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gray-50 mb-4 shadow-sm border border-gray-100/50">
             {imageUrl ? (
               <Image
                 src={imageUrl}
                 alt={altText}
                 fill
                 priority={priority}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
             ) : (
               <FallbackImage />
             )}
             {categories[0] ? (
-              <Badge
-                variant="primary"
-                className="absolute left-3 top-3 shadow-sm"
-              >
+              <span className="absolute left-3 top-3 rounded-full bg-white/90 backdrop-blur-md px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-800 shadow-sm border border-white/20">
                 {decodeHtmlEntities(categories[0].name)}
-              </Badge>
-            ) : null}
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-[color:var(--muted-foreground)]">
-              <span className="inline-flex items-center gap-1.5">
-                <Calendar className="size-3.5" aria-hidden /> {date}
               </span>
-              {author ? (
-                <span className="inline-flex items-center gap-1.5">
-                  <User className="size-3.5" aria-hidden /> {author}
-                </span>
-              ) : null}
-              {post.views !== undefined && post.views !== null ? (
-                <span className="inline-flex items-center gap-1.5">
-                  <Eye className="size-3.5" aria-hidden /> {post.views}
-                </span>
-              ) : null}
-            </div>
-            <h3 className="mt-2.5 line-clamp-2 text-base font-semibold leading-snug text-[color:var(--foreground)] transition-colors group-hover:text-[color:var(--primary)] sm:text-lg">
-              {title}
-            </h3>
-            {excerpt ? (
-              <p className="mt-2 line-clamp-3 text-sm text-[color:var(--muted-foreground)]">
-                {excerpt}
-              </p>
             ) : null}
-            <span className="mt-auto pt-4 text-sm font-semibold text-[color:var(--primary)]">
-              {dict.news.readMore}
-            </span>
           </div>
+
+          {/* Meta Info Row */}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-400 font-medium mb-2">
+            <span className="inline-flex items-center gap-1">
+              <Calendar className="size-3.5" />
+              {date}
+            </span>
+            {author ? (
+              <span className="inline-flex items-center gap-1">
+                <User className="size-3.5" />
+                {author}
+              </span>
+            ) : null}
+            {post.views !== undefined && post.views !== null ? (
+              <span className="inline-flex items-center gap-1">
+                <Eye className="size-3.5" />
+                {post.views}
+              </span>
+            ) : null}
+          </div>
+
+          {/* Title */}
+          <h3 className="font-sfpro font-bold text-gray-900 text-base sm:text-lg leading-snug group-hover:text-emerald-600 transition-colors duration-300">
+            {title}
+          </h3>
+
+          {/* Excerpt */}
+          {excerpt ? (
+            <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-3">
+              {excerpt}
+            </p>
+          ) : null}
+
+          {/* Read More Link */}
+          <span className="mt-auto pt-4 inline-flex items-center gap-1 text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
+            {dict.news.readMore}
+            <svg
+              className="size-3.5 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2.5"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
         </Link>
-      </MagicCard>
+      </article>
     </FadeIn>
   );
 }

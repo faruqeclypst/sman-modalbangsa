@@ -4,7 +4,9 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/layout/page-header";
+import { HistoryNarrative } from "@/components/profil/history-narrative";
 import { AnimatedTimeline } from "@/components/profil/animated-timeline";
+import { SpecialPrograms } from "@/components/profil/special-programs";
 
 export const revalidate = false;
 
@@ -95,54 +97,51 @@ export default async function HistoryPage({
         ]}
       />
 
-      {/* Intro section */}
-      <section className="py-16 sm:py-20">
-        <Container size="md">
-          <p className="text-xl leading-relaxed text-[color:var(--foreground)] sm:text-2xl sm:leading-relaxed">
-            {dict.profile.history.intro}
-          </p>
-
-          <div className="mt-8 h-px bg-[color:var(--border)]" />
-
-          <div className="mt-8 text-base leading-[1.8] text-[color:var(--muted-foreground)] sm:text-lg sm:leading-[1.9] space-y-6">
-            {dict.profile.history.paragraphs.map((p: string, i: number) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-
-          {/* Program Khusus section */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold text-[color:var(--foreground)] sm:text-3xl">
-              {dict.profile.history.specialProgramsTitle}
-            </h3>
-            <div className="mt-8 grid gap-8 sm:grid-cols-2">
-              {dict.profile.history.specialPrograms.map((prog: { name: string; desc: string }, i: number) => (
-                <div
-                  key={i}
-                  className="rounded-2xl border border-[color:var(--border)] bg-[color:var(--card)] p-6 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[color:var(--primary)]/50"
-                >
-                  <h4 className="text-lg font-bold text-[color:var(--foreground)]">
-                    {prog.name}
-                  </h4>
-                  <p className="mt-3 text-sm leading-relaxed text-[color:var(--muted-foreground)]">
-                    {prog.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Animated Timeline */}
-      <section className="border-y border-[color:var(--border)] bg-[color:var(--muted)]/20 py-16 sm:py-20">
-        <Container size="lg">
-          <AnimatedTimeline
-            items={isId ? MILESTONES_ID : MILESTONES_EN}
-            heading={isId ? "Tonggak Sejarah" : "Milestones"}
+      {/* Unified Immersive Content Canvas */}
+      <div className="bg-white py-16 sm:py-24 space-y-28 md:space-y-40 relative">
+        {/* Subtle decorative grid overlay spanning the entire content layout */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(to_right,#10b981_1px,transparent_1px),linear-gradient(to_bottom,#10b981_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        
+        {/* Section 1: Narrative History (Split Grid) */}
+        <Container size="xl" className="relative z-10">
+          <HistoryNarrative
+            intro={dict.profile.history.intro}
+            paragraphs={dict.profile.history.paragraphs}
+            lang={lang}
           />
         </Container>
-      </section>
+
+        {/* Section 2: History Timeline */}
+        <Container size="xl" className="relative z-10">
+          <AnimatedTimeline
+            items={isId ? MILESTONES_ID : MILESTONES_EN}
+            heading={lang === "id" ? "Tonggak Sejarah" : "Milestones"}
+          />
+        </Container>
+
+        {/* Section 2: Program Khusus */}
+        <Container size="xl" className="relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#16a34a] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100/50 inline-block mb-3">
+              {lang === "id" ? "Kurikulum Unggulan" : "Flagship Curriculum"}
+            </span>
+            <h3 className="text-3xl font-black text-gray-900 sm:text-4xl tracking-tight leading-tight uppercase">
+              {dict.profile.history.specialProgramsTitle}
+            </h3>
+            <p className="mt-3 text-sm sm:text-base text-gray-500 leading-relaxed">
+              {lang === "id" 
+                ? "Enam pilar program unggulan yang dirancang komprehensif untuk melahirkan alumni yang berkarakter kuat, berprestasi, dan berwawasan global." 
+                : "Six pillar flagship programs comprehensively designed to produce graduates with strong character, high achievements, and global outlook."}
+            </p>
+          </div>
+
+          <SpecialPrograms
+            programs={dict.profile.history.specialPrograms}
+            lang={lang}
+          />
+        </Container>
+
+      </div>
     </>
   );
 }

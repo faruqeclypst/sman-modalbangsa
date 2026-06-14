@@ -59,8 +59,24 @@ export async function InstagramFeed() {
   return (
     <section
       aria-label="Instagram"
-      className="bg-[color:var(--background)] py-14 sm:py-16"
+      className="relative overflow-hidden bg-[color:var(--background)] py-14 sm:py-16"
     >
+      {/* Background decoration - floating abstract cameras or geometry */}
+      <div className="absolute right-0 bottom-0 -z-10 h-72 w-72 translate-x-1/4 translate-y-1/4 opacity-[0.03] text-purple-700 pointer-events-none">
+        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="40" />
+          <circle cx="50" cy="50" r="20" strokeDasharray="4 4" />
+          <path d="M 10 50 L 90 50" />
+          <path d="M 50 10 L 50 90" />
+        </svg>
+      </div>
+      <div className="absolute left-0 top-0 -z-10 h-64 w-64 -translate-x-1/4 -translate-y-1/4 opacity-[0.02] text-orange-600 pointer-events-none">
+        <svg viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="30" />
+          <rect x="25" y="25" width="50" height="50" stroke="currentColor" strokeWidth="2" fill="none" transform="rotate(45 50 50)" />
+        </svg>
+      </div>
+
       <Container>
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">

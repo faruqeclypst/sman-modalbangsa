@@ -41,7 +41,7 @@ const socials = [
 export function SocialSidebar() {
   return (
     <aside
-      className="fixed left-0 top-1/2 z-50 hidden -translate-y-1/2 sm:block"
+      className="fixed left-0 top-1/2 z-40 hidden -translate-y-1/2 sm:block"
       aria-label="Social media"
     >
       <nav className="flex flex-col">

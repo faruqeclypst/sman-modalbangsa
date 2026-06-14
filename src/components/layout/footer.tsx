@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Mail, Phone, ArrowUpRight } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -111,131 +112,170 @@ export function Footer({ locale, dict }: FooterProps) {
 
   return (
     <footer>
-      {/* Map Section */}
-      <div className="w-full">
-        <iframe
-          title="Lokasi SMAN Modal Bangsa"
-          src="https://maps.google.com/maps?q=SMAN+Modal+Bangsa+Aceh+Besar&t=&z=15&ie=UTF8&iwloc=&output=embed"
-          className="h-[280px] w-full border-0 grayscale transition-all hover:grayscale-0"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
+      {/* CTA Section */}
+      <div className="relative overflow-hidden py-36 md:py-48 flex items-center justify-center min-h-[480px] text-center text-white">
+        <Image
+          src="/images/cta.jpeg"
+          alt="Mosa Inspire Background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
         />
+        <div className="absolute inset-0 bg-black/65" />
+
+        <div className="relative z-10 mx-auto max-w-4xl px-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+            {dict.cta.title}{" "}
+            <span className="font-romulo italic text-emerald-400">
+              {dict.cta.titleAccent}
+            </span>
+          </h2>
+          <p className="mt-6 text-base md:text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">
+            {dict.cta.description}
+          </p>
+          <div className="mt-10 flex justify-center">
+            <Link
+              href={`/${locale}/profil/sejarah`}
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 px-8 py-4 text-sm font-semibold text-white transition-all hover:scale-105 active:scale-95 shadow-lg shadow-black/20"
+            >
+              <span>{dict.cta.buttonText}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="size-4 transition-transform group-hover:translate-x-1"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Footer Content */}
-      <div className="relative overflow-hidden bg-[color:var(--primary)]">
+      <div className="relative overflow-hidden bg-gradient-to-b from-[#056b43] via-[#045937] to-[#03442a] border-t border-emerald-500/20">
         {/* Decorative Pattern */}
         <FooterPattern />
 
-        <Container className="relative z-10 py-12">
-        {/* Bento Grid */}
-        <div className="grid gap-4 md:grid-cols-4">
-          {/* Brand Card - spans 2 cols */}
-          <div className="flex flex-col justify-between rounded-2xl bg-white/10 p-6 backdrop-blur-sm md:col-span-2">
-            <div>
-              <div className="flex items-center gap-3">
-                <SchoolMark />
-                <div>
-                  <p className="text-lg font-bold text-white">
-                    {dict.site.name}
+        {/* Ambient Glows */}
+        <div className="absolute left-[10%] bottom-0 -z-10 h-80 w-80 rounded-full bg-white/[0.04] blur-[100px] pointer-events-none" />
+        <div className="absolute right-[10%] top-0 -z-10 h-80 w-80 rounded-full bg-white/[0.02] blur-[100px] pointer-events-none" />
+
+        <Container className="relative z-10 py-16 sm:py-20">
+          {/* Bento Grid */}
+          <div className="grid gap-6 md:grid-cols-4 lg:gap-8">
+            {/* Brand Card - spans 2 cols */}
+            <div className="flex flex-col justify-between rounded-3xl bg-white/[0.07] border border-white/[0.12] p-8 backdrop-blur-md hover:bg-white/[0.12] hover:border-white/30 transition-all duration-500 shadow-xl shadow-black/10 md:col-span-2">
+              <div>
+                <div className="flex items-center gap-4">
+                  <SchoolMark />
+                  <div>
+                    <p className="text-xl font-bold tracking-tight text-white">
+                      {dict.site.name}
+                    </p>
+                    <p className="text-xs font-medium text-emerald-200 mt-0.5">
+                      {dict.site.tagline}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 space-y-4 text-sm text-emerald-100/95">
+                  <p className="flex items-start gap-3 leading-relaxed">
+                    <MapPin className="mt-0.5 size-4 shrink-0 text-emerald-250" aria-hidden />
+                    <span className="hover:text-white transition-colors duration-300">{dict.footer.address}</span>
                   </p>
-                  <p className="text-sm text-white/70">
-                    {dict.site.tagline}
+                  <p className="flex items-center gap-3">
+                    <Mail className="size-4 shrink-0 text-emerald-250" aria-hidden />
+                    <a
+                      href="mailto:info@sman-modalbangsa.sch.id"
+                      className="transition-colors hover:text-white"
+                    >
+                      info@sman-modalbangsa.sch.id
+                    </a>
+                  </p>
+                  <p className="flex items-center gap-3">
+                    <Phone className="size-4 shrink-0 text-emerald-250" aria-hidden />
+                    <span className="hover:text-white transition-colors duration-300">(0651) 7551700</span>
                   </p>
                 </div>
               </div>
 
-              <div className="mt-6 space-y-3 text-sm text-white/80">
-                <p className="flex items-start gap-2.5">
-                  <MapPin className="mt-0.5 size-4 shrink-0 text-white/60" aria-hidden />
-                  <span>{dict.footer.address}</span>
-                </p>
-                <p className="flex items-center gap-2.5">
-                  <Mail className="size-4 shrink-0 text-white/60" aria-hidden />
+              {/* Social Icons */}
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                {socials.map(({ Icon, label, href }) => (
                   <a
-                    href="mailto:info@sman-modalbangsa.sch.id"
-                    className="transition-colors hover:text-white"
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="inline-flex size-10 items-center justify-center rounded-full bg-white/[0.08] border border-white/[0.12] text-white transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-[#056b43] hover:border-white shadow-sm"
                   >
-                    info@sman-modalbangsa.sch.id
+                    <Icon className="size-[18px]" />
                   </a>
-                </p>
-                <p className="flex items-center gap-2.5">
-                  <Phone className="size-4 shrink-0 text-white/60" aria-hidden />
-                  <span>(0651) 7551700</span>
-                </p>
+                ))}
               </div>
             </div>
 
-            {/* Social Icons */}
-            <div className="mt-6 flex items-center gap-2">
-              {socials.map(({ Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-all hover:bg-white/20 hover:text-white"
-                >
-                  <Icon className="size-5" />
-                </a>
-              ))}
+            {/* Quick Links Card */}
+            <div className="rounded-3xl bg-white/[0.07] border border-white/[0.12] p-8 backdrop-blur-md hover:bg-white/[0.12] hover:border-white/30 transition-all duration-500 shadow-xl shadow-black/10">
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-200/60 font-sfpro mb-6">
+                {dict.footer.links}
+              </h2>
+              <ul className="space-y-3">
+                {quickLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="group flex items-center justify-between text-sm font-medium text-emerald-100 hover:text-white transition-colors"
+                    >
+                      <span>{link.label}</span>
+                      <ArrowUpRight className="size-3.5 opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-white" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Profile Links Card */}
+            <div className="rounded-3xl bg-white/[0.07] border border-white/[0.12] p-8 backdrop-blur-md hover:bg-white/[0.12] hover:border-white/30 transition-all duration-500 shadow-xl shadow-black/10">
+              <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-200/60 font-sfpro mb-6">
+                {dict.nav.profile}
+              </h2>
+              <ul className="space-y-3">
+                {profileLinks.slice(0, 5).map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="group flex items-center justify-between text-sm font-medium text-emerald-100 hover:text-white transition-colors"
+                    >
+                      <span>{link.label}</span>
+                      <ArrowUpRight className="size-3.5 opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-white" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-
-          {/* Quick Links Card */}
-          <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-white/50">
-              {dict.footer.links}
-            </h2>
-            <ul className="mt-3 space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group flex items-center gap-1 text-sm text-white/80 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Profile Links Card */}
-          <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-white/50">
-              {dict.nav.profile}
-            </h2>
-            <ul className="mt-3 space-y-2">
-              {profileLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group flex items-center gap-1 text-sm text-white/80 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="size-3 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-        </div>
-      </Container>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <Container className="flex flex-col items-center justify-between gap-2 py-4 text-xs text-white/50 sm:flex-row">
-          <p>
-            © {new Date().getFullYear()} {dict.site.name}. {dict.footer.rights}
-          </p>
-          <p>{dict.footer.developed}</p>
         </Container>
-      </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-white/[0.08] bg-black/10">
+          <Container className="flex flex-col items-center justify-between gap-4 py-6 text-xs text-emerald-200/60 sm:flex-row">
+            <p className="font-medium">
+              © {new Date().getFullYear()} {dict.site.name}. {dict.footer.rights}
+            </p>
+            <p className="font-medium hover:text-white transition-colors duration-300">{dict.footer.developed}</p>
+          </Container>
+        </div>
       </div>
     </footer>
   );

@@ -7,6 +7,7 @@ import parse, {
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import { GallerySlider } from "./gallery-slider";
 
 interface ArticleContentProps {
   html: string;
@@ -34,6 +35,41 @@ function isElement(node: unknown): node is DomElement {
       "type" in (node as Record<string, unknown>) &&
       (node as Record<string, unknown>).type === "tag",
   );
+}
+
+interface GalleryImage {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+function extractImages(children: DOMNode[]): GalleryImage[] {
+  const images: GalleryImage[] = [];
+
+  function traverse(nodes: DOMNode[]) {
+    for (const node of nodes) {
+      if (isElement(node)) {
+        if (node.name === "img") {
+          const attribs = node.attribs || {};
+          if (attribs.src) {
+            images.push({
+              src: attribs.src,
+              alt: attribs.alt || attribs["data-image-description"] || "",
+              width: Number(attribs.width) || undefined,
+              height: Number(attribs.height) || undefined,
+            });
+          }
+        }
+        if (node.children) {
+          traverse(node.children as DOMNode[]);
+        }
+      }
+    }
+  }
+
+  traverse(children);
+  return images;
 }
 
 function sanitizeProps(
@@ -76,6 +112,17 @@ export function ArticleContent({ html, className }: ArticleContentProps) {
       if (DISALLOWED_TAGS.has(tag)) return <></>;
 
       const attribs = sanitizeProps(node.attribs);
+
+      if (
+        (tag === "figure" || tag === "div") &&
+        (attribs.className?.includes("wp-block-gallery") ||
+          attribs.className?.includes("gallery"))
+      ) {
+        const images = extractImages((node.children as DOMNode[]) ?? []);
+        if (images.length > 1) {
+          return <GallerySlider images={images} />;
+        }
+      }
 
       if (tag === "img") {
         const src = attribs.src ?? "";

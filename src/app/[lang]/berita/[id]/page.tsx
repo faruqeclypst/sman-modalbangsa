@@ -84,7 +84,10 @@ export default async function NewsDetailPage({
   if (!post) notFound();
 
   const title = decodeHtmlEntities(post.title.rendered);
-  const author = getAuthorName(post);
+  const authorRaw = getAuthorName(post);
+  const author = !authorRaw || authorRaw.toLowerCase() === "admin" || authorRaw.toLowerCase() === "administrator"
+    ? "Media Mosa"
+    : authorRaw;
   const date = formatDate(post.date, lang, {
     year: "numeric",
     month: "long",
@@ -95,6 +98,10 @@ export default async function NewsDetailPage({
   const tags = getTagTerms(post);
   const media = getFeaturedImage(post);
   const imageUrl = getFeaturedImageUrl(post);
+  const imgWidth = media?.media_details?.width;
+  const imgHeight = media?.media_details?.height;
+  const aspectRatio = imgWidth && imgHeight ? imgWidth / imgHeight : 1.5;
+  const isBoxyOrPortrait = aspectRatio < 1.35;
 
   // Related posts — prefer same category from last 3 months, fallback to latest
   const primaryCat = categories[0];
@@ -104,36 +111,38 @@ export default async function NewsDetailPage({
 
   let related: WPPost[] = [];
 
+
+
   // Try: same category, last 3 months
   if (primaryCat) {
     const { posts: catRecent } = await getPosts({
-      perPage: 4,
+      perPage: 7,
       categories: [primaryCat.id],
       exclude: [post.id],
       after: afterDate,
     });
-    related = catRecent.slice(0, 3);
+    related = catRecent.slice(0, 6);
   }
 
   // Fallback: if not enough, fill with latest posts (any category, last 3 months)
-  if (related.length < 3) {
+  if (related.length < 6) {
     const existingIds = [post.id, ...related.map((r) => r.id)];
     const { posts: latest } = await getPosts({
-      perPage: 4,
+      perPage: 7,
       exclude: existingIds,
       after: afterDate,
     });
-    related = [...related, ...latest].slice(0, 3);
+    related = [...related, ...latest].slice(0, 6);
   }
 
   // Final fallback: if still not enough (very few posts), get latest without date filter
-  if (related.length < 3) {
+  if (related.length < 6) {
     const existingIds = [post.id, ...related.map((r) => r.id)];
     const { posts: anyLatest } = await getPosts({
-      perPage: 4,
+      perPage: 7,
       exclude: existingIds,
     });
-    related = [...related, ...anyLatest].slice(0, 3);
+    related = [...related, ...anyLatest].slice(0, 6);
   }
 
   // Split content in half to inject "Baca Juga" in the middle
@@ -144,126 +153,149 @@ export default async function NewsDetailPage({
   const contentBottom = paragraphs.slice(midPoint).join("</p>");
 
   return (
-    <article className="bg-[color:var(--background)]">
+    <article className="bg-[color:var(--background)] min-h-screen">
       <ReadingProgress />
-      {/* Header */}
-      <header className="border-b border-[color:var(--border)] bg-[color:var(--muted)]/40">
-        <Container size="lg" className="py-10 sm:py-14">
-          <Link
-            href={`/${lang}/berita`}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--primary)] hover:underline"
-          >
-            <ArrowLeft className="size-4" aria-hidden />
-            {dict.news.backToList}
-          </Link>
 
-          {categories.length ? (
-            <div className="mt-5 flex flex-wrap gap-2">
-              {categories.map((c) => (
-                <Badge key={c.id} variant="primary">
-                  {decodeHtmlEntities(c.name)}
-                </Badge>
-              ))}
+      <Container size="xl" className="py-6 sm:py-8">
+        <Link
+          href={`/${lang}/berita`}
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:text-emerald-700 transition-colors mb-4"
+        >
+          <ArrowLeft className="size-3.5" aria-hidden />
+          {dict.news.backToList}
+        </Link>
+
+        {categories.length ? (
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {categories.map((c) => (
+              <Badge key={c.id} variant="primary" className="text-[10px] py-0.5 px-2 font-bold">
+                {decodeHtmlEntities(c.name)}
+              </Badge>
+            ))}
+          </div>
+        ) : null}
+
+        <h1 className="font-sfpro text-2xl font-bold tracking-tight text-[color:var(--foreground)] sm:text-3xl lg:text-4xl leading-tight">
+          {title}
+        </h1>
+
+        {/* Meta row under the title */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[color:var(--muted-foreground)] border-y border-[color:var(--border)] py-3">
+          {author ? (
+            <span className="inline-flex items-center gap-1">
+              <User className="size-3.5" aria-hidden /> {author}
+            </span>
+          ) : null}
+          <span className="inline-flex items-center gap-1">
+            <Calendar className="size-3.5" aria-hidden /> {date}
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <Clock className="size-3.5" aria-hidden /> {minutes} {dict.news.minRead}
+          </span>
+          <ViewCounter id={post.id} initialViews={post.views} locale={lang} />
+        </div>
+
+        {/* Featured image embedded inside centered layout, wide banner style */}
+        {imageUrl ? (
+          <div className="relative mt-6 aspect-[21/9] w-full overflow-hidden rounded-xl border border-[color:var(--border)] bg-[color:var(--muted)] max-h-[450px] flex items-center justify-center">
+            {/* Ambient background blur */}
+            <Image
+              src={imageUrl}
+              alt=""
+              fill
+              priority
+              sizes="10vw"
+              className="object-cover blur-2xl opacity-35 scale-105 select-none pointer-events-none"
+            />
+            {/* Crisp foreground image */}
+            {isBoxyOrPortrait ? (
+              <div
+                className="relative h-full max-w-full z-10"
+                style={{ aspectRatio: imgWidth && imgHeight ? `${imgWidth}/${imgHeight}` : "3/4" }}
+              >
+                <Image
+                  src={imageUrl}
+                  alt={media?.alt_text || title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 450px"
+                  className="object-contain"
+                />
+              </div>
+            ) : (
+              <Image
+                src={imageUrl}
+                alt={media?.alt_text || title}
+                fill
+                priority
+                sizes="(min-width: 1280px) 1216px, (min-width: 1024px) 960px, 100vw"
+                className="object-cover z-10"
+              />
+            )}
+          </div>
+        ) : null}
+
+        {/* Content body */}
+        <div className="mt-6">
+          {/* First half of content */}
+          <ArticleContent
+            html={contentTop}
+            className="prose-article max-w-none"
+          />
+
+          {/* Baca Juga - injected in the middle of content */}
+          {related.length ? (
+            <div className="my-8 rounded-2xl border border-[color:var(--border)] bg-[color:var(--muted)]/30 p-5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[color:var(--primary)]">
+                {lang === "id" ? "Baca Juga" : "Read Also"}
+              </h3>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                {related.slice(0, 3).map((r) => {
+                  const rImg = getFeaturedImageUrl(r);
+                  return (
+                    <Link
+                      key={r.id}
+                      href={`/${lang}/berita/${r.slug}`}
+                      className="group flex gap-3 sm:flex-col sm:gap-2 no-underline"
+                    >
+                      <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-[color:var(--muted)]">
+                        {rImg ? (
+                          <Image
+                            src={rImg}
+                            alt={decodeHtmlEntities(r.title.rendered)}
+                            fill
+                            sizes="(min-width: 640px) 200px, 100vw"
+                            className="object-cover transition-transform group-hover:scale-105"
+                          />
+                        ) : null}
+                      </div>
+                      <p className="line-clamp-2 text-sm font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)] transition-colors">
+                        {decodeHtmlEntities(r.title.rendered)}
+                      </p>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
           ) : null}
 
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-[color:var(--foreground)] sm:text-4xl md:text-5xl">
-            {title}
-          </h1>
-
-          <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[color:var(--muted-foreground)]">
-            {author ? (
-              <span className="inline-flex items-center gap-1.5">
-                <User className="size-4" aria-hidden /> {author}
-              </span>
-            ) : null}
-            <span className="inline-flex items-center gap-1.5">
-              <Calendar className="size-4" aria-hidden /> {date}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Clock className="size-4" aria-hidden /> {minutes} {dict.news.minRead}
-            </span>
-            <ViewCounter id={post.id} initialViews={post.views} locale={lang} />
-          </div>
-        </Container>
-      </header>
-
-      {/* Featured image */}
-      {imageUrl ? (
-        <Container size="lg" className="-mt-2 pt-6">
-          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-[color:var(--border)] bg-[color:var(--muted)]">
-            <Image
-              src={imageUrl}
-              alt={media?.alt_text || title}
-              fill
-              priority
-              sizes="(min-width: 1024px) 960px, 100vw"
-              className="object-cover"
+          {/* Second half of content */}
+          {contentBottom.trim() ? (
+            <ArticleContent
+              html={contentBottom}
+              className="prose-article max-w-none mt-4"
             />
-          </div>
-        </Container>
-      ) : null}
-
-      {/* Body */}
-      <Container size="md" className="py-10">
-        {/* First half of content */}
-        <ArticleContent
-          html={contentTop}
-          className="prose-article max-w-none"
-        />
-
-        {/* Baca Juga - injected in the middle of content */}
-        {related.length ? (
-          <div className="my-8 rounded-2xl border border-[color:var(--border)] bg-[color:var(--muted)]/30 p-5">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[color:var(--primary)]">
-              {lang === "id" ? "Baca Juga" : "Read Also"}
-            </h3>
-            <div className="mt-3 grid gap-3 sm:grid-cols-3">
-              {related.slice(0, 3).map((r) => {
-                const rImg = getFeaturedImageUrl(r);
-                return (
-                  <Link
-                    key={r.id}
-                    href={`/${lang}/berita/${r.slug}`}
-                    className="group flex gap-3 sm:flex-col sm:gap-2"
-                  >
-                    <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-[color:var(--muted)] sm:aspect-video sm:h-auto sm:w-full">
-                      {rImg ? (
-                        <Image
-                          src={rImg}
-                          alt={decodeHtmlEntities(r.title.rendered)}
-                          fill
-                          sizes="(min-width: 640px) 200px, 56px"
-                          className="object-cover transition-transform group-hover:scale-105"
-                        />
-                      ) : null}
-                    </div>
-                    <p className="line-clamp-2 text-sm font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">
-                      {decodeHtmlEntities(r.title.rendered)}
-                    </p>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        ) : null}
-
-        {/* Second half of content */}
-        {contentBottom.trim() ? (
-          <ArticleContent
-            html={contentBottom}
-            className="prose-article max-w-none"
-          />
-        ) : null}
+          ) : null}
+        </div>
 
         {tags.length ? (
-          <div className="mt-10 border-t border-[color:var(--border)] pt-6">
-            <p className="text-xs font-semibold uppercase tracking-wider text-[color:var(--muted-foreground)]">
+          <div className="mt-8 border-t border-[color:var(--border)] pt-4">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--muted-foreground)]">
               {dict.news.tags}
             </p>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap gap-1.5">
               {tags.map((t) => (
-                <Badge key={t.id} variant="muted">
+                <Badge key={t.id} variant="muted" className="text-[10px] py-0.5 px-2">
                   #{decodeHtmlEntities(t.name)}
                 </Badge>
               ))}
@@ -272,34 +304,30 @@ export default async function NewsDetailPage({
         ) : null}
 
         {/* Share buttons */}
-        <div className="mt-8 border-t border-[color:var(--border)] pt-6">
+        <div className="mt-6 border-t border-[color:var(--border)] pt-4">
           <ShareButtons
             url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${lang}/berita/${post.slug}`}
             title={title}
           />
         </div>
+
+        {/* Comments */}
+        <DisqusComments
+          identifier={`berita-${post.slug}`}
+          url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${lang}/berita/${post.slug}`}
+          title={title}
+        />
       </Container>
 
-      {/* Comments - Disqus */}
-      <section className="border-t border-[color:var(--border)] py-12">
-        <Container size="md">
-          <DisqusComments
-            identifier={`berita-${post.slug}`}
-            url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${lang}/berita/${post.slug}`}
-            title={title}
-          />
-        </Container>
-      </section>
-
-      {/* Related */}
-      {related.length ? (
+      {/* Related articles under the article (available on all viewports, excludes the ones shown in the middle of content) */}
+      {related.slice(3, 6).length ? (
         <section className="border-t border-[color:var(--border)] bg-[color:var(--muted)]/40 py-12">
-          <Container>
-            <h2 className="text-xl font-bold text-[color:var(--foreground)] sm:text-2xl">
+          <Container size="xl">
+            <h2 className="text-xl font-bold text-[color:var(--foreground)] sm:text-2xl mb-6">
               {dict.news.relatedNews}
             </h2>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p) => (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {related.slice(3, 6).map((p) => (
                 <NewsCard key={p.id} post={p} locale={lang} dict={dict} />
               ))}
             </div>
@@ -320,7 +348,7 @@ export default async function NewsDetailPage({
             "dateModified": post.modified,
             "author": [{
               "@type": "Person",
-              "name": author || "Admin"
+              "name": author || "Media Mosa"
             }]
           }),
         }}

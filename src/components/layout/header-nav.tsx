@@ -14,9 +14,10 @@ interface HeaderNavProps {
   nav: NavConfig;
   locale: Locale;
   dict: Dictionary;
+  isTransparent?: boolean;
 }
 
-export function HeaderNav({ nav, locale, dict }: HeaderNavProps) {
+export function HeaderNav({ nav, locale, dict, isTransparent }: HeaderNavProps) {
   const pathname = usePathname() ?? "";
   const [openMobile, setOpenMobile] = React.useState(false);
   const [openGroup, setOpenGroup] = React.useState<string | null>(null);
@@ -61,14 +62,14 @@ export function HeaderNav({ nav, locale, dict }: HeaderNavProps) {
                   aria-expanded="false"
                   aria-haspopup="true"
                   className={cn(
-                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    "inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-300",
                     groupActive
-                      ? "text-[color:var(--primary)]"
-                      : "text-[color:var(--foreground)] hover:text-[color:var(--primary)]",
+                      ? isTransparent ? "text-white font-bold" : "text-[color:var(--primary)]"
+                      : isTransparent ? "text-white/80 hover:text-white" : "text-[color:var(--foreground)] hover:text-[color:var(--primary)]",
                   )}
                 >
                   {item.label}
-                  <ChevronDown className="size-4 transition-transform group-hover:rotate-180" aria-hidden />
+                  <ChevronDown className={cn("size-4 transition-transform group-hover:rotate-180 duration-300", isTransparent ? "text-white/60" : "text-gray-400")} aria-hidden />
                 </button>
                 <div className="invisible absolute left-0 top-full z-50 mt-1 w-60 rounded-lg border border-gray-200 bg-white p-1 opacity-0 shadow-lg transition-all duration-150 group-hover:visible group-hover:opacity-100">
                   <ul className="flex flex-col">
@@ -79,7 +80,7 @@ export function HeaderNav({ nav, locale, dict }: HeaderNavProps) {
                           className={cn(
                             "block rounded-md px-3 py-2 text-sm transition-colors",
                             isActive(link.href)
-                              ? "bg-[color:var(--primary)]/5 text-[color:var(--primary)]"
+                              ? "bg-[color:var(--primary)]/5 text-[color:var(--primary)] font-semibold"
                               : "text-[color:var(--foreground)] hover:bg-[color:var(--muted)] hover:text-[color:var(--primary)]",
                           )}
                         >
@@ -97,10 +98,10 @@ export function HeaderNav({ nav, locale, dict }: HeaderNavProps) {
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                "rounded-md px-3 py-2 text-sm font-medium transition-colors duration-300",
                 isActive(item.href)
-                  ? "text-[color:var(--primary)]"
-                  : "text-[color:var(--foreground)] hover:text-[color:var(--primary)]",
+                  ? isTransparent ? "text-white font-bold" : "text-[color:var(--primary)]"
+                  : isTransparent ? "text-white/80 hover:text-white" : "text-[color:var(--foreground)] hover:text-[color:var(--primary)]",
               )}
             >
               {item.label}
@@ -111,13 +112,18 @@ export function HeaderNav({ nav, locale, dict }: HeaderNavProps) {
 
       {/* Mobile controls */}
       <div className="flex items-center gap-2 lg:hidden">
-        <LanguageSwitcher currentLocale={locale} variant="compact" />
+        <LanguageSwitcher currentLocale={locale} variant="compact" isTransparent={isTransparent} />
         <button
           type="button"
           aria-expanded={openMobile}
           aria-label={openMobile ? dict.common.close : dict.nav.menu}
           onClick={() => setOpenMobile((v) => !v)}
-          className="inline-flex size-10 items-center justify-center rounded-md border border-[color:var(--border)] bg-white text-[color:var(--foreground)] transition-colors hover:bg-[color:var(--muted)]"
+          className={cn(
+            "inline-flex size-10 items-center justify-center rounded-md transition-colors duration-300",
+            isTransparent
+              ? "border border-white/25 bg-white/10 text-white hover:bg-white/20"
+              : "border border-[color:var(--border)] bg-white text-[color:var(--foreground)] hover:bg-[color:var(--muted)]"
+          )}
         >
           {openMobile ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -160,6 +166,7 @@ export function HeaderNav({ nav, locale, dict }: HeaderNavProps) {
                           <li key={link.href}>
                             <Link
                               href={link.href}
+                              onClick={() => setOpenMobile(false)}
                               className={cn(
                                 "block rounded-md px-3 py-2 text-sm",
                                 isActive(link.href)
@@ -180,6 +187,7 @@ export function HeaderNav({ nav, locale, dict }: HeaderNavProps) {
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={() => setOpenMobile(false)}
                   className={cn(
                     "rounded-lg px-3 py-3 text-base font-semibold transition-colors",
                     isActive(item.href)

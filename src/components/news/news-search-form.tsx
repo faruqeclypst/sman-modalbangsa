@@ -44,7 +44,7 @@ export function NewsSearchForm({
       onSubmit={onSubmit}
       role="search"
       className={cn(
-        "relative flex w-full max-w-md items-center overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm focus-within:ring-2 focus-within:ring-emerald-500",
+        "relative flex w-full items-center overflow-hidden rounded-full border border-gray-200 bg-white shadow-sm transition-all duration-300 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500",
       )}
     >
       <Search

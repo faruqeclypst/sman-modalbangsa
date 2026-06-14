@@ -45,7 +45,9 @@
       "label": "Prestasi",
       "title": "Prestasi Siswa & Sekolah",
       "subtitle": "Pencapaian membanggakan di tingkat regional, nasional, dan internasional.",
-      "empty": "Belum ada prestasi yang dipublikasikan."
+      "empty": "Belum ada prestasi yang dipublikasikan.",
+      "hallOfFameTitle": "Mosa Hall of Fame",
+      "hallOfFameSubtitle": "Ruang apresiasi siswa berprestasi SMAN Modal Bangsa tingkat Internasional, Nasional, dan Provinsi."
     },
     "gtk": {
       "label": "Guru & Tenaga Kependidikan",
@@ -65,7 +67,7 @@
     "galeri": {
       "label": "Galeri",
       "title": "Galeri Kegiatan",
-      "subtitle": "Dokumentasi visual kegiatan SMAN Modal Bangsa.",
+      "subtitle": "Kumpulan foto dokumentasi langsung dari berbagai kegiatan dan acara SMAN Modal Bangsa.",
       "empty": "Belum ada foto."
     },
     "download": {
@@ -78,6 +80,10 @@
     }
   },
   "hero": {
+    "welcome": "Selamat Datang di SMAN Modal Bangsa",
+    "titleLine1": "Membentuk Pemimpin",
+    "titleAccent": "Masa Depan",
+    "titleLine2": "Hari Ini",
     "kicker": "Portal Resmi Sekolah",
     "title": "SMA Negeri Modal Bangsa Provinsi Aceh",
     "subtitle": "Temukan informasi terkini seputar pendidikan, prestasi, dan kegiatan SMAN Modal Bangsa Aceh.",
@@ -338,6 +344,20 @@
         "category": "Olahraga"
       }
     ]
+  },
+  "cta": {
+    "title": "Mosa",
+    "titleAccent": "Inspire",
+    "description": "Kesempatan Anda untuk mengenal jantung SMAN Modal Bangsa lebih dekat! Tetap terhubung melalui Mosa Inspire, temukan kisah kami, prestasi, dan wawasan tentang komunitas kami yang dinamis.",
+    "buttonText": "Info Sekolah"
+  },
+  "highlights": {
+    "title": "Sorotan",
+    "titleAccent": "Perjalanan Kami",
+    "subtitle": "Tetap terupdate dengan berita dan cerita terbaru dari SMAN Modal Bangsa.",
+    "news": "Berita",
+    "socialMedia": "Media Sosial",
+    "followUs": "Ikuti Media Sosial Kami"
   },
   "footer": {
     "address": "Jl. Bandara Sultan Iskandar Muda, Blang Bintang, Aceh Besar, Aceh, Indonesia",

@@ -1,44 +1,116 @@
-import Image from "next/image";
+"use client";
+
+import { useRef, useEffect, useLayoutEffect } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/container";
 import { HeroContent } from "@/components/home/hero-content";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+
+// Register ScrollTrigger on client only
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface HeroProps {
   locale: Locale;
   dict: Dictionary;
-  /** Optional slot for streaming gallery slider (rendered via Suspense) */
-  children?: React.ReactNode;
 }
 
-export function Hero({ locale, dict, children }: HeroProps) {
+export function Hero({ locale, dict }: HeroProps) {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const contentContainerRef = useRef<HTMLDivElement>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      if (!heroRef.current || !videoContainerRef.current || !contentContainerRef.current) return;
+
+      // Pin the hero section with no spacing, allowing the next section to slide on top
+      ScrollTrigger.create({
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false,
+        anticipatePin: 1,
+      });
+
+      // Parallax zoom-in and scroll shift for the video background
+      gsap.to(videoContainerRef.current, {
+        scale: 1.15,
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Fade out and float up for the content
+      gsap.to(contentContainerRef.current, {
+        opacity: 0,
+        yPercent: -15,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom 40%",
+          scrub: true,
+        },
+      });
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section
-      className="relative flex min-h-[100dvh] items-center overflow-hidden text-white"
-      aria-labelledby="hero-title"
-      id="hero"
-    >
-      {/* Default static background — always loads instantly */}
-      <Image
-        src="/bg.png"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover blur-[2px]"
-        aria-hidden
-      />
+    <div ref={heroRef} className="bg-zinc-950 w-full overflow-hidden relative z-10">
+      <section
+        className="relative flex h-screen w-full items-center justify-center overflow-hidden text-white"
+        aria-labelledby="hero-title"
+        id="hero"
+      >
+        {/* Background Video playing in loop, muted, playsInline */}
+        <div
+          ref={videoContainerRef}
+          className="absolute inset-0 h-full w-full overflow-hidden origin-center z-0"
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src="/bg-video.mp4" type="video/mp4" />
+            {/* Fallback image */}
+            <img
+              src="/bg.png"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              aria-hidden
+            />
+          </video>
 
-      {/* Gallery slider streams in on top when ready */}
-      {children}
+          {/* Cinematic overlay */}
+          <div aria-hidden className="absolute inset-0 bg-black/55" />
+        </div>
 
-      {/* Flat overlay */}
-      <div aria-hidden className="absolute inset-0 bg-black/40" />
-
-      {/* Content — centered on mobile, left on desktop */}
-      <Container className="relative z-10 py-24 sm:py-32">
-        <HeroContent locale={locale} dict={dict} />
-      </Container>
-    </section>
+        {/* Content — Centered */}
+        <div ref={contentContainerRef} className="relative z-10 w-full">
+          <Container className="py-24 sm:py-32">
+            <HeroContent locale={locale} dict={dict} />
+          </Container>
+        </div>
+      </section>
+    </div>
   );
 }
+

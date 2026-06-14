@@ -16,6 +16,7 @@ interface LanguageSwitcherProps {
   currentLocale: Locale;
   className?: string;
   variant?: "default" | "compact";
+  isTransparent?: boolean;
 }
 
 function buildLocalizedPath(pathname: string, target: Locale): string {
@@ -33,6 +34,7 @@ export function LanguageSwitcher({
   currentLocale,
   className,
   variant = "default",
+  isTransparent = false,
 }: LanguageSwitcherProps) {
   const pathname = usePathname() ?? `/${currentLocale}`;
 
@@ -43,13 +45,16 @@ export function LanguageSwitcher({
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 p-0.5 text-xs",
+        "inline-flex items-center gap-1 rounded-full p-0.5 text-xs transition-colors duration-300",
+        isTransparent
+          ? "border border-white/20 bg-white/10"
+          : "border border-gray-200 bg-gray-100",
         className,
       )}
       role="group"
       aria-label="Language selection"
     >
-      <Globe className="ml-1.5 size-3.5 text-gray-400" aria-hidden />
+      <Globe className={cn("ml-1.5 size-3.5 transition-colors duration-300", isTransparent ? "text-white/60" : "text-gray-400")} aria-hidden />
       {locales.map((locale) => {
         const isActive = locale === currentLocale;
         return (
@@ -60,10 +65,10 @@ export function LanguageSwitcher({
             aria-current={isActive ? "true" : undefined}
             aria-label={localeNames[locale]}
             className={cn(
-              "rounded-full px-2.5 py-1 font-semibold uppercase transition-colors",
+              "rounded-full px-2.5 py-1 font-semibold uppercase transition-colors duration-300",
               isActive
-                ? "bg-[#14532d] text-white"
-                : "text-gray-500 hover:text-gray-800",
+                ? isTransparent ? "bg-white text-[#14532d]" : "bg-[#14532d] text-white"
+                : isTransparent ? "text-white/70 hover:text-white" : "text-gray-500 hover:text-gray-800",
               variant === "compact" && "px-2 py-0.5",
             )}
           >

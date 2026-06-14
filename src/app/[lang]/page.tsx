@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Hero } from "@/components/home/hero";
-import { HeroGallery } from "@/components/home/hero-gallery";
-import { InstagramFeed } from "@/components/home/instagram-feed";
+import { OnboardingSplash } from "@/components/home/onboarding-splash";
+import { IntroTransition } from "@/components/home/intro-transition";
 import { HomeSections } from "@/components/home/home-sections";
 import { HomeSectionsSkeleton } from "@/components/home/home-sections-skeleton";
 import { SectionOrnament } from "@/components/ui/section-ornament";
@@ -21,21 +21,20 @@ export default async function HomePage({
 
   return (
     <>
-      {/* Hero renders instantly with static bg.png */}
-      {/* Gallery slider streams in when WP responds */}
-      <Hero locale={lang} dict={dict}>
-        <Suspense fallback={null}>
-          <HeroGallery />
-        </Suspense>
-      </Hero>
+      {/* 2.5s Onboarding preloader overlay with logo breathing scale */}
+      <OnboardingSplash locale={lang} />
+
+      {/* Hero renders instantly with video bg.mp4 */}
+      <Hero locale={lang} dict={dict} />
+
+      {/* GSAP Scroll-scrubbing text reveal transition section */}
+      <IntroTransition locale={lang} />
 
       {/* Content sections stream in with skeleton fallback */}
       <Suspense fallback={<HomeSectionsSkeleton />}>
         <HomeSections locale={lang} dict={dict} />
       </Suspense>
-
-      <SectionOrnament flip />
-      <InstagramFeed />
     </>
   );
 }
+

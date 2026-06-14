@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Decorative section ornament with Acehnese batik/floral motif.
+ * Decorative section ornament with Acehnese Pintu Aceh / floral motif.
  * Animates (grows) when scrolled into view using IntersectionObserver.
  */
 export function SectionOrnament({ flip = false }: { flip?: boolean }) {
@@ -19,7 +19,7 @@ export function SectionOrnament({ flip = false }: { flip?: boolean }) {
           el.classList.add("in-view");
         }
       },
-      { threshold: 0.3 },
+      { threshold: 0.2 },
     );
 
     observer.observe(el);
@@ -28,85 +28,147 @@ export function SectionOrnament({ flip = false }: { flip?: boolean }) {
 
   return (
     <div
-      className="pointer-events-none flex items-center justify-center overflow-hidden py-4"
+      className="pointer-events-none flex items-center justify-center overflow-hidden py-6"
       aria-hidden
     >
       <svg
         ref={ref}
-        viewBox="0 0 800 80"
+        viewBox="0 0 800 100"
         className={`section-ornament h-12 w-full max-w-2xl sm:h-16 ${flip ? "scale-y-[-1]" : ""}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Center flower */}
-        <g className="ornament-center" opacity="0.15">
-          <circle cx="400" cy="40" r="8" fill="currentColor" />
-          <path
-            d="M400 20c2-8 6-14 0-18s-6 10 0 18Zm0 0c-2-8-6-14 0-18s6 10 0 18Z"
-            fill="currentColor"
-          />
-          <path
-            d="M400 60c2 8 6 14 0 18s-6-10 0-18Zm0 0c-2 8-6 14 0-18s6 10 0 18Z"
-            fill="currentColor"
-          />
-          {/* Petals */}
-          <ellipse cx="400" cy="28" rx="4" ry="10" fill="currentColor" />
-          <ellipse cx="400" cy="52" rx="4" ry="10" fill="currentColor" />
-          <ellipse cx="388" cy="40" rx="10" ry="4" fill="currentColor" />
-          <ellipse cx="412" cy="40" rx="10" ry="4" fill="currentColor" />
-          {/* Diagonal petals */}
-          <ellipse cx="391" cy="31" rx="3.5" ry="8" transform="rotate(-45 391 31)" fill="currentColor" />
-          <ellipse cx="409" cy="31" rx="3.5" ry="8" transform="rotate(45 409 31)" fill="currentColor" />
-          <ellipse cx="391" cy="49" rx="3.5" ry="8" transform="rotate(45 391 49)" fill="currentColor" />
-          <ellipse cx="409" cy="49" rx="3.5" ry="8" transform="rotate(-45 409 49)" fill="currentColor" />
-        </g>
+        <defs>
+          <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f59e0b" />
+            <stop offset="50%" stopColor="#fbbf24" />
+            <stop offset="100%" stopColor="#d97706" />
+          </linearGradient>
+          <linearGradient id="green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#10b981" />
+            <stop offset="50%" stopColor="#059669" />
+            <stop offset="100%" stopColor="#047857" />
+          </linearGradient>
+        </defs>
 
-        {/* Left vine */}
-        <g className="ornament-left" opacity="0.12">
+        {/* Center Crest: Pintu Aceh Motif */}
+        <g className="ornament-center">
+          {/* Gold outer glow background circle */}
+          <circle cx="400" cy="50" r="28" fill="url(#gold-grad)" opacity="0.08" />
+          
+          {/* Pintu Aceh / Gate Outline */}
           <path
-            d="M380 40c-20 0-30-5-50-5s-40 8-60 5-30-10-50-8-40 5-60 3-50-6-70-4"
-            stroke="currentColor"
-            strokeWidth="1.5"
+            d="M 384 72 L 384 50 C 384 38, 390 30, 400 30 C 410 30, 416 38, 416 50 L 416 72 Z"
+            stroke="url(#gold-grad)"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Internal Gate Details */}
+          <path
+            d="M 388 72 L 388 52 C 388 43, 393 36, 400 36 C 407 36, 412 43, 412 52 L 412 72"
+            stroke="url(#green-grad)"
+            strokeWidth="1.8"
+            fill="none"
             strokeLinecap="round"
           />
-          {/* Leaves on left vine */}
-          <path d="M340 35c-4-6-10-8-14-5s2 8 8 9 8-1 6-4Z" fill="currentColor" />
-          <path d="M290 38c-3-7-8-10-12-8s0 9 6 11 8 0 6-3Z" fill="currentColor" />
-          <path d="M240 36c-4-5-9-7-12-4s1 7 6 8 8 0 6-4Z" fill="currentColor" />
-          <path d="M190 38c-3-6-8-9-11-6s1 8 6 9 7-1 5-3Z" fill="currentColor" />
-          {/* Small buds */}
-          <circle cx="350" cy="37" r="2.5" fill="currentColor" />
-          <circle cx="310" cy="39" r="2" fill="currentColor" />
-          <circle cx="260" cy="37" r="2.5" fill="currentColor" />
-          <circle cx="210" cy="38" r="2" fill="currentColor" />
-          {/* Curls */}
-          <path d="M360 40c-3 6-2 12 2 14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" />
-          <path d="M320 40c-2 5-1 10 2 12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" />
-          <path d="M270 40c-3 5-2 10 1 12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" />
+          {/* Center star / flower inside gate */}
+          <path
+            d="M 400 42 L 403 48 L 409 50 L 403 52 L 400 58 L 397 52 L 391 50 L 397 48 Z"
+            fill="url(#gold-grad)"
+          />
+          <circle cx="400" cy="50" r="2.5" fill="#ffffff" />
+          
+          {/* External floral wings on the side of the center */}
+          <path
+            d="M 378 50 C 368 40, 370 30, 380 30 C 382 30, 384 32, 384 34 C 384 38, 372 44, 384 50"
+            fill="url(#gold-grad)"
+            opacity="0.95"
+          />
+          <path
+            d="M 422 50 C 432 40, 430 30, 420 30 C 418 30, 416 32, 416 34 C 416 38, 428 44, 416 50"
+            fill="url(#gold-grad)"
+            opacity="0.95"
+          />
         </g>
 
-        {/* Right vine (mirrored) */}
-        <g className="ornament-right" opacity="0.12">
+        {/* Left Vine */}
+        <g className="ornament-left">
+          {/* Main connecting vine line */}
           <path
-            d="M420 40c20 0 30-5 50-5s40 8 60 5 30-10 50-8 40 5 60 3 50-6 70-4"
-            stroke="currentColor"
-            strokeWidth="1.5"
+            d="M 368 50 C 328 50, 308 36, 268 36 C 228 36, 198 64, 158 64 C 118 64, 88 50, 48 50"
+            stroke="url(#green-grad)"
+            strokeWidth="2.2"
             strokeLinecap="round"
+            fill="none"
           />
-          {/* Leaves on right vine */}
-          <path d="M460 35c4-6 10-8 14-5s-2 8-8 9-8-1-6-4Z" fill="currentColor" />
-          <path d="M510 38c3-7 8-10 12-8s0 9-6 11-8 0-6-3Z" fill="currentColor" />
-          <path d="M560 36c4-5 9-7 12-4s-1 7-6 8-8 0-6-4Z" fill="currentColor" />
-          <path d="M610 38c3-6 8-9 11-6s-1 8-6 9-7-1-5-3Z" fill="currentColor" />
-          {/* Small buds */}
-          <circle cx="450" cy="37" r="2.5" fill="currentColor" />
-          <circle cx="490" cy="39" r="2" fill="currentColor" />
-          <circle cx="540" cy="37" r="2.5" fill="currentColor" />
-          <circle cx="590" cy="38" r="2" fill="currentColor" />
-          {/* Curls */}
-          <path d="M440 40c3 6 2 12-2 14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" />
-          <path d="M480 40c2 5 1 10-2 12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" />
-          <path d="M530 40c3 5 2 10-1 12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" />
+          {/* Sub vine curls */}
+          <path
+            d="M 288 43 C 283 28, 268 24, 258 30"
+            stroke="url(#gold-grad)"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          <path
+            d="M 178 57 C 173 72, 158 76, 148 70"
+            stroke="url(#gold-grad)"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          
+          {/* Leaf motifs along left vine */}
+          <path d="M 318 44 C 313 33, 303 36, 308 47 C 313 47, 320 46, 318 44 Z" fill="url(#green-grad)" />
+          <path d="M 238 44 C 233 55, 223 52, 228 41 C 233 41, 240 42, 238 44 Z" fill="url(#gold-grad)" />
+          <path d="M 128 60 C 123 49, 113 52, 118 63 C 123 63, 130 62, 128 60 Z" fill="url(#green-grad)" />
+          
+          {/* Small dots / buds */}
+          <circle cx="338" cy="48" r="3" fill="url(#gold-grad)" />
+          <circle cx="278" cy="36" r="2.5" fill="url(#green-grad)" />
+          <circle cx="208" cy="50" r="3.2" fill="url(#gold-grad)" />
+          <circle cx="98" cy="55" r="2.5" fill="url(#green-grad)" />
+          <circle cx="63" cy="50" r="2" fill="url(#gold-grad)" />
+        </g>
+
+        {/* Right Vine (Mirrored) */}
+        <g className="ornament-right">
+          {/* Main connecting vine line */}
+          <path
+            d="M 432 50 C 472 50, 492 36, 532 36 C 572 36, 602 64, 642 64 C 682 64, 712 50, 752 50"
+            stroke="url(#green-grad)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          {/* Sub vine curls */}
+          <path
+            d="M 512 43 C 517 28, 532 24, 542 30"
+            stroke="url(#gold-grad)"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          <path
+            d="M 622 57 C 627 72, 642 76, 652 70"
+            stroke="url(#gold-grad)"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          
+          {/* Leaf motifs along right vine */}
+          <path d="M 482 44 C 487 33, 497 36, 492 47 C 487 47, 480 46, 482 44 Z" fill="url(#green-grad)" />
+          <path d="M 562 44 C 567 55, 577 52, 572 41 C 567 41, 560 42, 562 44 Z" fill="url(#gold-grad)" />
+          <path d="M 672 60 C 677 49, 687 52, 682 63 C 677 63, 670 62, 672 60 Z" fill="url(#green-grad)" />
+          
+          {/* Small dots / buds */}
+          <circle cx="462" cy="48" r="3" fill="url(#gold-grad)" />
+          <circle cx="522" cy="36" r="2.5" fill="url(#green-grad)" />
+          <circle cx="592" cy="50" r="3.2" fill="url(#gold-grad)" />
+          <circle cx="702" cy="55" r="2.5" fill="url(#green-grad)" />
+          <circle cx="737" cy="50" r="2" fill="url(#gold-grad)" />
         </g>
       </svg>
     </div>

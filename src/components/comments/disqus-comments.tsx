@@ -57,7 +57,7 @@ export function DisqusComments({ identifier, url, title }: DisqusCommentsProps) 
 
   return (
     <div className="mt-10 border-t border-[color:var(--border)] pt-8">
-      <div id="disqus_thread" ref={disqusRef} />
+      <div id="disqus_thread" ref={disqusRef} dangerouslySetInnerHTML={{ __html: "" }} />
       <noscript>
         Silakan aktifkan JavaScript untuk melihat{" "}
         <a href="https://disqus.com/?ref_noscript" rel="noopener noreferrer">

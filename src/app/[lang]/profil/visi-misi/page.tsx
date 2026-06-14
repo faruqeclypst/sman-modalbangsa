@@ -41,7 +41,7 @@ export default async function VisionMissionPage({
 
       {/* Visi — full-width statement */}
       <section className="bg-[#14532d] py-16 text-white sm:py-20">
-        <Container size="md">
+        <Container size="xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300">
             {dict.profile.vision.title}
           </p>
@@ -53,7 +53,7 @@ export default async function VisionMissionPage({
 
       {/* Misi — numbered list, clean */}
       <section className="py-16 sm:py-20">
-        <Container size="md">
+        <Container size="xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--muted-foreground)]">
             {dict.profile.mission.title}
           </p>
@@ -75,7 +75,7 @@ export default async function VisionMissionPage({
 
       {/* Tujuan — numbered list, clean */}
       <section className="border-t border-[color:var(--border)] bg-[color:var(--muted)]/10 py-16 sm:py-20">
-        <Container size="md">
+        <Container size="xl">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-[color:var(--muted-foreground)]">
             {dict.profile.objectives.title}
           </p>
