@@ -89,7 +89,7 @@ export function SchoolCommitment({ locale }: SchoolCommitmentProps) {
             trigger: sectionRef.current,
             pin: true,
             scrub: 0.5,
-            start: "top 15%",
+            start: "center center",
             end: () => `+=${scrollDist * 1.5}`,
             invalidateOnRefresh: true,
           },
@@ -104,7 +104,7 @@ export function SchoolCommitment({ locale }: SchoolCommitmentProps) {
     <section
       ref={sectionRef}
       id="komitmen-sekolah"
-      className="relative overflow-hidden bg-transparent py-24 sm:py-32"
+      className="relative overflow-hidden bg-transparent py-12 sm:py-32"
     >
       <Container>
         {/* Header Block */}

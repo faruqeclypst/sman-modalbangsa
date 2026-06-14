@@ -292,7 +292,12 @@ export function getThumbnailUrl(post: WPPost): string | null {
 }
 
 export function getAuthorName(post: WPPost): string | null {
-  return post._embedded?.author?.[0]?.name ?? null;
+  const name = post._embedded?.author?.[0]?.name ?? null;
+  if (!name) return null;
+  if (name.toLowerCase() === "admin" || name.toLowerCase() === "administrator") {
+    return "Media Mosa";
+  }
+  return name;
 }
 
 export function getCategoryTerms(post: WPPost): WPTerm[] {

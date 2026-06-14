@@ -144,7 +144,7 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
               trigger: sectionRef.current,
               pin: true,
               scrub: 0.5,
-              start: "top 15%",
+              start: "center center",
               end: () => `+=${scrollDist * 1.5}`,
               invalidateOnRefresh: true,
             },
@@ -231,7 +231,7 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
       ref={sectionRef}
       id="gallery"
       aria-labelledby="gallery-preview-title"
-      className="relative overflow-hidden bg-transparent py-24 sm:py-32"
+      className="relative overflow-hidden bg-transparent py-12 sm:py-32"
     >
       <Container>
         <div ref={headerRef} className="mx-auto max-w-4xl text-center mb-16 sm:mb-20">

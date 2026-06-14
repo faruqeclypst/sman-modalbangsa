@@ -223,6 +223,27 @@ export function Footer({ locale, dict }: FooterProps) {
                   </a>
                 ))}
               </div>
+
+              {/* Partner Logos */}
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <div className="flex flex-wrap items-center gap-5">
+                  <img
+                    src="/images/logo_mitra/SEAMOLEC_White.png"
+                    alt="SEAMOLEC"
+                    className="h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  />
+                  <img
+                    src="/images/logo_mitra/pendidikan.png"
+                    alt="Kementerian Pendidikan"
+                    className="h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  />
+                  <img
+                    src="/images/logo_mitra/unique_id.png"
+                    alt="Unique ID"
+                    className="h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Quick Links Card */}
@@ -273,7 +294,17 @@ export function Footer({ locale, dict }: FooterProps) {
             <p className="font-medium">
               © {new Date().getFullYear()} {dict.site.name}. {dict.footer.rights}
             </p>
-            <p className="font-medium hover:text-white transition-colors duration-300">{dict.footer.developed}</p>
+            <p className="font-medium">
+              {locale === "id" ? "Dikembangkan oleh " : "Developed by "}
+              <a
+                href="https://instagram.com/alfaruqasri"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-300 font-semibold underline decoration-emerald-500/30 hover:decoration-emerald-400 underline-offset-4"
+              >
+                Alfaruq Asri, S.Pd., Gr
+              </a>
+            </p>
           </Container>
         </div>
       </div>

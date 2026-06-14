@@ -258,7 +258,7 @@ export default async function NewsDetailPage({
                       href={`/${lang}/berita/${r.slug}`}
                       className="group flex gap-3 sm:flex-col sm:gap-2 no-underline"
                     >
-                      <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-[color:var(--muted)]">
+                      <div className="relative aspect-video w-24 sm:w-full shrink-0 overflow-hidden rounded-lg bg-[color:var(--muted)]">
                         {rImg ? (
                           <Image
                             src={rImg}
