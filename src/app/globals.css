@@ -390,3 +390,12 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(16, 185, 129, 0.4);
 }
+
+/* Hide header and sidebars during onboarding splash to prevent flash-in */
+.onboarding-active header,
+.onboarding-active aside,
+.onboarding-active button[aria-label="Back to top"] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}

@@ -95,7 +95,21 @@ export default async function LocaleLayout({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id";
 
   return (
-    <html lang={lang === "id" ? "id-ID" : "en-US"} className={plusJakarta.variable} translate="no">
+    <html lang={lang === "id" ? "id-ID" : "en-US"} className={plusJakarta.variable} translate="no" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                var p = window.location.pathname;
+                if (p === '/' || p === '/id' || p === '/en' || p === '/id/' || p === '/en/') {
+                  document.documentElement.classList.add('onboarding-active');
+                }
+              })();
+            `
+          }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
         <LenisProvider>
           <a

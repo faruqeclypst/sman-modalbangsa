@@ -22,6 +22,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
 
       const tl = gsap.timeline({
         onComplete: () => {
+          document.documentElement.classList.remove("onboarding-active");
           document.body.style.overflow = "";
           if (containerRef.current) {
             containerRef.current.style.display = "none";
@@ -76,6 +77,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
     }, containerRef);
 
     return () => {
+      document.documentElement.classList.remove("onboarding-active");
       document.body.style.overflow = "";
       ctx.revert();
     };
