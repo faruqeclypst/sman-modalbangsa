@@ -168,6 +168,7 @@ function PersonCard({
           src={imageUrl}
           alt={name}
           fill
+          unoptimized
           sizes={
             size === "hero"
               ? "(min-width: 1024px) 33vw, 100vw"

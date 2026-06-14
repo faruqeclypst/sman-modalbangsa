@@ -54,6 +54,7 @@ export default async function PrincipalPage({
                   className="h-auto w-full object-contain"
                   style={{ height: "auto" }}
                   priority
+                  unoptimized
                 />
               </div>
               <div className="mt-4 text-center lg:text-left">

@@ -26,6 +26,7 @@ export function GTKCard({ post, jabatanLabel, statusLabel }: GTKCardProps) {
             src={imageUrl}
             alt={media?.alt_text || name}
             fill
+            unoptimized
             sizes="112px"
             className="object-cover"
           />

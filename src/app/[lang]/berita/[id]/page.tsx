@@ -204,6 +204,7 @@ export default async function NewsDetailPage({
               alt=""
               fill
               priority
+              unoptimized
               sizes="10vw"
               className="object-cover blur-2xl opacity-35 scale-105 select-none pointer-events-none"
             />
@@ -218,6 +219,7 @@ export default async function NewsDetailPage({
                   alt={media?.alt_text || title}
                   fill
                   priority
+                  unoptimized
                   sizes="(max-width: 768px) 100vw, 450px"
                   className="object-contain"
                 />
@@ -228,6 +230,7 @@ export default async function NewsDetailPage({
                 alt={media?.alt_text || title}
                 fill
                 priority
+                unoptimized
                 sizes="(min-width: 1280px) 1216px, (min-width: 1024px) 960px, 100vw"
                 className="object-cover z-10"
               />
@@ -264,6 +267,7 @@ export default async function NewsDetailPage({
                             src={rImg}
                             alt={decodeHtmlEntities(r.title.rendered)}
                             fill
+                            unoptimized
                             sizes="(min-width: 640px) 200px, 100vw"
                             className="object-cover transition-transform group-hover:scale-105"
                           />
