@@ -418,7 +418,9 @@
 
 @media (max-width: 639px) {
   .animate-splash-entrance {
-    animation: splash-entrance-mobile 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: none;
+    opacity: 0;
+    transform: translateY(100vh);
   }
 }
 

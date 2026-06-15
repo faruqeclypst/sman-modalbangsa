@@ -15,6 +15,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLHeadingElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!isHome) return;
@@ -32,6 +33,15 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
           }
         }
       });
+
+      // On mobile only, slide content from bottom to center
+      if (typeof window !== "undefined" && window.innerWidth < 640 && contentRef.current) {
+        tl.fromTo(contentRef.current,
+          { y: "100vh", opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" },
+          0
+        );
+      }
 
       // Slide overlay up out of view (2.0s - 2.5s)
       tl.to(containerRef.current, {
@@ -55,7 +65,10 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
       ref={containerRef}
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white text-zinc-900 select-none overflow-hidden"
     >
-      <div className="flex flex-col items-center justify-center text-center px-6 w-full max-w-4xl animate-splash-entrance">
+      <div 
+        ref={contentRef}
+        className="flex flex-col items-center justify-center text-center px-6 w-full max-w-4xl animate-splash-entrance"
+      >
         {/* Brand Logo & Name */}
         <div className="flex items-center justify-center gap-3 sm:gap-6 mb-4 sm:mb-6">
           <div className="w-12 h-12 sm:w-20 sm:h-20 flex items-center justify-center shrink-0">
