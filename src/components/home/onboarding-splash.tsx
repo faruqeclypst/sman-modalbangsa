@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import type { Locale } from "@/i18n/config";
 
@@ -9,10 +10,14 @@ interface OnboardingSplashProps {
 }
 
 export function OnboardingSplash({ locale }: OnboardingSplashProps) {
+  const pathname = usePathname();
+  const isHome = pathname === null || pathname === "/" || pathname === `/${locale}` || pathname === `/${locale}/`;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
+    if (!isHome) return;
     // Prevent scrolling while onboarding is active
     document.body.style.overflow = "hidden";
 
@@ -41,7 +46,9 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
       document.body.style.overflow = "";
       ctx.revert();
     };
-  }, []);
+  }, [isHome]);
+
+  if (!isHome) return null;
 
   return (
     <div
