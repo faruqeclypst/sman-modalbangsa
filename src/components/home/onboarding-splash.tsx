@@ -57,10 +57,9 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
       ref={containerRef}
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white text-zinc-900 select-none overflow-hidden"
     >
-      <div className="flex flex-col items-center justify-center text-center px-6 max-w-4xl">
-
+      <div className="flex flex-col items-center justify-center text-center px-6 max-w-4xl animate-splash-entrance">
         {/* Brand Logo & Name */}
-        <div className="flex items-center gap-3 sm:gap-6 mb-4 sm:mb-6 animate-logo-entrance">
+        <div className="flex items-center gap-3 sm:gap-6 mb-4 sm:mb-6">
           <div className="relative w-12 h-12 sm:w-20 sm:h-20">
             <Image
               src="/images/logomosa.svg"
@@ -85,12 +84,12 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
         {/* Dynamic Tagline (fades in) */}
         <h1
           ref={taglineRef}
-          className="text-3xl sm:text-6xl font-bold tracking-tight text-zinc-950 font-sfpro mt-3 leading-tight animate-tagline-entrance"
+          className="text-3xl sm:text-6xl font-bold tracking-tight text-zinc-950 font-sfpro mt-3 leading-tight"
         >
           {locale === "en" ? (
             <>
               Nurturing Well-rounded{" "}
-              <br className="block sm:hidden" />
+              <br />
               <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
                 Leaders
               </span>{" "}
@@ -99,7 +98,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
           ) : (
             <>
               Membentuk Pemimpin{" "}
-              <br className="block sm:hidden" />
+              <br />
               <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
                 Masa Depan
               </span>{" "}
