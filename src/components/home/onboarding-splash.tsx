@@ -59,7 +59,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
     >
       <div className="flex flex-col items-center justify-center text-center px-6 max-w-4xl animate-splash-entrance">
         {/* Brand Logo & Name */}
-        <div className="flex items-center gap-3 sm:gap-6 mb-4 sm:mb-6">
+        <div className="flex items-center justify-center gap-3 sm:gap-6 mb-4 sm:mb-6">
           <div className="relative w-12 h-12 sm:w-20 sm:h-20">
             <Image
               src="/images/logomosa.svg"
@@ -84,7 +84,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
         {/* Dynamic Tagline (fades in) */}
         <h1
           ref={taglineRef}
-          className="text-3xl sm:text-6xl font-bold tracking-tight text-zinc-950 font-sfpro mt-3 leading-tight"
+          className="text-3xl sm:text-6xl font-bold tracking-tight text-zinc-950 font-sfpro mt-3 leading-tight text-center"
         >
           {locale === "en" ? (
             <>
