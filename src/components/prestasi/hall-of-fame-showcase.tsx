@@ -15,7 +15,8 @@ import {
   Globe,
   Flag,
   BookOpen,
-  ArrowUpRight
+  ArrowUpRight,
+  MapPin
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -225,7 +226,6 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
     if (!detailPanelRef.current) return;
     const el = detailPanelRef.current;
 
-    const honor = el.querySelector(".detail-honor");
     const name = el.querySelector(".detail-name");
     const title = el.querySelector(".detail-title");
     const quote = el.querySelector(".detail-quote");
@@ -233,8 +233,8 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
     const meta = el.querySelectorAll(".detail-meta");
     const imgFrame = el.querySelector(".detail-img-frame");
 
-    gsap.killTweensOf([honor, name, title, quote, desc, meta, imgFrame]);
-    gsap.set([honor, name, title, quote, desc, meta], { opacity: 0, y: 15 });
+    gsap.killTweensOf([name, title, quote, desc, meta, imgFrame]);
+    gsap.set([name, title, quote, desc, meta], { opacity: 0, y: 15 });
     gsap.set(imgFrame, { opacity: 0, scale: 0.96, filter: "blur(4px)" });
 
     const tl = gsap.timeline();
@@ -245,7 +245,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
       duration: 0.6,
       ease: "power3.out"
     })
-    .to([honor, name, title], {
+    .to([name, title], {
       opacity: 1,
       y: 0,
       duration: 0.4,
@@ -396,17 +396,6 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
               {/* Profile Details (col-span-7) */}
               <div className="col-span-12 md:col-span-7 space-y-5">
                 
-                {/* Honor & Category */}
-                <div className="detail-honor flex items-center gap-3">
-                  <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-emerald-850 uppercase bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-md">
-                    {lang === "id" ? currentItem.honorTier.id : currentItem.honorTier.en}
-                  </span>
-                  <div className="w-1.5 h-1.5 rounded-full bg-gray-200" />
-                  <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                    {lang === "id" ? currentItem.field.id : currentItem.field.en}
-                  </span>
-                </div>
-
                 {/* Champion Title */}
                 <div className="space-y-1">
                   <h2 className="detail-name font-romulo text-3xl font-bold tracking-tight text-emerald-950 leading-tight uppercase">
@@ -447,7 +436,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
 
                   <div className="detail-meta bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3">
                     <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100/50 flex items-center justify-center text-emerald-600 shrink-0">
-                      <Flag className="size-4.5" strokeWidth={1.2} />
+                      <MapPin className="size-4.5" strokeWidth={1.2} />
                     </div>
                     <div>
                       <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-wider">
