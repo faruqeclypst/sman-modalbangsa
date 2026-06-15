@@ -21,6 +21,8 @@ export function SpecialPrograms({ programs, lang }: SpecialProgramsProps) {
   const [isHovered, setIsHovered] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
 
   const images = [
     "/images/sp_islamic_values.png",
@@ -40,6 +42,31 @@ export function SpecialPrograms({ programs, lang }: SpecialProgramsProps) {
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + programs.length) % programs.length);
+  };
+
+  // Touch Swipe Handlers for Mobile Gestures
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const threshold = 50; // minimum distance in pixels for a swipe
+    const diff = touchStartX.current - touchEndX.current;
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // Swiped left -> Next
+        handleNext();
+      } else {
+        // Swiped right -> Prev
+        handlePrev();
+      }
+    }
   };
 
   // Auto-play effect
@@ -105,9 +132,12 @@ export function SpecialPrograms({ programs, lang }: SpecialProgramsProps) {
       
       {/* Upper Section: Genshin Character Presentation Layout */}
       <div 
-        className="relative min-h-[460px] md:min-h-[520px] rounded-[2.5rem] border border-gray-100 bg-gray-50/40 overflow-hidden p-6 pb-20 md:p-12 md:pb-12 flex flex-col justify-between"
+        className="relative min-h-[460px] md:min-h-[520px] rounded-[2.5rem] border border-gray-100 bg-gray-50/40 overflow-hidden p-6 pb-20 md:p-12 md:pb-12 flex flex-col justify-between select-none touch-pan-y"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         
         {/* Right side large graphic (Xiao Art) */}
@@ -181,24 +211,23 @@ export function SpecialPrograms({ programs, lang }: SpecialProgramsProps) {
           ))}
         </div>
 
-        {/* Floating Capsule Controller (Bottom Right) */}
-        <div className="absolute bottom-6 right-6 md:right-12 flex items-center gap-1 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-[#16a34a]/30 p-1.5 rounded-full shadow-xl z-20">
-          <button
-            onClick={handlePrev}
-            className="p-2.5 rounded-full text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800 transition-all cursor-pointer active:scale-90"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft className="size-4" />
-          </button>
-          <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-700 mx-1" />
-          <button
-            onClick={handleNext}
-            className="p-2.5 rounded-full text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800 transition-all cursor-pointer active:scale-90"
-            aria-label="Next slide"
-          >
-            <ChevronRight className="size-4" />
-          </button>
-        </div>
+        {/* Prev Arrow Button (Bottom Left) */}
+        <button
+          onClick={handlePrev}
+          className="absolute bottom-6 left-6 md:left-12 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-[#16a34a]/20 w-10 h-10 rounded-full shadow-lg z-20 text-zinc-700 hover:text-emerald-700 hover:border-emerald-550 transition-all cursor-pointer active:scale-90"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="size-5" />
+        </button>
+
+        {/* Next Arrow Button (Bottom Right) */}
+        <button
+          onClick={handleNext}
+          className="absolute bottom-6 right-6 md:right-12 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-[#16a34a]/20 w-10 h-10 rounded-full shadow-lg z-20 text-zinc-700 hover:text-emerald-700 hover:border-emerald-550 transition-all cursor-pointer active:scale-90"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="size-5" />
+        </button>
 
       </div>
 
