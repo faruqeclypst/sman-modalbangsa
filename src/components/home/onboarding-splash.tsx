@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
@@ -15,7 +15,6 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
   const isHome = pathname === "/" || pathname === `/${locale}` || pathname === `/${locale}/`;
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -59,27 +58,26 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white text-zinc-900 select-none overflow-hidden"
     >
       <div className="flex flex-col items-center justify-center text-center px-6 max-w-4xl">
+
         {/* Brand Logo & Name */}
-        <div
-          ref={logoRef}
-          className="flex items-center gap-4 mb-6 animate-logo-entrance"
-        >
-          <span className="relative inline-flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-xl">
+        <div className="flex items-center gap-3 sm:gap-6 mb-4 sm:mb-6 animate-logo-entrance">
+          <div className="relative w-12 h-12 sm:w-20 sm:h-20">
             <Image
-              src="/logo.png"
+              src="/images/logomosa.svg"
               alt="Logo SMAN Modal Bangsa"
-              width={64}
-              height={64}
+              fill
               className="object-contain"
               priority
             />
-          </span>
+          </div>
+          {/* Vertical Divider */}
+          <div className="h-10 sm:h-16 w-px bg-zinc-300" />
           <div className="flex flex-col text-left leading-tight">
-            <span className="text-2xl font-bold text-[#14532d]">
-              SMAN Modal Bangsa
-            </span>
-            <span className="text-[11px] font-semibold tracking-wider text-gray-500 uppercase">
+            <span className="text-[10px] sm:text-sm font-semibold tracking-wider text-gray-500 uppercase">
               Sekolah Unggul Berasrama
+            </span>
+            <span className="text-xl sm:text-3xl font-bold text-[#14532d] mt-0.5 sm:mt-1">
+              SMAN Modal Bangsa
             </span>
           </div>
         </div>
@@ -87,11 +85,12 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
         {/* Dynamic Tagline (fades in) */}
         <h1
           ref={taglineRef}
-          className="text-2xl sm:text-4xl font-bold tracking-tight text-zinc-950 font-sfpro mt-2 leading-normal animate-tagline-entrance"
+          className="text-3xl sm:text-6xl font-bold tracking-tight text-zinc-950 font-sfpro mt-3 leading-tight animate-tagline-entrance"
         >
           {locale === "en" ? (
             <>
               Nurturing Well-rounded{" "}
+              <br className="block sm:hidden" />
               <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
                 Leaders
               </span>{" "}
@@ -100,6 +99,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
           ) : (
             <>
               Membentuk Pemimpin{" "}
+              <br className="block sm:hidden" />
               <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
                 Masa Depan
               </span>{" "}
