@@ -99,12 +99,6 @@ export default async function LocaleLayout({
     <html lang={lang === "id" ? "id-ID" : "en-US"} className={plusJakarta.variable} translate="no">
       <body className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
         <LenisProvider>
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded focus:bg-[color:var(--primary)] focus:px-3 focus:py-2 focus:text-sm focus:text-white"
-          >
-            {dict.common.skipToContent}
-          </a>
           <OnboardingSplash locale={lang} />
           <Header locale={lang} dict={dict} />
           <main id="main" className="flex-1">
