@@ -105,7 +105,7 @@ export function SpecialPrograms({ programs, lang }: SpecialProgramsProps) {
       
       {/* Upper Section: Genshin Character Presentation Layout */}
       <div 
-        className="relative min-h-[460px] md:min-h-[520px] rounded-[2.5rem] border border-gray-100 bg-gray-50/40 overflow-hidden p-6 md:p-12 flex flex-col justify-between"
+        className="relative min-h-[460px] md:min-h-[520px] rounded-[2.5rem] border border-gray-100 bg-gray-50/40 overflow-hidden p-6 pb-20 md:p-12 md:pb-12 flex flex-col justify-between"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

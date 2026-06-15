@@ -383,7 +383,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
           {/* Right Column: Premium Spatial Exhibition Plate (col-span-8) */}
           <div
             ref={detailPanelRef}
-            className="col-span-12 lg:col-span-8 bg-white border border-emerald-100/40 rounded-[2.5rem] p-8 lg:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden"
+            className="col-span-12 lg:col-span-8 bg-white border border-emerald-100/40 rounded-3xl lg:rounded-[2.5rem] p-5 sm:p-8 lg:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden"
           >
             {/* Mesh background specific to current card */}
             <div className="absolute inset-0 pointer-events-none opacity-20 transition-all duration-1000">
@@ -453,11 +453,11 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
               </div>
 
               {/* Photo Frame (col-span-5) */}
-              <div className="col-span-12 md:col-span-5 flex justify-center items-center h-full">
+              <div className="col-span-12 md:col-span-5 flex justify-center items-center h-auto md:h-full">
                 {/* Double-bezel outer shell */}
-                <div className="detail-img-frame relative w-full max-w-[280px] aspect-[3/4.2] p-2 rounded-[2.5rem] bg-emerald-50 border border-emerald-100 shadow-sm group/img">
+                <div className="detail-img-frame relative w-full max-w-[240px] sm:max-w-[280px] aspect-[3/4.2] p-2 rounded-3xl sm:rounded-[2.5rem] bg-emerald-50 border border-emerald-100 shadow-sm group/img">
                   {/* Inner bezel core */}
-                  <div className="relative w-full h-full rounded-[calc(2.5rem-0.5rem)] overflow-hidden bg-gray-50 border border-gray-100">
+                  <div className="relative w-full h-full rounded-[calc(1.5rem-0.25rem)] sm:rounded-[calc(2.5rem-0.5rem)] overflow-hidden bg-gray-50 border border-gray-100">
                     <Image
                       src={currentItem.image}
                       alt={currentItem.name}
