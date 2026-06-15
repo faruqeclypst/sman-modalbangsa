@@ -6,6 +6,7 @@ import { Hero } from "@/components/home/hero";
 import { IntroTransition } from "@/components/home/intro-transition";
 import { HomeSections } from "@/components/home/home-sections";
 import { HomeSectionsSkeleton } from "@/components/home/home-sections-skeleton";
+import { OnboardingSplash } from "@/components/home/onboarding-splash";
 import { SectionOrnament } from "@/components/ui/section-ornament";
 
 export const revalidate = 3600; // 1h ISR
@@ -20,6 +21,7 @@ export default async function HomePage({
 
   return (
     <>
+      <OnboardingSplash locale={lang} />
       {/* Hero renders instantly with video bg.mp4 */}
       <Hero locale={lang} dict={dict} />
 
