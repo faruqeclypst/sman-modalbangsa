@@ -96,8 +96,8 @@ export default async function LocaleLayout({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id";
 
   return (
-    <html lang={lang === "id" ? "id-ID" : "en-US"} className={plusJakarta.variable} translate="no">
-      <body className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
+    <html lang={lang === "id" ? "id-ID" : "en-US"} className={`${plusJakarta.variable} overflow-x-hidden`} translate="no" suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] antialiased overflow-x-hidden">
         <LenisProvider>
           <OnboardingSplash locale={lang} />
           <Header locale={lang} dict={dict} />

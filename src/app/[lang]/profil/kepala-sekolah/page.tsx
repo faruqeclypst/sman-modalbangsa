@@ -52,7 +52,7 @@ export default async function PrincipalPage({
                   width={280}
                   height={380}
                   className="h-auto w-full object-contain"
-                  style={{ height: "auto" }}
+                  style={{ width: "100%", height: "auto" }}
                   priority
                   unoptimized
                 />

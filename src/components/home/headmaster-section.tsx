@@ -78,7 +78,7 @@ export function HeadmasterSection({ dict }: HeadmasterSectionProps) {
                   width={220}
                   height={300}
                   className="relative z-10 mx-auto h-auto w-full object-contain drop-shadow-[0_8px_16px_rgba(5,150,105,0.15)]"
-                  style={{ height: "auto" }}
+                  style={{ width: "100%", height: "auto" }}
                   unoptimized
                   priority
                 />
