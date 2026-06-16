@@ -74,26 +74,94 @@ const ORG_DATA: OrgNode = {
       }
     },
     {
-      id: "admin",
-      role: { id: "Kepala Tata Usaha", en: "Head of Administration" },
-      name: "Fittriani, S.E.",
-      initials: "TU",
+      id: "waka-asrama",
+      role: { id: "Kepala Asrama", en: "Head of Boarding" },
+      name: "Laswardi, S.Pd.",
+      initials: "AS",
       desc: {
-        id: "Penanggung jawab layanan administrasi persuratan, kepegawaian, keuangan, kesiswaan, dan rumah tangga sekolah secara menyeluruh.",
-        en: "Person in charge of administrative services, correspondence, staffing, finance, student records, and school household support."
+        id: "Mengatur tata tertib kehidupan berasrama harian siswa, pengasuhan, pembinaan akhlak, keamanan, dan kesehatan di lingkungan asrama.",
+        en: "Regulating daily boarding rules, student care, character building, security, and health inside the dormitories."
       },
       responsibilities: {
         id: [
-          "Mengelola persuratan, kearsipan, dan administrasi kepegawaian sekolah.",
-          "Menyusun draf administrasi keuangan sekolah dan laporan SPJ.",
-          "Mendukung urusan sarana prasarana dan inventarisasi aset sekolah."
+          "Mengawasi tata tertib harian dan jam malam asrama putra & putri.",
+          "Mengoordinasikan guru asrama, pamong, dan pembina asrama.",
+          "Memastikan kelancaran logistik dan kesehatan lingkungan asrama."
         ],
         en: [
-          "Managing correspondence, archives, and school staffing administration.",
-          "Drafting school financial administration and accountability reports.",
-          "Supporting infrastructure affairs and school asset inventories."
+          "Supervising daily rules and curfews for boys & girls dormitories.",
+          "Coordinating dormitory teachers, caretakers, and advisors.",
+          "Ensuring smooth logistics and environmental hygiene in dorms."
         ]
       }
+    },
+    {
+      id: "waka-sarpras",
+      role: { id: "Sarpras", en: "Facilities & Assets" },
+      name: "Rahmat, S.Pd.",
+      initials: "SP",
+      desc: {
+        id: "Merencanakan pemeliharaan gedung kelas, laboratorium, asrama, sarana olahraga, serta inventarisasi barang dan pemeliharaan rutin aset.",
+        en: "Planning class buildings, laboratories, dorms, and sports facilities maintenance, asset inventory, and routine maintenance."
+      },
+      responsibilities: {
+        id: [
+          "Mendata kebutuhan sarana prasarana sekolah dan asrama.",
+          "Mengatur pemeliharaan kebersihan dan fasilitas gedung.",
+          "Mengoordinasikan pengelola barang dan pemeliharaan alat sekolah."
+        ],
+        en: [
+          "Recording school and boarding facility infrastructure needs.",
+          "Managing cleanliness maintenance and building facilities.",
+          "Coordinating asset managers and school tool maintenance."
+        ]
+      },
+      coordinators: [
+        {
+          id: "penjab-sarpras",
+          role: { id: "Penjab Sarpras", en: "Facilities Coord." },
+          name: "M. Amin",
+          initials: "SP",
+          desc: {
+            id: "Membantu pengawasan kelayakan gedung kelas, laboratorium, asrama, sarana ibadah, dan inventaris fasilitas belajar.",
+            en: "Assisting in supervising classrooms, laboratories, dorms, worship places, and learning facility inventory conditions."
+          },
+          responsibilities: {
+            id: [
+              "Mendata kerusakan prasarana sekolah secara berkala untuk tindak lanjut.",
+              "Memantau kebersihan, kenyamanan, dan keamanan fasilitas fisik sekolah.",
+              "Mengoordinasikan perbaikan sarpras tingkat ringan dengan tim kebersihan."
+            ],
+            en: [
+              "Recording school infrastructure damage periodically for maintenance followup.",
+              "Monitoring the cleanliness, comfort, and safety of physical facilities.",
+              "Coordinating minor maintenance operations with the cleaning team."
+            ]
+          }
+        },
+        {
+          id: "pengelola-barang",
+          role: { id: "Pengelola Barang", en: "Asset Manager" },
+          name: "Feri Ardiansyah, S.Hum.",
+          initials: "PB",
+          desc: {
+            id: "Bertanggung jawab atas pencatatan, inventarisasi aset daerah, pemeliharaan logistik, dan pelaporan administrasi barang sekolah.",
+            en: "Responsible for recording, regional asset inventory, logistics maintenance, and school goods administrative reporting."
+          },
+          responsibilities: {
+            id: [
+              "Mencatat dan menempelkan nomor registrasi inventaris pada setiap aset sekolah.",
+              "Mengelola gudang logistik sekolah dan mendistribusikan kebutuhan rutin kelas.",
+              "Menyusun Laporan Mutasi Barang secara periodik untuk diserahkan ke dinas terkait."
+            ],
+            en: [
+              "Recording and affixing inventory registration numbers on all school assets.",
+              "Managing school logistics storage and distributing routine classroom needs.",
+              "Drafting Goods Mutation Reports periodically for submit to related departments."
+            ]
+          }
+        }
+      ]
     },
     {
       id: "waka-kurikulum",
@@ -183,81 +251,57 @@ const ORG_DATA: OrgNode = {
             ]
           }
         }
-      ],
+      ]
+    },
+    {
+      id: "tps-chair",
+      role: { id: "Ketua TPS", en: "TPS Chairman" },
+      name: "Muhammad Iqbal, S.Si., M.Si.",
+      initials: "TP",
+      desc: {
+        id: "Memimpin Test Preparation Service (TPS) untuk bimbingan intensif persiapan UTBK dan seleksi masuk perguruan tinggi negeri bagi siswa.",
+        en: "Leading the Test Preparation Service (TPS) for intensive UTBK tutoring and university entrance exam selection prep."
+      },
+      responsibilities: {
+        id: [
+          "Menyusun silabus bimbel UTBK-SNBT dan ujian mandiri.",
+          "Mengatur jadwal try-out ujian berkala bagi siswa kelas XII.",
+          "Mengevaluasi grafik kesiapan kelulusan PTN siswa."
+        ],
+        en: [
+          "Drafting UTBK-SNBT prep syllabus and independent entrance exams.",
+          "Arranging routine mock exam (try-out) schedules for Grade XII.",
+          "Evaluating student university entrance readiness graphs."
+        ]
+      },
       children: [
         {
-          id: "tps-chair",
-          role: { id: "Ketua TPS", en: "TPS Chairman" },
-          name: "Muhammad Iqbal, S.Si., M.Si.",
-          initials: "TP",
+          id: "perpus",
+          role: { id: "Kepala Perpustakaan", en: "Head of Library" },
+          name: "M. Iqbal, S.Pd., M.Pd.",
+          initials: "PB",
           desc: {
-            id: "Memimpin Test Preparation Service (TPS) untuk bimbingan intensif persiapan UTBK dan seleksi masuk perguruan tinggi negeri bagi siswa.",
-            en: "Leading the Test Preparation Service (TPS) for intensive UTBK tutoring and university entrance exam selection prep."
+            id: "Penanggung jawab pengelolaan perpustakaan sekolah dan gerakan literasi digital.",
+            en: "Person in charge of school library management and digital literacy movement."
           },
           responsibilities: {
-            id: [
-              "Menyusun silabus bimbel UTBK-SNBT dan ujian mandiri.",
-              "Mengatur jadwal try-out ujian berkala bagi siswa kelas XII.",
-              "Mengevaluasi grafik kesiapan kelulusan PTN siswa."
-            ],
-            en: [
-              "Drafting UTBK-SNBT prep syllabus and independent entrance exams.",
-              "Arranging routine mock exam (try-out) schedules for Grade XII.",
-              "Evaluating student university entrance readiness graphs."
-            ]
+            id: ["Mengelola peminjaman pustaka & koleksi literatur.", "Mengembangkan e-library sekolah bagi siswa."],
+            en: ["Managing library lending & literature collections.", "Developing school e-library platform for students."]
           }
         },
         {
-          id: "unit-pendukung",
-          role: { id: "Unit Pendukung", en: "Support Units" },
-          name: "Perpustakaan & Laboratorium",
-          initials: "UP",
+          id: "lab",
+          role: { id: "Kepala Laboratorium", en: "Head of Lab" },
+          name: "Herman, S.Pd.",
+          initials: "LB",
           desc: {
-            id: "Mengupayakan dukungan fasilitas literasi buku cetak/digital serta ketersediaan peralatan praktikum sains yang memadai.",
-            en: "Providing resources for printed/digital library facilities and ensuring adequate science practical equipment availability."
+            id: "Penanggung jawab tata ruang, peralatan, bahan, dan keselamatan kerja laboratorium sekolah.",
+            en: "Person in charge of laboratory layout, equipment, materials, and safety standards."
           },
           responsibilities: {
-            id: [
-              "Mengoordinasikan program kerja perpustakaan dan laboratorium sains.",
-              "Memastikan kesiapan ruang baca dan laboratorium menunjang riset siswa.",
-              "Menyusun laporan pemanfaatan sarana penunjang akademik."
-            ],
-            en: [
-              "Coordinating work programs of the library and science laboratories.",
-              "Ensuring reading room and laboratory readiness to support student research.",
-              "Drafting utilization reports for academic support facilities."
-            ]
-          },
-          children: [
-            {
-              id: "perpus",
-              role: { id: "Kepala Perpustakaan", en: "Head of Library" },
-              name: "M. Iqbal, S.Pd., M.Pd.",
-              initials: "PB",
-              desc: {
-                id: "Penanggung jawab pengelolaan perpustakaan sekolah dan gerakan literasi digital.",
-                en: "Person in charge of school library management and digital literacy movement."
-              },
-              responsibilities: {
-                id: ["Mengelola peminjaman pustaka & koleksi literatur.", "Mengembangkan e-library sekolah bagi siswa."],
-                en: ["Managing library lending & literature collections.", "Developing school e-library platform for students."]
-              }
-            },
-            {
-              id: "lab",
-              role: { id: "Kepala Laboratorium", en: "Head of Lab" },
-              name: "Herman, S.Pd.",
-              initials: "LB",
-              desc: {
-                id: "Penanggung jawab tata ruang, peralatan, bahan, dan keselamatan kerja laboratorium sekolah.",
-                en: "Person in charge of laboratory layout, equipment, materials, and safety standards."
-              },
-              responsibilities: {
-                id: ["Memantau kesediaan bahan praktikum Fisika, Kimia, Biologi.", "Mengatur jadwal penggunaan lab untuk praktikum siswa."],
-                en: ["Monitoring Physics, Chemistry, Biology practical materials availability.", "Scheduling lab rooms utilization for student practical sessions."]
-              }
-            }
-          ]
+            id: ["Memantau kesediaan bahan praktikum Fisika, Kimia, Biologi.", "Mengatur jadwal penggunaan lab untuk praktikum siswa."],
+            en: ["Monitoring Physics, Chemistry, Biology practical materials availability.", "Scheduling lab rooms utilization for student practical sessions."]
+          }
         }
       ]
     },
@@ -272,7 +316,7 @@ const ORG_DATA: OrgNode = {
       },
       responsibilities: {
         id: [
-          "Membimbing program kerja OSIS dan kegiatan organisasi siswa.",
+          "Membimbing program kerja OSIS and kegiatan organisasi siswa.",
           "Mengoordinasikan pembinaan ekstrakurikuler bidang akademik dan non-akademik.",
           "Mengawasi kegiatan gerakan pramuka sekolah."
         ],
@@ -374,28 +418,6 @@ const ORG_DATA: OrgNode = {
       ],
       children: [
         {
-          id: "waka-asrama",
-          role: { id: "Kepala Asrama", en: "Head of Boarding" },
-          name: "Laswardi, S.Pd.",
-          initials: "AS",
-          desc: {
-            id: "Mengatur tata tertib kehidupan berasrama harian siswa, pengasuhan, pembinaan akhlak, keamanan, dan kesehatan di lingkungan asrama.",
-            en: "Regulating daily boarding rules, student care, character building, security, and health inside the dormitories."
-          },
-          responsibilities: {
-            id: [
-              "Mengawasi tata tertib harian dan jam malam asrama putra & putri.",
-              "Mengoordinasikan guru asrama, pamong, dan pembina asrama.",
-              "Memastikan kelancaran logistik dan kesehatan lingkungan asrama."
-            ],
-            en: [
-              "Supervising daily rules and curfews for boys & girls dormitories.",
-              "Coordinating dormitory teachers, caretakers, and advisors.",
-              "Ensuring smooth logistics and environmental hygiene in dorms."
-            ]
-          }
-        },
-        {
           id: "wali-kelas",
           role: { id: "Wali Kelas", en: "Homeroom Teachers" },
           name: "Wali Kelas TA 2025/2026",
@@ -488,72 +510,26 @@ const ORG_DATA: OrgNode = {
       ]
     },
     {
-      id: "waka-sarpras",
-      role: { id: "Sarpras", en: "Facilities & Assets" },
-      name: "Rahmat, S.Pd.",
-      initials: "SP",
+      id: "admin",
+      role: { id: "Kepala Tata Usaha", en: "Head of Administration" },
+      name: "Fittriani, S.E.",
+      initials: "TU",
       desc: {
-        id: "Merencanakan pemeliharaan gedung kelas, laboratorium, asrama, sarana olahraga, serta inventarisasi barang dan pemeliharaan rutin aset.",
-        en: "Planning class buildings, laboratories, dorms, and sports facilities maintenance, asset inventory, and routine maintenance."
+        id: "Penanggung jawab layanan administrasi persuratan, kepegawaian, keuangan, kesiswaan, dan rumah tangga sekolah secara menyeluruh.",
+        en: "Person in charge of administrative services, correspondence, staffing, finance, student records, and school household support."
       },
       responsibilities: {
         id: [
-          "Mendata kebutuhan sarana prasarana sekolah dan asrama.",
-          "Mengatur pemeliharaan kebersihan dan fasilitas gedung.",
-          "Mengoordinasikan pengelola barang dan pemeliharaan alat sekolah."
+          "Mengelola persuratan, kearsipan, dan administrasi kepegawaian sekolah.",
+          "Menyusun draf administrasi keuangan sekolah dan laporan SPJ.",
+          "Mendukung urusan sarana prasarana dan inventarisasi aset sekolah."
         ],
         en: [
-          "Recording school and boarding facility infrastructure needs.",
-          "Managing cleanliness maintenance and building facilities.",
-          "Coordinating asset managers and school tool maintenance."
+          "Managing correspondence, archives, and school staffing administration.",
+          "Drafting school financial administration and accountability reports.",
+          "Supporting infrastructure affairs and school asset inventories."
         ]
-      },
-      coordinators: [
-        {
-          id: "penjab-sarpras",
-          role: { id: "Penjab Sarpras", en: "Facilities Coord." },
-          name: "M. Amin",
-          initials: "SP",
-          desc: {
-            id: "Membantu pengawasan kelayakan gedung kelas, laboratorium, asrama, sarana ibadah, dan inventaris fasilitas belajar.",
-            en: "Assisting in supervising classrooms, laboratories, dorms, worship places, and learning facility inventory conditions."
-          },
-          responsibilities: {
-            id: [
-              "Mendata kerusakan prasarana sekolah secara berkala untuk tindak lanjut.",
-              "Memantau kebersihan, kenyamanan, dan keamanan fasilitas fisik sekolah.",
-              "Mengoordinasikan perbaikan sarpras tingkat ringan dengan tim kebersihan."
-            ],
-            en: [
-              "Recording school infrastructure damage periodically for maintenance followup.",
-              "Monitoring the cleanliness, comfort, and safety of physical facilities.",
-              "Coordinating minor maintenance operations with the cleaning team."
-            ]
-          }
-        },
-        {
-          id: "pengelola-barang",
-          role: { id: "Pengelola Barang", en: "Asset Manager" },
-          name: "Feri Ardiansyah, S.Hum.",
-          initials: "PB",
-          desc: {
-            id: "Bertanggung jawab atas pencatatan, inventarisasi aset daerah, pemeliharaan logistik, dan pelaporan administrasi barang sekolah.",
-            en: "Responsible for recording, regional asset inventory, logistics maintenance, and school goods administrative reporting."
-          },
-          responsibilities: {
-            id: [
-              "Mencatat dan menempelkan nomor registrasi inventaris pada setiap aset sekolah.",
-              "Mengelola gudang logistik sekolah dan mendistribusikan kebutuhan rutin kelas.",
-              "Menyusun Laporan Mutasi Barang secara periodik untuk diserahkan ke dinas terkait."
-            ],
-            en: [
-              "Recording and affixing inventory registration numbers on all school assets.",
-              "Managing school logistics storage and distributing routine classroom needs.",
-              "Drafting Goods Mutation Reports periodically for submit to related departments."
-            ]
-          }
-        }
-      ]
+      }
     }
   ]
 };
@@ -848,53 +824,37 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
   // Render the interactive tree with custom top-level side branches
   const renderInteractiveTree = (root: OrgNode) => {
     const committee = root.children?.find((c) => c.id === "committee");
-    const admin = root.children?.find((c) => c.id === "admin");
-    const wakas = root.children?.filter(
-      (c) => c.id !== "committee" && c.id !== "admin"
-    ) || [];
+    const cols = root.children?.filter((c) => c.id !== "committee") || [];
 
     return (
       <div className="flex flex-col items-center">
-        {/* Principal Card */}
-        {renderCard(root, false)}
-
-        {/* Vertical line down to Committee/Admin row */}
-        <div className="w-px h-8 bg-zinc-200 dark:bg-zinc-700" />
-
-        {/* Committee & Admin Row */}
-        <div className="relative flex gap-12 justify-center">
-          {/* Horizontal connector line */}
-          <div className="absolute top-0 left-1/4 right-1/4 h-px bg-zinc-200 dark:bg-zinc-700" />
-
-          {/* Committee Column */}
+        {/* Top level: Principal centered with Committee positioned absolutely to the left */}
+        <div className="relative flex flex-col items-center">
+          {/* Principal Card */}
+          {renderCard(root, false)}
+          
+          {/* Committee Card (absolutely positioned to the left) */}
           {committee && (
-            <div className="relative pt-6 flex flex-col items-center">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-zinc-200 dark:bg-zinc-700" />
+            <div className="absolute right-full top-0 mr-12 flex items-center">
               {renderCard(committee, false)}
-            </div>
-          )}
-
-          {/* Admin Column */}
-          {admin && (
-            <div className="relative pt-6 flex flex-col items-center">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-zinc-200 dark:bg-zinc-700" />
-              {renderCard(admin, false)}
+              {/* Horizontal dotted connector line */}
+              <div className="w-12 border-t-2 border-dashed border-zinc-350 dark:border-zinc-650" />
             </div>
           )}
         </div>
 
-        {/* Vertical line from Committee/Admin down to Wakas */}
+        {/* Vertical line down from Kepala Sekolah to the 7 columns */}
         <div className="w-px h-8 bg-zinc-200 dark:bg-zinc-700" />
 
-        {/* Wakas Row */}
+        {/* 7 Columns Row */}
         <div className="relative flex gap-6 justify-center">
-          {wakas.map((waka, wIdx) => {
-            const isFirst = wIdx === 0;
-            const isLast = wIdx === wakas.length - 1;
+          {cols.map((col, idx) => {
+            const isFirst = idx === 0;
+            const isLast = idx === cols.length - 1;
             return (
-              <div key={waka.id} className="relative pt-6 flex flex-col items-center">
-                {/* Horizontal line segment */}
-                {wakas.length > 1 && (
+              <div key={col.id} className="relative pt-6 flex flex-col items-center">
+                {/* Horizontal connector line segment */}
+                {cols.length > 1 && (
                   <div 
                     className="absolute top-0 h-px bg-zinc-200 dark:bg-zinc-700"
                     style={{
@@ -903,9 +863,9 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                     }}
                   />
                 )}
-                {/* Vertical line segment */}
+                {/* Vertical line segment down to card */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-zinc-200 dark:bg-zinc-700" />
-                {renderTreeNode(waka)}
+                {renderTreeNode(col)}
               </div>
             );
           })}
