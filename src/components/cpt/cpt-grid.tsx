@@ -9,6 +9,7 @@ interface CPTGridProps {
   badge?: string;
   emptyText: string;
   showExcerpt?: boolean;
+  cols?: 2 | 3;
 }
 
 export function CPTGrid({
@@ -18,6 +19,7 @@ export function CPTGrid({
   badge,
   emptyText,
   showExcerpt = true,
+  cols = 3,
 }: CPTGridProps) {
   if (!posts.length) {
     return (
@@ -27,8 +29,12 @@ export function CPTGrid({
     );
   }
 
+  const gridClass = cols === 2
+    ? "grid gap-6 sm:grid-cols-2"
+    : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3";
+
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className={gridClass}>
       {posts.map((post, idx) => (
         <CPTCard
           key={post.id}

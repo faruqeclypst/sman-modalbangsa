@@ -5,6 +5,7 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/layout/page-header";
+import { ContactForm } from "@/components/kontak/contact-form";
 
 export const revalidate = false;
 
@@ -145,18 +146,23 @@ export default async function ContactPage({
               </div>
             </div>
 
-            {/* Right — map */}
-            <div className="overflow-hidden rounded-2xl border border-[color:var(--border)]">
-              <iframe
-                title={dict.footer.address}
-                src="https://www.google.com/maps?q=SMAN+Modal+Bangsa+Aceh&output=embed"
-                width="100%"
-                height="100%"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="block min-h-[400px] w-full border-0 lg:min-h-full"
-              />
+            {/* Right — Contact Form */}
+            <div>
+              <ContactForm lang={lang} />
             </div>
+          </div>
+
+          {/* Bottom — Map */}
+          <div className="mt-16 overflow-hidden rounded-2xl border border-[color:var(--border)] shadow-sm">
+            <iframe
+              title={dict.footer.address}
+              src="https://www.google.com/maps?q=SMAN+Modal+Bangsa+Aceh&output=embed"
+              width="100%"
+              height="450"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="block w-full border-0"
+            />
           </div>
         </Container>
       </section>
