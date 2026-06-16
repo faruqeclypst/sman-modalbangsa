@@ -1003,11 +1003,11 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                 onMouseUp={handleMouseUpOrLeave}
                 onMouseLeave={handleMouseUpOrLeave}
                 className={cn(
-                  "hidden lg:block overflow-auto custom-scrollbar pb-8 pt-4 select-none",
+                  "hidden lg:block overflow-auto custom-scrollbar pb-8 pt-24 select-none",
                   isDragging ? "cursor-grabbing" : "cursor-grab"
                 )}
               >
-                <div className="w-fit mx-auto p-4">
+                <div className="w-fit min-w-full flex justify-center py-4 px-12">
                   {renderInteractiveTree(ORG_DATA)}
                 </div>
               </div>
