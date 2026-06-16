@@ -19,7 +19,8 @@
     "services": "Services",
     "menu": "Menu",
     "alumni": "Alumni",
-    "clubSiswa": "Student Clubs"
+    "clubSiswa": "Student Clubs",
+    "mediaHub": "Media Hub"
   },
   "cpt": {
     "agenda": {
@@ -73,6 +74,12 @@
       "title": "Mosa Student Clubs",
       "subtitle": "Communities for developing student interests, talents, and leadership organizations at SMAN Modal Bangsa.",
       "empty": "No student clubs registered yet."
+    },
+    "mediaHub": {
+      "label": "Media Hub",
+      "title": "Mosa Video & Media Hub",
+      "subtitle": "Collection of official documentation videos, school profile, and student short movies at SMAN Modal Bangsa.",
+      "empty": "No videos available yet."
     },
     "galeri": {
       "label": "Gallery",

@@ -19,7 +19,8 @@
     "services": "Layanan",
     "menu": "Menu",
     "alumni": "Alumni",
-    "clubSiswa": "Club Siswa"
+    "clubSiswa": "Club Siswa",
+    "mediaHub": "Media Hub"
   },
   "cpt": {
     "agenda": {
@@ -73,6 +74,12 @@
       "title": "Club Siswa Mosa",
       "subtitle": "Komunitas pengembangan minat, bakat, dan organisasi kepemimpinan siswa SMAN Modal Bangsa.",
       "empty": "Belum ada club siswa terdaftar."
+    },
+    "mediaHub": {
+      "label": "Media Hub",
+      "title": "Mosa Video & Media Hub",
+      "subtitle": "Kumpulan video dokumentasi kegiatan, profil sekolah, dan karya film pendek siswa SMAN Modal Bangsa.",
+      "empty": "Belum ada video tersedia."
     },
     "galeri": {
       "label": "Galeri",

@@ -31,7 +31,13 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
           { label: dict.cpt.gtk.label, href: `${base}/gtk` },
         ],
       },
-      { label: dict.nav.news, href: `${base}/berita` },
+      {
+        label: dict.nav.news,
+        links: [
+          { label: dict.news.allNews, href: `${base}/berita` },
+          { label: dict.nav.mediaHub, href: `${base}/media-hub` },
+        ],
+      },
       {
         label: dict.nav.achievements,
         links: [
