@@ -18,7 +18,8 @@
     "contact": "Kontak",
     "services": "Layanan",
     "menu": "Menu",
-    "alumni": "Alumni"
+    "alumni": "Alumni",
+    "clubSiswa": "Club Siswa"
   },
   "cpt": {
     "agenda": {
@@ -66,6 +67,12 @@
       "title": "Ekstrakurikuler",
       "subtitle": "Wadah pengembangan minat, bakat, dan karakter siswa.",
       "empty": "Belum ada ekstrakurikuler terdaftar."
+    },
+    "clubSiswa": {
+      "label": "Club Siswa",
+      "title": "Club Siswa Mosa",
+      "subtitle": "Komunitas pengembangan minat, bakat, dan organisasi kepemimpinan siswa SMAN Modal Bangsa.",
+      "empty": "Belum ada club siswa terdaftar."
     },
     "galeri": {
       "label": "Galeri",

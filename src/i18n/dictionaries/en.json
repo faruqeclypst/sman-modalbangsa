@@ -18,7 +18,8 @@
     "contact": "Contact",
     "services": "Services",
     "menu": "Menu",
-    "alumni": "Alumni"
+    "alumni": "Alumni",
+    "clubSiswa": "Student Clubs"
   },
   "cpt": {
     "agenda": {
@@ -66,6 +67,12 @@
       "title": "Extracurricular Activities",
       "subtitle": "Programs to develop students' interests, talents, and character.",
       "empty": "No extracurricular registered."
+    },
+    "clubSiswa": {
+      "label": "Student Clubs",
+      "title": "Mosa Student Clubs",
+      "subtitle": "Communities for developing student interests, talents, and leadership organizations at SMAN Modal Bangsa.",
+      "empty": "No student clubs registered yet."
     },
     "galeri": {
       "label": "Gallery",
