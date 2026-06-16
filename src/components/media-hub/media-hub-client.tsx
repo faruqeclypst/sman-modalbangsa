@@ -20,7 +20,7 @@ interface Video {
 const VIDEOS_DATA: Video[] = [
   {
     id: "profile-2023",
-    youtubeId: "T1wY3yQ2mC0",
+    youtubeId: "xodKvMuZfa0",
     title: {
       id: "Profil SMA Negeri Modal Bangsa - Aceh (Official)",
       en: "SMA Negeri Modal Bangsa - Aceh Official School Profile"
@@ -37,7 +37,7 @@ const VIDEOS_DATA: Video[] = [
   },
   {
     id: "film-senja",
-    youtubeId: "o7uDk2gG5qE",
+    youtubeId: "jy6zbAVgemw",
     title: {
       id: "Cerita di Ujung Senja — Film Pendek Karya Siswa",
       en: "Stories at Dusk — Student Short Film Showcase"
@@ -54,7 +54,7 @@ const VIDEOS_DATA: Video[] = [
   },
   {
     id: "film-gapudu",
-    youtubeId: "9uR127V6M4w",
+    youtubeId: "vW9eBUMw5XQ",
     title: {
       id: "GAPUDU — Film Pendek Inspiratif Mosa",
       en: "GAPUDU — Mosa Student Short Film"
@@ -71,7 +71,7 @@ const VIDEOS_DATA: Video[] = [
   },
   {
     id: "film-bungsu",
-    youtubeId: "F054W-q4w14",
+    youtubeId: "DXK401XYxM0",
     title: {
       id: "SI BUNGSU — Drama Pendek Eksplorasi Karakter",
       en: "SI BUNGSU — Character Exploration Student Drama"
@@ -88,7 +88,7 @@ const VIDEOS_DATA: Video[] = [
   },
   {
     id: "film-langkah",
-    youtubeId: "0n8tQpQc63Q",
+    youtubeId: "GFGkzlOKdZU",
     title: {
       id: "LANGKAH BARU — Kisah Motivasi dan Disiplin",
       en: "LANGKAH BARU — Motivation and Discipline Story"
@@ -105,7 +105,7 @@ const VIDEOS_DATA: Video[] = [
   },
   {
     id: "osn-k-docs",
-    youtubeId: "kU_tEwQc9zI",
+    youtubeId: "LKvxj1keJiI",
     title: {
       id: "Dokumentasi Ujicoba OSN-K Sesi 2 SMAN Modal Bangsa",
       en: "OSN-K Simulation Session 2 SMAN Modal Bangsa Documentation"
