@@ -273,10 +273,13 @@ export function MediaHubClient({ locale, dict }: MediaHubClientProps) {
           </div>
 
           {/* Playlist Cards Stack */}
-          <div className={cn(
-            "space-y-4 overflow-y-auto custom-scrollbar pr-1 max-h-[680px]",
-            isCinemaMode && "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-h-none overflow-y-visible"
-          )}>
+          <div 
+            data-lenis-prevent
+            className={cn(
+              "space-y-4 overflow-y-auto custom-scrollbar pr-1 max-h-[680px]",
+              isCinemaMode && "grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-h-none overflow-y-visible"
+            )}
+          >
             {filteredVideos.map((video) => {
               const isActive = video.id === currentVideo.id;
               return (
