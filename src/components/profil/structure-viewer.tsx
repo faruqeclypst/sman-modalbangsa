@@ -1110,46 +1110,100 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                           <div className="grid gap-6 sm:grid-cols-3">
                             {/* Kelas X */}
                             <div className="space-y-3">
-                              <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
+                              <span className="inline-block text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
                                 {locale === "id" ? "Kelas X" : "Grade X"}
                               </span>
-                              <ul className="space-y-2 text-xs sm:text-sm text-zinc-650 dark:text-zinc-400 font-sans">
-                                <li><strong>X-1:</strong> Cut Sri Marlinda, S.Pd.</li>
-                                <li><strong>X-2:</strong> Ferul Dani, S.Pd., Gr.</li>
-                                <li><strong>X-3:</strong> Dzaki Fuady, S.Pd.</li>
-                                <li><strong>X-4:</strong> Misnawati, S.Pd.</li>
-                                <li><strong>X-5:</strong> Winda Rahman, S.Pd.</li>
-                                <li><strong>X-6:</strong> Armizani, S.Pd.</li>
+                              <ul className="space-y-2.5 text-xs sm:text-sm">
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">X-1</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Cut Sri Marlinda, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">X-2</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Ferul Dani, S.Pd., Gr.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">X-3</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Dzaki Fuady, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">X-4</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Misnawati, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">X-5</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Winda Rahman, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">X-6</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Armizani, S.Pd.</span>
+                                </li>
                               </ul>
                             </div>
                             
                             {/* Kelas XI */}
                             <div className="space-y-3">
-                              <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
+                              <span className="inline-block text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
                                 {locale === "id" ? "Kelas XI" : "Grade XI"}
                               </span>
-                              <ul className="space-y-2 text-xs sm:text-sm text-zinc-650 dark:text-zinc-400 font-sans">
-                                <li><strong>XI-1:</strong> Irnalita, S.Pd.</li>
-                                <li><strong>XI-2:</strong> Eva Susanti, S.Ag., M.M.</li>
-                                <li><strong>XI-3:</strong> Roni Miranda, S.Pd.</li>
-                                <li><strong>XI-4:</strong> Mira Fitriana, S.Si., M.Pd.</li>
-                                <li><strong>XI-5:</strong> Rosita Ariani, S.Pd.</li>
-                                <li><strong>XI-6:</strong> Yassi Hernawati, S.Pd.</li>
+                              <ul className="space-y-2.5 text-xs sm:text-sm">
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XI-1</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Irnalita, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XI-2</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Eva Susanti, S.Ag., M.M.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XI-3</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Roni Miranda, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XI-4</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Mira Fitriana, S.Si., M.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XI-5</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Rosita Ariani, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XI-6</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Yassi Hernawati, S.Pd.</span>
+                                </li>
                               </ul>
                             </div>
                             
                             {/* Kelas XII */}
                             <div className="space-y-3">
-                              <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
+                              <span className="inline-block text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
                                 {locale === "id" ? "Kelas XII" : "Grade XII"}
                               </span>
-                              <ul className="space-y-2 text-xs sm:text-sm text-zinc-650 dark:text-zinc-400 font-sans">
-                                <li><strong>XII-1:</strong> Sumanti Hutajulu, S.Pd.</li>
-                                <li><strong>XII-2:</strong> Mutia Rahmah, S.Pd.</li>
-                                <li><strong>XII-3:</strong> Fera Dama Yanti, S.Pd.</li>
-                                <li><strong>XII-4:</strong> Michael Tianame, S.Pd., M.Pd.</li>
-                                <li><strong>XII-5:</strong> Raisul Akbar, S.Pd., M.Pd.</li>
-                                <li><strong>XII-6:</strong> Irma Putriyani, S.Pd.</li>
+                              <ul className="space-y-2.5 text-xs sm:text-sm">
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XII-1</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Sumanti Hutajulu, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XII-2</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Mutia Rahmah, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XII-3</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Fera Dama Yanti, S.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XII-4</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Michael Tianame, S.Pd., M.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XII-5</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Raisul Akbar, S.Pd., M.Pd.</span>
+                                </li>
+                                <li className="flex items-center gap-2.5">
+                                  <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 dark:bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/10 shrink-0 w-12 text-center">XII-6</span>
+                                  <span className="text-zinc-750 dark:text-zinc-300 font-medium">Irma Putriyani, S.Pd.</span>
+                                </li>
                               </ul>
                             </div>
                           </div>
