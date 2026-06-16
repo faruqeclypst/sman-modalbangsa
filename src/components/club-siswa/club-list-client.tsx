@@ -1,130 +1,198 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Search, Trophy, User, ArrowUpRight, Sparkles, Compass, Target } from "lucide-react";
+import { Search, Trophy, User, ArrowUpRight, Sparkles, Compass, Target, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
-import type { WPPost } from "@/lib/wp-types";
-import { getFeaturedImageUrl } from "@/lib/wp";
-import { decodeHtmlEntities, stripHtml, truncate } from "@/lib/utils";
 
-interface ClubMeta {
-  category: "academic" | "language" | "arts" | "sports" | "leadership" | "entrepreneurship";
+interface Club {
+  id: string;
+  name: string;
+  acronym: string;
+  category: "academic" | "language" | "arts" | "sports" | "leadership";
   categoryLabel: { id: string; en: string };
   coach: string;
-  memberCount: number;
+  description: { id: string; en: string };
   achievements: { id: string[]; en: string[] };
+  memberCount: number;
 }
 
-const REAL_CLUBS_META: Record<string, ClubMeta> = {
-  "olimpiade-siswa": {
+const CLUBS_DATA: Club[] = [
+  {
+    id: "msc",
+    name: "Mosa Science Club",
+    acronym: "MSC",
     category: "academic",
     categoryLabel: { id: "Akademik & Sains", en: "Academic & Science" },
     coach: "Dra. Hj. Nurlela, M.Pd",
-    memberCount: 45,
+    description: {
+      id: "Komunitas ilmiah tempat berkumpulnya siswa berbakat sains untuk mempersiapkan diri menghadapi Olimpiade Sains Nasional (OSN) dan ajang kompetisi ilmiah lainnya.",
+      en: "A scientific community gathering students with high talent in sciences to prepare for the National Science Olympiad (OSN) and other scientific events."
+    },
     achievements: {
       id: [
-        "Juara Umum Olimpiade Sains Provinsi (OSP) Aceh",
-        "Medali Perak Kebumian & Astronomi tingkat Nasional",
-        "Binaan khusus intensif persiapan OSN kabupaten/kota"
+        "Medali Emas OSN Tingkat Nasional Bidang Astronomi (2024)",
+        "Medali Perak OSN Tingkat Nasional Bidang Fisika (2023)",
+        "Juara Umum Olimpiade Sains Provinsi Aceh selama 5 tahun berturut-turut"
       ],
       en: [
-        "Overall Champion of Aceh Province Science Olympiad (OSP)",
-        "National Silver Medal in Earth Science & Astronomy",
-        "Intensive coaching program for district/city OSN preparation"
+        "National Gold Medal in Astronomy OSN (2024)",
+        "National Silver Medal in Physics OSN (2023)",
+        "Overall Champion of Aceh Province Science Olympiad for 5 consecutive years"
       ]
-    }
+    },
+    memberCount: 45
   },
-  "team-sepak-bola-sekolah": {
+  {
+    id: "mds",
+    name: "Mosa Debating Society",
+    acronym: "MDS",
+    category: "language",
+    categoryLabel: { id: "Bahasa & Komunikasi", en: "Language & Communication" },
+    coach: "Ridwan, S.Pd",
+    description: {
+      id: "Wadah pengembangan kemampuan berpikir kritis, berbicara di depan umum, dan berargumen melalui seni debat kompetitif dalam Bahasa Inggris dan Bahasa Indonesia.",
+      en: "A forum for developing critical thinking, public speaking, and argumentation through the art of competitive debate in English and Indonesian."
+    },
+    achievements: {
+      id: [
+        "Juara 1 National Schools Debating Championship (NSDC) Tingkat Provinsi Aceh (2024)",
+        "Top 10 Pembicara Terbaik (Best Speaker) di Lomba Debat Bahasa Indonesia (LDBI) Nasional",
+        "Juara 1 Debat Bahasa Inggris se-Sumatera"
+      ],
+      en: [
+        "1st Place in National Schools Debating Championship (NSDC) Aceh Province (2024)",
+        "Top 10 Best Speakers in National Indonesian Debating Championship (LDBI)",
+        "1st Place in Sumatra English Debating Championship"
+      ]
+    },
+    memberCount: 30
+  },
+  {
+    id: "jeumpa-puteh",
+    name: "Sanggar Seni Jeumpa Puteh",
+    acronym: "SJP",
+    category: "arts",
+    categoryLabel: { id: "Seni & Budaya", en: "Arts & Culture" },
+    coach: "Cut Rahma, S.Sn",
+    description: {
+      id: "Pusat kreativitas seni pertunjukan tradisi dan kreasi baru, melestarikan tarian khas Aceh seperti Saman dan Ranup Lampuan serta seni teater musik.",
+      en: "Center of traditional and creative performance arts, preserving traditional Acehnese dances like Saman and Ranup Lampuan, as well as musical theater."
+    },
+    achievements: {
+      id: [
+        "Penyaji Tari Tradisional Terbaik di FLS2N Tingkat Nasional (2023)",
+        "Juara 1 Musik Tradisional FLS2N Tingkat Provinsi Aceh",
+        "Penampilan Kebudayaan Internasional di Festival Seni Pemuda Malaysia"
+      ],
+      en: [
+        "Best Traditional Dance Performance at National FLS2N (2023)",
+        "1st Place in Traditional Music at Aceh Province FLS2N",
+        "International Cultural Showcase at Malaysia Youth Art Festival"
+      ]
+    },
+    memberCount: 50
+  },
+  {
+    id: "mfc",
+    name: "Mosa Football & Futsal Club",
+    acronym: "MFC",
     category: "sports",
-    categoryLabel: { id: "Olahraga & Futsal", en: "Sports & Futsal" },
+    categoryLabel: { id: "Olahraga", en: "Sports" },
     coach: "Zulkifli, S.Pd",
-    memberCount: 32,
+    description: {
+      id: "Klub olahraga bergengsi yang fokus mengasah bakat sepak bola dan futsal siswa dengan latihan fisik terprogram dan strategi kerja sama tim yang solid.",
+      en: "A prestigious sports club focused on nurturing students' soccer and futsal talents with programmed physical training and solid teamwork strategies."
+    },
     achievements: {
       id: [
-        "Juara 1 Turnamen Futsal Pelajar Piala Dispora Aceh",
-        "Juara 2 Kejuaraan Sepak Bola Liga Pelajar Daerah (LPD) Aceh Besar",
-        "Latihan rutin mingguan di lapangan utama sekolah"
+        "Juara 1 Turnamen Futsal Pelajar Piala Dispora Aceh (2024)",
+        "Juara 2 Kejuaraan Sepak Bola Liga Pelajar Daerah (LPD) se-Aceh",
+        "Pemain Terbaik & Top Scorer Pelajar Piala Rektor USK"
       ],
       en: [
-        "1st Place in Aceh Dispora Cup Student Futsal Tournament",
-        "2nd Place in Aceh Besar Regional Students Soccer League (LPD)",
-        "Weekly routine practice sessions on the main school field"
+        "1st Place in Aceh Dispora Cup Futsal Tournament (2024)",
+        "2nd Place in Regional Students Soccer League (LPD) across Aceh",
+        "Best Player & Top Scorer at USK Rector's Student Cup"
       ]
-    }
+    },
+    memberCount: 40
   },
-  "kewirausahaan": {
+  {
+    id: "scout",
+    name: "Ambalan Pramuka SMAN Mosa",
+    acronym: "APM",
     category: "leadership",
-    categoryLabel: { id: "Kewirausahaan & Prakarya", en: "Entrepreneurship & Crafts" },
-    coach: "Dra. Cut Rahma",
-    memberCount: 28,
+    categoryLabel: { id: "Kepemimpinan & Karakter", en: "Leadership & Character" },
+    coach: "Drs. H. Ismail, M.Si",
+    description: {
+      id: "Organisasi kepanduan resmi yang melatih kemandirian, ketangguhan fisik, kepemimpinan taktis, dan kepedulian sosial berlandaskan Dasa Darma Pramuka.",
+      en: "Official scouting organization that trains independence, physical resilience, tactical leadership, and social care based on the Scout's Promise."
+    },
     achievements: {
       id: [
-        "Penyelenggara Bazar Kewirausahaan Tahunan Siswa Mosa",
-        "Produksi kerajinan tangan khas Aceh dan produk kreatif bernilai jual",
-        "Pelatihan dasar kepemimpinan finansial dan manajemen bisnis"
+        "Juara Umum Kemah Bakti Pramuka Penegak se-Provinsi Aceh (2024)",
+        "Penghargaan Lencana Melati Pramuka Garuda Berprestasi",
+        "Juara 1 Lomba Pionering Kreatif & Sandi Morse Tingkat Daerah"
       ],
       en: [
-        "Organizer of the Annual Mosa Student Entrepreneurship Bazaar",
-        "Production of traditional Acehnese crafts and creative marketable goods",
-        "Basic financial leadership and business management training sessions"
+        "Overall Champion of Rover Scouts Camp across Aceh Province (2024)",
+        "Garuda Scout Outstanding Achievement Award",
+        "1st Place in Regional Creative Pioneering & Morse Code Competition"
       ]
-    }
+    },
+    memberCount: 65
+  },
+  {
+    id: "mec",
+    name: "Mosa English Club",
+    acronym: "MEC",
+    category: "language",
+    categoryLabel: { id: "Bahasa & Komunikasi", en: "Language & Communication" },
+    coach: "Sarah, M.A.",
+    description: {
+      id: "Klub seru untuk meningkatkan kefasihan berbahasa Inggris secara santai dan mendalam melalui speech contest, storytelling, dan creative writing.",
+      en: "A fun club to improve English fluency casually and deeply through speech contests, storytelling, and creative writing sessions."
+    },
+    achievements: {
+      id: [
+        "Juara 1 Lomba Pidato Bahasa Inggris (Speech Contest) Universitas Syiah Kuala (2024)",
+        "Juara 1 Storytelling Pelajar Tingkat Regional Sumatera Utara - Aceh",
+        "Finalis Lomba Menulis Esai Bahasa Inggris Nasional"
+      ],
+      en: [
+        "1st Place in English Speech Contest at Syiah Kuala University (2024)",
+        "1st Place in Student Storytelling Regional North Sumatra - Aceh",
+        "Finalist in National English Essay Writing Competition"
+      ]
+    },
+    memberCount: 35
   }
-};
+];
 
 interface ClubListClientProps {
   locale: Locale;
   dict: any;
-  initialClubs: WPPost[];
 }
 
-export function ClubListClient({ locale, dict, initialClubs }: ClubListClientProps) {
+export function ClubListClient({ locale, dict }: ClubListClientProps) {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedCategory, setSelectedCategory] = React.useState<string>("all");
 
   const categories = [
     { value: "all", label: locale === "id" ? "Semua Club" : "All Clubs" },
     { value: "academic", label: locale === "id" ? "Akademik" : "Academic" },
+    { value: "language", label: locale === "id" ? "Bahasa" : "Languages" },
+    { value: "arts", label: locale === "id" ? "Seni & Budaya" : "Arts & Culture" },
     { value: "sports", label: locale === "id" ? "Olahraga" : "Sports" },
-    { value: "leadership", label: locale === "id" ? "Kepemimpinan & Bisnis" : "Leadership & Business" }
+    { value: "leadership", label: locale === "id" ? "Kepemimpinan" : "Leadership" }
   ];
 
-  // Map WPPosts to displayable club items
-  const clubs = initialClubs.map((post) => {
-    const title = decodeHtmlEntities(post.title.rendered);
-    const contentText = stripHtml(post.content?.rendered ?? "");
-    const description = truncate(contentText, 180);
-    const imageUrl = getFeaturedImageUrl(post);
-    
-    // Lookup meta by slug
-    const meta = REAL_CLUBS_META[post.slug] || {
-      category: "academic" as const,
-      categoryLabel: { id: "Ekstrakurikuler", en: "Extracurricular" },
-      coach: "Staf Kesiswaan",
-      memberCount: 20,
-      achievements: {
-        id: ["Pencapaian sedang diperbarui oleh pembina club."],
-        en: ["Achievements are currently being updated by the club advisor."]
-      }
-    };
-
-    return {
-      id: post.id.toString(),
-      slug: post.slug,
-      name: title,
-      imageUrl,
-      description,
-      ...meta
-    };
-  });
-
-  const filteredClubs = clubs.filter((club) => {
+  const filteredClubs = CLUBS_DATA.filter((club) => {
     const matchesSearch =
       club.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      club.description.toLowerCase().includes(searchQuery.toLowerCase());
+      club.acronym.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      club.description[locale].toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || club.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -166,11 +234,16 @@ export function ClubListClient({ locale, dict, initialClubs }: ClubListClientPro
       {filteredClubs.length > 0 ? (
         <div className="grid gap-8 grid-cols-1 md:grid-cols-6 lg:grid-cols-12 auto-rows-max">
           {filteredClubs.map((club, idx) => {
-            // Asymmetrical grid column calculations based on list index:
-            // Index 0 and 1 span 6 columns, Index 2 spans 12 columns for a nice bento distribution
+            // Asymmetrical grid column calculations:
+            // First 2 clubs (MSC and MDS) span 6 columns on lg, 3 on md
+            // SJP spans 12 columns (full width row for visual relief), MFC and APM span 6 columns, etc.
             let colSpan = "col-span-1 md:col-span-6 lg:col-span-6";
-            if (idx === 2) {
+            if (club.id === "jeumpa-puteh") {
               colSpan = "col-span-1 md:col-span-6 lg:col-span-12";
+            } else if (club.id === "scout") {
+              colSpan = "col-span-1 md:col-span-6 lg:col-span-7";
+            } else if (club.id === "mec") {
+              colSpan = "col-span-1 md:col-span-6 lg:col-span-5";
             }
 
             return (
@@ -183,7 +256,7 @@ export function ClubListClient({ locale, dict, initialClubs }: ClubListClientPro
               >
                 {/* Double-Bezel Design System */}
                 {/* Outer Shell */}
-                <div className="h-full rounded-[2rem] bg-zinc-100/60 dark:bg-zinc-800/40 p-2 border border-zinc-200/50 dark:border-zinc-700/30 transition-transform duration-500 group-hover:scale-[1.012] shadow-sm hover:shadow-md">
+                <div className="h-full rounded-[2rem] bg-zinc-100/60 dark:bg-zinc-800/40 p-2 border border-zinc-200/50 dark:border-zinc-700/30 transition-transform duration-500 group-hover:scale-[1.015] shadow-sm hover:shadow-md">
                   {/* Inner Core */}
                   <div className="h-full flex flex-col justify-between rounded-[calc(2rem-0.5rem)] bg-white dark:bg-zinc-900 border border-zinc-200/30 dark:border-zinc-800/30 p-6 sm:p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
                     <div>
@@ -191,6 +264,9 @@ export function ClubListClient({ locale, dict, initialClubs }: ClubListClientPro
                       <div className="flex items-center justify-between">
                         <span className="rounded-full bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1 text-[10px] uppercase font-bold tracking-[0.15em] text-emerald-700 dark:text-emerald-300 border border-emerald-500/10">
                           {club.categoryLabel[locale]}
+                        </span>
+                        <span className="font-sfpro text-sm font-bold text-zinc-400 dark:text-zinc-500">
+                          {club.acronym}
                         </span>
                       </div>
 
@@ -201,7 +277,7 @@ export function ClubListClient({ locale, dict, initialClubs }: ClubListClientPro
 
                       {/* Description */}
                       <p className="mt-3.5 text-sm sm:text-base leading-relaxed text-[color:var(--muted-foreground)]">
-                        {club.description}
+                        {club.description[locale]}
                       </p>
 
                       {/* Coach info */}
@@ -212,19 +288,6 @@ export function ClubListClient({ locale, dict, initialClubs }: ClubListClientPro
                         </span>
                       </div>
                     </div>
-
-                    {/* Image (if present in WordPress CPT) */}
-                    {club.imageUrl ? (
-                      <div className="mt-6 overflow-hidden rounded-2xl border border-zinc-200/40 dark:border-zinc-800/40 aspect-[16/9] relative bg-zinc-100 dark:bg-zinc-950">
-                        <Image
-                          src={club.imageUrl}
-                          alt={club.name}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                      </div>
-                    ) : null}
 
                     {/* Achievements List */}
                     <div className="mt-6 space-y-3 bg-zinc-50/50 dark:bg-zinc-950/20 rounded-2xl p-4.5 border border-zinc-100 dark:border-zinc-800/30">
@@ -249,15 +312,12 @@ export function ClubListClient({ locale, dict, initialClubs }: ClubListClientPro
                       <span className="text-xs font-medium text-zinc-400 dark:text-zinc-500">
                         {club.memberCount} {locale === "id" ? "Anggota Aktif" : "Active Members"}
                       </span>
-                      <Link
-                        href={`/${locale}/ekskul/${club.slug}`}
-                        className="inline-flex items-center gap-2 rounded-full bg-zinc-50 hover:bg-[color:var(--primary)] text-zinc-800 hover:text-white dark:bg-zinc-800/50 dark:hover:bg-[color:var(--primary)] dark:text-zinc-200 px-4.5 py-2 text-xs font-bold border border-zinc-200/60 dark:border-zinc-700/60 hover:border-transparent transition-all duration-300 cursor-pointer active:scale-95 group-hover:shadow-sm"
-                      >
-                        <span>{locale === "id" ? "Lihat Detail" : "View Details"}</span>
+                      <button className="inline-flex items-center gap-2 rounded-full bg-zinc-50 hover:bg-[color:var(--primary)] text-zinc-800 hover:text-white dark:bg-zinc-800/50 dark:hover:bg-[color:var(--primary)] dark:text-zinc-200 px-4.5 py-2 text-xs font-bold border border-zinc-200/60 dark:border-zinc-700/60 hover:border-transparent transition-all duration-300 cursor-pointer active:scale-95 group-hover:shadow-sm">
+                        <span>{locale === "id" ? "Gabung Club" : "Join Club"}</span>
                         <div className="w-5 h-5 rounded-full bg-zinc-200/50 dark:bg-zinc-700/50 group-hover:bg-white/20 flex items-center justify-center transition-colors">
                           <ArrowUpRight className="size-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </div>
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>

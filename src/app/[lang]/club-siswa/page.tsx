@@ -5,7 +5,6 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/layout/page-header";
 import { ClubListClient } from "@/components/club-siswa/club-list-client";
-import { getCPT } from "@/lib/wp";
 
 export const revalidate = false;
 
@@ -32,7 +31,6 @@ export default async function ClubSiswaPage({
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const dict = await getDictionary(lang);
-  const { posts } = await getCPT("ekskul", { perPage: 100 });
 
   return (
     <>
@@ -51,7 +49,7 @@ export default async function ClubSiswaPage({
         <div aria-hidden className="absolute -right-64 bottom-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-teal-500/5 blur-[120px] dark:bg-teal-500/3 pointer-events-none" />
 
         <Container size="xl">
-          <ClubListClient locale={lang} dict={dict} initialClubs={posts} />
+          <ClubListClient locale={lang} dict={dict} />
         </Container>
       </section>
     </>

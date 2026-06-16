@@ -41,7 +41,6 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
         ],
       },
       { label: dict.quickLinks.items.spmb, href: `${base}/spmb` },
-      { label: dict.nav.clubSiswa, href: `${base}/club-siswa` },
       { label: dict.nav.alumni, href: `${base}/alumni` },
       { label: dict.nav.contact, href: `${base}/kontak` },
     ],
