@@ -22,23 +22,14 @@ interface HeroProps {
 }
 
 export function Hero({ locale, dict }: HeroProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const contentContainerRef = useRef<HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      if (!heroRef.current || !videoContainerRef.current || !contentContainerRef.current) return;
-
-      // Pin the hero section with no spacing, allowing the next section to slide on top
-      ScrollTrigger.create({
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        pin: true,
-        pinSpacing: false,
-        anticipatePin: 1,
-      });
+      if (!scrollContainerRef.current || !videoContainerRef.current || !contentContainerRef.current) return;
 
       // Parallax zoom-in and scroll shift for the video background
       gsap.to(videoContainerRef.current, {
@@ -46,7 +37,7 @@ export function Hero({ locale, dict }: HeroProps) {
         yPercent: 12,
         ease: "none",
         scrollTrigger: {
-          trigger: heroRef.current,
+          trigger: scrollContainerRef.current,
           start: "top top",
           end: "bottom top",
           scrub: true,
@@ -59,57 +50,59 @@ export function Hero({ locale, dict }: HeroProps) {
         yPercent: -15,
         ease: "none",
         scrollTrigger: {
-          trigger: heroRef.current,
+          trigger: scrollContainerRef.current,
           start: "top top",
           end: "bottom 40%",
           scrub: true,
         },
       });
-    }, heroRef);
+    }, scrollContainerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={heroRef} className="bg-zinc-950 w-full overflow-hidden relative z-10">
-      <section
-        className="relative flex h-screen w-full items-center justify-center overflow-hidden text-white"
-        aria-labelledby="hero-title"
-        id="hero"
-      >
-        {/* Background Video playing in loop, muted, playsInline */}
-        <div
-          ref={videoContainerRef}
-          className="absolute inset-0 h-full w-full overflow-hidden origin-center z-0"
+    <div ref={scrollContainerRef} className="relative w-full h-screen bg-zinc-950 z-0">
+      <div ref={heroRef} className="w-full overflow-hidden sticky top-0 h-screen">
+        <section
+          className="relative flex h-screen w-full items-center justify-center overflow-hidden text-white"
+          aria-labelledby="hero-title"
+          id="hero"
         >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
+          {/* Background Video playing in loop, muted, playsInline */}
+          <div
+            ref={videoContainerRef}
+            className="absolute inset-0 h-full w-full overflow-hidden origin-center z-0"
           >
-            <source src="/bg-video.mp4" type="video/mp4" />
-            {/* Fallback image */}
-            <img
-              src="/bg.png"
-              alt=""
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
               className="absolute inset-0 h-full w-full object-cover"
-              aria-hidden
-            />
-          </video>
+            >
+              <source src="/bg-video.mp4" type="video/mp4" />
+              {/* Fallback image */}
+              <img
+                src="/bg.png"
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+                aria-hidden
+              />
+            </video>
 
-          {/* Cinematic overlay */}
-          <div aria-hidden className="absolute inset-0 bg-black/55" />
-        </div>
+            {/* Cinematic overlay */}
+            <div aria-hidden className="absolute inset-0 bg-black/55" />
+          </div>
 
-        {/* Content — Centered */}
-        <div ref={contentContainerRef} className="relative z-10 w-full">
-          <Container className="py-24 sm:py-32">
-            <HeroContent locale={locale} dict={dict} />
-          </Container>
-        </div>
-      </section>
+          {/* Content — Centered */}
+          <div ref={contentContainerRef} className="relative z-10 w-full">
+            <Container className="py-24 sm:py-32">
+              <HeroContent locale={locale} dict={dict} />
+            </Container>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
