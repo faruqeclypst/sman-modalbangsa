@@ -46,35 +46,35 @@ export default async function StructurePage({
       />
 
       {/* Main content using Apple-esque / Editorial structural guidelines */}
-      <section className="relative overflow-hidden py-24 sm:py-32 bg-[color:var(--background)]">
+      <section className="relative overflow-hidden py-20 sm:py-28 bg-[color:var(--background)]">
         
         {/* Subtle glow orb in the background */}
-        <div aria-hidden className="absolute -left-64 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-emerald-500/5 blur-[120px] dark:bg-emerald-500/3" />
+        <div aria-hidden className="absolute -left-64 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-emerald-500/5 blur-[120px] dark:bg-emerald-500/3 pointer-events-none" />
         
-        <Container size="xl">
-          <div className="grid gap-16 lg:grid-cols-[1fr_1.6fr] lg:gap-20 items-center">
-            
-            {/* Left Column - Editorial Typography & Nested CTA */}
-            <div className="space-y-8">
-              <FadeIn delay={0.1} direction="up" className="space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium text-[color:var(--primary)]">
-                  <Users className="h-3.5 w-3.5" />
-                  <span>{isId ? "Struktur Organisasi" : "Hierarchy Map"}</span>
-                </div>
-                
-                <h2 className="text-3xl font-bold tracking-tight text-[color:var(--foreground)] font-sfpro sm:text-4xl leading-tight">
-                  {isId ? "Tata Kelola & Alur Koordinasi" : "Governance & Coordination"}
-                </h2>
-                
-                <p className="text-base leading-relaxed text-[color:var(--muted-foreground)]">
-                  {isId 
-                    ? "SMA Negeri Modal Bangsa dikelola secara terpadu melalui alur instruksi dan koordinasi yang jelas, guna memastikan sinergi program pengajaran akademis, pembinaan keagamaan berasrama, dan pengembangan karakter kepemimpinan berjalan optimal."
-                    : "SMA Negeri Modal Bangsa is managed through clear channels of instruction and coordination to ensure optimal synergy across academic programs, boarding operations, and character development."}
-                </p>
-              </FadeIn>
+        <Container size="xl" className="space-y-16">
+          {/* Top Section - Balanced 2-Column Grid for Text & Info */}
+          <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-20 items-start">
+            {/* Left Column - Editorial Typography */}
+            <FadeIn delay={0.1} direction="up" className="space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium text-[color:var(--primary)]">
+                <Users className="h-3.5 w-3.5" />
+                <span>{isId ? "Struktur Organisasi" : "Hierarchy Map"}</span>
+              </div>
+              
+              <h2 className="text-3xl font-bold tracking-tight text-[color:var(--foreground)] font-sfpro sm:text-4xl leading-tight uppercase">
+                {isId ? "Tata Kelola & Alur Koordinasi" : "Governance & Coordination"}
+              </h2>
+              
+              <p className="text-base leading-relaxed text-[color:var(--muted-foreground)]">
+                {isId 
+                  ? "SMA Negeri Modal Bangsa dikelola secara terpadu melalui alur instruksi dan koordinasi yang jelas, guna memastikan sinergi program pengajaran akademis, pembinaan keagamaan berasrama, dan pengembangan karakter kepemimpinan berjalan optimal."
+                  : "SMA Negeri Modal Bangsa is managed through clear channels of instruction and coordination to ensure optimal synergy across academic programs, boarding operations, and character development."}
+              </p>
+            </FadeIn>
 
-              {/* Informative List */}
-              <FadeIn delay={0.25} direction="up" className="space-y-4 border-t border-[color:var(--border)] pt-8">
+            {/* Right Column - Informative List & CTA */}
+            <div className="space-y-6 lg:border-l lg:border-[color:var(--border)] lg:pl-10">
+              <FadeIn delay={0.25} direction="up" className="space-y-4">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-[color:var(--foreground)]">
                   {isId ? "Kanal Kepemimpinan Utama" : "Core Leadership Channels"}
                 </h3>
@@ -94,7 +94,7 @@ export default async function StructurePage({
                 </ul>
               </FadeIn>
 
-              {/* Nested CTA / Island Button */}
+              {/* Download CTA Button */}
               <FadeIn delay={0.4} direction="up" className="pt-2">
                 <a
                   href="/images/struktur/struktur.jpeg"
@@ -110,20 +110,20 @@ export default async function StructurePage({
                 </a>
               </FadeIn>
             </div>
-
-            {/* Right Column - Double Bezel Card Wrapper */}
-            <FadeIn delay={0.2} direction="up" className="w-full">
-              <div className="rounded-[2rem] bg-zinc-100/60 dark:bg-zinc-800/40 p-2 border border-zinc-200/50 dark:border-zinc-700/30">
-                <div className="rounded-[calc(2rem-0.5rem)] overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/30 shadow-md">
-                  <StructureViewer
-                    src="/images/struktur/struktur.jpeg"
-                    alt={isId ? "Struktur Organisasi SMAN Modal Bangsa" : "SMAN Modal Bangsa Organizational Structure"}
-                  />
-                </div>
-              </div>
-            </FadeIn>
-
           </div>
+
+          {/* Bottom Section - Full-Width Dynamic Structure Viewer */}
+          <FadeIn delay={0.2} direction="up" className="w-full pt-4">
+            <div className="rounded-[2.5rem] bg-zinc-150/60 dark:bg-zinc-800/40 p-2.5 border border-zinc-200/50 dark:border-zinc-700/30">
+              <div className="rounded-[calc(2.5rem-0.625rem)] overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200/30 shadow-md p-6 sm:p-8">
+                <StructureViewer
+                  src="/images/struktur/struktur.jpeg"
+                  alt={isId ? "Struktur Organisasi SMAN Modal Bangsa" : "SMAN Modal Bangsa Organizational Structure"}
+                />
+              </div>
+            </div>
+          </FadeIn>
+
         </Container>
       </section>
     </>

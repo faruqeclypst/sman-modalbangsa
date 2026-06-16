@@ -7,6 +7,7 @@ import { StudentStories } from "@/components/home/student-stories";
 import { LatestNews } from "@/components/home/latest-news";
 import { GalleryPreview } from "@/components/home/gallery-preview";
 import { StudentAchievements } from "@/components/home/student-achievements";
+import { PjjPromoBanner } from "@/components/home/pjj-promo-banner";
 import { SectionOrnament } from "@/components/ui/section-ornament";
 
 interface HomeSectionsProps {
@@ -74,6 +75,9 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
         <StudentAchievements locale={locale} dict={dict} />
 
         <SectionOrnament flip />
+        <PjjPromoBanner locale={locale} />
+
+        <SectionOrnament />
         {/* <StudentStories locale={locale} /> */}
         {/* <SectionOrnament /> */}
         <LatestNews

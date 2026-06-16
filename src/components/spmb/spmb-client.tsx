@@ -25,6 +25,17 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
   const [activeTab, setActiveTab] = useState<"spmb" | "pjj">("spmb");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // Handle dynamic tab activation from query parameter (e.g. ?tab=pjj)
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get("tab");
+      if (tab === "pjj" || tab === "spmb") {
+        setActiveTab(tab);
+      }
+    }
+  }, []);
+
   // Extract images from galleryItems
   const allPhotos = React.useMemo(() => {
     const photos: { url: string; title: string }[] = [];
