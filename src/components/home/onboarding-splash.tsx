@@ -1,16 +1,9 @@
 "use client";
 
-import { useRef, useEffect, useLayoutEffect } from "react";
+import { useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Locale } from "@/i18n/config";
-
-const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface OnboardingSplashProps {
   locale: Locale;
@@ -24,26 +17,8 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
   const taglineRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Hide splash immediately if already seen in this session to prevent visual flashes before initial paint
-  useIsomorphicLayoutEffect(() => {
-    if (!isHome || !containerRef.current) return;
-    const hasSeen = sessionStorage.getItem("has-seen-splash");
-    if (hasSeen) {
-      containerRef.current.style.display = "none";
-      document.body.style.overflow = "";
-    }
-  }, [isHome]);
-
   useEffect(() => {
     if (!isHome) return;
-
-    // Skip timeline if splash was already shown in this session
-    const hasSeen = sessionStorage.getItem("has-seen-splash");
-    if (hasSeen) {
-      document.body.style.overflow = "";
-      return;
-    }
-
     // Prevent scrolling while onboarding is active
     document.body.style.overflow = "hidden";
 
@@ -56,13 +31,6 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
           if (containerRef.current) {
             containerRef.current.style.display = "none";
           }
-          sessionStorage.setItem("has-seen-splash", "true");
-          window.dispatchEvent(new CustomEvent("splash-complete"));
-          
-          // Recalculate ScrollTrigger triggers after scroll is re-enabled
-          setTimeout(() => {
-            ScrollTrigger.refresh(true);
-          }, 100);
         }
       });
 

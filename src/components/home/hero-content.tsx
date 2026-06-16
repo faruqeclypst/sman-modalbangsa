@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { animate } from "animejs";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 
@@ -10,8 +11,44 @@ interface HeroContentProps {
 }
 
 export function HeroContent({ locale, dict }: HeroContentProps) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const kicker = el.querySelector("[data-hero-kicker]") as HTMLElement;
+    const title = el.querySelector("[data-hero-title]") as HTMLElement;
+
+    // Set initial hidden state
+    [kicker, title].forEach((t) => {
+      if (t) {
+        t.style.opacity = "0";
+        t.style.transform = "translateY(40px)";
+      }
+    });
+
+    // Kicker — fade in and slide up
+    animate(kicker, {
+      opacity: [0, 1],
+      translateY: [30, 0],
+      duration: 800,
+      ease: "outQuint",
+      delay: 150,
+    });
+
+    // Title — dramatic entrance
+    animate(title, {
+      opacity: [0, 1],
+      translateY: [50, 0],
+      duration: 1100,
+      ease: "outExpo",
+      delay: 350,
+    });
+  }, []);
+
   return (
-    <div className="mx-auto max-w-5xl text-center">
+    <div ref={containerRef} className="mx-auto max-w-5xl text-center">
       <p
         data-hero-kicker
         className="text-sm font-sfpro font-medium tracking-wide text-white/85 sm:text-base md:text-lg lg:text-xl mb-6"

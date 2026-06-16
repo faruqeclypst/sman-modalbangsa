@@ -46,16 +46,11 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  // Scroll to top and refresh ScrollTrigger on path change
+  // Scroll to top on path change
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
     }
-    // Refresh ScrollTrigger after a brief timeout to allow Next.js route change layout to settle
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
-    return () => clearTimeout(timer);
   }, [pathname]);
 
   return <>{children}</>;

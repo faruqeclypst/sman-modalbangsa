@@ -101,7 +101,7 @@ export function IntroTransition({ locale }: IntroTransitionProps) {
           {words.map((word, idx) => (
             <span
               key={idx}
-              className={`intro-word opacity-20 inline-block mr-[0.25em] ${
+              className={`intro-word opacity-20 inline-block mr-[0.25em] transition-opacity duration-300 ${
                 word.italic
                   ? "font-romulo font-normal italic text-green-300 normal-case"
                   : ""

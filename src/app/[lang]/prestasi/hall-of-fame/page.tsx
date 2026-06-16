@@ -20,6 +20,7 @@ export async function generateMetadata({
   };
 }
 
+
 export default async function HallOfFamePage({
   params,
 }: PageProps<"/[lang]/prestasi/hall-of-fame">) {
