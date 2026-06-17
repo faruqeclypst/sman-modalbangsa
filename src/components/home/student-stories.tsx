@@ -19,28 +19,28 @@ interface StoryItem {
 
 const stories: StoryItem[] = [
   {
-    name: "Arabel Eltara G. P. T.",
+    name: "Nama Lengkap Siswa",
     roleId: "Siswa SMAN Modal Bangsa",
     roleEn: "SMAN Modal Bangsa Student",
-    videoSrc: "/video/Welcome To SMA Unggulan Rushd_2.mp4"
+    videoSrc: "/video/Welcome To SMA mosa_2.mp4"
   },
   {
-    name: "Nayla Nisa Pamuji",
+    name: "Nama Lengkap Siswa",
     roleId: "Siswa SMAN Modal Bangsa",
     roleEn: "SMAN Modal Bangsa Student",
-    videoSrc: "/video/Welcome To SMA Unggulan Rushd.mp4"
+    videoSrc: "/video/Welcome To SMA mosa.mp4"
   },
   {
-    name: "I Putu Ananda Khrisna P.",
+    name: "Nama Lengkap Siswa",
     roleId: "Siswa SMAN Modal Bangsa",
     roleEn: "SMAN Modal Bangsa Student",
-    videoSrc: "/video/Welcome To SMA Unggulan Rushd_3.mp4"
+    videoSrc: "/video/Welcome To SMA mosa_3.mp4"
   },
   {
-    name: "Rashka Khalqilah Nugraha",
+    name: "Nama Lengkap Siswa",
     roleId: "Siswa SMAN Modal Bangsa",
     roleEn: "SMAN Modal Bangsa Student",
-    videoSrc: "/video/Welcome To SMA Unggulan Rushd_4.mp4"
+    videoSrc: "/video/Welcome To SMA mosa_4.mp4"
   }
 ];
 
