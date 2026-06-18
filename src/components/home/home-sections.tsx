@@ -78,8 +78,9 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
         <PjjPromoBanner locale={locale} />
 
         <SectionOrnament />
-        <StudentStories locale={locale} />
-        <SectionOrnament />
+        {/* <StudentStories locale={locale} />
+        <SectionOrnament /> */}
+
         <LatestNews
           posts={news}
           instagramPosts={instagramPosts}

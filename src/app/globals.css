@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: "SF Pro Display";
   src: url("https://framerusercontent.com/assets/JlbZvh2zfRZAGLbtHVY830OtpU.woff2") format("woff2");
@@ -44,34 +46,6 @@
   --accent-foreground: #ffffff;
   --ring: #166534;
   --radius: 0.75rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #090d16;
-    --foreground: #f8fafc;
-    --muted: #131c2e;
-    --muted-foreground: #94a3b8;
-    --border: #1e293b;
-    --primary: #22c55e;
-    --ring: #22c55e;
-    --secondary: #fbbf24;
-    --secondary-foreground: #0f172a;
-    --accent: #10b981;
-  }
-}
-
-.dark {
-  --background: #090d16;
-  --foreground: #f8fafc;
-  --muted: #131c2e;
-  --muted-foreground: #94a3b8;
-  --border: #1e293b;
-  --primary: #22c55e;
-  --ring: #22c55e;
-  --secondary: #fbbf24;
-  --secondary-foreground: #0f172a;
-  --accent: #10b981;
 }
 
 @theme inline {
