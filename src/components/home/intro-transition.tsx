@@ -20,39 +20,39 @@ interface Word {
 }
 
 const englishWords: Word[] = [
-  { text: "Let's", italic: false },
-  { text: "create", italic: false },
-  { text: "your", italic: false },
-  { text: "Journey", italic: true },
-  { text: "and", italic: false },
-  { text: "discover", italic: false },
-  { text: "your", italic: false },
-  { text: "Story,", italic: true },
-  { text: "an", italic: false },
-  { text: "Extraordinary", italic: true },
-  { text: "path", italic: false },
+  { text: "Ready", italic: false },
   { text: "to", italic: false },
-  { text: "your", italic: false },
-  { text: "Brightest", italic: true },
-  { text: "Future.", italic: true }
+  { text: "Learn,", italic: true },
+  { text: "Ready", italic: false },
+  { text: "to", italic: false },
+  { text: "Succeed,", italic: true },
+  { text: "Prepared", italic: false },
+  { text: "to", italic: false },
+  { text: "Lead", italic: false },
+  { text: "the", italic: false },
+  { text: "Future", italic: true },
+  { text: "with", italic: false },
+  { text: "Confidence,", italic: true },
+  { text: "Dedication,", italic: true },
+  { text: "and", italic: false },
+  { text: "Integrity.", italic: true }
 ];
 
 const indonesianWords: Word[] = [
-  { text: "Mari", italic: false },
-  { text: "ciptakan", italic: false },
-  { text: "Perjalanan", italic: true },
-  { text: "Anda", italic: false },
-  { text: "dan", italic: false },
-  { text: "temukan", italic: false },
-  { text: "Kisah", italic: true },
-  { text: "Anda,", italic: false },
-  { text: "sebuah", italic: false },
-  { text: "jalan", italic: false },
-  { text: "Luar Biasa", italic: true },
-  { text: "menuju", italic: false },
+  { text: "Siap", italic: false },
+  { text: "untuk", italic: false },
+  { text: "Belajar,", italic: true },
+  { text: "Siap", italic: false },
+  { text: "untuk", italic: false },
+  { text: "Sukses,", italic: true },
+  { text: "Bersiap", italic: false },
+  { text: "Memimpin", italic: false },
   { text: "Masa Depan", italic: true },
-  { text: "yang", italic: false },
-  { text: "gemilang.", italic: false }
+  { text: "dengan", italic: false },
+  { text: "Keyakinan,", italic: true },
+  { text: "Dedikasi,", italic: true },
+  { text: "dan", italic: false },
+  { text: "Integritas.", italic: true }
 ];
 
 interface IntroTransitionProps {
