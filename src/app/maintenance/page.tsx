@@ -33,16 +33,16 @@ export default function MaintenancePage() {
       `}} />
 
       {/* 2. LEFT SIDE: Editorial Typography & CTA */}
-      <div className="w-full md:w-1/2 h-full flex flex-col justify-between p-8 sm:p-12 md:p-20 relative z-10 bg-[#faf9f6]">
-        
-        {/* Top Section: Brand Eyebrow */}
-        <div className="animate-slide-up flex items-center justify-between md:justify-start gap-4">
+      <div className="w-full md:w-1/2 h-full flex flex-col justify-center p-8 sm:p-12 md:p-24 relative z-10 bg-[#faf9f6]">
+        <div className="max-w-md w-full mx-auto space-y-8 animate-slide-up">
+          
+          {/* Top Section: Brand Eyebrow */}
           <div className="flex items-center gap-3">
             <Image
               src="/logo.png"
               alt="Logo"
-              width={36}
-              height={36}
+              width={42}
+              height={42}
               className="object-contain"
             />
             <div>
@@ -55,82 +55,96 @@ export default function MaintenancePage() {
             </div>
           </div>
 
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-[8px] uppercase tracking-[0.15em] font-bold text-emerald-800">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+          {/* Core Typography */}
+          <div className="space-y-6">
+            {/* Indonesian Message */}
+            <div className="space-y-3">
+              <h1 className="text-3xl sm:text-4xl font-extrabold font-sfpro tracking-tight text-slate-900 leading-[1.15]">
+                Website sedang <br />
+                <span className="text-emerald-700 font-romulo italic font-normal normal-case">dalam pemeliharaan</span>
+              </h1>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-light">
+                Kami sedang meningkatkan infrastruktur web kami untuk memberikan layanan yang lebih cepat, aman, dan handal. Kami akan segera kembali online.
+              </p>
+            </div>
+
+            {/* Separator Line */}
+            <div className="w-12 h-px bg-slate-200" />
+
+            {/* English Message */}
+            <div className="space-y-2">
+              <h3 className="text-xs sm:text-sm font-bold font-sfpro tracking-tight text-emerald-800">
+                System Upgrades in Progress
+              </h3>
+              <p className="text-slate-500 text-[11px] sm:text-xs leading-relaxed font-light">
+                We are temporarily offline upgrading our servers to enhance the student portal experience. Thank you for your patience.
+              </p>
+            </div>
+          </div>
+
+          {/* Action CTA Buttons */}
+          <div className="flex flex-col gap-3 w-full">
+            <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
+              {/* WhatsApp Button */}
+              <a
+                href="https://wa.me/6285359907696"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex-1 inline-flex items-center justify-between pl-5 pr-1.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.98] text-white font-semibold text-[10px] rounded-full shadow-[0_2px_10px_rgba(5,150,105,0.15)] transition-all duration-500"
+              >
+                <span>WhatsApp Developer</span>
+                <span className="w-5.5 h-5.5 rounded-full bg-white/20 flex items-center justify-center ml-2.5 transition-transform duration-500 group-hover:translate-x-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-2.5 h-2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </span>
+              </a>
+
+              {/* Email Button */}
+              <a
+                href="mailto:info@sman-modalbangsa.sch.id"
+                className="group relative flex-1 inline-flex items-center justify-between pl-5 pr-1.5 py-1.5 bg-slate-100 hover:bg-slate-200 active:scale-[0.98] text-slate-800 border border-slate-200 font-semibold text-[10px] rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-all duration-500"
+              >
+                <span>Kirim Email Bantuan</span>
+                <span className="w-5.5 h-5.5 rounded-full bg-slate-200 flex items-center justify-center ml-2.5 transition-transform duration-500 group-hover:translate-x-0.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-2.5 h-2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+            
+            <span className="text-[10px] text-slate-400 font-medium block text-left select-none">
+              Developer: Alfaruq Asri, S.Pd., Gr
             </span>
-            Upgrading
-          </div>
-        </div>
-
-        {/* Center Section: Core Typography */}
-        <div className="my-auto py-8 space-y-6 sm:space-y-8 max-w-md">
-          {/* Indonesian Message */}
-          <div className="animate-slide-up [animation-delay:150ms] space-y-3">
-            <h1 className="text-3xl sm:text-4xl font-extrabold font-sfpro tracking-tight text-slate-900 leading-[1.15]">
-              Website sedang <br />
-              <span className="text-emerald-700 font-romulo italic font-normal normal-case">dalam pemeliharaan</span>
-            </h1>
-            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-light">
-              Kami sedang meningkatkan infrastruktur web kami untuk memberikan layanan yang lebih cepat, aman, dan handal. Kami akan segera kembali online.
-            </p>
           </div>
 
-          {/* Horizontal Divider Line */}
-          <div className="animate-slide-up [animation-delay:250ms] w-12 h-px bg-slate-200" />
-
-          {/* English Message */}
-          <div className="animate-slide-up [animation-delay:300ms] space-y-2">
-            <h3 className="text-xs sm:text-sm font-bold font-sfpro tracking-tight text-emerald-800">
-              System Upgrades in Progress
-            </h3>
-            <p className="text-slate-500 text-[11px] sm:text-xs leading-relaxed font-light">
-              We are temporarily offline upgrading our servers to enhance the student portal experience. Thank you for your patience.
-            </p>
+          {/* Bottom Section: Footer Links */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-slate-100">
+            <div className="flex items-center gap-3">
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[9px] tracking-wider uppercase font-semibold text-slate-400 hover:text-emerald-700 transition-colors"
+              >
+                Instagram
+              </a>
+              <span className="text-slate-300 text-xs select-none">&bull;</span>
+              <a 
+                href="https://youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[9px] tracking-wider uppercase font-semibold text-slate-400 hover:text-emerald-700 transition-colors"
+              >
+                YouTube
+              </a>
+            </div>
+            <div className="text-[8px] text-slate-400 font-mono tracking-widest uppercase select-none">
+              SMAN MODAL BANGSA &copy; {new Date().getFullYear()}
+            </div>
           </div>
 
-          {/* Action CTA Button */}
-          <div className="animate-slide-up [animation-delay:450ms] pt-2">
-            <a
-              href="mailto:info@sman-modalbangsa.sch.id"
-              className="group relative inline-flex items-center justify-between pl-5 pr-1.5 py-1.5 bg-emerald-700 hover:bg-emerald-600 active:scale-[0.98] text-white font-semibold text-[10px] rounded-full shadow-[0_4px_14px_rgba(4,120,87,0.15)] transition-all duration-500"
-            >
-              <span>Hubungi Layanan Bantuan</span>
-              <span className="w-5.5 h-5.5 rounded-full bg-white/10 flex items-center justify-center ml-4 transition-transform duration-500 group-hover:translate-x-0.5">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-2.5 h-2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
-
-        {/* Bottom Section: Footer Links */}
-        <div className="animate-slide-up [animation-delay:600ms] flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
-          <div className="flex items-center gap-3">
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-[9px] tracking-wider uppercase font-semibold text-slate-400 hover:text-emerald-700 transition-colors animate-pulse-on-hover"
-            >
-              Instagram
-            </a>
-            <span className="text-slate-300 text-xs select-none">&bull;</span>
-            <a 
-              href="https://youtube.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-[9px] tracking-wider uppercase font-semibold text-slate-400 hover:text-emerald-700 transition-colors"
-            >
-              YouTube
-            </a>
-          </div>
-          <div className="text-[8px] text-slate-400 font-mono tracking-widest uppercase">
-            SMAN MODAL BANGSA &copy; {new Date().getFullYear()}
-          </div>
         </div>
       </div>
 
