@@ -39,7 +39,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
   // Extract images from galleryItems
   const allPhotos = React.useMemo(() => {
     const photos: { url: string; title: string }[] = [];
-    
+
     galleryItems.forEach((item) => {
       const albumTitle = item.title?.rendered || "";
       const featuredUrl = item._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
@@ -48,7 +48,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
         const proxied = wpContentIdx !== -1 ? featuredUrl.substring(wpContentIdx) : featuredUrl;
         photos.push({ url: proxied, title: albumTitle });
       }
-      
+
       const html = item.content?.rendered || "";
       const imgRegex = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
       let match;
@@ -67,10 +67,10 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
   // Dynamic photos for SPMB (Admissions)
   const spmbPhotos = React.useMemo(() => {
     const keywords = ["spmb", "pendaftaran", "seleksi", "cat", "ujian", "test", "wawancara", "syarat", "daftar", "calon", "psb", "ppdb"];
-    const matched = allPhotos.filter((p) => 
+    const matched = allPhotos.filter((p) =>
       keywords.some((kw) => p.title.toLowerCase().includes(kw))
     );
-    
+
     const result = [...matched];
     // If not enough matches, fill with other photos from the gallery
     if (result.length < 3) {
@@ -80,7 +80,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
         }
       });
     }
-    
+
     return {
       img1: result[0]?.url || "/images/academy_campus.png",
       img2: result[1]?.url || "/images/academy_academic.png",
@@ -91,10 +91,10 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
   // Dynamic photos for PJJ (Distance Learning)
   const pjjPhotos = React.useMemo(() => {
     const keywords = ["pjj", "jarak jauh", "daring", "online", "lms", "belajar", "kelas", "guru", "siswa", "pembelajaran", "virtual", "komputer"];
-    const matched = allPhotos.filter((p) => 
+    const matched = allPhotos.filter((p) =>
       keywords.some((kw) => p.title.toLowerCase().includes(kw))
     );
-    
+
     const result = [...matched];
     // If not enough matches, fill with other photos from the gallery
     if (result.length < 2) {
@@ -104,7 +104,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
         }
       });
     }
-    
+
     return {
       img1: result[0]?.url || "/images/value_learning.png",
       cta: result[1]?.url || "/images/academy_academic.png",
@@ -143,8 +143,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 )}
               >
                 <span>
-                  {tab === "spmb" 
-                    ? (isId ? "Penerimaan Siswa Baru" : "School Admissions") 
+                  {tab === "spmb"
+                    ? (isId ? "Penerimaan Siswa Baru" : "School Admissions")
                     : (isId ? "Pendidikan Jarak Jauh" : "Distance Learning")}
                 </span>
                 {isActive && (
@@ -175,18 +175,18 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
               {/* Intro and Hero Image Grid */}
               <div className="space-y-12">
                 <p className="text-center max-w-3xl mx-auto text-base sm:text-lg text-zinc-550 leading-relaxed font-sans">
-                  {isId 
+                  {isId
                     ? "Selamat datang di halaman informasi pendaftaran SMAN Modal Bangsa! Kami berdedikasi untuk menyediakan lingkungan yang memperkaya dan mendukung pertumbuhan akademis serta pribadi siswa."
                     : "Welcome to the admissions page of SMAN Modal Bangsa! We are dedicated to providing an enriching environment that supports students' academic and personal growth."}
                 </p>
 
                 <div className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-sm bg-zinc-150">
-                  <Image 
-                    src="/images/spmb/spmb.jpeg" 
-                    alt="SMAN Modal Bangsa Campus" 
-                    fill 
+                  <Image
+                    src="/images/spmb/spmb.jpeg"
+                    alt="SMAN Modal Bangsa Campus"
+                    fill
                     sizes="100vw"
-                    className="object-cover" 
+                    className="object-cover"
                     priority
                   />
                 </div>
@@ -202,7 +202,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   {isId ? "" : "Admission"}
                 </h2>
                 <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans text-justify sm:text-left">
-                  {isId 
+                  {isId
                     ? "Kami informasikan bahwa PPDB SMAN Modal Bangsa untuk Tahun Ajaran 2026/2027 telah dibuka secara resmi. Seluruh proses pendaftaran dilakukan secara daring (online) melalui portal resmi SPMB SMAN Modal Bangsa. Kami mengundang putra-putri terbaik bangsa untuk bergabung dan berkembang bersama kami di lingkungan belajar yang unggul, islami, dan berkarakter kepemimpinan."
                     : "We inform you that the SMAN Modal Bangsa PPDB for the 2026/2027 Academic Year has been officially opened. The entire registration process is carried out online through the official SMAN Modal Bangsa SPMB portal. We invite the nation's best sons and daughters to join and grow with us in an excellent, Islamic, and leadership-oriented learning environment."}
                 </p>
@@ -245,7 +245,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                       {isId ? "Jalur Reguler" : "Regular Path"}
                     </h4>
                     <p className="text-xs sm:text-sm text-zinc-550 leading-relaxed">
-                      {isId 
+                      {isId
                         ? "Jalur Reguler diperuntukkan bagi seluruh calon siswa melalui proses seleksi umum yang mencakup tes akademik berbasis komputer (CAT) dan tes keagamaan berupa kemampuan membaca Al-Qur'an serta wawancara kesiapan tinggal di asrama."
                         : "The Regular Path is intended for all prospective students through a general selection process that includes a Computer-Assisted Test (CAT), religious testing (reciting the Al-Qur'an), and boarding suitability interviews."}
                     </p>
@@ -256,7 +256,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                       {isId ? "Jalur Prestasi" : "Achievement Path"}
                     </h4>
                     <p className="text-xs sm:text-sm text-zinc-550 leading-relaxed">
-                      {isId 
+                      {isId
                         ? "Jalur Prestasi ditujukan bagi siswa yang memiliki pencapaian luar biasa di bidang akademik (olimpiade sains), keagamaan (tahfidz), seni, olahraga, atau kepemimpinan. Calon siswa diwajibkan mengunggah bukti sertifikat prestasi dalam format PDF."
                         : "The Achievement Path is intended for students with outstanding achievements in academic fields (science olympiads), religion (tahfidz), arts, sports, or leadership. Applicants are required to upload proof of certificates in PDF format."}
                     </p>
@@ -269,7 +269,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 </div>
 
                 <p className="text-center pt-8 text-[#16a34a] font-romulo font-normal italic text-lg sm:text-xl">
-                  {isId 
+                  {isId
                     ? "Kami sangat menantikan kehadiranmu untuk bergabung dalam keluarga besar SMAN Modal Bangsa!"
                     : "We look forward to welcoming you to the family of SMAN Modal Bangsa!"}
                 </p>
@@ -282,7 +282,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                     {isId ? "Tahapan & Alur Pendaftaran" : "Admission Process Steps"}
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-500 font-sans">
-                    {isId 
+                    {isId
                       ? "Ikuti langkah terstruktur berikut untuk menyelesaikan proses seleksi masuk SMAN Modal Bangsa."
                       : "Follow these structured steps to complete your admission process at SMAN Modal Bangsa."}
                   </p>
@@ -322,7 +322,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                     </span>
                   </h2>
                   <p className="text-xs sm:text-sm text-zinc-650 leading-relaxed font-sans">
-                    {isId 
+                    {isId
                       ? "Untuk memulai perjalanan belajarmu di SMAN Modal Bangsa, silakan lengkapi formulir pendaftaran dan unggah seluruh dokumen persyaratan yang dibutuhkan."
                       : "To begin your learning journey at SMAN Modal Bangsa, please complete the registration form and upload all the required documents."}
                   </p>
@@ -346,12 +346,12 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 </div>
 
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm bg-zinc-200">
-                  <Image 
-                    src={spmbPhotos.cta} 
-                    alt="SMAN Modal Bangsa Boarding School Students" 
-                    fill 
+                  <Image
+                    src={spmbPhotos.cta}
+                    alt="SMAN Modal Bangsa Boarding School Students"
+                    fill
                     sizes="(max-width: 768px) 100vw, 40vw"
-                    className="object-cover" 
+                    className="object-cover"
                   />
                 </div>
               </div>
@@ -373,8 +373,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   {spmbFaqs.map((faq, idx) => {
                     const isOpen = openFaq === idx;
                     return (
-                      <div 
-                        key={idx} 
+                      <div
+                        key={idx}
                         className="py-2 transition-colors duration-300"
                       >
                         <button
@@ -416,18 +416,18 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
               {/* PJJ Hero & Intro */}
               <div className="space-y-12">
                 <p className="text-center max-w-3xl mx-auto text-base sm:text-lg text-zinc-550 leading-relaxed font-sans">
-                  {isId 
+                  {isId
                     ? "Program Pendidikan Jarak Jauh (PJJ) SMA 2026 merupakan program nasional yang diselenggarakan oleh Kemendikdasmen melalui Direktorat PKPLK bekerja sama dengan SEAMOLEC, untuk meningkatkan kompetensi guru dalam melaksanakan pembelajaran jarak jauh yang efektif dan berkualitas."
                     : "The PJJ SMA 2026 program is a national initiative by the Ministry of Education through the PKPLK Directorate in collaboration with SEAMOLEC, aimed at enhancing teacher competency in delivering effective and high-quality distance learning."}
                 </p>
 
                 <div className="relative aspect-[21/9] w-full rounded-3xl overflow-hidden shadow-sm bg-zinc-150">
-                  <Image 
-                    src={pjjPhotos.img1} 
-                    alt="SMAN Modal Bangsa Distance Learning Class" 
-                    fill 
+                  <Image
+                    src={pjjPhotos.img1}
+                    alt="SMAN Modal Bangsa Distance Learning Class"
+                    fill
                     sizes="100vw"
-                    className="object-cover" 
+                    className="object-cover"
                     priority
                   />
                 </div>
@@ -465,7 +465,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                     {isId ? "Tahapan Pelatihan" : "Training Stages"}
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-500 font-sans">
-                    {isId 
+                    {isId
                       ? "Pelatihan dilaksanakan melalui empat tahap yang mencakup kompetensi dasar, pengembangan konten, LMS, hingga keterampilan tutorial."
                       : "Training is delivered in four stages covering basic competencies, content development, LMS, and tutorial skills."}
                   </p>
@@ -545,9 +545,9 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                     {isId ? "Jadwal Pelaksanaan" : "Training Schedule"}
                   </span>
                   <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight uppercase">
-                    {isId ? "Pelatihan Tahap 2" : "Stage 2 Training"}{" "}
+                    {isId ? "Pelatihan Tahap 2 Di" : "Stage 2 Training At"}{" "}
                     <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
-                      {isId ? "di SMAN Modal Bangsa" : "at SMAN Modal Bangsa"}
+                      {isId ? "SMAN Modal Bangsa" : "SMAN Modal Bangsa"}
                     </span>
                   </h2>
                   <div className="space-y-3 text-xs sm:text-sm text-zinc-650 font-sans">
@@ -577,12 +577,12 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 </div>
 
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm bg-zinc-200">
-                  <Image 
-                    src={pjjPhotos.cta} 
-                    alt="SMAN Modal Bangsa Training" 
-                    fill 
+                  <Image
+                    src={pjjPhotos.cta}
+                    alt="SMAN Modal Bangsa Training"
+                    fill
                     sizes="(max-width: 768px) 100vw, 40vw"
-                    className="object-cover" 
+                    className="object-cover"
                   />
                 </div>
               </div>
@@ -604,8 +604,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   {pjjFaqs.map((faq, idx) => {
                     const isOpen = openFaq === idx;
                     return (
-                      <div 
-                        key={idx} 
+                      <div
+                        key={idx}
                         className="py-2 transition-colors duration-300"
                       >
                         <button
