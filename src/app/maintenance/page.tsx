@@ -37,19 +37,19 @@ export default function MaintenancePage() {
         <div className="max-w-lg w-full mx-auto space-y-10 animate-slide-up">
           
           {/* Top Section: Brand Eyebrow */}
-          <div className="flex items-center gap-3.5">
+          <div className="flex items-center gap-4">
             <Image
               src="/logo.png"
               alt="Logo"
-              width={40}
-              height={40}
-              className="object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.04)]"
+              width={56}
+              height={56}
+              className="object-contain drop-shadow-[0_3px_6px_rgba(0,0,0,0.05)]"
             />
             <div className="flex flex-col justify-center">
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-emerald-800 font-extrabold block leading-tight mb-0.5">
+              <span className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-emerald-800 font-black block leading-tight mb-1">
                 Portal Resmi
               </span>
-              <h2 className="text-xs sm:text-sm font-extrabold text-slate-800 font-sfpro leading-tight">
+              <h2 className="text-sm sm:text-base md:text-lg font-black text-slate-800 font-sfpro leading-tight">
                 SMAN Modal Bangsa Aceh
               </h2>
             </div>
