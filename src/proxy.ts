@@ -31,6 +31,15 @@ export function proxy(request: NextRequest) {
     return;
   }
 
+  // Maintenance mode check
+  const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
+  if (isMaintenanceMode) {
+    if (pathname === "/maintenance") {
+      return;
+    }
+    return NextResponse.rewrite(new URL("/maintenance", request.url));
+  }
+
   const pathnameHasLocale = locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
