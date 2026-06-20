@@ -20,7 +20,7 @@ export default function MaintenanceLayout({
 }) {
   return (
     <html lang="id" className={`${plusJakarta.variable} overflow-hidden`} translate="no">
-      <body className="bg-[#f3f7f4] antialiased overflow-hidden">
+      <body className="bg-[#faf9f6] antialiased overflow-hidden">
         {children}
       </body>
     </html>
