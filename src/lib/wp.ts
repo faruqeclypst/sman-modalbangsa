@@ -258,7 +258,7 @@ export function toProxyUrl(url: string | null): string | null {
 
   // Use configured direct media origin to bypass Vercel proxying.
   // Set NEXT_PUBLIC_WP_MEDIA_ORIGIN=proxy in .env to restore the Vercel rewrite proxy.
-  const mediaOrigin = process.env.NEXT_PUBLIC_WP_MEDIA_ORIGIN ?? "https://cms.sman-modalbangsa.sch.id";
+  const mediaOrigin = process.env.NEXT_PUBLIC_WP_MEDIA_ORIGIN ?? "proxy";
 
   if (mediaOrigin === "proxy") {
     const wpContentIdx = url.indexOf("/wp-content/");
