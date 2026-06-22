@@ -2,8 +2,7 @@ import type { MetadataRoute } from "next";
 import { locales } from "@/i18n/config";
 import { getCPT, getPosts } from "@/lib/wp";
 
-export const revalidate = 3600;
-export const dynamic = "force-dynamic"; // generate on first request, not at build
+export const revalidate = 86400; // Cache sitemap for 24 hours to reduce CPU usage
 
 const STATIC_PATHS = [
   "",

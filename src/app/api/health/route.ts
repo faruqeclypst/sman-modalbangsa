@@ -8,7 +8,7 @@ export async function GET() {
   try {
     const res = await fetch(`${WP_API_URL}/posts?per_page=1&_fields=id,title`, {
       headers: { Accept: "application/json" },
-      cache: "no-store",
+      next: { revalidate: 300 }, // Cache health check for 5 minutes to save CPU
     });
     const elapsed = Date.now() - start;
     const data = await res.json();

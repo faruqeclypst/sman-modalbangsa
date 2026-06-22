@@ -255,15 +255,28 @@ export async function getTaxonomyTerms(
 
 export function toProxyUrl(url: string | null): string | null {
   if (!url) return null;
-  const wpContentIdx = url.indexOf("/wp-content/");
-  if (wpContentIdx !== -1) {
-    return url.substring(wpContentIdx);
+
+  // Use configured direct media origin to bypass Vercel proxying.
+  // Set NEXT_PUBLIC_WP_MEDIA_ORIGIN=proxy in .env to restore the Vercel rewrite proxy.
+  const mediaOrigin = process.env.NEXT_PUBLIC_WP_MEDIA_ORIGIN ?? "https://cms.sman-modalbangsa.sch.id";
+
+  if (mediaOrigin === "proxy") {
+    const wpContentIdx = url.indexOf("/wp-content/");
+    if (wpContentIdx !== -1) {
+      return url.substring(wpContentIdx);
+    }
+    const wpIncludesIdx = url.indexOf("/wp-includes/");
+    if (wpIncludesIdx !== -1) {
+      return url.substring(wpIncludesIdx);
+    }
+    return url;
   }
-  const wpIncludesIdx = url.indexOf("/wp-includes/");
-  if (wpIncludesIdx !== -1) {
-    return url.substring(wpIncludesIdx);
-  }
-  return url;
+
+  // Replace public site domains with direct CMS domain to load directly from WP
+  let directUrl = url;
+  directUrl = directUrl.replace("https://www.sman-modalbangsa.sch.id", mediaOrigin);
+  directUrl = directUrl.replace("https://sman-modalbangsa.sch.id", mediaOrigin);
+  return directUrl;
 }
 
 export function getFeaturedImage(post: WPPost): WPMedia | null {
