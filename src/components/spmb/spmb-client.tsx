@@ -423,8 +423,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
 
                 <div className="relative aspect-[21/9] w-full rounded-3xl overflow-hidden shadow-sm bg-zinc-150">
                   <Image
-                    src={pjjPhotos.img1}
-                    alt="SMAN Modal Bangsa Distance Learning Class"
+                    src="/images/spmb/pjj-hero.jpeg"
+                    alt="Program Pendidikan Jarak Jauh SMAN Modal Bangsa"
                     fill
                     sizes="100vw"
                     className="object-cover"
@@ -441,7 +441,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   </span>
                   <h3 className="font-sfpro text-2xl sm:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
                     {isId ? "Sekolah Induk" : "Anchor School"}{" "}
-                    <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">PJJ Nasional</span>
+                    <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">Pendidikan Jarak Jauh</span>
                   </h3>
                 </div>
                 <div className="space-y-4 text-sm sm:text-base text-zinc-650 leading-relaxed font-sans text-justify sm:text-left">
@@ -495,43 +495,153 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 </div>
               </div>
 
-              {/* Sekolah Mitra Table */}
-              <div className="max-w-5xl mx-auto space-y-8">
-                <div className="space-y-3 text-center md:text-left">
+              {/* Sekolah Mitra — Table */}
+              <div className="max-w-5xl mx-auto space-y-6">
+                <div className="space-y-2">
                   <h3 className="font-sfpro text-2xl sm:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
                     {isId ? "Sekolah Mitra" : "Partner Schools"}
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-500 font-sans">
                     {isId
-                      ? "Sekolah-sekolah di Provinsi Aceh yang bermitra dengan SMAN Modal Bangsa dalam Program PJJ SMA."
-                      : "Schools in Aceh Province partnering with SMAN Modal Bangsa in the PJJ SMA Program."}
+                      ? "Sekolah-sekolah yang bermitra dengan SMAN Modal Bangsa dalam Program PJJ SMA."
+                      : "Schools partnering with SMAN Modal Bangsa in the PJJ SMA Program."}
                   </p>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-zinc-200 shadow-sm">
-                  <table className="w-full text-sm">
+
+                <div className="hidden md:block w-full overflow-x-auto rounded-2xl border border-zinc-200 shadow-sm bg-white">
+                  <table className="w-full border-collapse text-sm min-w-[768px]">
                     <thead>
                       <tr className="bg-[#16a34a] text-white">
-                        <th className="px-4 py-3 text-left text-[10px] font-sfpro font-bold tracking-[0.15em] uppercase">No.</th>
-                        <th className="px-4 py-3 text-left text-[10px] font-sfpro font-bold tracking-[0.15em] uppercase">{isId ? "Provinsi" : "Province"}</th>
-                        <th className="px-4 py-3 text-left text-[10px] font-sfpro font-bold tracking-[0.15em] uppercase">{isId ? "Kabupaten/Kota" : "Regency/City"}</th>
-                        <th className="px-4 py-3 text-left text-[10px] font-sfpro font-bold tracking-[0.15em] uppercase">{isId ? "Satuan Pendidikan" : "School"}</th>
-                        <th className="px-4 py-3 text-left text-[10px] font-sfpro font-bold tracking-[0.15em] uppercase">Status</th>
+                        <th className="w-12 py-3 px-4 text-center text-[10px] font-sfpro font-bold tracking-widest uppercase">No.</th>
+                        <th className="py-3 px-4 text-left text-[10px] font-sfpro font-bold tracking-widest uppercase">{isId ? "Kabupaten/Kota" : "Regency/City"}</th>
+                        <th className="py-3 px-4 text-left text-[10px] font-sfpro font-bold tracking-widest uppercase">{isId ? "Satuan Pendidikan" : "School"}</th>
+                        <th className="w-24 py-3 px-4 text-center text-[10px] font-sfpro font-bold tracking-widest uppercase">Status</th>
+                        <th className="py-3 px-4 text-left text-[10px] font-sfpro font-bold tracking-widest uppercase">Contact Person</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-zinc-100">
-                      {mitraSekolah.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-emerald-50 transition-colors duration-150">
-                          <td className="px-4 py-3 text-zinc-500 font-medium text-xs text-center">{row.no}</td>
-                          <td className="px-4 py-3 text-zinc-700 text-xs">{row.provinsi}</td>
-                          <td className="px-4 py-3 text-zinc-700 text-xs">{row.kabupaten}</td>
-                          <td className="px-4 py-3 text-zinc-900 font-semibold text-xs font-sfpro">{row.sekolah}</td>
-                          <td className="px-4 py-3">
-                            <span className="inline-block text-[10px] font-bold text-[#16a34a] bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-0.5">Mitra</span>
-                          </td>
-                        </tr>
-                      ))}
+                    <tbody>
+                      {mitraSekolah.map((row, idx) => {
+                        const isInduk = row.status === "Induk";
+                        const isEven = idx % 2 === 1;
+                        return (
+                          <tr
+                            key={idx}
+                            className={cn(
+                              "border-t border-zinc-100 transition-colors duration-150 align-middle hover:bg-emerald-50/50",
+                              isEven ? "bg-zinc-50/60" : "bg-white",
+                              isInduk && "bg-emerald-50/40 hover:bg-emerald-50/70"
+                            )}
+                          >
+                            <td className="py-3.5 px-4 text-center text-xs text-zinc-400 font-medium">{row.no}</td>
+                            <td className="py-3.5 px-4 text-xs text-zinc-500">{row.kabupaten}</td>
+                            <td className="py-3.5 px-4 text-sm font-semibold text-zinc-900 font-sfpro">{row.sekolah}</td>
+                            <td className="py-3.5 px-4 text-center">
+                              {isInduk ? (
+                                <span className="inline-block text-[10px] font-bold text-white bg-[#16a34a] rounded-full px-3 py-1 whitespace-nowrap">Induk</span>
+                              ) : (
+                                <span className="inline-block text-[10px] font-bold text-[#16a34a] bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1 whitespace-nowrap">Mitra</span>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-4">
+                              {row.contacts.length === 0 ? (
+                                <span className="text-xs text-zinc-300 italic">{isId ? "Belum tersedia" : "Not yet available"}</span>
+                              ) : (
+                                <div className="space-y-2.5">
+                                  {row.contacts.map((cp, ci) => {
+                                    const greeting = `Assalamualaikum Bapak/Ibu ${cp.name}, kami ingin menanyakan perihal SPMB Pendidikan Jarak Jauh`;
+                                    const waUrl = `https://wa.me/${cp.waNumber}?text=${encodeURIComponent(greeting)}`;
+                                    return (
+                                      <a key={ci} href={waUrl} target="_blank" rel="noopener noreferrer"
+                                        className="flex items-center gap-2 group/wa">
+                                        <svg className="w-4 h-4 shrink-0 text-[#25D366] group-hover/wa:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                                          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.853L.073 23.738a.5.5 0 0 0 .621.601l5.738-1.495A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.668-.524-5.178-1.434l-.36-.216-3.734.972.998-3.633-.236-.373A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                                        </svg>
+                                        <div className="min-w-0">
+                                          <p className="text-xs font-semibold text-zinc-800 group-hover/wa:text-[#16a34a] transition-colors leading-tight">{cp.name}</p>
+                                          <p className="text-[10px] text-zinc-400 font-mono mt-0.5">{cp.phone}</p>
+                                        </div>
+                                      </a>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
+                </div>
+
+                {/* Mobile Card List View */}
+                <div className="space-y-4 md:hidden">
+                  {mitraSekolah.map((row, idx) => {
+                    const isInduk = row.status === "Induk";
+                    return (
+                      <div
+                        key={idx}
+                        className={cn(
+                          "p-5 rounded-2xl border shadow-sm transition-all duration-300",
+                          isInduk ? "bg-emerald-50/30 border-emerald-200/60" : "bg-white border-zinc-200/80"
+                        )}
+                      >
+                        <div className="flex justify-between items-start gap-4 mb-3">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-mono text-zinc-400 font-bold">#{row.no}</span>
+                            <span className="text-xs text-zinc-500 font-medium">• {row.kabupaten}</span>
+                          </div>
+                          {isInduk ? (
+                            <span className="text-[9px] font-bold text-white bg-[#16a34a] rounded-full px-2.5 py-0.5 uppercase tracking-wider">Induk</span>
+                          ) : (
+                            <span className="text-[9px] font-bold text-[#16a34a] bg-emerald-50 border border-emerald-150 rounded-full px-2.5 py-0.5 uppercase tracking-wider">Mitra</span>
+                          )}
+                        </div>
+
+                        <h4 className="font-bold text-zinc-900 text-sm font-sfpro mb-4">
+                          {row.sekolah}
+                        </h4>
+
+                        {row.contacts.length === 0 ? (
+                          <div className="border-t border-zinc-100 pt-3 flex justify-between items-center">
+                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Contact Person</span>
+                            <span className="text-xs text-zinc-300 italic">{isId ? "Belum tersedia" : "Not yet available"}</span>
+                          </div>
+                        ) : (
+                          <div className="border-t border-zinc-100 pt-3">
+                            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block mb-2">Contact Person</span>
+                            <div className="space-y-2">
+                              {row.contacts.map((cp, ci) => {
+                                const greeting = `Assalamualaikum Bapak/Ibu ${cp.name}, kami ingin menanyakan perihal SPMB Pendidikan Jarak Jauh`;
+                                const waUrl = `https://wa.me/${cp.waNumber}?text=${encodeURIComponent(greeting)}`;
+                                return (
+                                  <a
+                                    key={ci}
+                                    href={waUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-between p-3 rounded-xl bg-zinc-50 hover:bg-emerald-50/50 border border-zinc-150/60 hover:border-emerald-100 transition-all duration-200 group/wa"
+                                  >
+                                    <div className="flex items-center gap-2.5 min-w-0">
+                                      <svg className="w-4 h-4 shrink-0 text-[#25D366] group-hover/wa:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                                        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.853L.073 23.738a.5.5 0 0 0 .621.601l5.738-1.495A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.668-.524-5.178-1.434l-.36-.216-3.734.972.998-3.633-.236-.373A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                                      </svg>
+                                      <div className="min-w-0">
+                                        <p className="text-xs font-semibold text-zinc-800 group-hover/wa:text-[#16a34a] transition-colors leading-tight">{cp.name}</p>
+                                        <p className="text-[10px] text-zinc-400 font-mono mt-0.5">{cp.phone}</p>
+                                      </div>
+                                    </div>
+                                    <ChevronRight className="w-3.5 h-3.5 text-zinc-400 group-hover/wa:text-[#16a34a] transition-colors group-hover/wa:translate-x-0.5 transition-transform" />
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -544,7 +654,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight uppercase">
                     {isId ? "Penerimaan Siswa Baru" : "New Student Admission"}{" "}
                     <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
-                      PJJ SMAN Modal Bangsa
+                      Program Pendidikan Jarak Jauh
                     </span>
                   </h2>
                   <div className="space-y-4 text-xs sm:text-sm text-zinc-650 font-sans">
@@ -575,8 +685,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                     <div className="flex items-center gap-2 text-[#16a34a] font-semibold pt-1">
                       <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] animate-pulse" />
                       <span>
-                        {isId 
-                          ? "Periode Pendaftaran: 25 Juni s.d. 10 Juli 2026" 
+                        {isId
+                          ? "Periode Pendaftaran: 25 Juni s.d. 10 Juli 2026"
                           : "Registration Period: June 25 to July 10, 2026"}
                       </span>
                     </div>
@@ -603,7 +713,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
 
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm bg-zinc-200">
                   <Image
-                    src={pjjPhotos.cta}
+                    src="/images/spmb/pjj-cta.png"
                     alt="SMAN Modal Bangsa Distance Learning Class"
                     fill
                     sizes="(max-width: 768px) 100vw, 40vw"

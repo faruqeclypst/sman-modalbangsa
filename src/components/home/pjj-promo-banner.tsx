@@ -23,7 +23,7 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
   React.useEffect(() => {
     const ctx = gsap.context(() => {
       if (!containerRef.current) return;
-      
+
       gsap.fromTo(
         containerRef.current,
         { opacity: 0, y: 50 },
@@ -49,12 +49,12 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
   return (
     <section className="relative overflow-hidden bg-transparent py-12 sm:py-16">
       <Container>
-        <div 
+        <div
           ref={containerRef}
           className="rounded-[2.5rem] bg-zinc-100/60 dark:bg-zinc-800/40 p-2.5 border border-zinc-200/50 dark:border-zinc-700/30 shadow-lg"
         >
           <div className="rounded-[calc(2.5rem-0.625rem)] bg-white dark:bg-zinc-900 overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-8 sm:p-12">
-            
+
             {/* Left side: Info */}
             <div className="lg:col-span-7 space-y-6">
               <div className="flex items-center gap-2">
@@ -68,14 +68,14 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
               </div>
 
               <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight uppercase">
-                {isId ? "Pendidikan Jarak Jauh" : "Distance Learning"}{" "}
+
                 <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
-                  (PJJ) SMAN Modal Bangsa
+                  {isId ? "Program Pendidikan Jarak Jauh" : "Distance Learning Program"}{" "}
                 </span>
               </h2>
 
               <p className="text-sm sm:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed font-sans">
-                {isId 
+                {isId
                   ? "Pendaftaran dibuka khusus untuk Anak Tidak Sekolah (ATS) dan Lulus Tidak Melanjutkan (LTMS) lulusan SMP/MTs sederajat tahun ajaran 2024/2025 dengan usia maksimal 18 tahun. Periode pendaftaran mulai 25 Juni hingga 10 Juli 2026."
                   : "Registration is open specifically for Out-of-School Children (ATS) and Graduates Not Continuing School (LTMS) who graduated from SMP/MTs in 2024/2025, aged maximum 18. Registration period from June 25 to July 10, 2026."}
               </p>
@@ -85,7 +85,7 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
                   href={`/${locale}/spmb?tab=pjj`}
                   className="inline-flex items-center gap-2.5 rounded-full bg-[#16a34a] hover:bg-[#118037] text-white font-sfpro font-bold tracking-wider py-3.5 px-8 text-xs transition-all duration-300 shadow-md hover:scale-105 active:scale-95 uppercase"
                 >
-                  <span>{isId ? "Lihat Info PJJ Selengkapnya" : "Explore PJJ Program"}</span>
+                  <span>{isId ? "Info PJJ" : "Explore PJJ"}</span>
                   <div className="w-5.5 h-5.5 rounded-full bg-white/20 flex items-center justify-center transition-colors">
                     <ArrowUpRight className="size-3" />
                   </div>
@@ -103,12 +103,12 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
 
             {/* Right side: Framed Image */}
             <div className="lg:col-span-5 relative w-full aspect-[16/9] rounded-[2rem] overflow-hidden shadow-md bg-zinc-100 group border border-zinc-200/50 dark:border-zinc-800">
-              <Image 
-                src="/images/banner/pjj.png" 
-                alt="Program Pendidikan Jarak Jauh" 
-                fill 
+              <Image
+                src="/images/banner/pjj.png"
+                alt="Program Pendidikan Jarak Jauh"
+                fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover transition-transform duration-750 ease-out group-hover:scale-105" 
+                className="object-cover transition-transform duration-750 ease-out group-hover:scale-105"
                 priority
               />
               <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
