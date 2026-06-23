@@ -70,17 +70,17 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
               <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight uppercase">
                 {isId ? "Pendidikan Jarak Jauh" : "Distance Learning"}{" "}
                 <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
-                  (PJJ) SMA 2026
+                  (PJJ) SMAN Modal Bangsa
                 </span>
               </h2>
 
               <p className="text-sm sm:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed font-sans">
                 {isId 
-                  ? "SMAN Modal Bangsa dipercayakan sebagai salah satu dari 32 Sekolah Induk PJJ Nasional oleh Kemendikdasmen. Bersama mitra, kami mengembangkan inovasi pembelajaran digital berbasis teknologi terdepan untuk meningkatkan kualitas pendidikan."
-                  : "SMAN Modal Bangsa has been designated as one of 32 national Anchor Schools for the PJJ SMA 2026 Program by the Ministry of Education. We drive technology-based digital learning innovations to elevate educational quality."}
+                  ? "Pendaftaran dibuka khusus untuk Anak Tidak Sekolah (ATS) dan Lulus Tidak Melanjutkan (LTMS) lulusan SMP/MTs sederajat tahun ajaran 2024/2025 dengan usia maksimal 18 tahun. Periode pendaftaran mulai 25 Juni hingga 10 Juli 2026."
+                  : "Registration is open specifically for Out-of-School Children (ATS) and Graduates Not Continuing School (LTMS) who graduated from SMP/MTs in 2024/2025, aged maximum 18. Registration period from June 25 to July 10, 2026."}
               </p>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap gap-4 items-center">
                 <Link
                   href={`/${locale}/spmb?tab=pjj`}
                   className="inline-flex items-center gap-2.5 rounded-full bg-[#16a34a] hover:bg-[#118037] text-white font-sfpro font-bold tracking-wider py-3.5 px-8 text-xs transition-all duration-300 shadow-md hover:scale-105 active:scale-95 uppercase"
@@ -90,6 +90,14 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
                     <ArrowUpRight className="size-3" />
                   </div>
                 </Link>
+                <a
+                  href="https://spmb.sman-modalbangsa.sch.id/register"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2.5 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-zinc-500 dark:hover:border-zinc-550 text-zinc-800 dark:text-zinc-200 font-sfpro font-bold tracking-wider py-3.5 px-8 text-xs transition-all duration-300 shadow-sm hover:scale-105 active:scale-95 uppercase"
+                >
+                  {isId ? "Daftar Sekarang" : "Register Now"}
+                </a>
               </div>
             </div>
 

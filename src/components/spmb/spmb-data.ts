@@ -58,28 +58,28 @@ export const getSpmbFaqs = (isId: boolean): FAQItem[] => [
 
 export const getPjjFaqs = (isId: boolean): FAQItem[] => [
   {
-    q: isId ? "Siapa saja yang bisa mengikuti program PJJ?" : "Who can participate in the Distance Learning program?",
+    q: isId ? "Apa itu Program Pendidikan Jarak Jauh (PJJ) SMAN Modal Bangsa?" : "What is the SMAN Modal Bangsa Distance Learning (PJJ) Program?",
     a: isId 
-      ? "Program PJJ SMA 2026 diperuntukkan bagi guru-guru dari Sekolah Induk dan Sekolah Mitra yang telah ditetapkan oleh Kemendikdasmen."
-      : "The PJJ SMA 2026 program is intended for teachers from designated Sekolah Induk and Sekolah Mitra schools selected by the Ministry of Education."
+      ? "Program PJJ SMAN Modal Bangsa adalah layanan pendidikan jarak jauh yang ditujukan khusus bagi Anak Tidak Sekolah (ATS) dan Lulus Tidak Melanjutkan (LTMS) agar dapat menyelesaikan pendidikan jenjang SMA."
+      : "The SMAN Modal Bangsa Distance Learning (PJJ) Program is a distance education service specifically designed for Out-of-School Children (ATS) and Graduates Not Continuing School (LTMS) to complete their high school education."
   },
   {
-    q: isId ? "Apa peran SMAN Modal Bangsa dalam Program PJJ?" : "What is SMAN Modal Bangsa's role in the PJJ Program?",
+    q: isId ? "Apa saja syarat utama pendaftaran PJJ?" : "What are the main registration requirements for PJJ?",
     a: isId 
-      ? "SMAN Modal Bangsa berperan sebagai Sekolah Induk — menjadi pusat pelatihan tatap muka, pengembangan konten digital, pendampingan guru, dan berbagi praktik baik bagi sekolah-sekolah mitra."
-      : "SMAN Modal Bangsa serves as the Sekolah Induk — the hub for in-person training, digital content development, teacher mentoring, and best practice sharing for partner schools."
+      ? "Calon peserta didik harus merupakan Anak Tidak Sekolah (ATS) atau Lulus Tidak Melanjutkan (LTMS) lulusan SMP/MTs sederajat tahun ajaran 2024/2025, telah putus sekolah selama minimal 1 tahun atau drop out, serta berusia maksimal 18 tahun saat pendaftaran."
+      : "Applicants must be Out-of-School Children (ATS) or Graduates Not Continuing School (LTMS) who graduated from SMP/MTs in 2024/2025, have been out of school for at least 1 year or dropped out, and are maximum 18 years old at registration."
   },
   {
-    q: isId ? "Kapan pelatihan Tahap 2 dilaksanakan di SMAN Modal Bangsa?" : "When is the Stage 2 training held at SMAN Modal Bangsa?",
+    q: isId ? "Berkas apa saja yang wajib diunggah saat pendaftaran?" : "What documents must be uploaded during registration?",
     a: isId 
-      ? "Pelatihan Tahap 2 (Pengembangan Konten dan Media Digital) secara luring dilaksanakan pada 28–30 Juli 2026 di SMAN Modal Bangsa Aceh."
-      : "Stage 2 training (Content and Digital Media Development) is held in-person on July 28–30, 2026, at SMAN Modal Bangsa, Aceh."
+      ? "Dokumen yang wajib diunggah adalah scan/foto ijazah SMP/MTs sederajat, Kartu Keluarga (KK), Akta Kelahiran, serta dokumen tambahan seperti sertifikat prestasi jika ada (opsional)."
+      : "Required documents include scans/photos of SMP/MTs certificate, Family Card (KK), Birth Certificate, and optional supporting documents such as achievement certificates."
   },
   {
-    q: isId ? "Apa saja yang dipelajari dalam pelatihan PJJ?" : "What topics are covered in the PJJ training?",
+    q: isId ? "Bagaimana cara melakukan pendaftaran PJJ?" : "How do I register for the PJJ Program?",
     a: isId 
-      ? "Pelatihan mencakup empat tahap: kompetensi dasar PJJ (daring), pengembangan konten & media digital termasuk AI (luring), pemanfaatan LMS, serta keterampilan tutorial dan asesmen."
-      : "Training covers four stages: basic PJJ competencies (online), content & digital media development including AI (in-person), LMS utilization, and tutorial & assessment skills."
+      ? "Pendaftaran dilakukan secara daring (online) dengan membuat akun di portal resmi SPMB SMAN Modal Bangsa pada menu pendaftaran PJJ, kemudian melengkapi data dan berkas yang diperlukan."
+      : "Registration is done online by creating an account on the official SMAN Modal Bangsa SPMB portal under the PJJ registration menu, then filling out the required data and files."
   }
 ];
 
@@ -131,35 +131,35 @@ export const getSpmbSteps = (isId: boolean): StepItem[] => [
 export const getPjjSteps = (isId: boolean): PJJStepItem[] => [
   {
     num: "01",
-    title: isId ? "Kompetensi Dasar PJJ" : "Basic PJJ Competencies",
+    title: isId ? "Registrasi Akun" : "Account Registration",
     mode: isId ? "Daring" : "Online",
     desc: isId
-      ? "Peserta mempelajari konsep dan karakteristik PJJ, pembelajaran dan tutorial, evaluasi & asesmen, serta pemanfaatan modul pembelajaran digital."
-      : "Participants learn PJJ concepts and characteristics, tutorial and learning strategies, evaluation & assessment, and digital learning module utilization."
+      ? "Calon peserta didik membuat akun pendaftaran di portal resmi SPMB SMAN Modal Bangsa pada menu pendaftaran PJJ."
+      : "Applicants create a registration account on the official SMAN Modal Bangsa SPMB portal under the PJJ registration menu."
   },
   {
     num: "02",
-    title: isId ? "Pengembangan Konten & Media Digital" : "Content & Digital Media Development",
-    mode: isId ? "Luring — SMAN Modal Bangsa, 28–30 Juli 2026" : "In-Person — SMAN Modal Bangsa, July 28–30, 2026",
+    title: isId ? "Pengisian Data & Unggah Berkas" : "Fill Data & Upload Documents",
+    mode: isId ? "Daring" : "Online",
     desc: isId
-      ? "Pemanfaatan AI dalam pendidikan, penyusunan materi digital, pengembangan bahan ajar interaktif, produksi video pembelajaran, dan pemanfaatan teknologi digital untuk konten pembelajaran."
-      : "AI utilization in education, digital material development, interactive teaching content creation, learning video production, and digital technology for learning content."
+      ? "Melengkapi biodata diri dan mengunggah dokumen persyaratan (FC Ijazah, KK, Akta Lahir, dan berkas tambahan/prestasi opsional)."
+      : "Complete personal biodata and upload required documents (copy of Certificate, KK, Birth Certificate, and optional achievement documents)."
   },
   {
     num: "03",
-    title: isId ? "Pemanfaatan Learning Management System" : "LMS Utilization",
+    title: isId ? "Verifikasi & Seleksi Administrasi" : "Verification & Selection",
     mode: isId ? "Daring" : "Online",
     desc: isId
-      ? "Pengenalan LMS Program PJJ, pengelolaan kelas digital, pengunggahan materi & aktivitas, pengelolaan tugas & asesmen, serta monitoring dan pelaporan pembelajaran."
-      : "Introduction to the PJJ LMS, digital classroom management, uploading materials & activities, task & assessment management, learning monitoring and reporting."
+      ? "Panitia akan memverifikasi kesesuaian dokumen pendaftaran dan pemenuhan syarat utama (Kategori Anak Tidak Sekolah)."
+      : "The committee verifies the registration documents and checks eligibility for the Out-of-School Children category."
   },
   {
     num: "04",
-    title: isId ? "Keterampilan Tutorial & Asesmen" : "Tutorial & Assessment Skills",
+    title: isId ? "Pengumuman Hasil Seleksi" : "Admissions Announcement",
     mode: isId ? "Daring" : "Online",
     desc: isId
-      ? "Teori dan praktik tutorial dalam PJJ, strategi fasilitasi pembelajaran daring, desain tutorial model ADDIE, serta penyusunan butir soal dan instrumen evaluasi yang valid."
-      : "Tutorial theory and practice in PJJ, online learning facilitation strategies, ADDIE model tutorial design, and developing valid assessment instruments."
+      ? "Hasil seleksi administrasi dan kelulusan pendaftaran PJJ akan diumumkan secara daring melalui akun pendaftaran masing-masing."
+      : "Administrative selection results and PJJ admission status will be announced online via each applicant's portal account."
   }
 ];
 

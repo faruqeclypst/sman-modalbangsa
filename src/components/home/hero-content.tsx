@@ -69,34 +69,65 @@ export function HeroContent({ locale, dict }: HeroContentProps) {
       </h1>
 
       {/* ===== SEMENTARA: INFO PENDIDIKAN JARAK JAUH — hapus blok ini jika tidak diperlukan ===== */}
-      <a
-        href={`/${locale}/spmb`}
-        className="mt-8 group inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-5 py-2.5 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-400/20 hover:border-emerald-400/60 hover:scale-105 active:scale-95"
-      >
-        <span className="relative flex size-2.5 shrink-0">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex size-2.5 rounded-full bg-emerald-400" />
-        </span>
-        <span className="text-sm font-medium text-emerald-200">
-          INFO SPMB-PJJ
-        </span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="text-emerald-400 transition-transform duration-300 group-hover:translate-x-1"
-          aria-hidden
+      <div className="mt-8 flex flex-wrap gap-4 justify-center items-center">
+        <a
+          href={`/${locale}/spmb?tab=pjj`}
+          className="group inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-5 py-2.5 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-400/20 hover:border-emerald-400/60 hover:scale-105 active:scale-95"
         >
-          <path d="M5 12h14" />
-          <path d="m12 5 7 7-7 7" />
-        </svg>
-      </a>
+          <span className="relative flex size-2.5 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex size-2.5 rounded-full bg-emerald-400" />
+          </span>
+          <span className="text-sm font-medium text-emerald-200 font-sfpro">
+            INFO SPMB-PJJ
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-emerald-400 transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden
+            data-slot="icon"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+
+        <a
+          href="https://spmb.sman-modalbangsa.sch.id/register"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-3 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-6 py-2.5 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-500/35 hover:border-emerald-500/70 hover:scale-105 active:scale-95 text-emerald-100"
+        >
+          <span className="text-sm font-bold tracking-wider font-sfpro uppercase">
+            {locale === "id" ? "Daftar PJJ" : "Register Now"}
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-emerald-300 transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden
+            data-slot="icon"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+      </div>
       {/* ===== AKHIR: INFO PENDIDIKAN JARAK JAUH ===== */}
 
     </div>

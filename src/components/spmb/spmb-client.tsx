@@ -417,8 +417,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
               <div className="space-y-12">
                 <p className="text-center max-w-3xl mx-auto text-base sm:text-lg text-zinc-550 leading-relaxed font-sans">
                   {isId
-                    ? "Program Pendidikan Jarak Jauh (PJJ) SMA 2026 merupakan program nasional yang diselenggarakan oleh Kemendikdasmen melalui Direktorat PKPLK bekerja sama dengan SEAMOLEC, untuk meningkatkan kompetensi guru dalam melaksanakan pembelajaran jarak jauh yang efektif dan berkualitas."
-                    : "The PJJ SMA 2026 program is a national initiative by the Ministry of Education through the PKPLK Directorate in collaboration with SEAMOLEC, aimed at enhancing teacher competency in delivering effective and high-quality distance learning."}
+                    ? "Program Pendidikan Jarak Jauh (PJJ) SMAN Modal Bangsa dibuka khusus untuk memfasilitasi Anak Tidak Sekolah (ATS) dan Lulus Tidak Melanjutkan (LTMS) agar dapat kembali menempuh pendidikan tingkat menengah atas secara fleksibel, berkualitas, dan setara."
+                    : "The SMAN Modal Bangsa Distance Learning (PJJ) Program is specifically opened to facilitate Out-of-School Children (ATS) and Graduates Not Continuing School (LTMS) to resume senior high school education flexibly, with high quality and equality."}
                 </p>
 
                 <div className="relative aspect-[21/9] w-full rounded-3xl overflow-hidden shadow-sm bg-zinc-150">
@@ -444,30 +444,30 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                     <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">PJJ Nasional</span>
                   </h3>
                 </div>
-                <div className="space-y-4 text-sm sm:text-base text-zinc-600 leading-relaxed font-sans text-justify sm:text-left">
+                <div className="space-y-4 text-sm sm:text-base text-zinc-650 leading-relaxed font-sans text-justify sm:text-left">
                   <p>
                     {isId
-                      ? "SMAN Modal Bangsa Aceh memperoleh kepercayaan sebagai salah satu dari 32 Sekolah Induk Program PJJ SMA 2026 yang tersebar di seluruh Indonesia. Penunjukan ini merupakan pengakuan atas komitmen SMAN Modal Bangsa dalam mengembangkan inovasi pembelajaran dan pemanfaatan teknologi pendidikan."
-                      : "SMAN Modal Bangsa Aceh has been designated as one of 32 national Anchor Schools (Sekolah Induk) for the PJJ SMA 2026 Program across Indonesia. This appointment recognizes SMAN Modal Bangsa's commitment to educational innovation and technology."}
+                      ? "SMAN Modal Bangsa Aceh dipercayakan sebagai salah satu Sekolah Induk Program PJJ SMA Nasional oleh Kemendikdasmen. Dalam menjalankan amanah ini, kami berkomitmen menyelenggarakan layanan pendidikan jarak jauh yang bermutu tinggi serta merata bagi anak-anak bangsa yang terhambat oleh keterbatasan geografis maupun ekonomi."
+                      : "SMAN Modal Bangsa Aceh is trusted as one of the national Anchor Schools for the High School PJJ Program by the Ministry of Education. In carrying out this mandate, we are committed to organizing high-quality and equitable distance learning services for children constrained by geographical or economic barriers."}
                   </p>
                   <p>
                     {isId
-                      ? "Sebagai Sekolah Induk, SMAN Modal Bangsa berperan sebagai pusat pelatihan tatap muka, pendampingan guru, pengembangan konten digital, kolaborasi pembelajaran, dan berbagi praktik baik bagi sekolah-sekolah mitra di Provinsi Aceh."
-                      : "As the Anchor School, SMAN Modal Bangsa serves as the hub for in-person training, teacher mentoring, digital content development, collaborative learning, and best practice sharing for partner schools in Aceh Province."}
+                      ? "Melalui sistem pembelajaran daring berbasis Learning Management System (LMS) dan pendampingan berkala, siswa PJJ SMAN Modal Bangsa akan mendapatkan kurikulum pengajaran setara dengan kelas reguler serta bimbingan dari guru-guru terbaik kami."
+                      : "Through an online learning system based on a Learning Management System (LMS) and periodic mentoring, SMAN Modal Bangsa PJJ students will receive a curriculum equivalent to regular classes and guidance from our best teachers."}
                   </p>
                 </div>
               </div>
 
-              {/* Training Stages */}
+              {/* Timeline Section */}
               <div className="max-w-5xl mx-auto space-y-12">
                 <div className="space-y-3 text-center md:text-left">
                   <h3 className="font-sfpro text-2xl sm:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
-                    {isId ? "Tahapan Pelatihan" : "Training Stages"}
+                    {isId ? "Tahapan & Alur Pendaftaran" : "Admission Process Steps"}
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-500 font-sans">
+                  <p className="text-xs sm:text-sm text-zinc-550 font-sans">
                     {isId
-                      ? "Pelatihan dilaksanakan melalui empat tahap yang mencakup kompetensi dasar, pengembangan konten, LMS, hingga keterampilan tutorial."
-                      : "Training is delivered in four stages covering basic competencies, content development, LMS, and tutorial skills."}
+                      ? "Ikuti langkah terstruktur berikut untuk menyelesaikan proses pendaftaran program PJJ SMAN Modal Bangsa."
+                      : "Follow these structured steps to complete your registration for the SMAN Modal Bangsa PJJ program."}
                   </p>
                 </div>
 
@@ -480,10 +480,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                       <div className="space-y-1.5 max-w-3xl">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="inline-block text-[9px] font-sfpro font-bold tracking-widest text-[#16a34a] uppercase bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100/40">
-                            {isId ? `Tahap ${step.num}` : `Stage ${step.num}`}
-                          </span>
-                          <span className="inline-block text-[9px] font-sfpro font-medium tracking-wide text-zinc-500 uppercase bg-zinc-100 px-2 py-0.5 rounded border border-zinc-200">
-                            {step.mode}
+                            {isId ? `Langkah ${step.num}` : `Step ${step.num}`}
                           </span>
                         </div>
                         <h4 className="font-bold text-base text-zinc-900 group-hover:text-[#16a34a] transition-colors font-sfpro">
@@ -498,7 +495,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 </div>
               </div>
 
-              {/* Mitra Schools Table */}
+              {/* Sekolah Mitra Table */}
               <div className="max-w-5xl mx-auto space-y-8">
                 <div className="space-y-3 text-center md:text-left">
                   <h3 className="font-sfpro text-2xl sm:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
@@ -506,8 +503,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-500 font-sans">
                     {isId
-                      ? "Sekolah-sekolah di Provinsi Aceh yang bermitra dengan SMAN Modal Bangsa dalam Program PJJ SMA 2026."
-                      : "Schools in Aceh Province partnering with SMAN Modal Bangsa in the PJJ SMA 2026 Program."}
+                      ? "Sekolah-sekolah di Provinsi Aceh yang bermitra dengan SMAN Modal Bangsa dalam Program PJJ SMA."
+                      : "Schools in Aceh Province partnering with SMAN Modal Bangsa in the PJJ SMA Program."}
                   </p>
                 </div>
                 <div className="overflow-hidden rounded-2xl border border-zinc-200 shadow-sm">
@@ -538,48 +535,76 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 </div>
               </div>
 
-              {/* Training Schedule CTA */}
+              {/* PJJ Admission Info CTA */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center bg-zinc-50 border border-zinc-150 p-8 sm:p-12 rounded-[2rem] max-w-5xl mx-auto shadow-sm">
                 <div className="space-y-6">
                   <span className="inline-block text-[10px] font-sfpro font-bold tracking-[0.2em] text-[#16a34a] uppercase bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
-                    {isId ? "Jadwal Pelaksanaan" : "Training Schedule"}
+                    {isId ? "Informasi Pendaftaran PJJ" : "PJJ Admission Information"}
                   </span>
                   <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight uppercase">
-                    {isId ? "Pelatihan Tahap 2 Di" : "Stage 2 Training At"}{" "}
+                    {isId ? "Penerimaan Siswa Baru" : "New Student Admission"}{" "}
                     <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
-                      {isId ? "SMAN Modal Bangsa" : "SMAN Modal Bangsa"}
+                      PJJ SMAN Modal Bangsa
                     </span>
                   </h2>
-                  <div className="space-y-3 text-xs sm:text-sm text-zinc-650 font-sans">
-                    <div className="flex items-start gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#16a34a] mt-1.5 shrink-0" />
-                      <span><strong className="text-zinc-900 font-semibold">{isId ? "Tanggal:" : "Date:"}</strong> 28–30 Juli 2026</span>
+                  <div className="space-y-4 text-xs sm:text-sm text-zinc-650 font-sans">
+                    <div className="space-y-2">
+                      <span className="font-bold text-zinc-900 block uppercase tracking-wider text-[10px] font-sfpro">
+                        {isId ? "Syarat Utama:" : "Main Requirements:"}
+                      </span>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li>{isId ? "Kategori Anak Tidak Sekolah (ATS) atau Lulus Tidak Melanjutkan (LTMS)" : "Out-of-School Children (ATS) or Graduates Not Continuing School (LTMS)"}</li>
+                        <li>{isId ? "Lulusan SMP/MTs sederajat tahun ajaran 2024/2025" : "Graduated from SMP/MTs in the 2024/2025 academic year"}</li>
+                        <li>{isId ? "Harus yang sudah putus sekolah 1 tahun, atau drop out lulus tahun 2025" : "Must have dropped out for 1 year, or dropped out / graduated in 2025"}</li>
+                        <li>{isId ? "Umur maksimal 18 tahun saat melakukan pendaftaran" : "Maximum age of 18 years old at the time of registration"}</li>
+                      </ul>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#16a34a] mt-1.5 shrink-0" />
-                      <span><strong className="text-zinc-900 font-semibold">{isId ? "Bentuk:" : "Mode:"}</strong> {isId ? "Pelatihan Luring (Tatap Muka)" : "In-Person Training"}</span>
+
+                    <div className="space-y-2">
+                      <span className="font-bold text-zinc-900 block uppercase tracking-wider text-[10px] font-sfpro">
+                        {isId ? "Berkas Upload:" : "Required Documents to Upload:"}
+                      </span>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li>{isId ? "Fotokopi Ijazah SMP/MTs sederajat" : "Copy of SMP/MTs certificate"}</li>
+                        <li>{isId ? "Kartu Keluarga (KK)" : "Family Card (KK)"}</li>
+                        <li>{isId ? "Akta Kelahiran" : "Birth Certificate"}</li>
+                        <li>{isId ? "Dokumen tambahan seperti prestasi dan sejenisnya (opsional)" : "Additional documents such as achievements, etc. (optional)"}</li>
+                      </ul>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#16a34a] mt-1.5 shrink-0" />
-                      <span><strong className="text-zinc-900 font-semibold">{isId ? "Peserta:" : "Participants:"}</strong> {isId ? "Guru PJJ dari Sekolah Induk & Mitra yang telah menyelesaikan Tahap 1" : "PJJ Teachers from Anchor & Partner Schools who completed Stage 1"}</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <span className="w-2 h-2 rounded-full bg-[#16a34a] mt-1.5 shrink-0" />
-                      <span><strong className="text-zinc-900 font-semibold">{isId ? "Fasilitas:" : "Facilities:"}</strong> {isId ? "Ruang pelatihan, LCD/Proyektor, sistem audio, akses internet" : "Training rooms, LCD/Projector, audio system, internet access"}</span>
+
+                    <div className="flex items-center gap-2 text-[#16a34a] font-semibold pt-1">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] animate-pulse" />
+                      <span>
+                        {isId 
+                          ? "Periode Pendaftaran: 25 Juni s.d. 10 Juli 2026" 
+                          : "Registration Period: June 25 to July 10, 2026"}
+                      </span>
                     </div>
                   </div>
-                  <a
-                    href={`/${lang}/kontak`}
-                    className="inline-block bg-[#16a34a] hover:bg-[#118037] text-white text-xs font-bold tracking-wider py-3.5 px-8 rounded-full transition-all duration-300 font-sfpro uppercase shadow-sm active:scale-[0.98]"
-                  >
-                    {isId ? "Hubungi Humas Kami" : "Contact Our PR"}
-                  </a>
+
+                  <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                    <a
+                      href="https://spmb.sman-modalbangsa.sch.id/register"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-[#16a34a] hover:bg-[#118037] text-white text-xs font-bold tracking-wider py-3.5 px-6 rounded-full flex items-center justify-between transition-all duration-300 font-sfpro uppercase shadow-sm active:scale-[0.98]"
+                    >
+                      <span>{isId ? "Daftar Sekarang" : "Register Now"}</span>
+                      <ArrowUpRight className="size-4 ml-2" />
+                    </a>
+                    <a
+                      href={`/${lang}/kontak`}
+                      className="bg-transparent border border-zinc-300 hover:border-zinc-500 text-zinc-800 text-xs font-bold tracking-wider py-3.5 px-6 rounded-full text-center transition-all duration-300 font-sfpro uppercase active:scale-[0.98]"
+                    >
+                      {isId ? "Hubungi Humas" : "Contact PR"}
+                    </a>
+                  </div>
                 </div>
 
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm bg-zinc-200">
                   <Image
                     src={pjjPhotos.cta}
-                    alt="SMAN Modal Bangsa Training"
+                    alt="SMAN Modal Bangsa Distance Learning Class"
                     fill
                     sizes="(max-width: 768px) 100vw, 40vw"
                     className="object-cover"
