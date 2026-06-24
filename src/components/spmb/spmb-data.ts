@@ -225,7 +225,14 @@ export const mitraSekolah: PartnerSchool[] = [
     kabupaten: "Kab. Aceh Besar",
     sekolah: "SMAN 1 Seulimeum",
     status: "Mitra",
-    contacts: [],
+    contacts: [
+      {
+        name: "Malahayati",
+        phone: "+62 852-6012-3817",
+        role: "PIC Sekolah Mitra PJJ SMAN 1 Seulimeum",
+        waNumber: "6285260123817",
+      },
+    ],
   },
   {
     no: 5,
