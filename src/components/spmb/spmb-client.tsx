@@ -686,8 +686,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                       <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] animate-pulse" />
                       <span>
                         {isId
-                          ? "Periode Pendaftaran: 25 Juni s.d. 10 Juli 2026"
-                          : "Registration Period: June 25 to July 10, 2026"}
+                          ? "Periode Pendaftaran: 25 Juni s.d. 31 Juli 2026"
+                          : "Registration Period: June 25 to July 31, 2026"}
                       </span>
                     </div>
                   </div>
