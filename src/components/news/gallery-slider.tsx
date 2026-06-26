@@ -18,14 +18,6 @@ export function GallerySlider({ images }: GallerySliderProps) {
 
   return (
     <div className="relative w-full my-12 py-6 bg-zinc-50/50 border-y border-zinc-100 rounded-3xl">
-      <div className="px-6 mb-4 flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#16a34a] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100/50">
-          Galeri Foto
-        </span>
-        <span className="text-[10px] font-medium text-zinc-400">
-          Geser atau scroll ke samping untuk melihat foto
-        </span>
-      </div>
       <div
         className="flex gap-6 px-6 relative z-10 w-full items-center overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
