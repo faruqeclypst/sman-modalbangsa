@@ -7,6 +7,7 @@ import { ImageLightbox } from "@/components/ui/image-lightbox";
  * Wraps article content and makes all images clickable to open in a lightbox.
  * Place this around any rendered HTML content that contains images.
  */
+
 export function ArticleLightboxWrapper({ children }: { children: React.ReactNode }) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [lightboxOpen, setLightboxOpen] = React.useState(false);
