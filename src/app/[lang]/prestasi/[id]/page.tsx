@@ -112,12 +112,18 @@ export default async function PrestasiDetailPage({
   });
   const related = relatedRaw.slice(0, 6);
 
-  // Split content in half to inject "Baca Juga" (related achievements) in the middle
+  // Split content in half to inject "Baca Juga" (related achievements) in the middle if there are enough paragraphs
   const contentHtml = post.content?.rendered ?? "";
-  const paragraphs = contentHtml.split(/<\/p>/i);
-  const midPoint = Math.max(2, Math.floor(paragraphs.length / 2));
-  const contentTop = paragraphs.slice(0, midPoint).join("</p>") + "</p>";
-  const contentBottom = paragraphs.slice(midPoint).join("</p>");
+  const paragraphs = contentHtml.split(/<\/p>/i).filter((p) => p.trim() !== "");
+
+  let contentTop = contentHtml;
+  let contentBottom = "";
+
+  if (paragraphs.length >= 4) {
+    const midPoint = Math.floor(paragraphs.length / 2);
+    contentTop = paragraphs.slice(0, midPoint).join("</p>") + "</p>";
+    contentBottom = paragraphs.slice(midPoint).join("</p>") + "</p>";
+  }
 
   return (
     <article className="bg-[color:var(--background)] min-h-screen">

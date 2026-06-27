@@ -10,6 +10,7 @@ const STATIC_PATHS = [
   "/profil/visi-misi",
   "/profil/kepala-sekolah",
   "/profil/fasilitas",
+  "/profil/kalender",
   "/gtk",
   "/prestasi",
   "/agenda",

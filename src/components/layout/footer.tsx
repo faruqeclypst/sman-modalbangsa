@@ -98,6 +98,7 @@ export function Footer({ locale, dict }: FooterProps) {
     { label: dict.nav.visionMission, href: `/${locale}/profil/visi-misi` },
     { label: dict.nav.principal, href: `/${locale}/profil/kepala-sekolah` },
     { label: dict.nav.facilities, href: `/${locale}/profil/fasilitas` },
+    { label: dict.nav.calendar, href: `/${locale}/profil/kalender` },
     { label: dict.cpt.gtk.label, href: `/${locale}/gtk` },
     { label: dict.cpt.ekskul.label, href: `/${locale}/ekskul` },
   ];

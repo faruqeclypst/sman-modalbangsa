@@ -11,6 +11,7 @@
     "visionMission": "Visi & Misi",
     "principal": "Kepala Sekolah",
     "facilities": "Fasilitas",
+    "calendar": "Kalender Pendidikan",
     "structure": "Struktur Organisasi",
     "academic": "Akademik",
     "achievements": "Prestasi",
@@ -274,6 +275,18 @@
           "desc": "Ruang pertemuan, seminar, dan pertunjukan seni."
         }
       ]
+    },
+    "calendar": {
+      "title": "Kalender Pendidikan",
+      "subtitle": "Jadwal dan kalender akademik resmi SMAN Modal Bangsa.",
+      "description": "Kalender akademik menyajikan jadwal kegiatan belajar mengajar, ujian, libur sekolah, serta agenda penting lainnya sepanjang tahun ajaran berjalan.",
+      "download": "Unduh Kalender Pendidikan",
+      "openNewTab": "Buka di Tab Baru",
+      "viewFullscreen": "Lihat Layar Penuh",
+      "fallbackMessage": "Browser Anda tidak mendukung pratinjau PDF langsung. Silakan klik tombol di bawah ini untuk mengunduh atau membuka dokumen secara langsung.",
+      "tabImage": "Gambar Kalender",
+      "tabPdf": "Dokumen PDF",
+      "clickToZoom": "Klik gambar untuk memperbesar"
     },
     "achievements": {
       "title": "Prestasi",

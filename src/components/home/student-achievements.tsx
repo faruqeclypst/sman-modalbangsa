@@ -169,31 +169,51 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
     // Reset list position first
     gsap.set(listEl, { y: 0 });
 
-    const containerHeight = isDesktop ? 4 * ITEM_HEIGHT : 360;
-    const scrollableDistance = listEl.scrollHeight - containerHeight;
-    
-    // We only animate if the content is taller than the container
-    if (scrollableDistance <= 0) return;
+    let anim: gsap.core.Tween | null = null;
+    let onMouseEnter: (() => void) | null = null;
+    let onMouseLeave: (() => void) | null = null;
 
     const ctx = gsap.context(() => {
-      const anim = gsap.to(listEl, {
-        y: -scrollableDistance,
-        duration: Math.max(8, scrollableDistance * 0.035), // Smooth speed proportional to height
-        ease: "power1.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
+      const initAnimation = () => {
+        if (anim) {
+          anim.kill();
+          anim = null;
+        }
 
-      // Pause on hover
-      const onMouseEnter = () => anim.pause();
-      const onMouseLeave = () => anim.play();
+        const containerHeight = isDesktop ? 4 * ITEM_HEIGHT : 360;
+        const scrollableDistance = listEl.scrollHeight - containerHeight;
+
+        if (scrollableDistance <= 0) {
+          gsap.set(listEl, { y: 0 });
+          return;
+        }
+
+        anim = gsap.to(listEl, {
+          y: -scrollableDistance,
+          duration: Math.max(8, scrollableDistance * 0.035), // Smooth speed proportional to height
+          ease: "power1.inOut",
+          repeat: -1,
+          yoyo: true,
+        });
+      };
+
+      initAnimation();
+
+      const observer = new ResizeObserver(() => {
+        initAnimation();
+      });
+      observer.observe(listEl);
+
+      onMouseEnter = () => anim?.pause();
+      onMouseLeave = () => anim?.play();
 
       listEl.addEventListener("mouseenter", onMouseEnter);
       listEl.addEventListener("mouseleave", onMouseLeave);
 
       return () => {
-        listEl.removeEventListener("mouseenter", onMouseEnter);
-        listEl.removeEventListener("mouseleave", onMouseLeave);
+        observer.disconnect();
+        if (onMouseEnter) listEl.removeEventListener("mouseenter", onMouseEnter);
+        if (onMouseLeave) listEl.removeEventListener("mouseleave", onMouseLeave);
       };
     }, wrapperRef);
 

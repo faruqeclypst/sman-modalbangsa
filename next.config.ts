@@ -110,7 +110,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: "/((?!.*\\.pdf$).*)",
         headers: [
           {
             key: "X-Content-Type-Options",

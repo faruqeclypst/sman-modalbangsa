@@ -171,108 +171,147 @@ export function LatestNews({
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch"
           >
             {activeTab === "news" ? (
-              // News Cards (Columns 1, 2, 3)
-              displayPosts.map((post) => {
-                const title = decodeHtml(post.title.rendered);
-                const excerpt = decodeHtml(post.excerpt?.rendered || "");
-                const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
-                const href = `/${locale}/berita/${post.slug}`;
+              displayPosts.length > 0 ? (
+                displayPosts.map((post) => {
+                  const title = decodeHtml(post.title.rendered);
+                  const excerpt = decodeHtml(post.excerpt?.rendered || "");
+                  const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
+                  const href = `/${locale}/berita/${post.slug}`;
 
-                return (
-                  <div key={post.id} className="h-full">
-                    <Link
-                      href={href}
-                      className="group flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-zinc-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md"
-                    >
-                      <div>
-                        {/* Image Container */}
-                        <div className="relative aspect-[16/10.5] w-full overflow-hidden rounded-[1.5rem] bg-zinc-100 mb-6">
-                          {imageUrl ? (
+                  return (
+                    <div key={post.id} className="h-full">
+                      <Link
+                        href={href}
+                        className="group flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-zinc-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md"
+                      >
+                        <div>
+                          {/* Image Container */}
+                          <div className="relative aspect-[16/10.5] w-full overflow-hidden rounded-[1.5rem] bg-zinc-100 mb-6">
+                            {imageUrl ? (
+                              <Image
+                                src={imageUrl}
+                                alt={title}
+                                fill
+                                sizes="(min-width: 1024px) 20vw, 45vw"
+                                className="object-cover transition-transform duration-750 ease-out group-hover:scale-103"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center bg-emerald-50 text-emerald-800">
+                                Mosa
+                              </div>
+                            )}
+                            {/* Spotlight Tag */}
+                            <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold text-zinc-900 shadow-sm border border-zinc-100/50">
+                              {locale === "en" ? "Mosa Spotlight" : "Info Sekolah"}
+                            </span>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="font-sfpro font-bold text-zinc-900 text-base sm:text-lg leading-snug mb-3 group-hover:text-[#16a34a] transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+                            {title}
+                          </h3>
+
+                          {/* Excerpt */}
+                          <p className="text-zinc-500 font-medium text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4 min-h-[3.75rem] sm:min-h-[4.5rem]">
+                            {excerpt}
+                          </p>
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                })
+              ) : (
+                // News empty state placeholders
+                Array.from({ length: 3 }).map((_, idx) => (
+                  <div key={`news-placeholder-${idx}`} className="h-full opacity-60">
+                    <div className="flex h-full flex-col justify-center items-center overflow-hidden rounded-[2rem] border border-dashed border-zinc-200 bg-zinc-50/50 p-6 text-center min-h-[350px]">
+                      <div className="space-y-3">
+                        <div className="mx-auto size-12 rounded-full bg-zinc-100 flex items-center justify-center text-lg">
+                          📭
+                        </div>
+                        <p className="text-sm font-semibold text-zinc-500">
+                          {locale === "en" ? "No news posts found" : "Belum ada berita terbaru"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )
+            ) : (
+              instagramPosts.length > 0 ? (
+                instagramPosts.slice(0, 3).map((post) => {
+                  const imgUrl = post.sizes?.medium?.mediaUrl ?? post.sizes?.small?.mediaUrl ?? post.mediaUrl;
+                  const captionLines = (post.caption || "").split("\n").filter(Boolean);
+                  const rawTitle = captionLines[0] || "Postingan Instagram";
+                  const displayTitle = rawTitle.length > 65 ? rawTitle.slice(0, 65) + "..." : rawTitle;
+                  const remainingText = captionLines.slice(1).join(" ") || post.prunedCaption || "";
+                  const displayExcerpt = remainingText.length > 110 ? remainingText.slice(0, 110) + "..." : remainingText;
+
+                  return (
+                    <div key={post.id} className="h-full">
+                      <a
+                        href={post.permalink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-zinc-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md"
+                      >
+                        <div>
+                          {/* Image Container */}
+                          <div className="relative aspect-[16/10.5] w-full overflow-hidden rounded-[1.5rem] bg-zinc-100 mb-6">
                             <Image
-                              src={imageUrl}
-                              alt={title}
+                              src={imgUrl}
+                              alt="Instagram post"
                               fill
-                              sizes="(min-width: 1024px) 20vw, 45vw"
+                              unoptimized
                               className="object-cover transition-transform duration-750 ease-out group-hover:scale-103"
                             />
-                          ) : (
-                            <div className="flex h-full w-full items-center justify-center bg-emerald-50 text-emerald-800">
-                              Mosa
-                            </div>
-                          )}
-                          {/* Spotlight Tag */}
-                          <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold text-zinc-900 shadow-sm border border-zinc-100/50">
-                            {locale === "en" ? "Mosa Spotlight" : "Info Sekolah"}
-                          </span>
+                            <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold text-zinc-900 shadow-sm border border-zinc-100/50">
+                              Instagram
+                            </span>
+                          </div>
+
+                          {/* Date */}
+                          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-2">
+                            <Calendar className="size-3.5" />
+                            <span>{fmtDate(post.timestamp, locale)}</span>
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="font-sfpro font-bold text-zinc-900 text-base sm:text-lg leading-snug mb-3 group-hover:text-[#16a34a] transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
+                            {displayTitle}
+                          </h3>
+
+                          {/* Excerpt */}
+                          <p className="text-zinc-500 font-medium text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4 min-h-[3.75rem] sm:min-h-[4.5rem]">
+                            {displayExcerpt}
+                          </p>
                         </div>
-
-                        {/* Title */}
-                        <h3 className="font-sfpro font-bold text-zinc-900 text-base sm:text-lg leading-snug mb-3 group-hover:text-[#16a34a] transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
-                          {title}
-                        </h3>
-
-                        {/* Excerpt */}
-                        <p className="text-zinc-500 font-medium text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4 min-h-[3.75rem] sm:min-h-[4.5rem]">
-                          {excerpt}
+                      </a>
+                    </div>
+                  );
+                })
+              ) : (
+                // Instagram empty state placeholders
+                Array.from({ length: 3 }).map((_, idx) => (
+                  <div key={`ig-placeholder-${idx}`} className="h-full opacity-60">
+                    <div className="flex h-full flex-col justify-center items-center overflow-hidden rounded-[2rem] border border-dashed border-zinc-200 bg-zinc-50/50 p-6 text-center min-h-[350px]">
+                      <div className="space-y-3">
+                        <div className="mx-auto size-12 rounded-full bg-zinc-100 flex items-center justify-center text-lg">
+                          📸
+                        </div>
+                        <p className="text-sm font-semibold text-zinc-500">
+                          {locale === "en" ? "Feed unavailable" : "Feed tidak tersedia"}
+                        </p>
+                        <p className="text-xs text-zinc-400 px-4 leading-relaxed">
+                          {locale === "en"
+                            ? "Visit our Instagram profile directly using the link on the right."
+                            : "Kunjungi profil Instagram kami secara langsung melalui tautan di samping."}
                         </p>
                       </div>
-                    </Link>
+                    </div>
                   </div>
-                );
-              })
-            ) : (
-              // Social Media Cards (Instagram)
-              instagramPosts.slice(0, 3).map((post) => {
-                const imgUrl = post.sizes?.medium?.mediaUrl ?? post.sizes?.small?.mediaUrl ?? post.mediaUrl;
-                const captionLines = (post.caption || "").split("\n").filter(Boolean);
-                const rawTitle = captionLines[0] || "Postingan Instagram";
-                const displayTitle = rawTitle.length > 65 ? rawTitle.slice(0, 65) + "..." : rawTitle;
-                const remainingText = captionLines.slice(1).join(" ") || post.prunedCaption || "";
-                const displayExcerpt = remainingText.length > 110 ? remainingText.slice(0, 110) + "..." : remainingText;
-
-                return (
-                  <div key={post.id} className="h-full">
-                    <a
-                      href={post.permalink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex h-full flex-col justify-between overflow-hidden rounded-[2rem] border border-zinc-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md"
-                    >
-                      <div>
-                        {/* Image Container */}
-                        <div className="relative aspect-[16/10.5] w-full overflow-hidden rounded-[1.5rem] bg-zinc-100 mb-6">
-                          <Image
-                            src={imgUrl}
-                            alt="Instagram post"
-                            fill
-                            unoptimized
-                            className="object-cover transition-transform duration-750 ease-out group-hover:scale-103"
-                          />
-                          <span className="absolute top-3 left-3 inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold text-zinc-900 shadow-sm border border-zinc-100/50">
-                            Instagram
-                          </span>
-                        </div>
-
-                        {/* Date */}
-                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-2">
-                          <Calendar className="size-3.5" />
-                          <span>{fmtDate(post.timestamp, locale)}</span>
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="font-sfpro font-bold text-zinc-900 text-base sm:text-lg leading-snug mb-3 group-hover:text-[#16a34a] transition-colors line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
-                          {displayTitle}
-                        </h3>
-
-                        {/* Excerpt */}
-                        <p className="text-zinc-500 font-medium text-xs sm:text-sm leading-relaxed line-clamp-3 mb-4 min-h-[3.75rem] sm:min-h-[4.5rem]">
-                          {displayExcerpt}
-                        </p>
-                      </div>
-                    </a>
-                  </div>
-                );
-              })
+                ))
+              )
             )}
 
             {/* Solid Brand Green Card (Column 4) */}

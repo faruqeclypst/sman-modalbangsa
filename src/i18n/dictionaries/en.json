@@ -11,6 +11,7 @@
     "visionMission": "Vision & Mission",
     "principal": "Principal",
     "facilities": "Facilities",
+    "calendar": "Academic Calendar",
     "structure": "Organizational Structure",
     "academic": "Academic",
     "achievements": "Achievements",
@@ -244,6 +245,18 @@
         { "name": "Sports Fields", "desc": "Futsal, basketball, volleyball, and athletics areas." },
         { "name": "Multipurpose Hall", "desc": "Venue for meetings, seminars, and arts performances." }
       ]
+    },
+    "calendar": {
+      "title": "Academic Calendar",
+      "subtitle": "Official academic calendar and schedules of SMAN Modal Bangsa.",
+      "description": "The academic calendar presents the schedule of teaching and learning activities, examinations, school holidays, and other important agendas throughout the current academic year.",
+      "download": "Download Academic Calendar",
+      "openNewTab": "Open in New Tab",
+      "viewFullscreen": "View Fullscreen",
+      "fallbackMessage": "Your browser does not support inline PDF preview. Please click the button below to download or view the document directly.",
+      "tabImage": "Calendar Image",
+      "tabPdf": "PDF Document",
+      "clickToZoom": "Click image to zoom in"
     },
     "achievements": {
       "title": "Achievements",

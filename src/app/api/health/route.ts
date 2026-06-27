@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { WP_API_URL } from "@/lib/wp";
 
-export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
 export async function GET() {
   const start = Date.now();

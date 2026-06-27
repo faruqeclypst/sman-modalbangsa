@@ -15,13 +15,16 @@ export default async function SlugResolverPage({ params }: ResolverPageProps) {
   const { lang, slug } = await params;
   if (!isLocale(lang)) notFound();
 
-  // 1. Try to find the slug in standard news Posts
-  const post = await getPostBySlug(slug);
-  if (post) {
-    redirect(`/${lang}/berita/${slug}`);
+  // Early return for common scanner bot / file paths to save Vercel CPU execution time
+  if (
+    slug.includes(".") ||
+    slug.includes("wp-") ||
+    slug.includes("admin") ||
+    slug.includes("xmlrpc")
+  ) {
+    notFound();
   }
 
-  // 2. Try to find the slug in other Custom Post Types (Agenda, Prestasi, etc.)
   const cpts = [
     { type: "agenda", path: "agenda" },
     { type: "prestasi", path: "prestasi" },
@@ -31,10 +34,19 @@ export default async function SlugResolverPage({ params }: ResolverPageProps) {
     { type: "ekskul", path: "ekskul" },
   ] as const;
 
-  for (const cpt of cpts) {
-    const cptPost = await getCPTBySlug(cpt.type, slug);
-    if (cptPost) {
-      redirect(`/${lang}/${cpt.path}/${slug}`);
+  // Query all endpoints in parallel to reduce sequential API overhead
+  const [post, ...cptResults] = await Promise.all([
+    getPostBySlug(slug),
+    ...cpts.map((cpt) => getCPTBySlug(cpt.type, slug)),
+  ]);
+
+  if (post) {
+    redirect(`/${lang}/berita/${slug}`);
+  }
+
+  for (let i = 0; i < cpts.length; i++) {
+    if (cptResults[i]) {
+      redirect(`/${lang}/${cpts[i].path}/${slug}`);
     }
   }
 
