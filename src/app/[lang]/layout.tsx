@@ -12,6 +12,7 @@ import { QuickAccessSidebar } from "@/components/layout/quick-access-sidebar";
 import { SocialSidebar } from "@/components/layout/social-sidebar";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { LenisProvider } from "@/components/ui/lenis-provider";
+import { ImageFadeIn } from "@/components/ui/image-fade-in";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -99,6 +100,7 @@ export default async function LocaleLayout({
     <html lang={lang === "id" ? "id-ID" : "en-US"} className={`${plusJakarta.variable} overflow-x-hidden`} translate="no" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col bg-[color:var(--background)] text-[color:var(--foreground)] antialiased overflow-x-hidden">
         <LenisProvider>
+          <ImageFadeIn />
           <OnboardingSplash locale={lang} />
           <Header locale={lang} dict={dict} />
           <main id="main" className="flex-1">
