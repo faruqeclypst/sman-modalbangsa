@@ -76,8 +76,8 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
 
               <p className="text-sm sm:text-base text-zinc-650 dark:text-zinc-400 leading-relaxed font-sans">
                 {isId
-                  ? "Pendaftaran dibuka khusus untuk Anak Tidak Sekolah (ATS) dan Lulus Tidak Melanjutkan (LTMS) lulusan SMP/MTs sederajat tahun ajaran 2024/2025 dengan usia maksimal 18 tahun. Periode pendaftaran mulai 25 Juni hingga 10 Juli 2026."
-                  : "Registration is open specifically for Out-of-School Children (ATS) and Graduates Not Continuing School (LTMS) who graduated from SMP/MTs in 2024/2025, aged maximum 18. Registration period from June 25 to July 10, 2026."}
+                  ? "Pendaftaran dibuka khusus untuk Anak Tidak Sekolah (ATS) dan Lulus Tidak Melanjutkan (LTMS) lulusan SMP/MTs sederajat tahun ajaran 2024/2025 dengan usia maksimal 18 tahun. Periode pendaftaran mulai 2 Juli hingga 31 Juli 2026."
+                  : "Registration is open specifically for Out-of-School Children (ATS) and Graduates Not Continuing School (LTMS) who graduated from SMP/MTs in 2024/2025, aged maximum 18. Registration period from July 2 to July 31, 2026."}
               </p>
 
               <div className="pt-2 flex flex-wrap gap-4 items-center">
