@@ -9,6 +9,10 @@ import { CPTDetail } from "@/components/cpt/cpt-detail";
 export const revalidate = 600;
 export const dynamicParams = true;
 
+export async function generateStaticParams() {
+  return [];
+}
+
 export async function generateMetadata({
   params,
 }: PageProps<"/[lang]/editorial/[id]">): Promise<Metadata> {

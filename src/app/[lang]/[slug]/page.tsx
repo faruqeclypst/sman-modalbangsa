@@ -3,6 +3,11 @@ import { isLocale } from "@/i18n/config";
 import { getPostBySlug, getCPTBySlug } from "@/lib/wp";
 
 export const revalidate = 3600; // Cache redirect resolution for 1 hour
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  return [];
+}
 
 interface ResolverPageProps {
   params: Promise<{
