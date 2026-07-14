@@ -466,8 +466,15 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   </h3>
                   <p className="text-xs sm:text-sm text-zinc-550 font-sans">
                     {isId
-                      ? "Ikuti langkah terstruktur berikut untuk menyelesaikan proses pendaftaran program PJJ SMAN Modal Bangsa."
-                      : "Follow these structured steps to complete your registration for the SMAN Modal Bangsa PJJ program."}
+                      ? "Ikuti langkah terstruktur berikut untuk menyelesaikan proses pendaftaran program PJJ SMAN Modal Bangsa. Untuk panduan lengkap bergambar, silakan baca "
+                      : "Follow these structured steps to complete your registration for the SMAN Modal Bangsa PJJ program. For a complete visual guide, please read our "}
+                    <a
+                      href={`/${lang}/spmb/cara-daftar`}
+                      className="text-[#16a34a] hover:underline font-semibold"
+                    >
+                      {isId ? "panduan cara mendaftar" : "registration guide"}
+                    </a>
+                    .
                   </p>
                 </div>
 

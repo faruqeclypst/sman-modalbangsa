@@ -21,7 +21,9 @@
     "menu": "Menu",
     "alumni": "Alumni",
     "clubSiswa": "Student Clubs",
-    "mediaHub": "Media Hub"
+    "mediaHub": "Media Hub",
+    "spmbInfo": "SPMB Info",
+    "spmbGuide": "How to Register"
   },
   "cpt": {
     "agenda": {

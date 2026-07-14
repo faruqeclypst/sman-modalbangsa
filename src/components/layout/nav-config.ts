@@ -47,7 +47,13 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
           { label: dict.nav.achievements, href: `${base}/prestasi` },
         ],
       },
-      { label: dict.quickLinks.items.spmb, href: `${base}/spmb` },
+      {
+        label: dict.quickLinks.items.spmb,
+        links: [
+          { label: dict.nav.spmbInfo, href: `${base}/spmb` },
+          { label: dict.nav.spmbGuide, href: `${base}/spmb/cara-daftar` },
+        ],
+      },
       { label: dict.nav.alumni, href: `${base}/alumni` },
       { label: dict.nav.contact, href: `${base}/kontak` },
     ],
