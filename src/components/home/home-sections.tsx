@@ -42,9 +42,15 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
     feed,
     { posts: galleryItems },
   ] = await Promise.all([
-    getPosts({ perPage: 6 }),
+    getPosts({
+      perPage: 6,
+      fields: ["id", "slug", "title", "date", "excerpt", "author", "categories", "featured_media", "_links", "_embedded"],
+    }),
     getBeholdFeed(),
-    getCPT("galeri", { perPage: 6 }),
+    getCPT("galeri", {
+      perPage: 6,
+      fields: ["id", "slug", "title", "featured_media", "_links", "_embedded"],
+    }),
   ]);
 
   const instagramPosts = feed?.posts || [];

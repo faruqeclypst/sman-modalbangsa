@@ -49,7 +49,10 @@ export async function generateMetadata({
   const { lang, id } = await params;
   if (!isLocale(lang)) return {};
 
-  const post = await getCPTBySlug("prestasi", id);
+  const post = await getCPTBySlug("prestasi", id, {
+    embed: true,
+    fields: ["id", "slug", "title", "excerpt", "date", "modified", "_links", "_embedded"],
+  });
   if (!post) return { title: "Not found" };
 
   const title = decodeHtmlEntities(post.title.rendered);
@@ -105,10 +108,11 @@ export default async function PrestasiDetailPage({
   const aspectRatio = imgWidth && imgHeight ? imgWidth / imgHeight : 1.5;
   const isBoxyOrPortrait = aspectRatio < 1.35;
 
-  // Get related achievements
+  // Get related achievements (skipping large content fields)
   const { posts: relatedRaw } = await getCPT("prestasi", {
     perPage: 7,
     exclude: [post.id],
+    fields: ["id", "slug", "title", "excerpt", "_links", "_embedded"],
   });
   const related = relatedRaw.slice(0, 6);
 

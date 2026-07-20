@@ -58,6 +58,7 @@ export default async function NewsListPage({
       perPage,
       search: q || undefined,
       categories: catId ? [catId] : undefined,
+      fields: ["id", "slug", "title", "date", "excerpt", "author", "categories", "featured_media", "_links", "_embedded"],
     }),
     getCategories()
   ]);

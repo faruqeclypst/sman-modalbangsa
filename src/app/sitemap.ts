@@ -54,8 +54,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     try {
       const fetcher =
         type === "posts"
-          ? getPosts({ perPage: 50 })
-          : getCPT(type, { perPage: 50 });
+          ? getPosts({ perPage: 50, embed: false, fields: ["slug", "modified"] })
+          : getCPT(type, { perPage: 50, embed: false, fields: ["slug", "modified"] });
       const { posts } = await fetcher;
       for (const post of posts) {
         for (const locale of locales) {

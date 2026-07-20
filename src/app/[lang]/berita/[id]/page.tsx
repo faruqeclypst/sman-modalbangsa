@@ -45,7 +45,10 @@ export async function generateMetadata({
   const { lang, id } = await params;
   if (!isLocale(lang)) return {};
 
-  const post = await getPostBySlug(id);
+  const post = await getPostBySlug(id, {
+    embed: true,
+    fields: ["id", "slug", "title", "excerpt", "date", "modified", "_links", "_embedded"],
+  });
   if (!post) return { title: "Not found" };
 
   const title = decodeHtmlEntities(post.title.rendered);
@@ -103,46 +106,42 @@ export default async function NewsDetailPage({
   const aspectRatio = imgWidth && imgHeight ? imgWidth / imgHeight : 1.5;
   const isBoxyOrPortrait = aspectRatio < 1.35;
 
-  // Related posts — prefer same category from last 3 months, fallback to latest
+  // Related posts — fetch category-matched and general latest posts in parallel (omitting large content fields)
   const primaryCat = categories[0];
-  const threeMonthsAgo = new Date();
-  threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-  const afterDate = threeMonthsAgo.toISOString();
+  const listFields = ["id", "slug", "title", "date", "excerpt", "_links", "_embedded"];
 
-  let related: WPPost[] = [];
-
-
-
-  // Try: same category, last 3 months
-  if (primaryCat) {
-    const { posts: catRecent } = await getPosts({
+  const [catPostsRes, latestPostsRes] = await Promise.all([
+    primaryCat
+      ? getPosts({
+          perPage: 7,
+          categories: [primaryCat.id],
+          exclude: [post.id],
+          fields: listFields,
+        })
+      : Promise.resolve({ posts: [], totalPages: 1, totalPosts: 0 }),
+    getPosts({
       perPage: 7,
-      categories: [primaryCat.id],
       exclude: [post.id],
-      after: afterDate,
-    });
-    related = catRecent.slice(0, 6);
+      fields: listFields,
+    }),
+  ]);
+
+  const seenIds = new Set<number>([post.id]);
+  const related: WPPost[] = [];
+
+  for (const r of catPostsRes.posts) {
+    if (!seenIds.has(r.id)) {
+      seenIds.add(r.id);
+      related.push(r);
+    }
   }
 
-  // Fallback: if not enough, fill with latest posts (any category, last 3 months)
-  if (related.length < 6) {
-    const existingIds = [post.id, ...related.map((r) => r.id)];
-    const { posts: latest } = await getPosts({
-      perPage: 7,
-      exclude: existingIds,
-      after: afterDate,
-    });
-    related = [...related, ...latest].slice(0, 6);
-  }
-
-  // Final fallback: if still not enough (very few posts), get latest without date filter
-  if (related.length < 6) {
-    const existingIds = [post.id, ...related.map((r) => r.id)];
-    const { posts: anyLatest } = await getPosts({
-      perPage: 7,
-      exclude: existingIds,
-    });
-    related = [...related, ...anyLatest].slice(0, 6);
+  for (const r of latestPostsRes.posts) {
+    if (related.length >= 6) break;
+    if (!seenIds.has(r.id)) {
+      seenIds.add(r.id);
+      related.push(r);
+    }
   }
 
   // Split content in half to inject "Baca Juga" in the middle if there are enough paragraphs

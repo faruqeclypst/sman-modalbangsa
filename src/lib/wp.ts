@@ -127,10 +127,19 @@ export async function getPostById(id: number | string): Promise<WPPost | null> {
   }
 }
 
-/** Fetch a single post by slug with embedded data. */
-export async function getPostBySlug(slug: string): Promise<WPPost | null> {
+/** Fetch a single post by slug with optional embedded data or field filtering. */
+export async function getPostBySlug(
+  slug: string,
+  options?: { embed?: boolean; fields?: string[] },
+): Promise<WPPost | null> {
+  const { embed = true, fields } = options ?? {};
+  const queryParts = [`slug=${encodeURIComponent(slug)}`];
+  if (embed) queryParts.push("_embed=1");
+  if (fields?.length) queryParts.push(`_fields=${fields.join(",")}`);
+  const query = queryParts.join("&");
+
   try {
-    const { data } = await wpFetch<WPPost[]>(`/posts?slug=${encodeURIComponent(slug)}&_embed=1`);
+    const { data } = await wpFetch<WPPost[]>(`/posts?${query}`);
     return Array.isArray(data) && data.length > 0 ? data[0] : null;
   } catch (err) {
     console.error("[wp.getPostBySlug]", err);
@@ -221,13 +230,20 @@ export async function getCPTById(
   }
 }
 
-/** Fetch a single CPT entry by slug. */
+/** Fetch a single CPT entry by slug with optional embedded data or field filtering. */
 export async function getCPTBySlug(
   type: WPCustomPostType,
   slug: string,
+  options?: { embed?: boolean; fields?: string[] },
 ): Promise<WPPost | null> {
+  const { embed = true, fields } = options ?? {};
+  const queryParts = [`slug=${encodeURIComponent(slug)}`];
+  if (embed) queryParts.push("_embed=1");
+  if (fields?.length) queryParts.push(`_fields=${fields.join(",")}`);
+  const query = queryParts.join("&");
+
   try {
-    const { data } = await wpFetch<WPPost[]>(`/${type}?slug=${encodeURIComponent(slug)}&_embed=1`);
+    const { data } = await wpFetch<WPPost[]>(`/${type}?${query}`);
     return Array.isArray(data) && data.length > 0 ? data[0] : null;
   } catch (err) {
     console.error(`[wp.getCPTBySlug:${type}]`, err);
