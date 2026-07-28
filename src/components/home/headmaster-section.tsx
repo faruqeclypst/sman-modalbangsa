@@ -8,7 +8,7 @@ interface HeadmasterSectionProps {
 }
 
 const HEADMASTER = {
-  name: "Misra, S.Pd., M.Pd",
+  name: "Dr. Sofyan, S.Pd., M.Pd",
   role: "Kepala Sekolah",
   photo: "/headmaster.png",
 };
@@ -72,16 +72,16 @@ export function HeadmasterSection({ dict }: HeadmasterSectionProps) {
               </div>
 
               {/* Photo - transparent PNG, no overflow hidden so bottom isn't cut */}
-                <Image
-                  src={HEADMASTER.photo}
-                  alt={HEADMASTER.name}
-                  width={220}
-                  height={300}
-                  className="relative z-10 mx-auto h-auto w-full object-contain drop-shadow-[0_8px_16px_rgba(5,150,105,0.15)]"
-                  style={{ width: "100%", height: "auto" }}
-                  unoptimized
-                  priority
-                />
+              <Image
+                src={HEADMASTER.photo}
+                alt={HEADMASTER.name}
+                width={220}
+                height={300}
+                className="relative z-10 mx-auto h-auto w-full object-contain drop-shadow-[0_8px_16px_rgba(5,150,105,0.15)]"
+                style={{ width: "100%", height: "auto" }}
+                unoptimized
+                priority
+              />
             </div>
             <div className="mt-3 text-center">
               <p className="text-sm font-bold text-[color:var(--foreground)]">{HEADMASTER.name}</p>

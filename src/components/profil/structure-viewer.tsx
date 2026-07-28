@@ -30,7 +30,7 @@ interface OrgNode {
 const ORG_DATA: OrgNode = {
   id: "principal",
   role: { id: "Kepala Sekolah", en: "Principal" },
-  name: "Misra, S.Pd., M.Pd.",
+  name: "Dr. Sofyan, S.Pd., M.Pd.",
   initials: "MS",
   desc: {
     id: "Pimpinan tertinggi satuan pendidikan SMAN Modal Bangsa, bertanggung jawab atas manajemen sekolah, pelaksanaan kurikulum, pembinaan GTK, dan hubungan eksternal.",
@@ -643,7 +643,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
           <h4 className="font-sfpro text-xs font-bold leading-tight line-clamp-2">
             {node.name}
           </h4>
-          
+
           {/* Badge for coordinators */}
           {node.coordinators && node.coordinators.length > 0 && (
             <span className={cn(
@@ -739,7 +739,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                     <li><strong className="text-zinc-400">X-6:</strong> <span className="text-white font-sans font-semibold">Armizani</span></li>
                   </ul>
                 </div>
-                
+
                 {/* Kelas XI */}
                 <div className="space-y-1.5">
                   <span className="block text-[7px] font-extrabold text-emerald-500 uppercase tracking-widest border-b border-zinc-800/40 pb-0.5">Kelas XI</span>
@@ -789,7 +789,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
           <div className="relative pt-8 flex flex-col items-center">
             {/* Vertical connector line from parent card */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-8 bg-zinc-200 dark:bg-zinc-700" />
-            
+
             {/* Children grid */}
             <div className="relative flex gap-6">
               {node.children!.map((child, cIdx) => {
@@ -799,7 +799,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                   <div key={child.id} className="relative pt-6 flex flex-col items-center">
                     {/* Horizontal segment connecting to neighbors */}
                     {node.children!.length > 1 && (
-                      <div 
+                      <div
                         className="absolute top-0 h-px bg-zinc-200 dark:bg-zinc-700"
                         style={{
                           left: isFirst ? "50%" : "0",
@@ -807,7 +807,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                         }}
                       />
                     )}
-                    
+
                     {/* Vertical connector down to card */}
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-6 bg-zinc-200 dark:bg-zinc-700" />
                     {renderTreeNode(child)}
@@ -832,7 +832,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
         <div className="relative flex flex-col items-center">
           {/* Principal Card */}
           {renderCard(root, false)}
-          
+
           {/* Committee Card (absolutely positioned to the left) */}
           {committee && (
             <div className="absolute right-full top-0 mr-12 flex items-center">
@@ -855,7 +855,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
               <div key={col.id} className="relative pt-6 flex flex-col items-center">
                 {/* Horizontal connector line segment */}
                 {cols.length > 1 && (
-                  <div 
+                  <div
                     className="absolute top-0 h-px bg-zinc-200 dark:bg-zinc-700"
                     style={{
                       left: isFirst ? "50%" : "0",
@@ -994,7 +994,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
           >
             {/* Tree Workspace container */}
             <div className="w-full border border-zinc-200/50 dark:border-zinc-800/60 rounded-3xl p-6 bg-zinc-50/50 dark:bg-zinc-950/20">
-              
+
               {/* Desktop view (Tree diagram with horizontal & vertical drag-to-scroll) */}
               <div
                 ref={scrollContainerRef}
@@ -1021,7 +1021,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
             {/* Selected Card Details Panel (Genshin-style glass card) */}
             <div className="rounded-[2rem] bg-gradient-to-tr from-emerald-500/5 to-teal-500/5 p-1 border border-emerald-500/10 shadow-sm">
               <div className="rounded-[calc(2rem-0.25rem)] bg-white dark:bg-zinc-900/80 backdrop-blur-md p-6 sm:p-8 space-y-6">
-                
+
                 {(() => {
                   const hasSelectedCoordinator = selectedCoordinator !== null;
                   const activeDetailNode = selectedCoordinator || selectedNode;
@@ -1100,7 +1100,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                                 </li>
                               </ul>
                             </div>
-                            
+
                             {/* Kelas XI */}
                             <div className="space-y-3">
                               <span className="inline-block text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
@@ -1133,7 +1133,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                                 </li>
                               </ul>
                             </div>
-                            
+
                             {/* Kelas XII */}
                             <div className="space-y-3">
                               <span className="inline-block text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-100/50 dark:border-emerald-900/30">
@@ -1201,15 +1201,15 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                               <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-white flex items-center gap-2">
                                 <Users className="size-4 text-emerald-600 dark:text-emerald-500" />
                                 <span>
-                                  {locale === "id" 
-                                    ? "Koordinator & Penanggung Jawab Pelaksana" 
+                                  {locale === "id"
+                                    ? "Koordinator & Penanggung Jawab Pelaksana"
                                     : "Coordinators & Person in Charge"}
                                 </span>
                               </h4>
                               <div className="grid gap-3 sm:grid-cols-2">
                                 {selectedNode.coordinators.map((coord, cIdx) => (
-                                  <div 
-                                    key={cIdx} 
+                                  <div
+                                    key={cIdx}
                                     onClick={() => setSelectedCoordinator(coord)}
                                     className="flex items-center gap-3 rounded-xl p-3 bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-200/40 dark:border-zinc-800/40 cursor-pointer hover:border-emerald-500/40 hover:bg-emerald-500/[0.02] hover:shadow-sm transition-all duration-300 active:scale-[0.99]"
                                   >
@@ -1247,7 +1247,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
             transition={{ duration: 0.35, ease: [0.32, 0.72, 0, 1] }}
             className="w-full flex justify-center"
           >
-            <div 
+            <div
               onClick={() => setIsLightboxOpen(true)}
               className="group relative aspect-[4/3] w-full max-w-4xl bg-zinc-50 dark:bg-zinc-950/20 hover:scale-[1.005] transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] cursor-zoom-in border border-zinc-200/50 dark:border-zinc-800 rounded-3xl overflow-hidden shadow-inner"
             >
@@ -1259,7 +1259,7 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
                 className="object-contain p-4"
                 priority
               />
-              
+
               {/* Hover overlay with scan icon */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 dark:group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 dark:bg-zinc-900/90 text-zinc-900 dark:text-white rounded-full px-5 py-3 shadow-md flex items-center gap-2">

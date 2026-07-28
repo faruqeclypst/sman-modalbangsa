@@ -48,7 +48,7 @@ export default async function PrincipalPage({
               <div className="relative w-[240px] overflow-hidden rounded-2xl bg-emerald-50 sm:w-[280px]">
                 <Image
                   src="/headmaster.png"
-                  alt="Misra, S.Pd., M.Pd"
+                  alt="Dr. Sofyan, S.Pd., M.Pd"
                   width={280}
                   height={380}
                   className="h-auto w-full object-contain"
@@ -58,7 +58,7 @@ export default async function PrincipalPage({
                 />
               </div>
               <div className="mt-4 text-center lg:text-left">
-                <p className="text-lg font-bold text-[color:var(--foreground)]">Misra, S.Pd., M.Pd</p>
+                <p className="text-lg font-bold text-[color:var(--foreground)]">Dr. Sofyan, S.Pd., M.Pd</p>
                 <p className="text-sm text-[color:var(--muted-foreground)]">
                   {lang === "id" ? "Kepala Sekolah" : "Principal"}
                 </p>
@@ -82,7 +82,7 @@ export default async function PrincipalPage({
                     : "With the spirit of quality education, we invite all stakeholders to work together in creating a generation that is faithful, knowledgeable, and noble in character. Let us make SMAN Modal Bangsa a comfortable second home for learning and growing."}
                 </p>
                 <p className="mt-4 font-semibold text-[color:var(--foreground)]">
-                  — Misra, S.Pd., M.Pd
+                  — Dr. Sofyan, S.Pd., M.Pd
                 </p>
               </div>
             </div>
