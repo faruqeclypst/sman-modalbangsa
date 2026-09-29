@@ -1,7 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import type { WPPost } from "@/lib/wp-types";
 import { CPTCard } from "./cpt-card";
-import { getThumbnailUrl } from "@/lib/wp";
 
 interface CPTGridProps {
   posts: WPPost[];
@@ -30,37 +29,33 @@ export function CPTGrid({
     );
   }
 
-  // Galeri adalah halaman VISUAL: entri tanpa gambar hanya menyisakan
-  // kotak kosong besar dan membuat halaman terlihat rusak. Untuk halaman
-  // yang tidak menampilkan excerpt (= galeri), saring entri tanpa gambar.
-  const visible = !showExcerpt
-    ? posts.filter((p) => Boolean(getThumbnailUrl(p)))
-    : posts;
-
-  const hiddenCount = posts.length - visible.length;
-
   const gridClass = cols === 2
     ? "grid gap-6 sm:grid-cols-2"
     : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3";
 
   return (
     <div className={gridClass}>
-      {visible.map((post, idx) => (
-        <CPTCard
+      {posts.map((post, idx) => (
+        <div
           key={post.id}
-          post={post}
-          locale={locale}
-          basePath={basePath}
-          badge={badge}
-          priority={idx < 3}
-          showExcerpt={showExcerpt}
-        />
+          className={
+            // Kartu pertama membentang 2 kolom agar grid terasa terkurasi,
+            // bukan deretan thumbnail seragam. Hanya bila item cukup banyak.
+            !showExcerpt && idx === 0 && posts.length >= 3
+              ? "sm:col-span-2 lg:col-span-2"
+              : undefined
+          }
+        >
+          <CPTCard
+            post={post}
+            locale={locale}
+            basePath={basePath}
+            badge={badge}
+            priority={idx < 3}
+            showExcerpt={showExcerpt}
+          />
+        </div>
       ))}
-      {hiddenCount > 0 ? (
-        <p className="col-span-full text-center text-xs text-[color:var(--muted-foreground)]">
-          {}
-        </p>
-      ) : null}
     </div>
   );
 }
