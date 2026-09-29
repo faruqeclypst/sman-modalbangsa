@@ -8,7 +8,22 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
+        disallow: [
+          "/api/",
+          // Path backend WordPress (dilayani lewat proxy, tidak perlu diindeks)
+          "/wp-admin/",
+          "/wp-login.php",
+          "/wp-json/",
+          "/wp-content/",
+          "/wp-includes/",
+          "/xmlrpc.php",
+          // Hasil pencarian & filter (menghindari crawl tak terbatas)
+          "/id/berita?*",
+          "/en/berita?*",
+          "/*?s=",
+          "/*?p=",
+          "/*?page=",
+        ],
       },
       {
         userAgent: [

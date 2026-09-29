@@ -34,6 +34,17 @@ import { ShareButtons } from "@/components/ui/share-buttons";
 export const revalidate = 3600; // 1 hour ISR for individual posts
 export const dynamicParams = true;
 
+/**
+ * Halaman detail berita.
+ *
+ * Catatan performa (Fluid Active CPU):
+ *  - `revalidate = 3600` -> halaman di-cache 1 jam sekali render.
+ *  - Slug yang tidak ada memanggil `notFound()` (404) sehingga tidak
+ *    pernah di-cache; untuk slug lama yang sudah dihapus bot tetap
+ *    menembak. Middleware menandai response dengan X-Robots-Tag
+ *    noindex agar URL mati cepat keluar dari indeks mesin pencari.
+ */
+
 export async function generateStaticParams() {
   // Skip pre-rendering at build time — render on-demand with ISR
   return [];
