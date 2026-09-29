@@ -36,15 +36,25 @@ export function CPTGrid({
   return (
     <div className={gridClass}>
       {posts.map((post, idx) => (
-        <CPTCard
+        <div
           key={post.id}
-          post={post}
-          locale={locale}
-          basePath={basePath}
-          badge={badge}
-          priority={idx < 3}
-          showExcerpt={showExcerpt}
-        />
+          className={
+            // Kartu pertama membentang 2 kolom agar grid terasa terkurasi,
+            // bukan deretan thumbnail seragam. Hanya bila item cukup banyak.
+            !showExcerpt && idx === 0 && posts.length >= 3
+              ? "sm:col-span-2 lg:col-span-2"
+              : undefined
+          }
+        >
+          <CPTCard
+            post={post}
+            locale={locale}
+            basePath={basePath}
+            badge={badge}
+            priority={idx < 3}
+            showExcerpt={showExcerpt}
+          />
+        </div>
       ))}
     </div>
   );

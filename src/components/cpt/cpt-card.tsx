@@ -40,9 +40,9 @@ export function CPTCard({
   const imageUrl = getThumbnailUrl(post);
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-white/30 bg-white/60 shadow-sm backdrop-blur-md transition-all hover:-translate-y-1 hover:border-white/50 hover:bg-white/80 hover:shadow-lg">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-lg">
       <Link href={href} className="flex h-full flex-col">
-        <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--muted)]">
+        <div className="relative aspect-[4/3] overflow-hidden bg-[color:var(--muted)]">
           {imageUrl ? (
             <Image
               src={imageUrl}
@@ -73,8 +73,12 @@ export function CPTCard({
               </svg>
             </div>
           )}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent"
+          />
           {badge ? (
-            <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-[color:var(--primary)] px-2.5 py-0.5 text-xs font-semibold text-white shadow-sm">
+            <span className="absolute left-3 top-3 inline-flex items-center rounded-full border border-white/25 bg-black/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/95 backdrop-blur-sm">
               {badge}
             </span>
           ) : null}

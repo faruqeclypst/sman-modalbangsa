@@ -270,7 +270,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
   return (
     <div
       ref={showcaseRef}
-      className="relative bg-gradient-to-br from-[#fafbfa] via-[#f7fbf8] to-[#f2faf4] text-zinc-850 py-10 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gray-100"
+      className="relative bg-gradient-to-br from-[#fafbfa] via-[#f7fbf8] to-[#f2faf4] text-zinc-800 py-10 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gray-100"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
@@ -288,20 +288,20 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
           <div className="col-span-12 lg:col-span-4 flex flex-col justify-between">
             
             {/* Sidebar Shell */}
-            <div className="bg-white/95 border border-emerald-100/60 rounded-[2rem] p-6 flex flex-col flex-1 shadow-md relative overflow-hidden">
+            <div className="bg-white/95 border border-emerald-100/60 rounded-3xl p-6 flex flex-col flex-1 shadow-sm relative overflow-hidden">
               <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#10b981_1px,transparent_1px)] bg-[size:1.5rem_1.5rem]" />
               
               <div className="relative z-10 flex-1">
                 {/* Section Header */}
-                <div className="flex items-center justify-between border-b border-gray-150 pb-4 mb-5">
+                <div className="flex items-center justify-between border-b border-gray-200 pb-4 mb-5">
                   <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                     <h3 className="font-sfpro text-xs font-bold uppercase tracking-[0.15em] text-zinc-500">
-                      {lang === "id" ? "Daftar Tokoh Aktif" : "Active Figure List"}
+                      {lang === "id" ? "Lembar Arsip" : "Archive Index"}
                     </h3>
                   </div>
                   <span className="text-[9px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
-                    {filteredData.length} {lang === "id" ? "DITEMUKAN" : "FOUND"}
+                    {filteredData.length} {lang === "id" ? "TERCATAT" : "RECORDED"}
                   </span>
                 </div>
 
@@ -349,7 +349,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
                               "w-7 h-7 rounded-full flex items-center justify-center border transition-all duration-300",
                               isSelected 
                                 ? "bg-white/10 border-white/20 text-white rotate-45" 
-                                : "bg-white border-gray-150 text-zinc-400 group-hover:text-emerald-600 group-hover:border-emerald-200"
+                                : "bg-white border-gray-200 text-zinc-400 group-hover:text-emerald-600 group-hover:border-emerald-200"
                             )}>
                               <ArrowUpRight className="size-3.5" />
                             </div>
@@ -383,7 +383,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
           {/* Right Column: Premium Spatial Exhibition Plate (col-span-8) */}
           <div
             ref={detailPanelRef}
-            className="col-span-12 lg:col-span-8 bg-white border border-emerald-100/40 rounded-3xl lg:rounded-[2.5rem] p-5 sm:p-8 lg:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden"
+            className="col-span-12 lg:col-span-8 bg-white border border-emerald-100/40 rounded-3xl p-5 sm:p-8 lg:p-10 shadow-sm flex flex-col justify-between relative overflow-hidden"
           >
             {/* Mesh background specific to current card */}
             <div className="absolute inset-0 pointer-events-none opacity-20 transition-all duration-1000">
@@ -398,7 +398,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
                 
                 {/* Champion Title */}
                 <div className="space-y-1">
-                  <h2 className="detail-name font-romulo text-3xl font-bold tracking-tight text-emerald-950 leading-tight uppercase">
+                  <h2 className="detail-name font-romulo text-3xl font-bold tracking-tight text-emerald-950 leading-tight">
                     {currentItem.name}
                   </h2>
                   <p className="detail-title font-sfpro text-sm text-emerald-700 font-medium tracking-wide leading-relaxed">
@@ -409,7 +409,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
                 {/* Editorial Quote Box */}
                 <div className="detail-quote bg-emerald-50/30 border border-emerald-100/50 rounded-2xl p-5 relative overflow-hidden">
                   <span className="absolute -left-1 -top-8 text-[7rem] font-romulo italic text-emerald-600/5 pointer-events-none select-none">“</span>
-                  <p className="text-emerald-950 font-sans text-sm leading-relaxed italic relative z-10 font-medium">
+                  <p className="text-emerald-950 font-sans text-sm leading-relaxed relative z-10">
                     "{lang === "id" ? currentItem.quote.id : currentItem.quote.en}"
                   </p>
                 </div>
@@ -482,9 +482,9 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
         <div className="space-y-6 relative">
           <div className="flex items-center gap-4">
             <div className="h-px flex-1 bg-gray-200" />
-            <div className="flex items-center gap-1.5 bg-white border border-gray-150 shadow-sm px-4 py-1.5 rounded-full text-[10px] font-bold text-emerald-600 tracking-widest uppercase">
-              <Sparkles className="size-3 text-amber-500 animate-pulse" />
-              <span>{lang === "id" ? "Saring Galeri Tokoh" : "Filter Figure Gallery"}</span>
+            <div className="flex items-center gap-1.5 bg-white border border-gray-200 shadow-sm px-4 py-1.5 rounded-full text-[10px] font-bold text-emerald-600 tracking-widest uppercase">
+              <Sparkles className="size-3 text-amber-500" />
+              <span>{lang === "id" ? "Saring Arsip" : "Filter Archive"}</span>
             </div>
             <div className="h-px flex-1 bg-gray-200" />
           </div>
