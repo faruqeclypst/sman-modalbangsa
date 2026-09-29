@@ -69,7 +69,7 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
 
               <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight uppercase">
 
-                <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
+                <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1 block sm:inline">
                   {isId ? "Program Pendidikan Jarak Jauh" : "Distance Learning Program"}{" "}
                 </span>
               </h2>

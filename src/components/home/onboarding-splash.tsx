@@ -118,7 +118,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
             <>
               Nurturing Well-rounded{" "}
               <br />
-              <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
+              <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">
                 Leaders
               </span>{" "}
               Today
@@ -127,7 +127,7 @@ export function OnboardingSplash({ locale }: OnboardingSplashProps) {
             <>
               Membentuk Pemimpin{" "}
               <br />
-              <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
+              <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">
                 Masa Depan
               </span>{" "}
               Hari Ini

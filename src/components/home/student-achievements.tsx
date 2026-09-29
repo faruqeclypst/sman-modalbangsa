@@ -238,14 +238,14 @@ export function StudentAchievements({ locale, dict }: StudentAchievementsProps) 
                 {isId ? (
                   <>
                     Prestasi{" "}
-                    <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
+                    <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">
                       Mosaist
                     </span>
                   </>
                 ) : (
                   <>
                     Mosaist{" "}
-                    <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
+                    <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">
                       Achievements
                     </span>
                   </>

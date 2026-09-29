@@ -154,7 +154,7 @@ export function CbtContent() {
           {/* Android */}
           <div className="rounded-xl border border-[color:var(--border)] bg-white">
             <div className="flex items-center gap-3 border-b border-[color:var(--border)] px-5 py-4">
-              <Smartphone className="size-5 text-green-600" />
+              <Smartphone className="size-5 text-emerald-600" />
               <div>
                 <p className="text-sm font-semibold text-[color:var(--foreground)]">
                   Android — Aplikasi EXAM AA

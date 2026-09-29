@@ -138,12 +138,12 @@ export function LatestNews({
           <h2 className="font-sfpro font-bold tracking-tight text-[2.5rem] leading-[1.15] sm:text-[3.5rem] md:text-[4rem] text-zinc-900 mb-6">
             {locale === "en" ? (
               <>
-                <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">Highlights</span> <br className="sm:hidden" />
+                <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">Highlights</span> <br className="sm:hidden" />
                 from Our Journey
               </>
             ) : (
               <>
-                <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">Sorotan</span> <br className="sm:hidden" />
+                <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">Sorotan</span> <br className="sm:hidden" />
                 Perjalanan Kami
               </>
             )}

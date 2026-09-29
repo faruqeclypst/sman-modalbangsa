@@ -214,7 +214,7 @@ export function SpecialPrograms({ programs, lang }: SpecialProgramsProps) {
         {/* Prev Arrow Button (Bottom Left) */}
         <button
           onClick={handlePrev}
-          className="absolute bottom-6 left-6 md:left-12 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-[#16a34a]/20 w-10 h-10 rounded-full shadow-lg z-20 text-zinc-700 hover:text-emerald-700 hover:border-emerald-550 transition-all cursor-pointer active:scale-90"
+          className="absolute bottom-6 left-6 md:left-12 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-[#16a34a]/20 w-10 h-10 rounded-full shadow-lg z-20 text-zinc-700 hover:text-emerald-700 hover:border-emerald-600 transition-all cursor-pointer active:scale-90"
           aria-label="Previous slide"
         >
           <ChevronLeft className="size-5" />
@@ -223,7 +223,7 @@ export function SpecialPrograms({ programs, lang }: SpecialProgramsProps) {
         {/* Next Arrow Button (Bottom Right) */}
         <button
           onClick={handleNext}
-          className="absolute bottom-6 right-6 md:right-12 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-[#16a34a]/20 w-10 h-10 rounded-full shadow-lg z-20 text-zinc-700 hover:text-emerald-700 hover:border-emerald-550 transition-all cursor-pointer active:scale-90"
+          className="absolute bottom-6 right-6 md:right-12 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md border border-[#16a34a]/20 w-10 h-10 rounded-full shadow-lg z-20 text-zinc-700 hover:text-emerald-700 hover:border-emerald-600 transition-all cursor-pointer active:scale-90"
           aria-label="Next slide"
         >
           <ChevronRight className="size-5" />

@@ -503,7 +503,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
                     "px-5 py-2.5 text-xs font-bold rounded-full border transition-all duration-500 cursor-pointer tracking-wider",
                     isActive
                       ? "bg-[#166534] border-[#166534] text-white shadow-md"
-                      : "bg-white border-gray-200 text-zinc-500 hover:border-emerald-350 hover:text-emerald-950"
+                      : "bg-white border-gray-200 text-zinc-500 hover:border-emerald-300 hover:text-emerald-950"
                   )}
                 >
                   {tab}

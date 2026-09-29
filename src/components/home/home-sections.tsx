@@ -62,7 +62,7 @@ export async function HomeSections({ locale, dict }: HomeSectionsProps) {
 
       {/* Soft ambient glow spots that overlap and create high-end depth */}
       <div className="absolute top-[15%] left-[-15%] w-[60vw] h-[60vw] max-w-[800px] rounded-full bg-gradient-to-tr from-emerald-100/40 to-emerald-50/25 blur-[130px] pointer-events-none -z-20" />
-      <div className="absolute top-[40%] right-[-15%] w-[55vw] h-[55vw] max-w-[750px] rounded-full bg-gradient-to-br from-emerald-100/50 via-green-150/20 to-transparent blur-[140px] pointer-events-none -z-20" />
+      <div className="absolute top-[40%] right-[-15%] w-[55vw] h-[55vw] max-w-[750px] rounded-full bg-gradient-to-br from-emerald-100/50 via-emerald-100/20 to-transparent blur-[140px] pointer-events-none -z-20" />
       <div className="absolute bottom-[2%] left-[-5%] w-[60vw] h-[60vw] max-w-[800px] rounded-full bg-gradient-to-tr from-emerald-200/50 via-emerald-100/25 to-transparent blur-[150px] pointer-events-none -z-20" />
 
       {/* Structured vertical lines for architectural layout feel */}

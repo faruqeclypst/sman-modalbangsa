@@ -190,11 +190,11 @@ export function Footer({ locale, dict }: FooterProps) {
 
                 <div className="mt-8 space-y-4 text-sm text-emerald-100/95">
                   <p className="flex items-start gap-3 leading-relaxed">
-                    <MapPin className="mt-0.5 size-4 shrink-0 text-emerald-250" aria-hidden />
+                    <MapPin className="mt-0.5 size-4 shrink-0 text-emerald-200" aria-hidden />
                     <span className="hover:text-white transition-colors duration-300">{dict.footer.address}</span>
                   </p>
                   <p className="flex items-center gap-3">
-                    <Mail className="size-4 shrink-0 text-emerald-250" aria-hidden />
+                    <Mail className="size-4 shrink-0 text-emerald-200" aria-hidden />
                     <a
                       href="mailto:info@sman-modalbangsa.sch.id"
                       className="transition-colors hover:text-white"
@@ -203,7 +203,7 @@ export function Footer({ locale, dict }: FooterProps) {
                     </a>
                   </p>
                   <p className="flex items-center gap-3">
-                    <Phone className="size-4 shrink-0 text-emerald-250" aria-hidden />
+                    <Phone className="size-4 shrink-0 text-emerald-200" aria-hidden />
                     <span className="hover:text-white transition-colors duration-300">(0651) 7551700</span>
                   </p>
                 </div>

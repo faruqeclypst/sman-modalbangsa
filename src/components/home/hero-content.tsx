@@ -62,7 +62,7 @@ export function HeroContent({ locale, dict }: HeroContentProps) {
       >
         {dict.hero.titleLine1}
         <br className="hidden sm:inline" />
-        <span className="text-green-400 font-romulo font-normal normal-case text-[2.25rem] sm:text-[3.25rem] md:text-[4rem] lg:text-[4.75rem] inline-block px-2 italic">
+        <span className="text-[#15803d] font-romulo font-normal normal-case text-[2.25rem] sm:text-[3.25rem] md:text-[4rem] lg:text-[4.75rem] inline-block px-2 italic">
           {dict.hero.titleAccent}
         </span>{" "}
         {dict.hero.titleLine2}

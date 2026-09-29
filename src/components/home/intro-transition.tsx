@@ -103,7 +103,7 @@ export function IntroTransition({ locale }: IntroTransitionProps) {
               key={idx}
               className={`intro-word opacity-20 inline-block mr-[0.25em] transition-opacity duration-300 ${
                 word.italic
-                  ? "font-romulo font-normal italic text-green-300 normal-case"
+                  ? "font-romulo font-normal italic text-[#15803d] normal-case"
                   : ""
               }`}
             >

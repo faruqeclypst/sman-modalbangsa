@@ -49,7 +49,7 @@ export default async function StructurePage({
       <section className="relative overflow-hidden py-20 sm:py-28 bg-[color:var(--background)]">
         
         {/* Subtle glow orb in the background */}
-        <div aria-hidden className="absolute -left-64 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-emerald-500/5 blur-[120px] dark:bg-emerald-500/3 pointer-events-none" />
+        <div aria-hidden className="absolute -left-64 top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-emerald-500/5 blur-[120px] dark:bg-emerald-500/5 pointer-events-none" />
         
         <Container size="xl" className="space-y-16">
           {/* Top Section - Balanced 2-Column Grid for Text & Info */}

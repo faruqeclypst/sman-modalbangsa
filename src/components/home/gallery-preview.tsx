@@ -186,14 +186,14 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
 
     return (
       <>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 via-40% to-transparent transition-opacity duration-300 group-hover:opacity-95" />
         <div className="relative z-10 flex flex-col justify-end p-6 md:p-8 text-center">
-          <p className="text-white/80 font-medium text-xs sm:text-sm tracking-wide mb-1.5">
+          <p className="text-emerald-300 font-semibold text-xs sm:text-sm tracking-wide mb-1.5 [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">
             {displayCategory}
           </p>
           {displayTitle && (
             <h3
-              className={`font-sfpro font-bold text-white leading-tight ${
+              className={`font-sfpro font-bold text-white leading-tight [text-shadow:0_2px_6px_rgba(0,0,0,0.95)] ${
                 isLarge ? "text-lg sm:text-xl md:text-2xl" : "text-base sm:text-lg line-clamp-2"
               }`}
             >
@@ -223,19 +223,11 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
           >
             {locale === "en" ? (
               <>
-                Our{" "}
-                <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
-                  Activity
-                </span>{" "}
-                Gallery
+                Our <span className="text-[#15803d] italic">Activity</span> Gallery
               </>
             ) : (
               <>
-                Galeri{" "}
-                <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
-                  Aktivitas
-                </span>{" "}
-                Kami
+                Galeri <span className="text-[#15803d] italic">Aktivitas</span> Kami
               </>
             )}
           </h2>
@@ -252,7 +244,7 @@ export function GalleryPreview({ locale, items }: GalleryPreviewProps) {
             className="flex overflow-x-auto scrollbar-none snap-x snap-mandatory md:grid md:grid-cols-4 gap-6 md:gap-6 grid-flow-dense md:grid-rows-2 md:h-[650px] items-stretch select-none pb-4 md:pb-0"
           >
             <div
-              className="md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto w-[290px] sm:w-[320px] md:w-auto shrink-0 snap-start"
+              className="md:col-span-2 md:row-span-2 aspect-[4/3] w-[290px] sm:w-[320px] md:w-auto shrink-0 snap-start"
             >
               <div
                 onClick={() => setSelectedPhotoIndex(0)}

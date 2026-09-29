@@ -80,7 +80,7 @@ export function QuickAccessSidebar({ dict, locale }: QuickAccessSidebarProps) {
           {items.map(({ key, Icon, label, href, onClick }) => {
             const content = (
               <>
-                <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-md bg-gray-900 px-2.5 py-1.5 text-xs font-medium text-white opacity-0 shadow-md transition-opacity group-hover:opacity-100">
+                <span className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-md bg-gray-900 px-3 py-2 text-xs font-medium leading-snug text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                   {label}
                 </span>
                 <span
@@ -95,13 +95,16 @@ export function QuickAccessSidebar({ dict, locale }: QuickAccessSidebarProps) {
               </>
             );
 
+            const desc = label;
+
             if (onClick) {
               return (
                 <button
                   key={key}
                   onClick={onClick}
-                  className="group relative flex items-center"
-                  aria-label={label}
+                  className="group relative flex items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+                  aria-label={desc}
+                  title={desc}
                 >
                   {content}
                 </button>
@@ -114,8 +117,9 @@ export function QuickAccessSidebar({ dict, locale }: QuickAccessSidebarProps) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex items-center"
+                className="group relative flex items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
                 aria-label={label}
+                title={label}
               >
                 {content}
               </a>

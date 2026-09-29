@@ -56,14 +56,14 @@ export function SchoolCommitment({ locale }: SchoolCommitmentProps) {
             {locale === "en" ? (
               <>
                 Our Commitment <br />
-                <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 text-[2.75rem] sm:text-[3.75rem] md:text-[4.5rem]">
+                <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1 text-[2.75rem] sm:text-[3.75rem] md:text-[4.5rem]">
                   to Excellence
                 </span>
               </>
             ) : (
               <>
                 Komitmen Kami <br />
-                <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 text-[2.75rem] sm:text-[3.75rem] md:text-[4.5rem]">
+                <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1 text-[2.75rem] sm:text-[3.75rem] md:text-[4.5rem]">
                   Untuk Keunggulan
                 </span>
               </>

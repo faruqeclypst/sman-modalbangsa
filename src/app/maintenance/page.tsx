@@ -174,7 +174,7 @@ export default function MaintenancePage() {
               <h3 className="text-white font-bold font-sfpro tracking-tight text-base sm:text-lg">
                 SMAN Modal Bangsa Aceh
               </h3>
-              <p className="text-green-300/60 font-mono text-[10px] sm:text-xs uppercase tracking-widest mt-1.5">
+              <p className="text-emerald-300/60 font-mono text-[10px] sm:text-xs uppercase tracking-widest mt-1.5">
                 Sekolah Unggul Berasrama
               </p>
             </div>

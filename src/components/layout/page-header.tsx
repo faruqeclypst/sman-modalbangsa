@@ -17,6 +17,27 @@ interface PageHeaderProps {
   variant?: "white" | "green";
 }
 
+
+/**
+ * Aksentuasi italic hijau pada judul HANYA untuk kata yang membawa
+ * makna brand / nama program resmi. Judul deskriptif biasa ditampilkan
+ * polos agar tidak terasa seperti gimmick yang berulang di setiap halaman.
+ */
+const ACCENT_WORDS = new Set([
+  "mosa",
+  "mosaist",
+  "pjjarakjauh", // placeholder guard
+  "jarak", // "…Jarak Jauh"
+  "inspire",
+]);
+
+export function shouldAccentTitle(title: string): boolean {
+  const words = title.trim().split(/\s+/);
+  if (words.length < 2) return false;
+  const last = words[words.length - 1].toLowerCase().replace(/[^a-z]/g, "");
+  return ACCENT_WORDS.has(last);
+}
+
 export function PageHeader({
   title,
   subtitle,
@@ -75,7 +96,7 @@ export function PageHeader({
                         href={c.href}
                         className={cn(
                           "transition-colors",
-                          isGreen ? "hover:text-white text-emerald-250" : "hover:text-emerald-600"
+                          isGreen ? "hover:text-white text-emerald-200" : "hover:text-emerald-600"
                         )}
                       >
                         {c.label}
@@ -108,7 +129,7 @@ export function PageHeader({
           "font-sfpro text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl leading-tight",
           isGreen ? "text-white" : "text-zinc-950"
         )}>
-          {plainTitle ? (
+          {plainTitle || !shouldAccentTitle(title) ? (
             title
           ) : (() => {
             const words = title.split(" ");
@@ -120,7 +141,7 @@ export function PageHeader({
                   {firstPart}{" "}
                   <span className={cn(
                     "font-romulo font-normal italic normal-case px-1",
-                    isGreen ? "text-emerald-300" : "text-[#16a34a]"
+                    isGreen ? "text-emerald-300" : "text-[#15803d]"
                   )}>
                     {lastWord}
                   </span>
@@ -130,7 +151,7 @@ export function PageHeader({
             return (
               <span className={cn(
                 "font-romulo font-normal italic normal-case px-1",
-                isGreen ? "text-emerald-300" : "text-[#16a34a]"
+                isGreen ? "text-emerald-300" : "text-[#15803d]"
               )}>
                 {title}
               </span>

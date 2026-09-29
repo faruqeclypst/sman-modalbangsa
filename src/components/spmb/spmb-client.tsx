@@ -196,7 +196,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
               <div className="max-w-5xl mx-auto space-y-6 text-center md:text-left">
                 <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-none uppercase">
                   {isId ? "Tentang Penerimaan" : "About"}{" "}
-                  <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">
+                  <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">
                     SMAN Modal Bangsa
                   </span>{" "}
                   {isId ? "" : "Admission"}
@@ -268,7 +268,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   </div>
                 </div>
 
-                <p className="text-center pt-8 text-[#16a34a] font-romulo font-normal italic text-lg sm:text-xl">
+                <p className="text-center pt-8 text-[#15803d] font-romulo font-normal italic text-lg sm:text-xl">
                   {isId
                     ? "Kami sangat menantikan kehadiranmu untuk bergabung dalam keluarga besar SMAN Modal Bangsa!"
                     : "We look forward to welcoming you to the family of SMAN Modal Bangsa!"}
@@ -317,7 +317,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 <div className="space-y-6">
                   <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight uppercase">
                     {isId ? "Siap bergabung" : "Ready to join"}{" "}
-                    <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
+                    <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1 block sm:inline">
                       {isId ? "dengan kami?" : "with us?"}
                     </span>
                   </h2>
@@ -441,7 +441,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   </span>
                   <h3 className="font-sfpro text-2xl sm:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
                     {isId ? "Sekolah Induk" : "Anchor School"}{" "}
-                    <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1">Pendidikan Jarak Jauh</span>
+                    <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1">Pendidikan Jarak Jauh</span>
                   </h3>
                 </div>
                 <div className="space-y-4 text-sm sm:text-base text-zinc-650 leading-relaxed font-sans text-justify sm:text-left">
@@ -601,7 +601,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                           {isInduk ? (
                             <span className="text-[9px] font-bold text-white bg-[#16a34a] rounded-full px-2.5 py-0.5 uppercase tracking-wider">Induk</span>
                           ) : (
-                            <span className="text-[9px] font-bold text-[#16a34a] bg-emerald-50 border border-emerald-150 rounded-full px-2.5 py-0.5 uppercase tracking-wider">Mitra</span>
+                            <span className="text-[9px] font-bold text-[#16a34a] bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-0.5 uppercase tracking-wider">Mitra</span>
                           )}
                         </div>
 
@@ -660,7 +660,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                   </span>
                   <h2 className="font-sfpro text-3xl sm:text-4xl font-bold text-zinc-900 tracking-tight leading-tight uppercase">
                     {isId ? "Penerimaan Siswa Baru" : "New Student Admission"}{" "}
-                    <span className="text-[#16a34a] font-romulo font-normal italic normal-case px-1 block sm:inline">
+                    <span className="text-[#15803d] font-romulo font-normal italic normal-case px-1 block sm:inline">
                       Program Pendidikan Jarak Jauh
                     </span>
                   </h2>

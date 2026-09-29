@@ -94,7 +94,7 @@ export default async function AlumniPage({
                   <div className="flex items-center gap-1.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400 dark:bg-red-500/80" />
                     <span className="h-2.5 w-2.5 rounded-full bg-yellow-400 dark:bg-yellow-500/80" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-green-400 dark:bg-green-500/80" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 dark:bg-emerald-500/80" />
                   </div>
                   <div className="h-4 w-px bg-[color:var(--border)]" />
                   <div className="flex items-center gap-2">
