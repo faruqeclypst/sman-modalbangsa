@@ -276,7 +276,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.04] blur-[120px]" />
         <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-amber-500/[0.03] blur-[120px]" />
-        <div className="absolute inset-0 opacity-[0.015] bg-[linear-gradient(to_right,#16a34a_1px,transparent_1px),linear-gradient(to_bottom,#16a34a_1px,transparent_1px)] bg-[size:3rem_3rem]" />
+        
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto space-y-6">
@@ -289,7 +289,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
             
             {/* Sidebar Shell */}
             <div className="bg-white/95 border border-emerald-100/60 rounded-3xl p-6 flex flex-col flex-1 shadow-sm relative overflow-hidden">
-              <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#10b981_1px,transparent_1px)] bg-[size:1.5rem_1.5rem]" />
+              
               
               <div className="relative z-10 flex-1">
                 {/* Section Header */}
@@ -323,7 +323,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
                         >
                           <div className="flex items-center gap-3 relative z-10">
                             <span className={cn(
-                              "font-mono text-[10px] leading-none px-2 py-1.5 rounded-md transition-colors",
+                              "font-mono text-[11px] leading-none px-2 py-1.5 rounded-md transition-colors",
                               isSelected ? "bg-white/20 text-white" : "bg-gray-100 text-zinc-500"
                             )}>
                               {`0${idx + 1}`}
@@ -336,7 +336,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
                                 {item.name}
                               </p>
                               <p className={cn(
-                                "text-[10px] mt-0.5 tracking-wider font-semibold",
+                                "text-[11px] mt-0.5 tracking-wider font-semibold",
                                 isSelected ? "text-emerald-100" : "text-zinc-400"
                               )}>
                                 {translateSubject(item.subjectTag)} • {translateCategory(item.category)}
@@ -482,7 +482,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
         <div className="space-y-6 relative">
           <div className="flex items-center gap-4">
             <div className="h-px flex-1 bg-gray-200" />
-            <div className="flex items-center gap-1.5 bg-white border border-gray-200 shadow-sm px-4 py-1.5 rounded-full text-[10px] font-bold text-emerald-600 tracking-widest uppercase">
+            <div className="flex items-center gap-1.5 bg-white border border-gray-200 shadow-sm px-4 py-1.5 rounded-full text-[11px] font-bold text-emerald-600 tracking-widest uppercase">
               <Sparkles className="size-3 text-amber-500" />
               <span>{lang === "id" ? "Saring Arsip" : "Filter Archive"}</span>
             </div>
