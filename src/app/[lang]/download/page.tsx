@@ -11,7 +11,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { Pagination } from "@/components/news/pagination";
 import { formatDate } from "@/lib/utils";
 
-export const revalidate = 600;
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,

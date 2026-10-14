@@ -8,7 +8,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { CPTGrid } from "@/components/cpt/cpt-grid";
 import { Pagination } from "@/components/news/pagination";
 
-export const revalidate = 600;
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,

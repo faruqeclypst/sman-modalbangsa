@@ -29,7 +29,7 @@ import { DisqusComments } from "@/components/comments/disqus-comments";
 import { ReadingProgress } from "@/components/ui/reading-progress";
 import { ShareButtons } from "@/components/ui/share-buttons";
 
-export const revalidate = 600; // 10 minutes ISR for individual achievements
+export const revalidate = 3600; // 10 minutes ISR for individual achievements
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

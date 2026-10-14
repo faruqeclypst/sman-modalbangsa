@@ -11,7 +11,7 @@ import { decodeHtmlEntities } from "@/lib/utils";
 import Link from "next/link";
 import type { WPPost } from "@/lib/wp-types";
 
-export const revalidate = 600;
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,

@@ -10,7 +10,7 @@ import {
 } from "@/lib/utils";
 import { CPTDetail } from "@/components/cpt/cpt-detail";
 
-export const revalidate = 600;
+export const revalidate = 3600;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
