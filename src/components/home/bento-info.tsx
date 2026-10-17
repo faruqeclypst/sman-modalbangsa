@@ -125,7 +125,7 @@ function FeaturedAgenda({ post, locale }: { post: WPPost; locale: Locale }) {
 
   return (
     <Link
-      href={`/${locale}/agenda/${post.slug}`}
+      href={`/agenda/${post.slug}`}
       className="group relative flex h-full flex-col overflow-hidden rounded-2xl"
     >
       {/* Background */}
@@ -198,7 +198,7 @@ function AgendaListItem({ post, locale }: { post: WPPost; locale: Locale }) {
 
   return (
     <Link
-      href={`/${locale}/agenda/${post.slug}`}
+      href={`/agenda/${post.slug}`}
       className="group flex items-center gap-3 rounded-xl bg-white p-3 shadow-sm ring-1 ring-gray-100 transition-all hover:ring-[color:var(--primary)] hover:shadow-md"
     >
       {/* Date badge */}
@@ -295,7 +295,7 @@ export function BentoInfo({
         <div className="mb-8" data-animate>
           <h2 className="text-xl font-bold text-[color:var(--foreground)] sm:text-2xl">
             <Link
-              href={`/${locale}/agenda`}
+              href={`/agenda`}
               className="hover:text-[color:var(--primary)] transition-colors"
             >
               {dict.cpt.agenda.title}
@@ -352,7 +352,7 @@ export function BentoInfo({
                 {editorial.slice(0, 2).map((post) => (
                   <li key={post.id}>
                     <Link
-                      href={`/${locale}/editorial/${post.slug}`}
+                      href={`/editorial/${post.slug}`}
                       className="group block"
                     >
                       <p className="line-clamp-2 text-sm font-medium leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)]">

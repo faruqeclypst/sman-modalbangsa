@@ -71,7 +71,7 @@ export function HeroContent({ locale, dict }: HeroContentProps) {
       {/* ===== SEMENTARA: INFO PENDIDIKAN JARAK JAUH — hapus blok ini jika tidak diperlukan ===== */}
       <div className="mt-8 flex flex-wrap gap-4 justify-center items-center">
         <a
-          href={`/${locale}/spmb?tab=pjj`}
+          href={`/spmb?tab=pjj`}
           className="group inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-5 py-2.5 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-400/20 hover:border-emerald-400/60 hover:scale-105 active:scale-95"
         >
           <span className="relative flex size-2.5 shrink-0">

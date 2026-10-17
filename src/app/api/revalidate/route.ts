@@ -31,12 +31,9 @@ function performRevalidation({ tag, slug, type }: RevalidateParams) {
     const basePath = typeToPathMap[type.toLowerCase()];
     if (basePath) {
       const paths = [
-        "/id",
-        "/en",
-        `/id/${basePath}`,
-        `/en/${basePath}`,
-        `/id/${basePath}/${slug}`,
-        `/en/${basePath}/${slug}`,
+        "/",
+        `/${basePath}`,
+        `/${basePath}/${slug}`,
       ];
       for (const p of paths) {
         revalidatePath(p);
@@ -56,7 +53,7 @@ function performRevalidation({ tag, slug, type }: RevalidateParams) {
     for (const t of VALID_TAGS) {
       revalidateTag(t, EXPIRE_NOW);
     }
-    const paths = ["/id", "/en", "/id/berita", "/en/berita"];
+    const paths = ["/", "/berita"];
     for (const p of paths) {
       revalidatePath(p);
     }
@@ -70,7 +67,7 @@ function performRevalidation({ tag, slug, type }: RevalidateParams) {
 
   if (VALID_TAGS.includes(targetTag as (typeof VALID_TAGS)[number])) {
     revalidateTag(targetTag, EXPIRE_NOW);
-    const paths = ["/id", "/en", "/id/berita", "/en/berita"];
+    const paths = ["/", "/berita"];
     for (const p of paths) {
       revalidatePath(p);
     }

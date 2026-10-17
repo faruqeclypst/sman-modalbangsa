@@ -7,7 +7,6 @@ import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
-import { LanguageSwitcher } from "./language-switcher";
 import { SchoolMark } from "./school-mark";
 import { HeaderNav } from "./header-nav";
 import { buildNav } from "./nav-config";
@@ -18,7 +17,7 @@ interface HeaderProps {
 }
 
 export function Header({ locale, dict }: HeaderProps) {
-  const pathname = usePathname() ?? `/${locale}`;
+  const pathname = usePathname() ?? `/`;
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -32,7 +31,7 @@ export function Header({ locale, dict }: HeaderProps) {
   const nav = buildNav(locale, dict);
 
   // Check if current path is home: / or /id or /en
-  const isHome = pathname === `/${locale}` || pathname === "/";
+  const isHome = pathname === `/` || pathname === "/";
   const isTransparent = isHome && !scrolled;
 
   return (
@@ -47,7 +46,7 @@ export function Header({ locale, dict }: HeaderProps) {
     >
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link
-          href={`/${locale}`}
+          href={`/`}
           className="flex items-center gap-3 outline-none"
           aria-label={dict.site.name}
         >
@@ -74,11 +73,6 @@ export function Header({ locale, dict }: HeaderProps) {
 
         <div className="flex items-center gap-3">
           <HeaderNav nav={nav} locale={locale} dict={dict} isTransparent={isTransparent} />
-          <LanguageSwitcher
-            currentLocale={locale}
-            isTransparent={isTransparent}
-            className="hidden md:inline-flex"
-          />
         </div>
       </Container>
     </header>

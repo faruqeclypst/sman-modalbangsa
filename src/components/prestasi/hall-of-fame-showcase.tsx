@@ -369,7 +369,7 @@ export function HallOfFameShowcase({ lang, dict }: HallOfFameShowcaseProps) {
 
               {/* View all CTA with Island Button Architecture */}
               <Link
-                href={`/${lang}/prestasi`}
+                href={`/prestasi`}
                 className="mt-6 group w-full bg-gray-50 border border-gray-100 hover:border-emerald-200 hover:bg-white text-zinc-600 hover:text-emerald-800 transition-all p-1.5 rounded-2xl flex items-center justify-between text-xs font-bold cursor-pointer"
               >
                 <span className="pl-3 tracking-wide">{lang === "id" ? "Arsip Prestasi Lengkap" : "Complete Achievements"}</span>

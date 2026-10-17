@@ -27,7 +27,7 @@ interface CPTDetailProps {
   dict: Dictionary;
   /** Type label, e.g. "Agenda", "Pengumuman". */
   typeLabel: string;
-  /** Path back to the listing, e.g. "/id/agenda". */
+  /** Path back to the listing, e.g. "/agenda". */
   backHref: string;
   /** Translated label for the back link. */
   backLabel: string;
@@ -116,14 +116,14 @@ export function CPTDetail({
         {/* Share buttons */}
         <div className="mt-8 border-t border-[color:var(--border)] pt-6">
           <ShareButtons
-            url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${locale}/${backHref.split("/").slice(2).join("/")}/${post.slug}`}
+            url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${backHref.split("/").slice(2).join("/")}/${post.slug}`}
             title={title}
           />
         </div>
 
         <DisqusComments
           identifier={`${post.slug}`}
-          url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${locale}/${backHref.split("/").slice(2).join("/")}/${post.slug}`}
+          url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id"}/${backHref.split("/").slice(2).join("/")}/${post.slug}`}
           title={title}
         />
       </Container>

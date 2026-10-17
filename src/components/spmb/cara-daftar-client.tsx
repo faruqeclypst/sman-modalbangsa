@@ -538,7 +538,7 @@ export function CaraDaftarClient({ lang }: CaraDaftarClientProps) {
               {isId ? "Portal SPMB" : "SPMB Portal"}
             </a>
             <a
-              href={`/${lang}/spmb`}
+              href={`/spmb`}
               className="bg-transparent border border-zinc-300 hover:border-zinc-500 text-zinc-800 text-xs font-bold tracking-wider py-3.5 px-8 rounded-full transition-all duration-300 font-sfpro uppercase active:scale-[0.98] outline-none"
             >
               {isId ? "Kembali ke SPMB" : "Back to SPMB"}

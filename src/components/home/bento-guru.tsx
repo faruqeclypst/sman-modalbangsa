@@ -173,7 +173,7 @@ export function BentoGuru({ locale, dict, gtk }: BentoGuruProps) {
         <div data-animate-guru>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             <Link
-              href={`/${locale}/gtk`}
+              href={`/gtk`}
               className="hover:text-[color:var(--primary)] transition-colors"
             >
               {dict.cpt.gtk.title}

@@ -46,7 +46,7 @@ export function DownloadSection({ locale, dict, downloads }: DownloadSectionProp
           <div>
             <h2 className="text-2xl font-bold tracking-tight text-[color:var(--foreground)]">
               <Link
-                href={`/${locale}/download`}
+                href={`/download`}
                 className="hover:text-[color:var(--primary)] transition-colors"
               >
                 {dict.cpt.download.title}
@@ -57,7 +57,7 @@ export function DownloadSection({ locale, dict, downloads }: DownloadSectionProp
             </p>
           </div>
           <Link
-            href={`/${locale}/download`}
+            href={`/download`}
             className="hidden items-center gap-1.5 rounded-full border border-[color:var(--border)] bg-white px-4 py-2 text-sm font-medium text-[color:var(--foreground)] transition-colors hover:border-[color:var(--primary)] hover:text-[color:var(--primary)] sm:inline-flex"
           >
             {dict.cpt.download.viewAll}
@@ -72,7 +72,7 @@ export function DownloadSection({ locale, dict, downloads }: DownloadSectionProp
             return (
               <a
                 key={item.id}
-                href={item.fileUrl ?? `/${locale}/download`}
+                href={item.fileUrl ?? `/download`}
                 target={item.fileUrl ? "_blank" : undefined}
                 rel={item.fileUrl ? "noopener noreferrer" : undefined}
                 className="group flex items-center gap-4 rounded-xl border border-[color:var(--border)] bg-white p-4 shadow-sm transition-all hover:border-[color:var(--primary)] hover:shadow-md"
@@ -116,7 +116,7 @@ export function DownloadSection({ locale, dict, downloads }: DownloadSectionProp
         {/* Mobile view all link */}
         <div className="mt-6 text-center sm:hidden">
           <Link
-            href={`/${locale}/download`}
+            href={`/download`}
             className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--border)] bg-white px-5 py-2.5 text-sm font-medium text-[color:var(--foreground)] transition-colors hover:border-[color:var(--primary)] hover:text-[color:var(--primary)]"
           >
             {dict.cpt.download.viewAll}

@@ -337,7 +337,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                       <ArrowUpRight className="size-4 ml-2" />
                     </a>
                     <a
-                      href={`/${lang}/kontak`}
+                      href={`/kontak`}
                       className="bg-transparent border border-zinc-300 hover:border-zinc-500 text-zinc-800 text-xs font-bold tracking-wider py-3.5 px-6 rounded-full text-center transition-all duration-300 font-sfpro uppercase active:scale-[0.98]"
                     >
                       {isId ? "Hubungi Kami" : "Contact Us"}
@@ -469,7 +469,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                       ? "Ikuti langkah terstruktur berikut untuk menyelesaikan proses pendaftaran program PJJ SMAN Modal Bangsa. Untuk panduan lengkap bergambar, silakan baca "
                       : "Follow these structured steps to complete your registration for the SMAN Modal Bangsa PJJ program. For a complete visual guide, please read our "}
                     <a
-                      href={`/${lang}/spmb/cara-daftar`}
+                      href={`/spmb/cara-daftar`}
                       className="text-[#16a34a] hover:underline font-semibold"
                     >
                       {isId ? "panduan cara mendaftar" : "registration guide"}
@@ -710,7 +710,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                       <ArrowUpRight className="size-4 ml-2" />
                     </a>
                     <a
-                      href={`/${lang}/kontak`}
+                      href={`/kontak`}
                       className="bg-transparent border border-zinc-300 hover:border-zinc-500 text-zinc-800 text-xs font-bold tracking-wider py-3.5 px-6 rounded-full text-center transition-all duration-300 font-sfpro uppercase active:scale-[0.98]"
                     >
                       {isId ? "Hubungi Humas" : "Contact PR"}

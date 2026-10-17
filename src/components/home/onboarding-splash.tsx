@@ -11,7 +11,7 @@ interface OnboardingSplashProps {
 
 export function OnboardingSplash({ locale }: OnboardingSplashProps) {
   const pathname = usePathname();
-  const isHome = pathname === null || pathname === "/" || pathname === `/${locale}` || pathname === `/${locale}/`;
+  const isHome = pathname === null || pathname === "/" || pathname === `/` || pathname === `/`;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLHeadingElement>(null);

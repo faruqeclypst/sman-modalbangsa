@@ -40,7 +40,7 @@ export function TeamPreview({ locale, dict, members }: TeamPreviewProps) {
             </p>
           </div>
           <Link
-            href={`/${locale}/gtk`}
+            href={`/gtk`}
             className="inline-flex items-center gap-1.5 self-start rounded-full border border-[color:var(--border)] bg-white px-4 py-2 text-sm font-medium text-[color:var(--primary)] hover:bg-[color:var(--primary)] hover:text-white sm:self-auto"
           >
             {dict.cpt.gtk.title}

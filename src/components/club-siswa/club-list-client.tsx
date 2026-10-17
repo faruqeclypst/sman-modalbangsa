@@ -355,7 +355,7 @@ export function ClubListClient({ locale, dict }: ClubListClientProps) {
           </p>
           <div className="pt-4">
             <a
-              href={`/${locale}/kontak`}
+              href={`/kontak`}
               className="inline-flex items-center gap-2 rounded-full bg-[color:var(--primary)] hover:bg-[color:var(--primary)]/90 text-white font-semibold px-8 py-3.5 text-sm transition-all hover:scale-105 active:scale-95 shadow-md shadow-emerald-900/15"
             >
               <span>{locale === "id" ? "Hubungi Kesiswaan" : "Contact Student Affairs"}</span>

@@ -47,7 +47,7 @@ function Column({
           </h3>
         </div>
         <Link
-          href={`/${locale}/${basePath}`}
+          href={`/${basePath}`}
           className="inline-flex items-center gap-1 text-xs font-semibold text-[color:var(--primary)] hover:underline"
         >
           {viewAllLabel}
@@ -66,7 +66,7 @@ function Column({
             return (
               <li key={post.id}>
                 <Link
-                  href={`/${locale}/${basePath}/${post.slug}`}
+                  href={`/${basePath}/${post.slug}`}
                   className="group flex flex-col gap-1 p-4 transition-colors hover:bg-[color:var(--muted)]/60"
                 >
                   <p className="text-xs uppercase tracking-wider text-[color:var(--muted-foreground)]">

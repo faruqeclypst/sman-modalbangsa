@@ -140,7 +140,7 @@ export function SearchOverlay({ locale, placeholder = "Cari berita, pengumuman, 
                   {results.map((post) => (
                     <li key={post.id}>
                       <Link
-                        href={`/${locale}/berita/${post.slug}`}
+                        href={`/berita/${post.slug}`}
                         onClick={() => setOpen(false)}
                         className="flex flex-col gap-1 px-5 py-3 transition-colors hover:bg-[color:var(--muted)]/50"
                       >

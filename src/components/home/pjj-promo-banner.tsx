@@ -82,7 +82,7 @@ export function PjjPromoBanner({ locale }: PjjPromoBannerProps) {
 
               <div className="pt-2 flex flex-wrap gap-4 items-center">
                 <Link
-                  href={`/${locale}/spmb?tab=pjj`}
+                  href={`/spmb?tab=pjj`}
                   className="inline-flex items-center gap-2.5 rounded-full bg-[#16a34a] hover:bg-[#118037] text-white font-sfpro font-bold tracking-wider py-3.5 px-8 text-xs transition-all duration-300 shadow-md hover:scale-105 active:scale-95 uppercase"
                 >
                   <span>{isId ? "Info PJJ" : "Explore PJJ"}</span>

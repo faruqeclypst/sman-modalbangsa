@@ -85,22 +85,22 @@ function WhatsAppIcon({ className }: { className?: string }) {
 
 export function Footer({ locale, dict }: FooterProps) {
   const quickLinks = [
-    { label: dict.nav.home, href: `/${locale}` },
-    { label: dict.nav.news, href: `/${locale}/berita` },
-    { label: dict.cpt.prestasi.label, href: `/${locale}/prestasi` },
-    { label: dict.cpt.agenda.label, href: `/${locale}/agenda` },
-    { label: dict.cpt.pengumuman.label, href: `/${locale}/pengumuman` },
-    { label: dict.cpt.galeri.label, href: `/${locale}/galeri` },
+    { label: dict.nav.home, href: `/` },
+    { label: dict.nav.news, href: `/berita` },
+    { label: dict.cpt.prestasi.label, href: `/prestasi` },
+    { label: dict.cpt.agenda.label, href: `/agenda` },
+    { label: dict.cpt.pengumuman.label, href: `/pengumuman` },
+    { label: dict.cpt.galeri.label, href: `/galeri` },
   ];
 
   const profileLinks = [
-    { label: dict.nav.history, href: `/${locale}/profil/sejarah` },
-    { label: dict.nav.visionMission, href: `/${locale}/profil/visi-misi` },
-    { label: dict.nav.principal, href: `/${locale}/profil/kepala-sekolah` },
-    { label: dict.nav.facilities, href: `/${locale}/profil/fasilitas` },
-    { label: dict.nav.calendar, href: `/${locale}/profil/kalender` },
-    { label: dict.cpt.gtk.label, href: `/${locale}/gtk` },
-    { label: dict.cpt.ekskul.label, href: `/${locale}/ekskul` },
+    { label: dict.nav.history, href: `/profil/sejarah` },
+    { label: dict.nav.visionMission, href: `/profil/visi-misi` },
+    { label: dict.nav.principal, href: `/profil/kepala-sekolah` },
+    { label: dict.nav.facilities, href: `/profil/fasilitas` },
+    { label: dict.nav.calendar, href: `/profil/kalender` },
+    { label: dict.cpt.gtk.label, href: `/gtk` },
+    { label: dict.cpt.ekskul.label, href: `/ekskul` },
   ];
 
   const socials = [
@@ -137,7 +137,7 @@ export function Footer({ locale, dict }: FooterProps) {
           </p>
           <div className="mt-10 flex justify-center">
             <Link
-              href={`/${locale}/profil/sejarah`}
+              href={`/profil/sejarah`}
               className="inline-flex items-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 px-8 py-4 text-sm font-semibold text-white transition-all hover:scale-105 active:scale-95 shadow-lg shadow-black/20"
             >
               <span>{dict.cta.buttonText}</span>

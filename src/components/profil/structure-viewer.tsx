@@ -591,14 +591,8 @@ export function StructureViewer({ src, alt }: StructureViewerProps) {
     setIsDragging(false);
   };
 
-  // Dynamic localization detection from path or window context
-  const [locale, setLocale] = React.useState<"id" | "en">("id");
-  React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isEn = window.location.pathname.startsWith("/en");
-      setLocale(isEn ? "en" : "id");
-    }
-  }, []);
+  // Single-language site (Indonesian)
+  const [locale] = React.useState<"id" | "en">("id");
 
   const toggleCollapse = (nodeId: string, e: React.MouseEvent) => {
     e.stopPropagation();

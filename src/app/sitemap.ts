@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { locales } from "@/i18n/config";
 import { getCPT, getPosts } from "@/lib/wp";
 
 export const revalidate = 86400; // Cache sitemap for 24 hours to reduce CPU usage
@@ -36,14 +35,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base =
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://sman-modalbangsa.sch.id";
 
-  const staticUrls: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    STATIC_PATHS.map((path) => ({
-      url: `${base}/${locale}${path}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: path === "" ? 1.0 : 0.7,
-    })),
-  );
+  const staticUrls: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
+    url: `${base}${path === "" ? "/" : path}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: path === "" ? 1.0 : 0.7,
+  }));
 
   // Try to enrich the sitemap with content URLs. If the upstream is offline at
   // build time we just emit the static URLs without failing the build. Use
@@ -58,14 +55,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           : getCPT(type, { perPage: 50, embed: false, fields: ["slug", "modified"] });
       const { posts } = await fetcher;
       for (const post of posts) {
-        for (const locale of locales) {
-          contentUrls.push({
-            url: `${base}/${locale}/${basePath}/${post.slug}`,
-            lastModified: new Date(post.modified),
-            changeFrequency: "monthly" as const,
-            priority: 0.6,
-          });
-        }
+        contentUrls.push({
+          url: `${base}/${basePath}/${post.slug}`,
+          lastModified: new Date(post.modified),
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        });
       }
     } catch {
       // Best-effort enrichment.

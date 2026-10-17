@@ -97,11 +97,16 @@ const nextConfig: NextConfig = {
     };
   },
 
-  // Redirect old WordPress root-level slug URLs to Next.js locale-prefixed URLs.
-  // This handles Google-indexed URLs like /ppdb-jalur-reguler-tahun/ -> /id/berita/ppdb-jalur-reguler-tahun
+  // Redirect old locale-prefixed URLs (/id/*, /en/*) to plain URLs.
+  // The site is now single-language (Indonesian) without locale prefix.
+  // Keeps Google-indexed URLs working after the locale removal.
   async redirects() {
     return [
-      // Old WP permalink format: /{slug}/ -> /id/berita/{slug}
+      { source: "/id", destination: "/", permanent: true },
+      { source: "/en", destination: "/", permanent: true },
+      { source: "/id/:path*", destination: "/:path*", permanent: true },
+      { source: "/en/:path*", destination: "/:path*", permanent: true },
+      // Old WP permalink format: /{slug}/ -> /berita/{slug}
       // Only catches slugs that don't match known Next.js routes or WP paths
     ];
   },

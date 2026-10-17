@@ -24,7 +24,7 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
       Icon: GraduationCap,
       label: dict.quickLinks.items.spmb,
       desc: dict.quickLinks.items.spmbDesc,
-      href: `/${locale}/spmb`,
+      href: `/spmb`,
       tone: "bg-[color:var(--primary)]/10 text-[color:var(--primary)]",
     },
     {
@@ -41,7 +41,7 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
       Icon: Calendar,
       label: dict.quickLinks.items.schedule,
       desc: dict.quickLinks.items.scheduleDesc,
-      href: `/${locale}/akademik/jadwal`,
+      href: `/akademik/jadwal`,
       tone: "bg-emerald-50 text-emerald-700",
     },
     {
@@ -49,7 +49,7 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
       Icon: Megaphone,
       label: dict.quickLinks.items.announcements,
       desc: dict.quickLinks.items.announcementsDesc,
-      href: `/${locale}/berita`,
+      href: `/berita`,
       tone: "bg-amber-50 text-amber-700",
     },
     {
@@ -57,7 +57,7 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
       Icon: Trophy,
       label: dict.quickLinks.items.achievements,
       desc: dict.quickLinks.items.achievementsDesc,
-      href: `/${locale}/prestasi`,
+      href: `/prestasi`,
       tone: "bg-rose-50 text-rose-700",
     },
     {
@@ -74,7 +74,7 @@ export function QuickLinks({ locale, dict }: QuickLinksProps) {
       Icon: ClipboardList,
       label: dict.quickLinks.items.alumni,
       desc: dict.quickLinks.items.alumniDesc,
-      href: `/${locale}/alumni`,
+      href: `/alumni`,
       tone: "bg-teal-50 text-teal-700",
     },
   ] as const;

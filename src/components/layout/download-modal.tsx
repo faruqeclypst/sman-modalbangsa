@@ -164,7 +164,7 @@ export function DownloadModal({
         {/* Footer */}
         <div className="flex justify-end border-t border-white/20 bg-white/5 px-6 py-4">
           <a
-            href={`/${locale}/download`}
+            href={`/download`}
             className="text-sm font-medium text-emerald-400 hover:text-emerald-300"
           >
             {dict.cpt.download.viewAll} &rarr;

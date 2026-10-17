@@ -128,7 +128,7 @@ export function AgendaCalendar({ events, locale }: AgendaCalendarProps) {
                   <span className="absolute left-0 top-1/4 h-1/2 w-1 rounded-r-md bg-[color:var(--primary)] transition-all group-hover:h-2/3 group-hover:bg-[color:var(--accent)]" />
                   
                   <Link
-                    href={`/${locale}/agenda/${event.slug}`}
+                    href={`/agenda/${event.slug}`}
                     className="block"
                   >
                     <h5 className="font-sfpro text-sm font-bold leading-snug text-[color:var(--foreground)] group-hover:text-[color:var(--primary)] transition-colors line-clamp-2">
@@ -149,7 +149,7 @@ export function AgendaCalendar({ events, locale }: AgendaCalendarProps) {
 
                   <div className="mt-4 flex items-center justify-end">
                     <Link
-                      href={`/${locale}/agenda/${event.slug}`}
+                      href={`/agenda/${event.slug}`}
                       className="inline-flex items-center gap-1 text-[11px] font-bold text-[color:var(--primary)] group-hover:text-[color:var(--accent)] transition-colors"
                     >
                       {isId ? "Lihat Detail" : "View Details"}

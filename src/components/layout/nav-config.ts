@@ -16,7 +16,7 @@ export interface NavConfig {
 }
 
 export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
-  const base = `/${locale}`;
+  const base = `/`;
   return {
     primary: [
       { label: dict.nav.home, href: base },

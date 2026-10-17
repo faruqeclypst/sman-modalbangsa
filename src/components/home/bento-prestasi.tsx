@@ -76,7 +76,7 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
         <div data-animate>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             <Link
-              href={`/${locale}/prestasi`}
+              href={`/prestasi`}
               className="hover:text-[color:var(--primary)] transition-colors"
             >
               {dict.cpt.prestasi.title}
@@ -130,7 +130,7 @@ export function BentoPrestasi({ locale, dict, prestasi }: BentoPrestasiProps) {
             return (
               <Link
                 key={post.id}
-                href={`/${locale}/prestasi/${post.slug}`}
+                href={`/prestasi/${post.slug}`}
                 data-animate
                 className="group relative overflow-hidden rounded-2xl bg-gray-100"
               >

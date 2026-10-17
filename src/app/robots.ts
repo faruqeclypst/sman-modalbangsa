@@ -18,8 +18,7 @@ export default function robots(): MetadataRoute.Robots {
           "/wp-includes/",
           "/xmlrpc.php",
           // Hasil pencarian & filter (menghindari crawl tak terbatas)
-          "/id/berita?*",
-          "/en/berita?*",
+          "/berita?*",
           "/*?s=",
           "/*?p=",
           "/*?page=",

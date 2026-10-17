@@ -39,7 +39,7 @@ export function NewsCard({
   priority = false,
   badge,
 }: NewsCardProps) {
-  const href = `/${locale}/berita/${post.slug}`;
+  const href = `/berita/${post.slug}`;
   const title = decodeHtmlEntities(post.title.rendered);
   const excerpt = truncate(stripHtml(post.excerpt.rendered), 160);
   const author = getAuthorName(post);

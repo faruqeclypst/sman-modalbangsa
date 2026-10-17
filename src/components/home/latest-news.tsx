@@ -159,7 +159,7 @@ export function LatestNews({
         <div className="relative w-full">
           {/* Overlapping Next Button linking to main news page */}
           <Link
-            href={`/${locale}/berita`}
+            href={`/berita`}
             className="absolute top-1/2 right-1/4 z-20 hidden lg:flex size-12 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-white text-[#16a34a] shadow-lg border border-zinc-100 hover:scale-110 active:scale-95 transition-transform"
             aria-label="Lihat Semua Berita"
           >
@@ -176,7 +176,7 @@ export function LatestNews({
                   const title = decodeHtml(post.title.rendered);
                   const excerpt = decodeHtml(post.excerpt?.rendered || "");
                   const imageUrl = post._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? null;
-                  const href = `/${locale}/berita/${post.slug}`;
+                  const href = `/berita/${post.slug}`;
 
                   return (
                     <div key={post.id} className="h-full">

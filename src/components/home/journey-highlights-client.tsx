@@ -173,7 +173,7 @@ export function JourneyHighlightsClient({
                         </div>
                         {/* Title */}
                         <h3 className="font-bold text-gray-900 line-clamp-2 text-sm sm:text-base hover:text-emerald-600 transition-colors">
-                          <Link href={`/${locale}/berita/${post.id}`}>
+                          <Link href={`/berita/${post.id}`}>
                             {decodeHtml(post.title.rendered)}
                           </Link>
                         </h3>
@@ -185,7 +185,7 @@ export function JourneyHighlightsClient({
 
                       <div className="mt-4 pt-4 border-t border-gray-50 flex justify-end">
                         <Link
-                          href={`/${locale}/berita/${post.id}`}
+                          href={`/berita/${post.id}`}
                           className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline"
                         >
                           <span>Selengkapnya</span>

@@ -7,7 +7,6 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { LanguageSwitcher } from "./language-switcher";
 import { isNavGroup, type NavConfig } from "./nav-config";
 
 interface HeaderNavProps {
@@ -44,8 +43,8 @@ export function HeaderNav({ nav, locale, dict, isTransparent }: HeaderNavProps) 
   }, [openMobile]);
 
   const isActive = (href: string) => {
-    if (href === `/${locale}`) return pathname === href;
-    if (href === `/${locale}/prestasi` && pathname.startsWith(`/${locale}/prestasi/hall-of-fame`)) {
+    if (href === `/`) return pathname === href;
+    if (href === `/prestasi` && pathname.startsWith(`/prestasi/hall-of-fame`)) {
       return false;
     }
     return pathname === href || pathname.startsWith(`${href}/`);
@@ -115,7 +114,6 @@ export function HeaderNav({ nav, locale, dict, isTransparent }: HeaderNavProps) 
 
       {/* Mobile controls */}
       <div className="flex items-center gap-2 lg:hidden">
-        <LanguageSwitcher currentLocale={locale} variant="compact" isTransparent={isTransparent} />
         <button
           type="button"
           aria-expanded={openMobile}

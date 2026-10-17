@@ -99,7 +99,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
         <div data-animate-galeri>
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             <Link
-              href={`/${locale}/galeri`}
+              href={`/galeri`}
               className="hover:text-[color:var(--primary)] transition-colors"
             >
               {dict.cpt.galeri.title}
@@ -121,7 +121,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
                 className="absolute inset-0"
               >
                 <Link
-                  href={`/${locale}/galeri/${visible[0].id}`}
+                  href={`/galeri/${visible[0].id}`}
                   className="group relative block h-full w-full"
                 >
                   <Image
@@ -153,7 +153,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
                   className="absolute inset-0"
                 >
                   <Link
-                    href={`/${locale}/galeri/${visible[1].id}`}
+                    href={`/galeri/${visible[1].id}`}
                     className="group relative block h-full w-full"
                   >
                     <Image
@@ -185,7 +185,7 @@ export function BentoCommunity({ locale, dict, galeri }: BentoCommunityProps) {
                     className="absolute inset-0"
                   >
                     <Link
-                      href={`/${locale}/galeri/${post.slug}`}
+                      href={`/galeri/${post.slug}`}
                       className="group relative block h-full w-full"
                     >
                       {imgUrl ? (
