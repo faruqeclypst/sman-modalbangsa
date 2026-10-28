@@ -226,3 +226,5 @@ bun run start
 Built with ❤️ for SMAN Modal Bangsa using Next.js 16 & WordPress REST API.
 
 </div>
+
+<!-- redeploy 2026-10-28: refresh cache berita -->
