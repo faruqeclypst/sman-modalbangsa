@@ -228,3 +228,5 @@ Built with ❤️ for SMAN Modal Bangsa using Next.js 16 & WordPress REST API.
 </div>
 
 <!-- redeploy 2026-10-28: refresh cache berita -->
+
+<!-- redeploy 2026-11-04: refresh cache berita (4 artikel baru) -->
