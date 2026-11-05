@@ -91,6 +91,26 @@ export const getSpmbGeneralRequirements = (isId: boolean): string[] =>
         "Willing to live in the dormitory throughout the education period.",
       ];
 
+// Dokumen yang perlu disiapkan pendaftar SPMB TA 2027/2028 (daftar dari panitia).
+export const getSpmbDocuments = (isId: boolean): string[] =>
+  isId
+    ? [
+        "Pas foto 3×4.",
+        "Kartu Keluarga (KK).",
+        "Rapor semester 2, 3, dan 4.",
+        "Surat Rekomendasi (khusus Jalur Undangan).",
+        "Surat Aktif (khusus Jalur Prestasi).",
+        "Sertifikat Prestasi (khusus Jalur Prestasi).",
+      ]
+    : [
+        "3×4 passport-sized photo.",
+        "Family Card (Kartu Keluarga).",
+        "Report cards for semesters 2, 3, and 4.",
+        "Recommendation Letter (Invitation Track only).",
+        "Active Student Letter (Achievement Track only).",
+        "Achievement Certificate (Achievement Track only).",
+      ];
+
 export const getSpmbFaqs = (isId: boolean): FAQItem[] => [
   {
     q: isId ? "Materi tesnya berupa apa saja?" : "What are the test subjects?",
@@ -107,8 +127,8 @@ export const getSpmbFaqs = (isId: boolean): FAQItem[] => [
   {
     q: isId ? "Apa saja berkas yang harus diunggah?" : "What documents must be uploaded?",
     a: isId
-      ? "Dokumen yang wajib diunggah meliputi scan rapor semester 2, 3, dan 4 serta pas foto terbaru. Pendaftar Jalur Undangan wajib melampirkan surat rekomendasi dari kepala sekolah, dan pendaftar Jalur Prestasi wajib melampirkan sertifikat atau bukti juara minimal juara 1 tingkat kabupaten dari lomba yang diselenggarakan Kementerian Pendidikan atau Kementerian Agama."
-      : "Required documents include scanned report cards for semesters 2, 3, and 4 and a recent passport-sized photo. Invitation Track applicants must attach a recommendation letter from their principal, and Achievement Track applicants must attach a certificate or proof of at least a first-place win at regency level from a competition held by the Ministry of Education or the Ministry of Religious Affairs."
+      ? "Dokumen yang perlu disiapkan adalah pas foto 3×4, Kartu Keluarga (KK), dan rapor semester 2, 3, dan 4. Khusus Jalur Undangan ditambah surat rekomendasi dari kepala sekolah, sedangkan khusus Jalur Prestasi ditambah surat aktif dan sertifikat prestasi, yaitu sertifikat atau bukti juara minimal juara 1 tingkat kabupaten dari lomba yang diselenggarakan Kementerian Pendidikan atau Kementerian Agama."
+      : "The documents to prepare are a 3×4 passport-sized photo, a Family Card (Kartu Keluarga), and report cards for semesters 2, 3, and 4. Invitation Track applicants must also attach a recommendation letter from their principal, while Achievement Track applicants must also attach an active student letter and an achievement certificate, namely a certificate or proof of at least a first-place win at regency level from a competition held by the Ministry of Education or the Ministry of Religious Affairs."
   },
   {
     q: isId ? "Apakah Jalur Reguler sudah dibuka?" : "Is the Regular Track open yet?",

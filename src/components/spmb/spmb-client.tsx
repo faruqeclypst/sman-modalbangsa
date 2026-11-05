@@ -8,6 +8,7 @@ import { ArrowUpRight, Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { WPPost } from "@/lib/wp-types";
 import {
+  getSpmbDocuments,
   getSpmbFaqs,
   getSpmbGeneralRequirements,
   getSpmbSchedule,
@@ -59,6 +60,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
 
   const spmbFaqs = getSpmbFaqs(isId);
   const requirements = getSpmbGeneralRequirements(isId);
+  const documents = getSpmbDocuments(isId);
   const schedule = getSpmbSchedule(isId);
 
   const toggleFaq = (index: number) => {
@@ -149,6 +151,23 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
                 : "Applicants must attach a certificate or proof of achievement, at minimum a first-place win at regency level, from a competition held by the Ministry of Education (OSN, FLS3N, O2SN, FIKSI, KIHAJAR, and OPSI) or the Ministry of Religious Affairs (OMI and MYRES)."}
             </p>
           </div>
+        </div>
+
+        <div className="space-y-3 pt-4">
+          <h4 className="font-bold text-base text-zinc-950 font-sfpro border-b border-zinc-100 pb-2 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#16a34a]" />
+            {isId ? "Dokumen yang Perlu Disiapkan" : "Documents to Prepare"}
+          </h4>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 pt-1">
+            {documents.map((doc, idx) => (
+              <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-zinc-650 font-sans leading-relaxed">
+                <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-50 border border-emerald-100">
+                  <Check className="size-3 text-[#16a34a]" />
+                </span>
+                <span>{doc}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-4">
