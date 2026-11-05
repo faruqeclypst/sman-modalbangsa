@@ -4,10 +4,11 @@ import * as React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Check, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Check, ChevronRight, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { WPPost } from "@/lib/wp-types";
 import {
+  getSpmbDocumentFormats,
   getSpmbDocuments,
   getSpmbFaqs,
   getSpmbGeneralRequirements,
@@ -61,6 +62,7 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
   const spmbFaqs = getSpmbFaqs(isId);
   const requirements = getSpmbGeneralRequirements(isId);
   const documents = getSpmbDocuments(isId);
+  const documentFormats = getSpmbDocumentFormats(isId);
   const schedule = getSpmbSchedule(isId);
 
   const toggleFaq = (index: number) => {
@@ -168,6 +170,19 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
               </li>
             ))}
           </ul>
+          <div className="flex flex-wrap gap-2.5 pt-2">
+            {documentFormats.map((fmt) => (
+              <a
+                key={fmt.href}
+                href={fmt.href}
+                download
+                className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs sm:text-sm font-medium text-emerald-800 transition-colors hover:bg-emerald-100"
+              >
+                <Download className="size-3.5 shrink-0" />
+                {fmt.label}
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-4">

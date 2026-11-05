@@ -111,6 +111,27 @@ export const getSpmbDocuments = (isId: boolean): string[] =>
         "Achievement Certificate (Achievement Track only).",
       ];
 
+export interface DocumentFormat {
+  label: string;
+  href: string;
+}
+
+// Format surat resmi untuk diunduh pendaftar (berkas Word di Media WordPress).
+export const getSpmbDocumentFormats = (isId: boolean): DocumentFormat[] => [
+  {
+    label: isId
+      ? "Unduh Format Surat Rekomendasi Kepala Sekolah (Word)"
+      : "Download the Principal Recommendation Letter Format (Word)",
+    href: "https://cms.sman-modalbangsa.sch.id/wp-content/uploads/2026/11/Format-Surat_Rekomendasi_Kepala_Sekolah.docx",
+  },
+  {
+    label: isId
+      ? "Unduh Format Surat Keterangan Aktif Siswa (Word)"
+      : "Download the Active Student Certificate Format (Word)",
+    href: "https://cms.sman-modalbangsa.sch.id/wp-content/uploads/2026/11/Format-Surat_Aktif_Siswa.docx",
+  },
+];
+
 export const getSpmbFaqs = (isId: boolean): FAQItem[] => [
   {
     q: isId ? "Materi tesnya berupa apa saja?" : "What are the test subjects?",
