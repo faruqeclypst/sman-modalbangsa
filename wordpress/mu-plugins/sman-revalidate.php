@@ -134,3 +134,25 @@ add_action('deleted_post', function ($postId, $post) {
     $slug = $post->post_name !== '' ? $post->post_name : sanitize_title($post->post_title);
     sman_revalidate_fire($post->post_type, $slug);
 }, 10, 2);
+
+// Mengedit isi postingan yang sudah terbit tidak mengubah status, jadi tidak
+// tertangkap transition_post_status. Picu dari post_updated bila judul, isi,
+// atau kutipan berubah.
+add_action('post_updated', function ($postId, $postAfter, $postBefore) {
+    if (!($postAfter instanceof WP_Post) || !($postBefore instanceof WP_Post)) {
+        return;
+    }
+    if (!in_array($postAfter->post_type, SMAN_REVALIDATE_POST_TYPES, true)) {
+        return;
+    }
+    if ($postAfter->post_status !== 'publish' || $postBefore->post_status !== 'publish') {
+        return;
+    }
+    if ($postAfter->post_content === $postBefore->post_content
+        && $postAfter->post_title === $postBefore->post_title
+        && $postAfter->post_excerpt === $postBefore->post_excerpt) {
+        return;
+    }
+    $slug = $postAfter->post_name !== '' ? $postAfter->post_name : sanitize_title($postAfter->post_title);
+    sman_revalidate_fire($postAfter->post_type, $slug);
+}, 10, 3);
