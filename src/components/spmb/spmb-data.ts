@@ -71,7 +71,7 @@ export const getSpmbSchedule = (isId: boolean): ScheduleItem[] => [
 ];
 
 // Syarat Umum SPMB TA 2027/2028, sesuai Draft SPMB 2027 dari panitia.
-// Berlaku untuk Jalur Undangan dan Prestasi; Jalur Reguler kurang lebih sama, belum dibuka.
+// Berlaku untuk semua jalur, termasuk Jalur Reguler (Reguler belum dibuka).
 export const getSpmbGeneralRequirements = (isId: boolean): string[] =>
   isId
     ? [
@@ -113,8 +113,8 @@ export const getSpmbFaqs = (isId: boolean): FAQItem[] => [
   {
     q: isId ? "Apakah Jalur Reguler sudah dibuka?" : "Is the Regular Track open yet?",
     a: isId
-      ? "Belum. Saat ini SPMB Tahun Ajaran 2027/2028 baru dibuka untuk Jalur Undangan dan Jalur Prestasi. Persyaratan Jalur Reguler kurang lebih sama dengan syarat umum, dan jadwal pembukaannya akan diumumkan kemudian."
-      : "Not yet. For the 2027/2028 academic year, admissions are currently open only for the Invitation and Achievement Tracks. The Regular Track requirements are broadly the same as the general requirements, and its opening schedule will be announced later."
+      ? "Belum. Saat ini SPMB Tahun Ajaran 2027/2028 baru dibuka untuk Jalur Undangan dan Jalur Prestasi. Jalur Reguler termasuk dalam syarat umum, persyaratannya sama dengan yang tercantum pada bagian Syarat Umum, dan jadwal pembukaannya akan diumumkan kemudian."
+      : "Not yet. For the 2027/2028 academic year, admissions are currently open only for the Invitation and Achievement Tracks. The Regular Track is included in the general requirements, its requirements are the same as those listed in the General Requirements section, and its opening schedule will be announced later."
   },
   {
     q: isId ? "Apakah ada tes kemampuan membaca Al-Qur'an?" : "Is there a Quran recitation test?",

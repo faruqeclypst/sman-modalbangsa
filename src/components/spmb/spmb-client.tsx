@@ -105,9 +105,16 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
 
       {/* Syarat Umum */}
       <div className="max-w-5xl mx-auto space-y-8">
-        <h3 className="font-sfpro text-2xl sm:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
-          {isId ? "Syarat Umum" : "General Requirements"}
-        </h3>
+        <div className="space-y-3">
+          <h3 className="font-sfpro text-2xl sm:text-3xl font-bold text-zinc-900 uppercase tracking-tight">
+            {isId ? "Syarat Umum" : "General Requirements"}
+          </h3>
+          <p className="text-xs sm:text-sm text-zinc-500 font-sans">
+            {isId
+              ? "Syarat umum ini berlaku untuk semua jalur pendaftaran: Jalur Undangan, Jalur Prestasi, dan Jalur Reguler."
+              : "These general requirements apply to all admission tracks: the Invitation Track, the Achievement Track, and the Regular Track."}
+          </p>
+        </div>
         <ul className="space-y-3.5">
           {requirements.map((req, idx) => (
             <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-zinc-650 font-sans leading-relaxed">
@@ -150,8 +157,8 @@ export function SPMBClient({ lang, galleryItems = [] }: SPMBClientProps) {
           </span>
           <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-sans">
             {isId
-              ? "Jalur Reguler: persyaratannya kurang lebih sama dengan syarat umum di atas. Jadwal pembukaannya akan diumumkan kemudian."
-              : "Regular Track: its requirements are broadly the same as the general requirements above. Its opening schedule will be announced later."}
+              ? "Jalur Reguler termasuk dalam Syarat Umum di atas: persyaratannya sama, tanpa syarat khusus tambahan. Bedanya, saat ini Jalur Reguler belum dibuka, jadwal pembukaannya akan diumumkan kemudian."
+              : "The Regular Track is included in the General Requirements above: its requirements are the same, with no additional specific requirements. The only difference is that the Regular Track is not open yet, and its opening schedule will be announced later."}
           </p>
         </div>
 
