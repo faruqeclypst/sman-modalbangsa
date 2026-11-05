@@ -51,7 +51,13 @@ export function buildNav(locale: Locale, dict: Dictionary): NavConfig {
         label: dict.quickLinks.items.spmb,
         links: [
           { label: dict.nav.spmbInfo, href: `${base}/spmb` },
-          { label: dict.nav.spmbGuide, href: `${base}/spmb/cara-daftar` },
+        ],
+      },
+      {
+        label: "PJJ",
+        links: [
+          { label: dict.nav.pjjInfo, href: `${base}/pjj` },
+          { label: dict.nav.pjjGuide, href: `${base}/pjj/cara-daftar` },
         ],
       },
       { label: dict.nav.alumni, href: `${base}/alumni` },

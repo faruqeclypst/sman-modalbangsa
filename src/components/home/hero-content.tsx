@@ -68,10 +68,9 @@ export function HeroContent({ locale, dict }: HeroContentProps) {
         {dict.hero.titleLine2}
       </h1>
 
-      {/* ===== SEMENTARA: INFO PENDIDIKAN JARAK JAUH — hapus blok ini jika tidak diperlukan ===== */}
       <div className="mt-8 flex flex-wrap gap-4 justify-center items-center">
         <a
-          href={`/spmb?tab=pjj`}
+          href={`/spmb`}
           className="group inline-flex items-center gap-3 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-5 py-2.5 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-400/20 hover:border-emerald-400/60 hover:scale-105 active:scale-95"
         >
           <span className="relative flex size-2.5 shrink-0">
@@ -79,7 +78,7 @@ export function HeroContent({ locale, dict }: HeroContentProps) {
             <span className="relative inline-flex size-2.5 rounded-full bg-emerald-400" />
           </span>
           <span className="text-sm font-medium text-emerald-200 font-sfpro">
-            INFO SPMB-PJJ
+            INFO SPMB
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -101,13 +100,13 @@ export function HeroContent({ locale, dict }: HeroContentProps) {
         </a>
 
         <a
-          href="https://spmb.sman-modalbangsa.sch.id/register"
+          href="https://spmb.sman-modalbangsa.sch.id"
           target="_blank"
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-3 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-6 py-2.5 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-500/35 hover:border-emerald-500/70 hover:scale-105 active:scale-95 text-emerald-100"
         >
           <span className="text-sm font-bold tracking-wider font-sfpro uppercase">
-            {locale === "id" ? "Daftar PJJ" : "Register Now"}
+            {locale === "id" ? "Daftar Sekarang" : "Register Now"}
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +127,6 @@ export function HeroContent({ locale, dict }: HeroContentProps) {
           </svg>
         </a>
       </div>
-      {/* ===== AKHIR: INFO PENDIDIKAN JARAK JAUH ===== */}
 
     </div>
   );

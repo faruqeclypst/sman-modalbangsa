@@ -44,12 +44,12 @@ export function CaraDaftarClient({ lang }: CaraDaftarClientProps) {
         ? "Masuk ke Website SMAN Modal Bangsa" 
         : "Access SMAN Modal Bangsa Website",
       desc: isId
-        ? "Pada halaman utama Website SMAN Modal Bangsa, pilih menu SPMB atau klik tombol Daftar PJJ pada halaman depan."
-        : "On the main page of the SMAN Modal Bangsa Website, select the SPMB menu or click the Register PJJ button on the front page.",
+        ? "Pada halaman utama Website SMAN Modal Bangsa, pilih menu PJJ untuk membuka halaman Pendidikan Jarak Jauh."
+        : "On the main page of the SMAN Modal Bangsa Website, select the PJJ menu to open the Distance Learning page.",
       image: "/images/tutorial_daftar/1.jpeg",
       goal: isId
-        ? "Tujuan: Masuk ke sistem pendaftaran SPMB Pendidikan Jarak Jauh (PJJ) dan mengarahkan calon peserta didik ke halaman registrasi akun."
-        : "Goal: Enter the SPMB Distance Learning (PJJ) registration system and direct prospective students to the account registration page."
+        ? "Tujuan: Masuk ke sistem pendaftaran Pendidikan Jarak Jauh (PJJ) dan mengarahkan calon peserta didik ke halaman registrasi akun."
+        : "Goal: Enter the Distance Learning (PJJ) registration system and direct prospective students to the account registration page."
     },
     {
       num: "02",
@@ -538,10 +538,10 @@ export function CaraDaftarClient({ lang }: CaraDaftarClientProps) {
               {isId ? "Portal SPMB" : "SPMB Portal"}
             </a>
             <a
-              href={`/spmb`}
+              href={`/pjj`}
               className="bg-transparent border border-zinc-300 hover:border-zinc-500 text-zinc-800 text-xs font-bold tracking-wider py-3.5 px-8 rounded-full transition-all duration-300 font-sfpro uppercase active:scale-[0.98] outline-none"
             >
-              {isId ? "Kembali ke SPMB" : "Back to SPMB"}
+              {isId ? "Kembali ke PJJ" : "Back to PJJ"}
             </a>
           </div>
         </div>

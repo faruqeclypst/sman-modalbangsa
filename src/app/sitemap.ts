@@ -19,6 +19,9 @@ const STATIC_PATHS = [
   "/galeri",
   "/berita",
   "/kontak",
+  "/spmb",
+  "/pjj",
+  "/pjj/cara-daftar",
 ];
 
 const CPT_ROUTES = [

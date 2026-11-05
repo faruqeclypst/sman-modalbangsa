@@ -3,12 +3,6 @@ export interface FAQItem {
   a: string;
 }
 
-export interface StepItem {
-  num: string;
-  title: string;
-  desc: string;
-}
-
 export interface PJJStepItem {
   num: string;
   title: string;
@@ -31,6 +25,72 @@ export interface PartnerSchool {
   contacts: ContactPerson[];
 }
 
+export interface ScheduleItem {
+  kegiatan: string;
+  tanggal: string;
+}
+
+// Jadwal SPMB Jalur Undangan dan Prestasi TA 2027/2028, sesuai Draft SPMB 2027 dari panitia.
+export const getSpmbSchedule = (isId: boolean): ScheduleItem[] => [
+  {
+    kegiatan: isId ? "Sosialisasi ke Sekolah Undangan" : "Outreach to Invited Schools",
+    tanggal: isId ? "4 s.d 8 November 2026" : "November 4 to 8, 2026",
+  },
+  {
+    kegiatan: isId ? "Zoom Meeting dengan Sekolah Undangan" : "Zoom Meeting with Invited Schools",
+    tanggal: "9 November 2026",
+  },
+  {
+    kegiatan: isId ? "Pendaftaran Via Web SPMB" : "Registration via the SPMB Website",
+    tanggal: isId ? "9 s.d 13 November 2026" : "November 9 to 13, 2026",
+  },
+  {
+    kegiatan: isId ? "Verifikasi Berkas Online (oleh panitia)" : "Online Document Verification (by the committee)",
+    tanggal: isId ? "10 s.d 13 November 2026" : "November 10 to 13, 2026",
+  },
+  {
+    kegiatan: isId
+      ? "Pengumuman Kelulusan Verifikasi Berkas Online (cek di akun SPMB siswa)"
+      : "Announcement of Online Document Verification Results (check your SPMB student account)",
+    tanggal: "13 November 2026",
+  },
+  {
+    kegiatan: isId ? "Tes Akademik dan Wawancara" : "Academic Test and Interview",
+    tanggal: "14 November 2026",
+  },
+  {
+    kegiatan: isId ? "Tes Kesehatan dan Fisik" : "Health and Physical Test",
+    tanggal: "15 November 2026",
+  },
+  {
+    kegiatan: isId
+      ? "Pengumuman Akhir Kelulusan SPMB Jalur Undangan dan Prestasi"
+      : "Final Admission Announcement for the Invitation and Achievement Tracks",
+    tanggal: "17 November 2026",
+  },
+];
+
+// Syarat Umum SPMB TA 2027/2028, sesuai Draft SPMB 2027 dari panitia.
+// Berlaku untuk Jalur Undangan dan Prestasi; Jalur Reguler kurang lebih sama, belum dibuka.
+export const getSpmbGeneralRequirements = (isId: boolean): string[] =>
+  isId
+    ? [
+        "Siswa aktif kelas III SMP/MTs tahun pelajaran 2026/2027.",
+        "Nilai rapor minimal 85,00 untuk mata pelajaran Matematika, IPA, Bahasa Indonesia, Bahasa Inggris, dan Agama pada semester 2, 3, dan 4.",
+        "Mampu membaca Al-Quran dengan benar dan lancar.",
+        "Memiliki kemampuan dasar berbahasa Inggris.",
+        "Berbadan sehat, tidak cacat fisik yang dapat mengganggu kegiatan pembelajaran.",
+        "Sanggup tinggal di asrama selama pendidikan.",
+      ]
+    : [
+        "Active third-year SMP/MTs student in the 2026/2027 academic year.",
+        "Minimum report card grade of 85.00 in Mathematics, Science, Indonesian, English, and Religion for semesters 2, 3, and 4.",
+        "Able to recite the Qur'an correctly and fluently.",
+        "Has basic English language skills.",
+        "Physically healthy, with no physical condition that would interfere with learning activities.",
+        "Willing to live in the dormitory throughout the education period.",
+      ];
+
 export const getSpmbFaqs = (isId: boolean): FAQItem[] => [
   {
     q: isId ? "Materi tesnya berupa apa saja?" : "What are the test subjects?",
@@ -47,8 +107,14 @@ export const getSpmbFaqs = (isId: boolean): FAQItem[] => [
   {
     q: isId ? "Apa saja berkas yang harus diunggah?" : "What documents must be uploaded?",
     a: isId
-      ? "Dokumen yang wajib diunggah meliputi scan rapor semester 2, 3, dan 4, pas foto terbaru, surat rekomendasi kepala sekolah, serta sertifikat/piagam prestasi bagi pendaftar jalur prestasi."
-      : "Required documents include scanned report cards for semesters 2, 3, and 4, a recent passport-sized photo, principal recommendation letter, and achievement certificates for achievement track applicants."
+      ? "Dokumen yang wajib diunggah meliputi scan rapor semester 2, 3, dan 4 serta pas foto terbaru. Pendaftar Jalur Undangan wajib melampirkan surat rekomendasi dari kepala sekolah, dan pendaftar Jalur Prestasi wajib melampirkan sertifikat atau bukti juara minimal juara 1 tingkat kabupaten dari lomba yang diselenggarakan Kementerian Pendidikan atau Kementerian Agama."
+      : "Required documents include scanned report cards for semesters 2, 3, and 4 and a recent passport-sized photo. Invitation Track applicants must attach a recommendation letter from their principal, and Achievement Track applicants must attach a certificate or proof of at least a first-place win at regency level from a competition held by the Ministry of Education or the Ministry of Religious Affairs."
+  },
+  {
+    q: isId ? "Apakah Jalur Reguler sudah dibuka?" : "Is the Regular Track open yet?",
+    a: isId
+      ? "Belum. Saat ini SPMB Tahun Ajaran 2027/2028 baru dibuka untuk Jalur Undangan dan Jalur Prestasi. Persyaratan Jalur Reguler kurang lebih sama dengan syarat umum, dan jadwal pembukaannya akan diumumkan kemudian."
+      : "Not yet. For the 2027/2028 academic year, admissions are currently open only for the Invitation and Achievement Tracks. The Regular Track requirements are broadly the same as the general requirements, and its opening schedule will be announced later."
   },
   {
     q: isId ? "Apakah ada tes kemampuan membaca Al-Qur'an?" : "Is there a Quran recitation test?",
@@ -88,51 +154,6 @@ export const getPjjFaqs = (isId: boolean): FAQItem[] => [
     a: isId
       ? "Pendaftaran dilakukan secara daring (online) dengan membuat akun di portal resmi SPMB SMAN Modal Bangsa pada menu pendaftaran PJJ, kemudian melengkapi data dan berkas yang diperlukan."
       : "Registration is done online by creating an account on the official SMAN Modal Bangsa SPMB portal under the PJJ registration menu, then filling out the required data and files."
-  }
-];
-
-export const getSpmbSteps = (isId: boolean): StepItem[] => [
-  {
-    num: "01",
-    title: isId ? "Registrasi Akun" : "Account Registration",
-    desc: isId
-      ? "Calon peserta didik membuat akun pendaftaran di portal resmi SPMB menggunakan NISN dan email aktif."
-      : "Prospective students register their account on the official SPMB portal using NISN and active email."
-  },
-  {
-    num: "02",
-    title: isId ? "Pengisian Rapor & Berkas" : "Grade & Document Submission",
-    desc: isId
-      ? "Menginput nilai rapor pengetahuan semester 2, 3, dan 4 untuk mata pelajaran utama secara akurat serta mengunggah berkas pendukung."
-      : "Accurately input report card grades for semesters 2, 3, and 4 in core academic subjects and upload supporting files."
-  },
-  {
-    num: "03",
-    title: isId ? "Verifikasi Berkas" : "Administrative Verification",
-    desc: isId
-      ? "Pihak panitia memverifikasi kesesuaian berkas nilai rapor dan kelengkapan dokumen administratif secara online."
-      : "The admissions committee validates report card grades and uploaded administrative documents online."
-  },
-  {
-    num: "04",
-    title: isId ? "Ujian Seleksi CAT" : "Computer-Assisted Test",
-    desc: isId
-      ? "Mengikuti tes potensi akademik terkomputerisasi secara langsung di lokasi ujian untuk bidang studi utama."
-      : "Take the computerized academic aptitude test evaluating core study subjects in person at the exam location."
-  },
-  {
-    num: "05",
-    title: isId ? "Tes Agama & Wawancara" : "Religious Test & Interview",
-    desc: isId
-      ? "Menjalani tes kefasihan membaca Al-Qur'an secara tartil serta wawancara kesiapan menetap di sistem asrama."
-      : "Undergo tests for Al-Qur'an recitation fluency and interviews evaluating dormitory boarding suitability."
-  },
-  {
-    num: "06",
-    title: isId ? "Pengumuman & Daftar Ulang" : "Announcement & Enrollment",
-    desc: isId
-      ? "Hasil kelulusan diumumkan melalui portal, dilanjutkan proses verifikasi fisik serta daftar ulang berkas."
-      : "Admissions results announced online, followed by in-person physical verification and enrollment registration."
   }
 ];
 

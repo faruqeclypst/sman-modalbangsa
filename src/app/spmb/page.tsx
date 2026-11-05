@@ -14,10 +14,10 @@ export async function generateMetadata({
 }: PageProps<"/spmb">): Promise<Metadata> {
   const lang = "id" as const;
   const isId = lang === "id";
-  const title = isId ? "Informasi Penerimaan Siswa Baru dan Pendidikan Jarak Jauh" : "Student Admissions & Distance Learning Information";
-  const description = isId 
-    ? "Penerimaan Siswa Baru SMAN Modal Bangsa dan Program Layanan Pendidikan Jarak Jauh"
-    : "New Student Admissions and Distance Learning Services at SMAN Modal Bangsa";
+  const title = isId ? "Informasi Penerimaan Siswa Baru" : "Student Admissions Information";
+  const description = isId
+    ? "Penerimaan Siswa Baru SMAN Modal Bangsa Tahun Ajaran 2027/2028, Jalur Undangan dan Prestasi"
+    : "New Student Admissions at SMAN Modal Bangsa for the 2027/2028 Academic Year, Invitation and Achievement Tracks";
   return {
     title: `${title} | SMAN Modal Bangsa`,
     description,
@@ -32,10 +32,10 @@ export default async function SPMBPage({
   const dict = await getDictionary(lang);
   
   const isId = lang === "id";
-  const title = isId ? "Informasi Penerimaan Siswa Baru dan Pendidikan Jarak Jauh" : "Student Admissions & Distance Learning Information";
-  const subtitle = isId 
-    ? "Penerimaan Siswa Baru SMAN Modal Bangsa dan Program Layanan Pendidikan Jarak Jauh"
-    : "New Student Admissions and Distance Learning Services at SMAN Modal Bangsa";
+  const title = isId ? "Informasi Penerimaan Siswa Baru" : "Student Admissions Information";
+  const subtitle = isId
+    ? "Penerimaan Siswa Baru SMAN Modal Bangsa Tahun Ajaran 2027/2028, Jalur Undangan dan Prestasi"
+    : "New Student Admissions at SMAN Modal Bangsa for the 2027/2028 Academic Year, Invitation and Achievement Tracks";
 
   // Fetch gallery items to display appropriate images dynamically
   const { posts: galleryItems } = await getCPT("galeri", { perPage: 24 }).catch(() => ({ posts: [] }));
