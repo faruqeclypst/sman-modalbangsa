@@ -488,3 +488,8 @@ html.js-active img.img-loaded {
   opacity: 1;
   background-color: transparent;
 }
+
+/* Fullscreen announcement image: the top navbar steps aside. */
+body.lightbox-open header {
+  display: none;
+}

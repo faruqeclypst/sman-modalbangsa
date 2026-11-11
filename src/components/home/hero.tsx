@@ -31,6 +31,13 @@ export function Hero({ locale, dict }: HeroProps) {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [imageZoomed, setImageZoomed] = useState(false);
+
+  // Fullscreen image mode hides the site header entirely.
+  useEffect(() => {
+    if (!imageZoomed) return;
+    document.body.classList.add("lightbox-open");
+    return () => document.body.classList.remove("lightbox-open");
+  }, [imageZoomed]);
   const [modalData, setModalData] = useState<{
     isEnabled: boolean;
     title: string;
