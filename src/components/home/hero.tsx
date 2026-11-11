@@ -55,15 +55,10 @@ export function Hero({ locale, dict }: HeroProps) {
             setModalData({
               isEnabled: true,
               title: s.notifModalJudul || "Pengumuman",
-              // Same composition as the old modal: a body text and the
-              // green read-more button stay even when the SPMB body is
-              // still empty, falling back to the previous wording.
-              message:
-                s.notifModalIsi?.trim() ||
-                "Silakan pelajari informasi pendaftaran, persyaratan, jadwal, dan tahapan seleksi sebelum melakukan pendaftaran. Pastikan seluruh data yang diinput sesuai dengan dokumen yang dimiliki.",
+              message: s.notifModalIsi || "",
               image: s.notifModalGambar || undefined,
-              linkText: "Baca Selengkapnya",
-              linkUrl: "https://sman-modalbangsa.sch.id/id/spmb",
+              linkText: s.notifModalLinkTeks || undefined,
+              linkUrl: s.notifModalLinkUrl || undefined,
             });
             setModalOpen(true);
           }
