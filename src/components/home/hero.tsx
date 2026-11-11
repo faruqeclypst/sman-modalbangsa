@@ -41,18 +41,28 @@ export function Hero({ locale, dict }: HeroProps) {
   } | null>(null);
 
   useEffect(() => {
+    // The announcement modal mirrors the SPMB app's notification
+    // settings, read from its PocketBase REST API: one switch, title,
+    // body, and image, all managed in the SPMB admin panel.
     const fetchCustomModal = async () => {
       try {
-        const res = await fetch("https://webtestmosa-default-rtdb.asia-southeast1.firebasedatabase.app/settings/ppdb/customModal.json");
+        const res = await fetch("https://spmb.sman-modalbangsa.sch.id/pb/api/collections/settings/records?perPage=1");
         if (res.ok) {
-          const data = await res.json();
-          if (data && data.isEnabled) {
-            setModalData(data);
+          const json = await res.json();
+          const s = json?.items?.[0];
+          const hasContent = s && (s.notifModalJudul?.trim() || s.notifModalIsi?.trim() || s.notifModalGambar?.trim());
+          if (s && s.notifModalAktif && hasContent) {
+            setModalData({
+              isEnabled: true,
+              title: s.notifModalJudul || "Pengumuman",
+              message: s.notifModalIsi || "",
+              image: s.notifModalGambar || undefined,
+            });
             setModalOpen(true);
           }
         }
       } catch (err) {
-        console.error("Error fetching custom modal:", err);
+        console.error("Error fetching SPMB announcement:", err);
       }
     };
     fetchCustomModal();
