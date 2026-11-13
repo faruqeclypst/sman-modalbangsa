@@ -66,7 +66,9 @@ export const getSpmbSchedule = (isId: boolean): ScheduleItem[] => [
     kegiatan: isId
       ? "Pengumuman Akhir Kelulusan SPMB Jalur Undangan dan Prestasi"
       : "Final Admission Announcement for the Invitation and Achievement Tracks",
-    tanggal: "17 November 2026",
+    tanggal: isId
+      ? "Akan dikabari lewat Instagram dan web, silakan cek berkala"
+      : "To be announced via Instagram and the website, please check regularly",
   },
 ];
 
