@@ -56,11 +56,11 @@ export const getSpmbSchedule = (isId: boolean): ScheduleItem[] => [
   },
   {
     kegiatan: isId ? "Tes Akademik dan Wawancara" : "Academic Test and Interview",
-    tanggal: "14 November 2026",
+    tanggal: "15 November 2026",
   },
   {
     kegiatan: isId ? "Tes Kesehatan dan Fisik" : "Health and Physical Test",
-    tanggal: "15 November 2026",
+    tanggal: "16 November 2026",
   },
   {
     kegiatan: isId
